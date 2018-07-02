@@ -110,12 +110,12 @@ define.clip.unit = function(clip_unit) {
     )) {
       if (!(-14.4246950943  <= clip_unit[[1]] &&
             clip_unit[[1]] <= 71.4395725902)) {
-        stop("Latitude must be vector element 1 and within: (-90 <= x <= 90)")
+        stop("Latitude must be vector element 1 and between -90 and 90")
       }
 
       if (!(-179.229655487 <= clip_unit[[2]] &&
             clip_unit[[2]] <= 179.856674735)) {
-        stop("Longitude must be vector element 2 and within: (-180 <= x <= 180)")
+        stop("Longitude must be vector element 2 and between -180 and 180")
       }
 
       location <- c(clip_unit[[1]], clip_unit[[2]])
