@@ -17,6 +17,11 @@
 #' @author
 #'
 #' Mike Johnson
+#'
+
+state = 'California'
+county = c('Santa Barbara', 'ventura')
+clip_unit = NULL
 
 nameAOI = function(state = NULL,
                    county = NULL,
@@ -28,38 +33,48 @@ nameAOI = function(state = NULL,
   }
 
   if (all(!is.null(state), is.null(county))) {
+
     for (i in seq_along(state)) {
       if (nchar(state[i]) == 2) {
         unit = append(unit, stats::setNames(AOI::state.name, AOI::state.abb)[state[i]])
       } else{
-        unit = append(unit, state[i])
+        unit = append(unit, simpleCap(tolower(state[i])))
       }
     }
-    unit = paste0("boundary of ", paste(unit, collapse = ", "))
 
+    if (length(unit) > 1) {
+      unit[length(unit)] = paste("and", tail(unit, n = 1))
+    }
+
+    unit = paste0("boundary of ", paste(unit, collapse = ", "))
   }
 
   if (!is.null(county)) {
+
+    states = vector(mode = 'character')
     county.map = vector(mode = 'character')
+
+    for (i in seq_along(state)) {
+      if (nchar(state[i]) == 2) {
+        states = append(states, stats::setNames(AOI::state.name, AOI::state.abb)[state[i]])
+      } else{
+        states = append(states, simpleCap(tolower(state[i])))
+      }
+    }
 
     for (i in 1:length(county)) {
       county.map = append(county.map, simpleCap(tolower(county[i])))
     }
+
     if (length(county.map) > 1) {
       county.map[length(county.map)] = paste("and", tail(county.map, n = 1))
     }
+
     county.map = paste(county.map, collapse = ', ')
 
-    if (nchar(state == 2)) {
-      unit = paste0(
-        " boundary of ",
-        county.map ,
-        " County, ",
-        setNames(AOI::state.name, AOI::state.abb)[state]
-      )
-    } else{
-      unit = paste0(" boundary of ", county.map , " County, ", state)
-    }
+    unit = paste0("boundary of ", county.map, " County, ", states)
   }
   return(unit)
 }
+
+

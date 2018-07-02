@@ -9,7 +9,6 @@ test_that("getAOI throws correct errors", {
   expect_error(getAOI(state = 12), "State must be a character value. Try surrounding in qoutes...")
 })
 
-
 test_that("check getAOI routines", {
   one_state <- try(getAOI(state = "Colorado"))
   sp_def <- try(getAOI(clip_unit = one_state))
