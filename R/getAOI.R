@@ -85,7 +85,7 @@ getAOI = function(state = NULL,
       if (!is.character(value)) {
         stop("State must be a character value. Try surrounding in qoutes...")
       }
-      if (!(toupper(value) %in% datasets::state.abb || tolower(value) %in% tolower(datasets::state.name))) {
+      if (!(toupper(value) %in% AOI::state.abb || tolower(value) %in% tolower(AOI::state.name))) {
         stop("State not recongized. Full names or abbreviations can be used. Please check spelling.")
       }
     }
@@ -118,7 +118,7 @@ getAOI = function(state = NULL,
     ignore.case = T,
     fixed = F))
     {
-    shp =  rasterToPolygons(clip_unit) %>% spTransform(HydroDataProj)
+    shp =  rasterToPolygons(clip_unit) %>% spTransform(AOI::HydroDataProj)
     #return(shp)
     }
 
@@ -128,7 +128,7 @@ getAOI = function(state = NULL,
     ignore.case = T,
     fixed = F
   )) {
-    shp =  clip_unit %>% spTransform(HydroDataProj)
+    shp =  clip_unit %>% spTransform(AOI::HydroDataProj)
   }
 
   #------------------------------------------------------------------------------#

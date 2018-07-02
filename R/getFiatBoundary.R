@@ -62,7 +62,7 @@ getFiatBoundary <- function(state = NULL, county = NULL, clip_unit = NULL) {
     df$geometry <- NULL
     df <- as.data.frame(df)
     row.names(df) = NULL
-    states <- sp::SpatialPolygonsDataFrame(states, data = df) %>% spTransform(HydroDataProj)
+    states <- sp::SpatialPolygonsDataFrame(states, data = df) %>% spTransform(AOI::HydroDataProj)
 
     states = states[A, ]
 
@@ -72,7 +72,7 @@ getFiatBoundary <- function(state = NULL, county = NULL, clip_unit = NULL) {
     df$geometry <- NULL
     df <- as.data.frame(df)
     row.names(df) = NULL
-    counties <- sp::SpatialPolygonsDataFrame(counties, data = df) %>% spTransform(HydroDataProj)
+    counties <- sp::SpatialPolygonsDataFrame(counties, data = df) %>% spTransform(AOI::HydroDataProj)
 
     map = counties[A, ]
 
@@ -84,9 +84,9 @@ getFiatBoundary <- function(state = NULL, county = NULL, clip_unit = NULL) {
     df$geometry <- NULL
     df <- as.data.frame(df)
     row.names(df) = NULL
-    counties <- sp::SpatialPolygonsDataFrame(counties, data = df) %>% spTransform(HydroDataProj)
+    counties <- sp::SpatialPolygonsDataFrame(counties, data = df) %>% spTransform(AOI::HydroDataProj)
 
-    map <- sp::SpatialPolygonsDataFrame(counties, data = df) %>% spTransform(HydroDataProj)
+    map <- sp::SpatialPolygonsDataFrame(counties, data = df) %>% spTransform(AOI::HydroDataProj)
 
     if(!is.null(county)){
       county.map <- vector(mode = "character")
