@@ -10,12 +10,13 @@ Depends:
     R(>= 3.3.0),
     USAboundariesData
 Imports:
-    sp,
-    dplyr,
     dismo,
+    dplyr,
+    raster,
+    rgdal,
+    sp,
     sf,
-    USAboundaries,
-    raster
+    USAboundaries
 Suggests: 
     testthat
 License: MIT + file LICENSE
