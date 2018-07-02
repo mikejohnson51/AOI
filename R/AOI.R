@@ -10,7 +10,6 @@
 #' @name AOI
 #'
 #' @import sp
-#' @import USAboundariesData
 #' @importFrom  sf as_Spatial st_geometry
 #' @importFrom  dplyr %>%
 #' @importFrom  dismo geocode
