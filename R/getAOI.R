@@ -89,8 +89,7 @@ getAOI = function(state = NULL,
         stop("State not recongized. Full names or abbreviations can be used. Please check spelling.")
       }
     }
-  }
-  else {
+  } else {
     if (!is.null(county)) {
       stop("The use of 'county' requires the 'state' parameter be used as well.")
     }
@@ -116,9 +115,8 @@ getAOI = function(state = NULL,
     pattern = "Raster",
     class(clip_unit),
     ignore.case = T,
-    fixed = F))
-    {
-    shp =  rasterToPolygons(clip_unit) %>% spTransform(AOI::HydroDataProj)
+    fixed = F)){
+    shp =  raster::rasterToPolygons(clip_unit) %>% spTransform(AOI::HydroDataProj)
     #return(shp)
     }
 

@@ -6,12 +6,16 @@ test_that("getAOI throws correct errors", {
   expect_error(getAOI(state = 'CA', clip_unit = list('KMART near UCSB', 10, 10)), "Only 'state' or 'clip_unit' can be used. Set the other to NULL")
   expect_error(getAOI(county = 'Santa Barbara'), "The use of 'county' requires the 'state' parameter be used as well.")
   expect_error(getAOI(), "Requires a 'clip_unit' or 'state' parameter to execute")
+  expect_error(getAOI(state = 12), "State must be a character value. Try surrounding in qoutes...")
 })
 
 
 test_that("check getAOI routines", {
   one_state <- try(getAOI(state = "Colorado"))
   sp_def <- try(getAOI(clip_unit = one_state))
+  rast  = raster::raster(matrix(rnorm(400),20,20), crs = AOI::HydroDataProj)
+  raster::extent(rast) = raster::extent(sp_def)
+  ras_def <- try(getAOI(clip_unit = rast))
   two_state <- try(getAOI(state = c("AZ", "utah")))
 
   one_county <- try(getAOI(state = 'TX', county = 'Harris'))

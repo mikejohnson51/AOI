@@ -21,11 +21,24 @@ define.clip.unit = function(clip_unit) {
     y = mean(clip_unit@bbox[2, ])
 
     location <- c(y, x)
-    h        <-
-      round(abs(clip_unit@bbox[2, 1] - clip_unit@bbox[2, 2]) * 69, 0)
-    w        <-
-      round((abs(clip_unit@bbox[1, 1] - clip_unit@bbox[1, 2]) * 69) * (cos(y * pi /
-                                                                             180)), 0)
+    h        <- round(abs(clip_unit@bbox[2, 1] - clip_unit@bbox[2, 2]) * 69, 0)
+    w        <- round((abs(clip_unit@bbox[1, 1] - clip_unit@bbox[1, 2]) * 69) * (cos(y * pi / 180)), 0)
+    o        <- 'center'
+  }
+
+  if (grepl(
+    pattern = "Raster",
+    class(clip_unit),
+    ignore.case = T,
+    fixed = F
+  )) {
+    e = raster::extent(clip_unit)
+    x = mean(e[1:2])
+    y = mean(e[3:4])
+
+    location <- c(y, x)
+    h        <- round(abs(e[4] - e[3]) * 69, 0)
+    w        <- round((abs(e[2] - e[1]) * 69) * (cos(y * pi / 180)), 0)
     o        <- 'center'
   }
 
