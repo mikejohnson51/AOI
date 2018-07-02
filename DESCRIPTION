@@ -16,7 +16,8 @@ Imports:
     rgdal,
     sp,
     sf,
-    USAboundaries
+    USAboundaries,
+    XML
 Suggests: 
     testthat
 License: MIT + file LICENSE
