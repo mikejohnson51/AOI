@@ -2,7 +2,7 @@
 % Please edit documentation in R/define_clip_unit.R
 \name{define.clip.unit}
 \alias{define.clip.unit}
-\title{Interprete a clip unit from a user input}
+\title{Interpret a clip unit from a user input}
 \usage{
 define.clip.unit(clip_unit)
 }
@@ -13,7 +13,7 @@ define.clip.unit(clip_unit)
 a list of features defining the AOI
 }
 \description{
-Interprete a clip unit from a user input
+Interpret a clip unit from a user input
 }
 \author{
 Mike Johnson
