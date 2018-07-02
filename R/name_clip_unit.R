@@ -14,7 +14,7 @@ test = define.clip.unit(clip_unit)
 
 if(class(test$location) == 'numeric'){
  test$location =  paste(paste(round(test$location,2), collapse = "/"), "(lat/lon)")
-} else { test$location =  paste("(the) ", test$location)}
+} else { test$location =  paste("(the)", test$location)}
 
 if(test$o == 'center'){
    name = paste0("A ", test$h, " mile tall by ", test$w, " mile wide region centered on ", test$location)
