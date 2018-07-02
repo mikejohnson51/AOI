@@ -3,4 +3,3 @@ library(AOI)
 
 test_check("AOI")
 
-HydroDataProj

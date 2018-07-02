@@ -16,7 +16,8 @@ Imports:
     USAboundaries,
     USAboundariesData,
     raster
-Suggests: testthat
+Suggests: 
+    testthat
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

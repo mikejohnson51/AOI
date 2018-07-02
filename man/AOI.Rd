@@ -11,5 +11,5 @@
 \details{
 Create Area of Interest (AOI) polygons and/or gridded rasters
 
-See the README on
+See the README on github
 }

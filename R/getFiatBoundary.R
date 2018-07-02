@@ -45,13 +45,13 @@ getFiatBoundary <- function(state = NULL, county = NULL, clip_unit = NULL) {
 
   USAboundaries_version <- "0.3.1"
 
-  if (!requireNamespace("USAboundariesData", quietly = TRUE)) {
-    message("Installing USAboundariesData package.")
-    install_USAboundariesData()
-  } else if (utils::packageVersion("USAboundariesData") < USAboundaries_version) {
-    message("Updating the USAboundariesData package.")
-    install_USAboundariesData()
-  }
+  # if (!requireNamespace("USAboundariesData", quietly = TRUE)) {
+  #   message("Installing USAboundariesData package.")
+  #   install_USAboundariesData()
+  # } else if (utils::packageVersion("USAboundariesData") < USAboundaries_version) {
+  #   message("Updating the USAboundariesData package.")
+  #   install_USAboundariesData()
+  # }
 
   if(!is.null(clip_unit)){
     A = getAOI(state = NULL, county = NULL, clip_unit = clip_unit)
