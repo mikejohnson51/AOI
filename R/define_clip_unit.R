@@ -5,6 +5,9 @@
 #' @return a list of features defining the AOI
 #' @author Mike Johnson
 #' @export
+#'
+#'
+
 
 define.clip.unit = function(clip_unit) {
   #------------------------------------------------------------------------------#
@@ -23,7 +26,7 @@ define.clip.unit = function(clip_unit) {
     location <- c(y, x)
     h        <- round(abs(clip_unit@bbox[2, 1] - clip_unit@bbox[2, 2]) * 69, 0)
     w        <- round((abs(clip_unit@bbox[1, 1] - clip_unit@bbox[1, 2]) * 69) * (cos(y * pi / 180)), 0)
-    o        <- 'center'
+    o        <- "center"
   }
 
   if (grepl(
@@ -45,22 +48,13 @@ define.clip.unit = function(clip_unit) {
   # AOI defined by location and bounding box width and height
 
   if (length(clip_unit) == 3) {
-    if (is.numeric(clip_unit[[1]])) {
-      p <- clip_unit[[1]]
-      clip_unit[[4]] <- clip_unit[[3]]
-      clip_unit[[3]] <- clip_unit[[2]]
-      clip_unit[[2]] <- p[2]
-      clip_unit[[1]] <- p[1]
-
-    } else if (!any(is.character(clip_unit[[1]]),
-                    is.numeric(clip_unit[[2]]),
-                    !is.numeric(clip_unit[[3]]))) {
+    if (all(is.numeric(unlist(clip_unit)))) {
       stop(
-        "A clip_unit with length 3 must be defined by:
-        (1) A name (i.e 'UCSB', 'The Walmart near the National Water Center') (character)
-        (2) A bound box height (in miles) (numeric)
-        (3) A bound box width (in miles) (numeric)"
-      )
+        cat("A clip_unit with length 3 must be defined by:\n",
+            "1. A name (i.e 'UCSB') (character)\n",
+            "2. A bound box height (in miles) (numeric)\n",
+            "3. A bound box width (in miles) (numeric)"
+        ))
     } else {
       location <- clip_unit[[1]]
       h        <- clip_unit[[2]]
@@ -72,35 +66,27 @@ define.clip.unit = function(clip_unit) {
   # AOI defined by (centroid lat, long, and bounding box width and height) or (loaction, width, height, origin)
 
   if (length(clip_unit) == 4) {
-    if (all(
-      all(
-        is.numeric(clip_unit[[1]]),
-        is.numeric(clip_unit[[2]]),
-        is.numeric(clip_unit[[3]]),
-        is.numeric(clip_unit[[4]])
-      ),
-      all(
-        !is.numeric(clip_unit[[1]]),
-        is.numeric(clip_unit[[2]]),
-        is.numeric(clip_unit[[3]]),
-        !is.numeric(clip_unit[[4]])
-      )
+
+  if (any(
+      !is.numeric(clip_unit[[2]]),
+      !is.numeric(clip_unit[[3]]),
+      all(!is.character(clip_unit[[1]]), is.character(clip_unit[[4]])),
+      all(is.character(clip_unit[[1]]), !is.character(clip_unit[[4]]))
     )) {
       stop(
-        "A clip_unit with length 4 must be defined by:
-        (1) A latitude (numeric)
-        (2) A longitude (numeric)
-        (3) A bound box height (in miles) (numeric)
-        (4) A bound box width (in miles) (numeric)
+        cat("A clip_unit with length 4 must be defined by:\n",
+            "1. A latitude (numeric)",
+            "2. A longitude (numeric)\n",
+            "2. A bounding box height (in miles) (numeric)\n",
+            "3. A bounding box width (in miles) (numeric)\n\n",
+            "OR\n\n",
+            "1. A location (character)\n",
+            "2. A bound box height (in miles) (numeric)\n",
+            "3. A bounding box width (in miles) (numeric)\n",
+            "4. A bounding box origin (character)"
+        ))
 
-        or
 
-        (1) A location (character)
-        (2) A bound box height (in miles) (numeric)
-        (3) A bound box width (in miles) (numeric)
-        (3) A bound box origion (character)
-        "
-      )
 
     } else if (all(
       is.numeric(clip_unit[[1]]),
@@ -108,13 +94,11 @@ define.clip.unit = function(clip_unit) {
       is.numeric(clip_unit[[3]]),
       is.numeric(clip_unit[[4]])
     )) {
-      if (!(-14.4246950943  <= clip_unit[[1]] &&
-            clip_unit[[1]] <= 71.4395725902)) {
+      if (all(-90  <= clip_unit[[1]], clip_unit[[1]] >= 90)) {
         stop("Latitude must be vector element 1 and between -90 and 90")
       }
 
-      if (!(-179.229655487 <= clip_unit[[2]] &&
-            clip_unit[[2]] <= 179.856674735)) {
+      if (all(-179.229655487 <= clip_unit[[2]], clip_unit[[2]] >= 179.856674735)) {
         stop("Longitude must be vector element 2 and between -180 and 180")
       }
 

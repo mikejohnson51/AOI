@@ -69,6 +69,9 @@
 #'
 #' @author
 #' Mike Johnson
+#'
+
+
 
 getAOI = function(state = NULL,
                   county = NULL,
@@ -116,16 +119,16 @@ getAOI = function(state = NULL,
     class(clip_unit),
     ignore.case = T,
     fixed = F)){
+
     shp =  raster::rasterToPolygons(clip_unit) %>% spTransform(AOI::HydroDataProj)
-    #return(shp)
+
     }
 
   if (grepl(
     pattern = "Spatial",
     class(clip_unit),
     ignore.case = T,
-    fixed = F
-  )) {
+    fixed = F)) {
     shp =  clip_unit %>% spTransform(AOI::HydroDataProj)
   }
 
@@ -134,7 +137,8 @@ getAOI = function(state = NULL,
   #------------------------------------------------------------------------------#
 
   if(!exists("shp")){
-     fin = define.clip.unit(clip_unit)
+
+   fin = define.clip.unit(clip_unit)
 
    shp <- getClipUnit(location = fin$location,
                       width = fin$w,
