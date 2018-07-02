@@ -41,15 +41,9 @@
 #' Mike Johnson
 #'
 
-
-
 getFiatBoundary <- function(state = NULL, county = NULL, clip_unit = NULL) {
 
   USAboundaries_version <- "0.3.1"
-
-  install_USAboundariesData <- function() {
-    install.packages("USAboundariesData", repos = "http://packages.ropensci.org", type = "source")
-  }
 
   if (!requireNamespace("USAboundariesData", quietly = TRUE)) {
     message("Installing USAboundariesData package.")
