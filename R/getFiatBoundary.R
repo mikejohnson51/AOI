@@ -43,41 +43,6 @@
 
 getFiatBoundary <- function(state = NULL, county = NULL, clip_unit = NULL) {
 
-  USAboundaries_version <- "0.3.1"
-
-  # if (!requireNamespace("USAboundariesData", quietly = TRUE)) {
-  #   message("Installing USAboundariesData package.")
-  #   install_USAboundariesData()
-  # } else if (utils::packageVersion("USAboundariesData") < USAboundaries_version) {
-  #   message("Updating the USAboundariesData package.")
-  #   install_USAboundariesData()
-  # }
-
-  if(!is.null(clip_unit)){
-    A = getAOI(state = NULL, county = NULL, clip_unit = clip_unit)
-
-    s = USAboundaries::us_states(map_date = NULL, resolution = "high", states = state)
-    states = sf::as_Spatial(sf::st_geometry(s), IDs = as.character(1:nrow(s)))
-    df = s
-    df$geometry <- NULL
-    df <- as.data.frame(df)
-    row.names(df) = NULL
-    states <- sp::SpatialPolygonsDataFrame(states, data = df) %>% spTransform(AOI::HydroDataProj)
-
-    states = states[A, ]
-
-    c = USAboundaries::us_counties(map_date = NULL, resolution = "high", states = states$name)
-    counties = sf::as_Spatial(sf::st_geometry(c), IDs = as.character(1:nrow(c)))
-    df = c
-    df$geometry <- NULL
-    df <- as.data.frame(df)
-    row.names(df) = NULL
-    counties <- sp::SpatialPolygonsDataFrame(counties, data = df) %>% spTransform(AOI::HydroDataProj)
-
-    map = counties[A, ]
-
-  } else {
-
     c = USAboundaries::us_counties(map_date = NULL, resolution = "high", states = state)
     counties = sf::as_Spatial(sf::st_geometry(c), IDs = as.character(1:nrow(c)))
     df = c
@@ -99,7 +64,6 @@ getFiatBoundary <- function(state = NULL, county = NULL, clip_unit = NULL) {
       if(length(bad.counties) > 0){stop(paste(bad.counties, collapse = ", "), " not a valid county in ", state, ".")}
 
       map <- map[map$name %in% county.map, ]
-    }
   }
 
   return(map)
