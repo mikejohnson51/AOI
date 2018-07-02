@@ -51,7 +51,7 @@
 getClipUnit = function(location = NULL, width = NULL, height = NULL, origin = NULL){
 
     if(class(location) == "numeric"){ location = location }
-    if(is.null(origin)){ origin = 'center' }
+   # if(is.null(origin)){ origin = 'center' }
 
     if(class(location) == "character"){
 
