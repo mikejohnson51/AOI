@@ -15,7 +15,7 @@ Imports:
     raster,
     rgdal,
     sp,
-    sf,
+    sf (>= 0.6-0),
     USAboundaries,
     XML
 Suggests: 

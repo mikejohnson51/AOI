@@ -19,10 +19,6 @@
 #' Mike Johnson
 #'
 
-state = 'California'
-county = c('Santa Barbara', 'ventura')
-clip_unit = NULL
-
 nameAOI = function(state = NULL,
                    county = NULL,
                    clip_unit = NULL) {
