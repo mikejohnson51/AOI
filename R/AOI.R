@@ -10,8 +10,7 @@
 #' @name AOI
 #'
 #' @importFrom sp Polygon SpatialPolygons
-#' @importFrom  sf st_geometry
-#' @importFrom  methods as
+#' @importFrom  sf st_geometry as_Spatial
 #' @importFrom  dplyr %>%
 #' @importFrom  dismo geocode
 #' @importFrom  stats setNames
