@@ -54,13 +54,7 @@ getClipUnit = function(location = NULL, width = NULL, height = NULL, origin = NU
    # if(is.null(origin)){ origin = 'center' }
 
     if(class(location) == "character"){
-
-      trash <-  capture.output(
-        suppressMessages(
-          loc <-  dismo::geocode(location, output = 'latlon' )
-          )
-        )
-      location = c(loc$lat, loc$lon)
+      location = getPoint(name = location)
      }
 
     if(origin == "center"){
@@ -75,37 +69,37 @@ getClipUnit = function(location = NULL, width = NULL, height = NULL, origin = NU
     if(origin == "lowerleft"){
       df = (height)/69
       dl = ((width)/69) / cos(location[1] * pi/180)
-      south = location[1]
-      north = location[1] + df
-      west  = location[2]
-      east  = location[2] + dl
+      south = location$lat
+      north = location$lat + df
+      west  = location$lon
+      east  = location$lon + dl
     }
 
     if(origin == "lowerright"){
         df = (height)/69
         dl = ((width)/69) / cos(location[1] * pi/180)
-        south = location[1]
-        north = location[1] + df
-        west  = location[2] - dl
-        east  = location[2]
+        south = location$lat
+        north = location$lat + df
+        west  = location$lon - dl
+        east  = location$lon
     }
 
     if(origin == "upperright"){
         df = (height)/69
         dl = ((width)/69) / cos(location[1] * pi/180)
-        south = location[1] - df
-        north = location[1]
-        west  = location[2] - dl
-        east  = location[2]
+        south = location$lat - df
+        north = location$lat
+        west  = location$lon - dl
+        east  = location$lon
     }
 
     if(origin == "upperleft"){
         df = (height)/69
         dl = ((width)/69) / cos(location[1] * pi/180)
-        south = location[1] - df
-        north = location[1]
-        west  = location[2]
-        east  = location[2] + dl
+        south = location$lat - df
+        north = location$lat
+        west  = location$lon
+        east  = location$lon + dl
     }
 
     coords = matrix(c(west, south,
@@ -116,8 +110,8 @@ getClipUnit = function(location = NULL, width = NULL, height = NULL, origin = NU
                       ncol = 2,
                       byrow = TRUE)
 
-    P1 = Polygon(coords)
-    shp = SpatialPolygons(list(Polygons(list(P1), ID = "a")), proj4string= HydroDataProj)
+    P1 = sp::Polygon(coords)
+    shp = sp::SpatialPolygons(list(Polygons(list(P1), ID = "a")), proj4string= HydroDataProj)
     return(shp)
 }
 

@@ -9,8 +9,9 @@
 #' @docType package
 #' @name AOI
 #'
-#' @import sp
-#' @importFrom  sf as_Spatial st_geometry
+#' @importFrom sp Polygon SpatialPolygons
+#' @importFrom  sf st_geometry
+#' @importFrom  methods as
 #' @importFrom  dplyr %>%
 #' @importFrom  dismo geocode
 #' @importFrom  stats setNames
@@ -19,4 +20,3 @@
 #' @importFrom  raster rasterToPolygons
 
 NULL
-
