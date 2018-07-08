@@ -9,7 +9,7 @@
 #' @docType package
 #' @name AOI
 #'
-#' @importFrom sp Polygon SpatialPolygons
+#' @importFrom sp Polygon SpatialPolygons spTransform Polygons
 #' @importFrom  sf st_geometry as_Spatial
 #' @importFrom  dplyr %>%
 #' @importFrom  dismo geocode

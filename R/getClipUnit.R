@@ -111,7 +111,7 @@ getClipUnit = function(location = NULL, width = NULL, height = NULL, origin = NU
                       byrow = TRUE)
 
     P1 = sp::Polygon(coords)
-    shp = sp::SpatialPolygons(list(Polygons(list(P1), ID = "a")), proj4string= HydroDataProj)
+    shp = sp::SpatialPolygons(list(sp::Polygons(list(P1), ID = "a")), proj4string= HydroDataProj)
     return(shp)
 }
 

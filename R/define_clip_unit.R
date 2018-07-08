@@ -50,7 +50,7 @@ define.clip.unit = function(clip_unit) {
   if (length(clip_unit) == 3) {
     if (all(is.numeric(unlist(clip_unit)))) {
       stop(
-        cat("A clip_unit with length 3 must be defined by:\n",
+        paste0("A clip_unit with length 3 must be defined by:\n",
             "1. A name (i.e 'UCSB') (character)\n",
             "2. A bound box height (in miles) (numeric)\n",
             "3. A bound box width (in miles) (numeric)"
@@ -74,7 +74,7 @@ define.clip.unit = function(clip_unit) {
       all(is.character(clip_unit[[1]]), !is.character(clip_unit[[4]]))
     )) {
       stop(
-        cat("A clip_unit with length 4 must be defined by:\n",
+        paste0("A clip_unit with length 4 must be defined by:\n",
             "1. A latitude (numeric)",
             "2. A longitude (numeric)\n",
             "2. A bounding box height (in miles) (numeric)\n",

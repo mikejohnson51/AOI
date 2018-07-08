@@ -13,10 +13,10 @@ test_that("getAOI throws correct errors", {
 
 
   expect_error(getAOI(clip_unit = list(37,10,10)),  cat("A clip_unit with length 3 must be defined by:\n",
-                                                        "1. A name (i.e 'UCSB') (character)\n",
-                                                        "2. A bound box height (in miles) (numeric)\n",
-                                                        "3. A bound box width (in miles) (numeric)"
-                                                        ))
+                                                           "1. A name (i.e 'UCSB') (character)\n",
+                                                           "2. A bound box height (in miles) (numeric)\n",
+                                                           "3. A bound box width (in miles) (numeric)"
+  ))
 
   expect_error(getAOI(clip_unit = list(37,10,10, "upperleft")),  cat("A clip_unit with length 4 must be defined by:\n",
                                                                          "1. A latitude (numeric)",
