@@ -1,7 +1,27 @@
-# AOI
+## AOI
 
 [![Build Status](https://travis-ci.org/mikejohnson51/AOI.svg?branch=master)](https://travis-ci.org/mikejohnson51/AOI) 
 [![Coveralls github](https://img.shields.io/coveralls/github/mikejohnson51/AOI.svg)](https://coveralls.io/github/mikejohnson51/AOI?branch=master)
 
-The AOI package helps define and buid AOI spatial objects from a common query. It is intended to backend spatial subsetting packages/tasks such as [HydroData](http://mikejohnson51.github.io/HydroData/) and [nwm](https://github.com/mikejohnson51/NWM); serve front end applications like [FlowlineFinder](https://github.com/mikejohnson51/FlowlineFinder); or stand alone.
+An area of interest (AOI) is the geographic extent of a project. It helps confine the unit of work to a geographic area, and helps to not only proritize and define research and subsetting efforts, but to improve reproducabilty across studies. This package aims to make finding state, county and geographic AOIs easier, through a common query system based on 'state', 'county' and 'clip' parameters. AOIs for all queryies are retruned as a  ```sp::SpatialPolygons```.  It is intended to backend spatial subsetting packages/tasks; serve front end applications; or stand alone.
 
+Packages and services currently requiring a spatial AOI include (but are not limited to):
+
+[HydroData](http://mikejohnson51.github.io/HydroData/) <br>
+[nwm](https://github.com/mikejohnson51/NWM)<br>
+[FlowlineFinder](https://github.com/mikejohnson51/FlowlineFinder)<br>
+[FedData](https://cran.r-project.org/web/packages/FedData/index.html)<br>
+[nhdplusTools](https://github.com/dblodgett-usgs/nhdplusTools)<br>
+
+### Installation:
+
+```
+install.packages("devtools")
+devtools::install_github("mikejohnson51/AOI")
+```
+
+### Examples:
+
+### Support:
+
+Package development is supported with funds from the UCAR COMET program; the NOAA National Water Center; and the Universtiy of California, Santa Barbara
