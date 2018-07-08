@@ -8,7 +8,6 @@
 #'
 #'
 
-
 define.clip.unit = function(clip_unit) {
   #------------------------------------------------------------------------------#
   # Clip Unit Defintion  (getClipUnit() for 3,4, or 5 inputs)                    #

@@ -54,8 +54,9 @@ getClipUnit = function(location = NULL, width = NULL, height = NULL, origin = NU
    # if(is.null(origin)){ origin = 'center' }
 
     if(class(location) == "character"){
-      location = getPoint(name = location)
-     }
+      location = getPoint(name = 'UCSB')
+    }
+
 
     if(origin == "center"){
       df = (height/2)/69                               # north/south
@@ -69,37 +70,37 @@ getClipUnit = function(location = NULL, width = NULL, height = NULL, origin = NU
     if(origin == "lowerleft"){
       df = (height)/69
       dl = ((width)/69) / cos(location[1] * pi/180)
-      south = location$lat
-      north = location$lat + df
-      west  = location$lon
-      east  = location$lon + dl
+      south = location[1]
+      north = location[1] + df
+      west  = location[2]
+      east  = location[2] + dl
     }
 
     if(origin == "lowerright"){
         df = (height)/69
         dl = ((width)/69) / cos(location[1] * pi/180)
-        south = location$lat
-        north = location$lat + df
-        west  = location$lon - dl
-        east  = location$lon
+        south = location[1]
+        north = location[1] + df
+        west  = location[2] - dl
+        east  = location[2]
     }
 
     if(origin == "upperright"){
         df = (height)/69
         dl = ((width)/69) / cos(location[1] * pi/180)
-        south = location$lat - df
-        north = location$lat
-        west  = location$lon - dl
-        east  = location$lon
+        south = location[1] - df
+        north = location[1]
+        west  = location[2] - dl
+        east  = location[2]
     }
 
     if(origin == "upperleft"){
         df = (height)/69
         dl = ((width)/69) / cos(location[1] * pi/180)
-        south = location$lat - df
-        north = location$lat
-        west  = location$lon
-        east  = location$lon + dl
+        south = location[1] - df
+        north = location[1]
+        west  = location[2]
+        east  = location[2] + dl
     }
 
     coords = matrix(c(west, south,
