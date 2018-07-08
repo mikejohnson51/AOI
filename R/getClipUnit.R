@@ -55,6 +55,7 @@ getClipUnit = function(location = NULL, width = NULL, height = NULL, origin = NU
 
     if(class(location) == "character"){
       location = getPoint(name = 'UCSB')
+      location = unlist(location)
     }
 
 
