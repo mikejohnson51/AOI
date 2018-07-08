@@ -7,11 +7,11 @@ An area of interest (AOI) is the geographic extent of a project. It helps confin
 
 Packages and services currently requiring a spatial AOI include (but are not limited to):
 
-[HydroData](http://mikejohnson51.github.io/HydroData/) 
-[nwm](https://github.com/mikejohnson51/NWM)
-[FlowlineFinder](https://github.com/mikejohnson51/FlowlineFinder)
-[FedData](https://cran.r-project.org/web/packages/FedData/index.html)
-[nhdplusTools](https://github.com/dblodgett-usgs/nhdplusTools)
+[HydroData](http://mikejohnson51.github.io/HydroData/) <br>
+[nwm](https://github.com/mikejohnson51/NWM)<br>
+[FlowlineFinder](https://github.com/mikejohnson51/FlowlineFinder)<br>
+[FedData](https://cran.r-project.org/web/packages/FedData/index.html)<br>
+[nhdplusTools](https://github.com/dblodgett-usgs/nhdplusTools)<br>
 
 ### Installation:
 
