@@ -23,7 +23,7 @@ if(test$o == 'center'){
 if(test$o == "lowerright"){ test$o = "lower right corner"}
 if(test$o == "lowerleft"){ test$o = "lower left corner"}
 if(test$o == "upperright"){ test$o = "upper right corner"}
-if(test$o == "upperleft"){ test$o = " upper right corner"}
+if(test$o == "upperleft"){ test$o = "upper left corner"}
 
 name = paste0("A ", test$h, " mile tall by ", test$w, " mile wide region with ",  test$location, " in the ", test$o)
 
