@@ -1,0 +1,207 @@
+---
+title: AOI for R
+output:
+  prettydoc::html_pretty:
+    theme: tactile
+    highlight: github
+---
+
+```{r echo = FALSE, results='hide', warning= FALSE,message=FALSE}
+devtools::load_all()
+library(leaflet)
+library(sp)
+col  = 'red'
+col1 = '#212f3f'
+```
+
+
+## Defining an Area of Interest (AOI)
+
+An area of interest (AOI) is the geographic extent. It helps confine the unit of work to a geographic area, and helps to not only proritize and define research and subsetting efforts, but improves reproducabilty across studies. 'AOI` is an R package that lets users define an AOI through a common query and return a 'SpatialPolygon' of that area.  
+
+Three parameters can be used to define a query:  *state*, *county*, and *clip_unit*. This page illustrates how these parameters can be used define -- and refine -- a query. 
+
+###Method 1: Defining an AOI by **state**  
+
+An AOI can be defined by a **state** name or abbreviation:
+
+```{r, message = FALSE}
+CA = getAOI(state = 'CA')
+```
+
+```{r, echo = FALSE}
+leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 5, maxZoom = 5)) %>% addProviderTiles(providers$CartoDB.Positron) %>% addPolygons(data = CA,fillColor = col, color = col1, weight = 2)
+```
+
+<br>
+<br>
+A query can also be defined by multiple **states** provided as a vector:
+
+```{r, message = FALSE}
+WestCoast = getAOI(state = c("Oregon", "Washington", "CA"))
+```
+
+```{r, echo = FALSE}
+leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 4, maxZoom = 4)) %>% addProviderTiles(providers$CartoDB.Positron) %>% addPolygons(data = WestCoast,fillColor = col, color = col1, weight = 1)
+```
+
+<br>
+
+###Method 2: Defining an AOI by **county**  
+
+Defining an AOI by **county** requires a **state** as well:
+
+```{r, message = FALSE}
+EP = getAOI(state = "CO", county = "El Paso")
+```
+
+```{r, echo = FALSE}
+leaflet() %>% addProviderTiles(providers$CartoDB.Positron) %>% addPolygons(data = EP,fillColor = col, color = col1, weight = 4)
+```
+
+<br>
+<br>
+Multiple counties can be queried if provided as a vector:
+
+```{r, message = F}
+centralCoast = getAOI(state ="CA", county = c("Santa Barbara", "San Luis Obispo", "Ventura"))
+```
+
+```{r, echo = FALSE}
+leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 7, maxZoom = 7)) %>% addProviderTiles(providers$CartoDB.Positron) %>% addPolygons(data = centralCoast,fillColor = col, color = col1, weight = 2)
+```
+
+<br>
+
+###Method 3: Defining an AOI with a **clip_unit**
+
+In `HydroData` a **clip_unit** is user defined region. Most commonly a bounding box or a supplied shapefile - both of which can be input as a **clip_unit**. 
+<br>
+
+### The clip_unit list()
+
+To define a bounding box **clip_unit** has four inputs given as a list:
+
+(1) Location   
+(2) Bounding box height (in miles)   
+(3) Bounding box width (in miles)  
+(4) location origin (default = 'center')   
+
+Again, all **clip_unit** inputs **must** be provided as a list. It is also important to note that order **DOES** matter if each parameter is not explicitly assigned (eg `h = 10`). Examples for each input follow: 
+
+###1. Location
+
+A Location is the first input in  **clip_unit** list and can be given as a colloquial name (*character string*) or as a (lat/long) pair (*numeric*). Names are geocoded by the Google API via the `dismo` R package. 
+
+<br>
+
+####*Grand Canyon Location example*:
+
+Here we query an AOI surrounding the Grand Canyon, using both the colloquial name, and the (lat/long) pair found with a <a target="_blank"href="http://www.google.com/search?q=grand+canyon+lat+long">google search.</a> Notice slightly different locations are generated:
+
+```{r, message = F}
+GC_name = getAOI(clip_unit = list("grand canyon", 10, 10))
+
+GC_lat_lon = getAOI(clip_unit = list(36.0544, -112.1401, 10, 10))
+```
+
+```{r echo = FALSE}
+
+latlon = "<strong>Query by Lat Long</strong>"
+API = "<strong>Query by Name</strong>"
+gc = dismo::geocode("grand canyon")
+
+icon.r <- makeAwesomeIcon(icon = 'home', iconColor = col1, markerColor = 'gray')
+icon.b <- makeAwesomeIcon(icon = 'home', iconColor = col,  markerColor = 'gray')
+
+
+leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 10, maxZoom = 10)) %>% addProviderTiles(providers$CartoDB.Positron) %>% 
+  addPolygons(data = GC_name, fillColor = "transparent", color = col, weight = 4) %>% 
+  addPolygons(data = GC_lat_lon, fillColor = "transparent", color = col1, weight = 4) %>% 
+  addAwesomeMarkers(icon = icon.b, lat = gc$latitude[1], lng = gc$longitude[1], popup = API) %>% 
+  addAwesomeMarkers(icon = icon.r, lat = 36.0544 , lng = -112.1401, popup = latlon)
+
+```
+
+### 2. Bounding box height and width
+
+Once a location is specified, the next two needed values are a bounding box height and width (*in miles*). The first entry defines height and the second width: 
+
+<br>
+
+####*National Water Center bounding box diminsions example*:
+
+```{r, message = FALSE}
+nwc.tall = getAOI(clip_unit = list("National Water Center, AL", 30, 10))
+nwc.wide = getAOI(clip_unit = list("National Water Center, AL", 10, 30))
+```
+
+```{r, echo = FALSE}
+nwc = getPoint("National Water Center, AL")
+
+leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 9, maxZoom = 9)) %>% addProviderTiles(providers$CartoDB.Positron) %>% 
+  addPolygons(data = nwc.tall,fillColor = "transparent", color = col, weight = 4, label = "Tall: list('National Water Center, AL', 30, 10)") %>%  
+  addPolygons(data = nwc.wide, fillColor = "transparent", color = col1, weight = 4, label = "Wide: list('National Water Center, AL', 10, 30)") %>% 
+  addAwesomeMarkers(icon = icon.b, lat = nwc$lat, lng = nwc$lon, popup = "National Water Center")
+```
+
+###3. Origin
+
+With a location, height, and width defined the relationship of the box to the location is needed. By default (and in the previous examples) each bounding box was generated using the location as a centroid. You can change this by adding a final argument to the **clip_unit** list specifying where the location lies in reference to the box. Options include 'center', 'lowerleft', 'lowerright', 'upperleft', 'upperright':
+
+
+####*UCSB origin example*:
+
+```{r, message = FALSE}
+ucsb.c =  getAOI(clip_unit = list("UCSB", 10, 10, "center"))
+ucsb.ul = getAOI(clip_unit = list("UCSB", 10, 10, "upperleft"))
+ucsb.ur = getAOI(clip_unit = list("UCSB", 10, 10, "upperright"))
+ucsb.ll = getAOI(clip_unit = list("UCSB", 10, 10, "lowerleft"))
+ucsb.lr = getAOI(clip_unit = list("UCSB", 10, 10, "lowerright"))
+```
+
+```{r, echo = FALSE}
+leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 10, maxZoom = 10)) %>% addProviderTiles(providers$CartoDB.Positron) %>% 
+  addPolygons(data = ucsb.ul, fillColor = "transparent", color = col1, weight = 4, label = "upperleft") %>% 
+  addPolygons(data = ucsb.ur, fillColor = "transparent", color = col1, weight = 4, label = "upperright") %>% 
+  addPolygons(data = ucsb.ll, fillColor = "transparent", color = col1, weight = 4, label = "lowerleft") %>% 
+  addPolygons(data = ucsb.lr, fillColor = "transparent", color = col1, weight = 4, label = "lowerright") %>% 
+  addPolygons(data = ucsb.c,  fillColor = col1, color = col,  weight = 4, label = "center") %>% 
+  addAwesomeMarkers(icon = icon.b, lat = 34.41396, lng = -119.8489, popup = 'UCSB')
+```
+
+<br>
+
+### Clip_unit by User Shapefile
+
+A user supplied shapefile can  be used as input for the clip_unit parameter in lieu of a list() bounding box.
+
+<br>
+
+####*Santa Monica (user shapefile example)*:
+
+```{r, message = FALSE}
+#Read in shapefile of all Los Angeles Communities
+LA = rgdal::readOGR("shp/LA.shp", verbose = FALSE)
+#Subset Santa Monica
+SM = LA[LA$LABEL_CITY == 'Santa Monica',] %>% spTransform(aoiProj)
+#Define AOI
+AOI = getAOI(clip_unit = SM)
+```
+
+```{r, echo = FALSE}
+leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 12, maxZoom = 12)) %>% addProviderTiles(providers$CartoDB.Positron) %>% 
+  addPolygons(data = AOI,fillColor = col, color = col1, weight = 4, label = "Santa Monica")
+```
+
+### Use Cases
+
+Now that you know how to define an AOI, check out some packages and/or that are using, or could use `AOI`:
+<br>
+<br>
+[HydroData](http://mikejohnson51.github.io/HydroData/) <br>
+[nwm](https://github.com/mikejohnson51/NWM)<br>
+[FlowlineFinder](https://github.com/mikejohnson51/FlowlineFinder)<br>
+[FedData](https://cran.r-project.org/web/packages/FedData/index.html)<br>
+[nhdplusTools](https://github.com/dblodgett-usgs/nhdplusTools)<br>
+<br>

@@ -2,7 +2,7 @@
 % Please edit documentation in R/simpleCap.R
 \name{simpleCap}
 \alias{simpleCap}
-\title{A function for capitilizing all words in a string}
+\title{Camel Case}
 \usage{
 simpleCap(x)
 }
@@ -10,11 +10,14 @@ simpleCap(x)
 \item{x}{a string to be parsed.}
 }
 \description{
-A function for capitilizing all words in a string
+\code{simpleCap} capitilizes all words in a given text string
 }
 \examples{
 simpleCap("santa barbara")
 
+}
+\seealso{
+Other AOI 'utility': \code{\link{firstLower}}
 }
 \author{
 Mike Johnson

@@ -11,11 +11,20 @@
 
 getPoint = function(name = "UCSB") {
 
+  x = FALSE
+
   trash <-  capture.output(
-                    suppressMessages(
-                      loc <- dismo::geocode(name, output = 'latlon')
-                    )
+
+    while( !isTRUE(x)){
+
+                    tryCatch({
+                      suppressMessages( loc <- dismo::geocode(name, output = 'latlon') )
+                      x = TRUE
+                    }, error = function(e){x = FALSE}
                   )
+    }
+  )
+
 
   rm(trash)
 
@@ -25,3 +34,5 @@ getPoint = function(name = "UCSB") {
   return(location)
 
 }
+
+

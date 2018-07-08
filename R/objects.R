@@ -1,32 +1,26 @@
-#' Variables needed for AOI calls
+#' AOI Projection
 #'
-#' @export
-#' @author
-#' Mike Johnson
+#' @author Mike Johnson
 #'
 
-HydroDataProj = sp::CRS('+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0+no_defs')
+aoiProj = sp::CRS('+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0+no_defs')
 
-#' Variables needed for AOI calls
+#' State Abbrivations
 #'
-#' @export
-#' @author
-#' Mike Johnson
+#' @author Mike Johnson
 #'
 
-state.abb =  c("AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL",
+stateAbb =  c("AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL",
                "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT",
                "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI",
                "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY")
 
-#' Variables needed for AOI calls
+#' State Names
 #'
-#' @export
-#' @author
-#' Mike Johnson
+#' @author Mike Johnson
 #'
 
-state.name = c("Alabama",        "Alaska",         "Arizona",       "Arkansas",
+stateName = c("Alabama",        "Alaska",         "Arizona",       "Arkansas",
                "California",     "Colorado",       "Connecticut",    "Delaware",
                "Florida",        "Georgia",        "Hawaii",         "Idaho",
                "Illinois",       "Indiana",        "Iowa",          "Kansas",

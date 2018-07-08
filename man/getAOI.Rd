@@ -40,12 +40,11 @@ Acceptable variations include:
                                     }}
 }
 \value{
-All HydroData outputs are projected to \emph{'+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0+no_defs'}.
+All AOI outputs are projected to \emph{'+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0+no_defs'}.
 }
 \description{
-The core of  all \code{AOI} functions is a bounding area. This area can be defined by (1) a US state name(s),
-a (2) US county name(s), or a uniqe bounding box. The parameters used in \code{getAOI} are the same as all \code{AOI}
-functions. Understanding the flexibility of \code{getAOI} allows you to 'find' and 'get' data for your region of interest.
+The core of  all \code{AOI} functions is a bounding area. This area can be defined by (1) US state name(s),
+(2) US county name(s), or a uniqe bounding box. The parameters used in \code{getAOI} are the same as all \code{AOI}
 }
 \examples{
 \dontrun{
@@ -72,8 +71,8 @@ functions. Understanding the flexibility of \code{getAOI} allows you to 'find' a
 }
 \seealso{
 \itemize{
-         \item \code{\link{getClipUnit}}
-         \item \code{\link{getFiatBoundary}}
+         \item \code{\link{getClip}}
+         \item \code{\link{getFiat}}
          }
 }
 \author{

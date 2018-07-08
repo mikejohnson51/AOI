@@ -1,9 +1,8 @@
 #' Get Area of interest (AOI) boundary
 #'
 #' @description
-#' The core of  all \code{AOI} functions is a bounding area. This area can be defined by (1) a US state name(s),
-#' a (2) US county name(s), or a uniqe bounding box. The parameters used in \code{getAOI} are the same as all \code{AOI}
-#' functions. Understanding the flexibility of \code{getAOI} allows you to 'find' and 'get' data for your region of interest.
+#' The core of  all \code{AOI} functions is a bounding area. This area can be defined by (1) US state name(s),
+#' (2) US county name(s), or a uniqe bounding box. The parameters used in \code{getAOI} are the same as all \code{AOI}
 #'
 #' @param state     character.  Full name or two character abbriviation. Not case senstive
 #' @param county    character.  County name(s). Requires \code{state} input. Not case senstive
@@ -35,7 +34,7 @@
 #'                                         \item \emph{list(36,-120, 10, 10, "upperright) }}
 #'                                     }
 #'
-#' @return All HydroData outputs are projected to \emph{'+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0+no_defs'}.
+#' @return All AOI outputs are projected to \emph{'+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0+no_defs'}.
 #'
 #' @export
 #'
@@ -62,16 +61,13 @@
 #' }
 #'
 #' @seealso \itemize{
-#'          \item \code{\link{getClipUnit}}
-#'          \item \code{\link{getFiatBoundary}}
+#'          \item \code{\link{getClip}}
+#'          \item \code{\link{getFiat}}
 #'          }
 #'
 #'
 #' @author
 #' Mike Johnson
-#'
-
-
 
 getAOI = function(state = NULL,
                   county = NULL,
@@ -88,7 +84,7 @@ getAOI = function(state = NULL,
       if (!is.character(value)) {
         stop("State must be a character value. Try surrounding in qoutes...")
       }
-      if (!(toupper(value) %in% AOI::state.abb || tolower(value) %in% tolower(AOI::state.name))) {
+      if (!(toupper(value) %in% AOI::stateAbb || tolower(value) %in% tolower(AOI::stateName))) {
         stop("State not recongized. Full names or abbreviations can be used. Please check spelling.")
       }
     }
@@ -108,7 +104,7 @@ getAOI = function(state = NULL,
   # AOI by state
 
   if (is.null(clip_unit) && !is.null(state)) {
-    shp <- getFiatBoundary(state = state, county = county)
+    shp <- getFiat(state = state, county = county)
     #return(shp)
   }
 
@@ -120,7 +116,7 @@ getAOI = function(state = NULL,
     ignore.case = T,
     fixed = F)){
 
-    shp =  raster::rasterToPolygons(clip_unit) %>% spTransform(AOI::HydroDataProj)
+    shp =  raster::rasterToPolygons(clip_unit) %>% spTransform(aoiProj)
 
     }
 
@@ -129,7 +125,7 @@ getAOI = function(state = NULL,
     class(clip_unit),
     ignore.case = T,
     fixed = F)) {
-    shp =  clip_unit %>% spTransform(AOI::HydroDataProj)
+    shp =  clip_unit %>% spTransform(aoiProj)
   }
 
   #------------------------------------------------------------------------------#
@@ -138,9 +134,9 @@ getAOI = function(state = NULL,
 
   if(!exists("shp")){
 
-   fin = define.clip.unit(clip_unit)
+   fin = defineClip(clip_unit)
 
-   shp <- getClipUnit(location = fin$location,
+   shp <- getClip(location = fin$location,
                       width = fin$w,
                       height = fin$h,
                       origin = fin$o)

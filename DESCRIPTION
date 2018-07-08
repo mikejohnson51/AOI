@@ -1,11 +1,10 @@
 Package: AOI
 Type: Package
-Title: AOI
+Title: Area of Interest
 Version: 0.1.0
-Author: Mike Johnson [aut, cre]
+Authors@R: person("Mike", "Johnson", role = c("aut", "cre"), email = "mike.johnson@geog.ucsb.edu")
 Maintainer: Mike Johnson <mike.johnson@geog.ucsb.edu>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: The AOI package is developed to help define spatial objects defining an area of interest for subsetting, mapping, and enhanced reproducibility.
 Depends:
     R(>= 3.3.0),
     USAboundariesData
