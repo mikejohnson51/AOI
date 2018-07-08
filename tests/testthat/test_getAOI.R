@@ -38,7 +38,7 @@ test_that("check AOI routines", {
   sp_def <- try(getAOI(clip_unit = one_state))
   rast  = raster::raster(matrix(rnorm(400),20,20), crs = AOI::aoiProj)
   raster::extent(rast) = raster::extent(sp_def)
-  ras_def <- try(getAOI(clip_unit = rast))
+  ras_def <- try(getAOI(clip_unit = rast) %>% check())
   two_state <- try(getAOI(state = c("AZ", "utah")))
 
   one_county <- try(getAOI(state = 'TX', county = 'Harris'))
@@ -47,7 +47,7 @@ test_that("check AOI routines", {
   clip_3   <- try(getAOI(clip_unit = list('KMART near UCSB', 10, 10)))
   clip_4_1 <- try(getAOI(clip_unit = list('University of Alabama', 10, 10, "upperleft")))
   clip_4_2 <- try(getAOI(clip_unit = list(37, -119, 10, 10)))
-  clip_5   <- try(getAOI(clip_unit = list(35, -115, 10, 10, "lowerright")))
+  clip_5   <- try(getAOI(clip_unit = list(35, -115, 10, 10, "lowerright")) %>% check())
   clip_ll  <- try(getAOI(clip_unit = list(35, -115, 10, 10, "lowerleft")))
   clip_ur  <- try(getAOI(clip_unit = list(35, -115, 10, 10, "upperright")))
   clip_center  <- try(getAOI(clip_unit = list(35, -115, 10, 10, "center")))

@@ -16,7 +16,6 @@ getPoint = function(name = "UCSB") {
       suppressMessages(loc <- dismo::geocode(name, output = 'latlon'))
       x = TRUE
     }, error = function(e) {
-      x = FALSE
     })
   })
 
