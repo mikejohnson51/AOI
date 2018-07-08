@@ -3,7 +3,7 @@
 #' Dataset containing \code{SpatialPolygons} of USA States. Data is taken from the USAboundaries and USAboundariesData
 #' package, converted to spatial \code{sp} objects, and cleaned-up for this packages purposes.
 #'
-#' #' The primary reason for doing this is because of the challenges associated with using the USAboundariesData as a dependency for this, and other packages.
+#' The primary reason for doing this is because of the challenges associated with using the USAboundariesData as a dependency for this, and other packages.
 #'
 #' @docType data
 #'
