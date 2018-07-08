@@ -17,9 +17,11 @@ Packages and services currently requiring a spatial AOI include (but are not lim
 
 ```
 install.packages("devtools")
-devtools::install_github("mikejohnson51/nhdplusTools")
+devtools::install_github("mikejohnson51/AOI")
 ```
 
-### Support
+### Examples:
+
+### Support:
 
 Package development is supported with funds from the UCAR COMET program; the NOAA National Water Center; and the Universtiy of California, Santa Barbara
