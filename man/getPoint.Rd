@@ -13,7 +13,7 @@ getPoint(name = "UCSB")
 a data.frame of lat,lon values
 }
 \description{
-Overwrite the
+Overwrite the dismo::geocode function to only return lat/long, remove excessive print statements; and to retry on query errors.
 }
 \author{
 Mike Johnson

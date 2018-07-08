@@ -6,6 +6,7 @@
 #'
 #' @examples
 #' simpleCap("santa barbara")
+#' @export
 #'
 #' @author Mike Johnson
 #' @family AOI 'utility'
@@ -26,6 +27,7 @@ simpleCap <- function(x) {
 #'
 #' @examples
 #' simpleCap("santa barbara")
+#' @export
 #'
 #' @author Mike Johnson
 #' @family AOI 'utility'

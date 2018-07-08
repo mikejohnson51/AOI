@@ -11,6 +11,7 @@ Depends:
 Imports:
     dismo,
     dplyr,
+    leaflet,
     raster,
     rgdal,
     sp,

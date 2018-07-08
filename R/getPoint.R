@@ -1,6 +1,6 @@
 #' Geocode a Point
 #'
-#' Overwrite the
+#' Overwrite the dismo::geocode function to only return lat/long, remove excessive print statements; and to retry on query errors.
 #'
 #' @param name a \code{character} place name
 #'
@@ -8,22 +8,17 @@
 #' @export
 #' @author Mike Johnson
 
-
 getPoint = function(name = "UCSB") {
-
   x = FALSE
 
-  trash <-  capture.output(
-
-    while( !isTRUE(x)){
-
-                    tryCatch({
-                      suppressMessages( loc <- dismo::geocode(name, output = 'latlon') )
-                      x = TRUE
-                    }, error = function(e){x = FALSE}
-                  )
-    }
-  )
+  trash <-  capture.output(while (!isTRUE(x)) {
+    tryCatch({
+      suppressMessages(loc <- dismo::geocode(name, output = 'latlon'))
+      x = TRUE
+    }, error = function(e) {
+      x = FALSE
+    })
+  })
 
 
   rm(trash)
@@ -34,5 +29,4 @@ getPoint = function(name = "UCSB") {
   return(location)
 
 }
-
 

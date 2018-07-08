@@ -36,7 +36,7 @@ test_that("getAOI throws correct errors", {
 test_that("check getAOI routines", {
   one_state <- try(getAOI(state = "Colorado"))
   sp_def <- try(getAOI(clip_unit = one_state))
-  rast  = raster::raster(matrix(rnorm(400),20,20), crs = AOI::HydroDataProj)
+  rast  = raster::raster(matrix(rnorm(400),20,20), crs = AOI::aoiProj)
   raster::extent(rast) = raster::extent(sp_def)
   ras_def <- try(getAOI(clip_unit = rast))
   two_state <- try(getAOI(state = c("AZ", "utah")))

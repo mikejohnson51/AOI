@@ -12,6 +12,7 @@
 #' @docType package
 #' @name AOI
 #'
+#' @importFrom  leaflet leaflet addProviderTiles addScaleBar addMeasure addLayersControl addPolygons
 #' @importFrom  sp Polygon SpatialPolygons spTransform Polygons
 #' @importFrom  sf st_geometry as_Spatial
 #' @importFrom  dplyr %>%

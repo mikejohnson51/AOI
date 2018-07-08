@@ -14,7 +14,6 @@ firstLower(x)
 }
 \examples{
 simpleCap("santa barbara")
-
 }
 \seealso{
 Other AOI 'utility': \code{\link{simpleCap}}

@@ -14,13 +14,13 @@ getFiat(state = NULL, county = NULL, clip_unit = NULL)
 \item{clip_unit}{SpatialObject* or list. For details see \code{?getClipUnit}}
 }
 \value{
-\code{getFiatBoundary} returns a \code{SpatialPolygon} Object
+\code{getFiat} returns a \code{SpatialPolygon} Object
 }
 \description{
 Get County and State SpatialPolygon(s)
 }
 \details{
-\code{getFiatBoundary} gets a \code{SpatialPolygon} for a defiend state and/or county or those intersecting a clip_unit.
+\code{getFiat} gets a \code{SpatialPolygon} for a defiend state and/or county or those intersecting a clip_unit.
 Fiat boundaries come from the 2017 US Census Bureau 2017 TIGER Dataset.
 
 All HydroData outputs are projected to \emph{'+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0+no_defs'}
@@ -46,7 +46,7 @@ All HydroData outputs are projected to \emph{'+proj=longlat +ellps=GRS80 +towgs8
 }
 \seealso{
 \itemize{
-         \item \code{\link{getClipUnit}}
+         \item \code{\link{getClip}}
          \item \code{\link{getAOI}}
          }
 }

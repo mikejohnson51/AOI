@@ -17,7 +17,7 @@ col1 = '#212f3f'
 
 ## Defining an Area of Interest (AOI)
 
-An area of interest (AOI) is the geographic extent. It helps confine the unit of work to a geographic area, and helps to not only proritize and define research and subsetting efforts, but improves reproducabilty across studies. 'AOI` is an R package that lets users define an AOI through a common query and return a 'SpatialPolygon' of that area.  
+An area of interest (AOI) is the geographic extent. It helps confine the unit of work to a geographic area, and helps to not only prioritize and define research and subsetting efforts, but improves reproducabilty across studies. 'AOI` is an R package that lets users define an AOI through a common query and return a 'SpatialPolygon' of that area.  
 
 Three parameters can be used to define a query:  *state*, *county*, and *clip_unit*. This page illustrates how these parameters can be used define -- and refine -- a query. 
 
@@ -97,7 +97,7 @@ A Location is the first input in  **clip_unit** list and can be given as a collo
 
 ####*Grand Canyon Location example*:
 
-Here we query an AOI surrounding the Grand Canyon, using both the colloquial name, and the (lat/long) pair found with a <a target="_blank"href="http://www.google.com/search?q=grand+canyon+lat+long">google search.</a> Notice slightly different locations are generated:
+Here we query an AOI surrounding the Grand Canyon, using both the colloquial name, and the (lat/long) pair found with a <a target="_blank"href="http://www.Google.com/search?q=grand+canyon+lat+long">Google search.</a> Notice slightly different locations are generated:
 
 ```{r, message = F}
 GC_name = getAOI(clip_unit = list("grand canyon", 10, 10))
@@ -194,9 +194,40 @@ leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 12, maxZoom = 12)) %
   addPolygons(data = AOI,fillColor = col, color = col1, weight = 4, label = "Santa Monica")
 ```
 
+### Finding and refining an AOI
+
+One on the hardest aspects of defining an AOI is deciding on the query parameters (eg the location, width and height). To help with this the `AOI` package has a `check` function that can be used to define OR refine AOI queries.
+
+If you have no idea about the constraints of your AOI you can run check() alone:
+
+```{r, message = FALSE}
+check()
+```
+<br>
+<br>
+Doing so brings up a map centered on the United States (panning is available). Zooming to your general AOI, you can use the tools in the lower right hand corner of the map to mark locations to get lat/long, and measure distances. These values can them be input directly into the `getAOI()` call. 
+<br>
+<br>
+Give it a try!
+<br>
+<br>
+The `check()` function can also be chained to existing AOI call to immediately see the region being queried:
+<br>
+```{r, message = FALSE}
+getAOI(clip_unit = list("San Luis Obispo", 10, 10 )) %>% check()
+```
+<br>
+<br>
+Using the tabs in the upper right corner allow you to toggle between base maps to better understand the area you are defining. 
+<br>
+<br>
+Give it a try!
+<br>
+<br>
+
 ### Use Cases
 
-Now that you know how to define an AOI, check out some packages and/or that are using, or could use `AOI`:
+Now that you know how to define, view and refine an AOI, check out some packages and/or services that are using, or could use the `AOI` package for spatial subsetting calls:
 <br>
 <br>
 [HydroData](http://mikejohnson51.github.io/HydroData/) <br>
@@ -205,3 +236,7 @@ Now that you know how to define an AOI, check out some packages and/or that are 
 [FedData](https://cran.r-project.org/web/packages/FedData/index.html)<br>
 [nhdplusTools](https://github.com/dblodgett-usgs/nhdplusTools)<br>
 <br>
+
+### Support
+
+Package development is supported with funds from the UCAR COMET program; the NOAA National Water Center; and the University of California, Santa Barbara (UCSB).
