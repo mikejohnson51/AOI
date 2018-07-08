@@ -1,26 +1,23 @@
 Package: AOI
 Type: Package
 Title: Area of Interest
-Version: 0.1.0
+Version: 0.0.1
 Authors@R: person("Mike", "Johnson", role = c("aut", "cre"), email = "mike.johnson@geog.ucsb.edu")
 Maintainer: Mike Johnson <mike.johnson@geog.ucsb.edu>
+BugReports: https://github.com/mikejohnson51/AOI/issues
 Description: The AOI package is developed to help define spatial objects defining an area of interest for subsetting, mapping, and enhanced reproducibility.
 Depends:
-    R(>= 3.3.0),
-    USAboundariesData
+    R(>= 3.3.0)
 Imports:
     dismo,
-    dplyr,
     leaflet,
     raster,
     rgdal,
-    sp,
-    sf (>= 0.6-0),
-    USAboundaries,
-    XML
+    sp
 Suggests: 
     testthat
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
+URL: https://github.com/mikejohnson51/AOI/

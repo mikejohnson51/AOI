@@ -10,16 +10,13 @@
 #' See the README on github
 #'
 #' @docType package
+#'
 #' @name AOI
 #'
-#' @importFrom  leaflet leaflet addProviderTiles addScaleBar addMeasure addLayersControl addPolygons
-#' @importFrom  sp Polygon SpatialPolygons spTransform Polygons
-#' @importFrom  sf st_geometry as_Spatial
-#' @importFrom  dplyr %>%
+#' @import      leaflet
+#' @importFrom  sp Polygon SpatialPolygons spTransform Polygons CRS
 #' @importFrom  dismo geocode
-#' @importFrom  stats setNames
 #' @importFrom  utils capture.output tail install.packages
-#' @importFrom  USAboundaries us_counties us_states
 #' @importFrom  raster rasterToPolygons
 
 NULL

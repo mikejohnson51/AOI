@@ -4,14 +4,12 @@
 \alias{getFiat}
 \title{Get County and State SpatialPolygon(s)}
 \usage{
-getFiat(state = NULL, county = NULL, clip_unit = NULL)
+getFiat(state = NULL, county = NULL)
 }
 \arguments{
 \item{state}{character. Full name or two character abbriviation. Not case senstive}
 
 \item{county}{character. Provide county name(s). Requires 'state' input.}
-
-\item{clip_unit}{SpatialObject* or list. For details see \code{?getClipUnit}}
 }
 \value{
 \code{getFiat} returns a \code{SpatialPolygon} Object

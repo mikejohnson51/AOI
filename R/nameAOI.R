@@ -57,10 +57,10 @@ nameAOI = function(state = NULL,
     }
 
     for (i in 1:length(county)) {
-      county.map = append(county_map, simpleCap(tolower(county[i])))
+      county_map = append(county_map, simpleCap(tolower(county[i])))
     }
 
-    if (length(county.map) > 1) {
+    if (length(county_map) > 1) {
       county_map[length(county_map)] = paste("and", tail(county_map, n = 1))
     }
 

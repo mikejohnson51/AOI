@@ -8,7 +8,6 @@
 #'
 #' @param state     character. Full name or two character abbriviation. Not case senstive
 #' @param county    character. Provide county name(s). Requires 'state' input.
-#' @param clip_unit SpatialObject* or list. For details see \code{?getClipUnit}
 #'
 #' @return \code{getFiat} returns a \code{SpatialPolygon} Object
 #' @export
@@ -40,31 +39,36 @@
 #' @author Mike Johnson
 #'
 
-getFiat <- function(state = NULL, county = NULL, clip_unit = NULL) {
+getFiat <- function(state = NULL, county = NULL) {
 
-    df = USAboundaries::us_counties(map_date = NULL, resolution = "high", states = state)
-    counties = sf::as_Spatial(sf::st_geometry(df), IDs = as.character(1:nrow(df)))
+  states = AOI::states
+  counties = AOI::counties
 
-    df$geometry <- NULL
-    df <- as.data.frame(df)
-    row.names(df) = NULL
-    counties <- sp::SpatialPolygonsDataFrame(counties, data = df) %>% spTransform(aoiProj)
+  state_map = states[(state == states$state_name | state == states$state_abbr),]
+  county_map = counties[(state == counties$state_name | state == counties$state_abbr),]
 
-    map <- sp::SpatialPolygonsDataFrame(counties, data = df) %>% spTransform(aoiProj)
+  if(is.null(county)) {
+    map = state_map
+    } else {
 
-    if(!is.null(county)){
-      county_map <- vector(mode = "character")
-      for (i in 1:length(county)) { county_map <- append(county_map, simpleCap(tolower(county[i]))) }
+    county = simpleCap(county)
+    check = county %in% county_map$name
 
-      bad_counties  = setdiff(county_map, map$name)
+    if(!all(check)) {
+      bad_counties  = county[which(!(check))]
+      if(nchar(state) == 2){state = states$state_name[which(states$state_abbr == state)]}
+      stop(paste(bad_counties, collapse = ", "), " not a valid county in ", state, ".")
+    }
 
-      if(nchar(state) == 2){state = setNames(stateName, stateAbb)[toupper(state)][1]}
+    map = county_map[county == county_map$name,]
 
-      if(length(bad_counties) > 0){stop(paste(bad_counties, collapse = ", "), " not a valid county in ", state, ".")}
-
-      map <- map[map$name %in% county_map, ]
   }
+
+  rm(states)
+  rm(counties)
 
   return(map)
 
 }
+
+

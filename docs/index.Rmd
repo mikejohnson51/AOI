@@ -205,7 +205,7 @@ check()
 ```
 <br>
 <br>
-Doing so brings up a map centered on the United States (panning is available). Zooming to your general AOI, you can use the tools in the lower right hand corner of the map to mark locations to get lat/long, and measure distances. These values can them be input directly into the `getAOI()` call. 
+Doing so brings up a map centered on the United States (panning is available). Zooming to your general AOI, you can use the tools in the lower left hand corner of the map to mark locations to get lat/long, and measure distances. These values can then be input directly into the `getAOI()` call. 
 <br>
 <br>
 Give it a try!

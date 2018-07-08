@@ -14,7 +14,7 @@ check = function(AOI = NULL) {
     addProviderTiles("Esri.NatGeoWorldMap" , group = "Terrain") %>%
 
     addScaleBar("bottomleft") %>%
-    addMiniMap(tiles = providers$OpenStreetMap.BlackAndWhite,
+    addMiniMap(tiles = "OpenStreetMap.BlackAndWhite",
                toggleDisplay = TRUE, minimized = TRUE) %>%
     addMeasure(
       position = "bottomleft",

@@ -24,16 +24,16 @@ test_that("getAOI throws correct errors", {
                                                                          "2. A bounding box height (in miles) (numeric)\n",
                                                                          "3. A bounding box width (in miles) (numeric)\n\n",
                                                                          "OR\n\n",
-                                                                     "1. A location (character)\n",
-                                                                     "2. A bound box height (in miles) (numeric)\n",
-                                                                     "3. A bounding box width (in miles) (numeric)\n",
-                                                                     "4. A bounding box origin (character)"
-                                                                     ))
+                                                                         "1. A location (character)\n",
+                                                                         "2. A bound box height (in miles) (numeric)\n",
+                                                                         "3. A bounding box width (in miles) (numeric)\n",
+                                                                         "4. A bounding box origin (character)"
+))
 
 })
 
 
-test_that("check getAOI routines", {
+test_that("check AOI routines", {
   one_state <- try(getAOI(state = "Colorado"))
   sp_def <- try(getAOI(clip_unit = one_state))
   rast  = raster::raster(matrix(rnorm(400),20,20), crs = AOI::aoiProj)

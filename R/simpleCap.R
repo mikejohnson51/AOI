@@ -11,12 +11,19 @@
 #' @author Mike Johnson
 #' @family AOI 'utility'
 
-
-
 simpleCap <- function(x) {
-  s <- strsplit(x, " ")[[1]]
-  paste(toupper(substring(s, 1,1)), substring(s, 2),
+
+  x = tolower(x)
+
+  vals = vector(mode = "character", length = length(x))
+
+  for(i in 1:length(x)){
+    s <- strsplit(x, " ")[[i]]
+    vals[i] = paste(toupper(substring(s, 1,1)), substring(s, 2),
         sep="", collapse=" ")
+  }
+
+  return(vals)
 }
 
 #' Lower case first character
