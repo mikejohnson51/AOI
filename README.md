@@ -22,6 +22,8 @@ devtools::install_github("mikejohnson51/AOI")
 
 ### Examples:
 
+See a documented set of examples [here](https://mikejohnson51.github.io/AOI/)
+
 ### Support:
 
 Package development is supported with funds from the UCAR COMET program; the NOAA National Water Center; and the Universtiy of California, Santa Barbara
