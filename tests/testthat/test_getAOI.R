@@ -34,6 +34,7 @@ test_that("getAOI throws correct errors", {
 
 
 test_that("check AOI routines", {
+  map = try(check(AOI = NULL))
   one_state <- try(getAOI(state = "Colorado"))
   sp_def <- try(getAOI(clip_unit = one_state))
   rast  = raster::raster(matrix(rnorm(400),20,20), crs = AOI::aoiProj)
@@ -52,7 +53,7 @@ test_that("check AOI routines", {
   clip_ur  <- try(getAOI(clip_unit = list(35, -115, 10, 10, "upperright")))
   clip_center  <- try(getAOI(clip_unit = list(35, -115, 10, 10, "center")))
 
-  vec = c(one_state, sp_def, two_state, one_county, two_county, clip_3, clip_4_1, clip_4_2, clip_5, clip_ll, clip_ur, clip_center)
+  vec = c(map, one_state, sp_def, two_state, one_county, two_county, clip_3, clip_4_1, clip_4_2, clip_5, clip_ll, clip_ur, clip_center)
   print(!inherits(vec,"try-error"))
   check = !inherits(vec,"try-error")
   expect_true(check)
