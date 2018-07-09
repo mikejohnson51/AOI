@@ -7,13 +7,28 @@
 check(AOI = NULL)
 }
 \arguments{
-\item{AOI}{an AOI obtained from \code{getAOI}}
+\item{AOI}{an AOI obtained from \link{getAOI}. Can be left \code{NULL}}
 }
 \value{
-a leaflet map object
+a \code{leaflet} map object
 }
 \description{
-Check AOI extents
+Generate an interactive \code{leaflet} map for defining, checking, and refining AOI queries. Can be chained to \link{getAOI} via
+%>%. Useful \code{leaflet} tools allow for the marking of points, measuring of distances, and interactive panning and zooming to help define
+an approapriate AOI
+}
+\examples{
+\dontrun{
+# Generate an empty map:
+check()
+
+# Check a defined AOI
+AOI = getAOI(clip = list("UCSB", 10, 10))
+check(AOI)
+
+# Chain to AOI calls:
+getAOI(clip = list("UCSB", 10, 10)) \%>\% check()
+}
 }
 \author{
 Mike Johnson

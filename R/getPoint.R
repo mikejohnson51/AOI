@@ -5,6 +5,8 @@
 #' @param name a \code{character} place name
 #'
 #' @return a data.frame of lat,lon values
+#' @examples
+#' \dontrun{ getPoint("UCSB") }
 #' @export
 #' @author Mike Johnson
 
@@ -19,7 +21,6 @@ getPoint = function(name = "UCSB") {
     }, error = function(e) {
     })
   })
-
 
   rm(trash)
 

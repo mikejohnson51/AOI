@@ -1,27 +1,45 @@
 #' Get Area of interest (AOI) boundary
 #'
-#' @description
-#' The core of  all \code{AOI} functions is a bounding area. This area can be defined by (1) US state name(s),
-#' (2) US county name(s), or a uniqe bounding box. The parameters used in \code{getAOI} are the same as all \code{AOI}
+#' @description Get a \code{SpatialPolygons} representation of an AOI defined by:
+#' \enumerate{
+#'              \item  a US state name(s)
+#'              \item  a US state, county pair(s)
+#'              \item  a clipping unit
+#'              }
 #'
-#' @param state     character.  Full name or two character abbriviation. Not case senstive
-#' @param county    character.  County name(s). Requires \code{state} input. Not case senstive
-#' @param clip SpatialObject* or list. If a list, a clip unit requires 3 inputs:
+#' \code{getAOI} wraps \code{\link{getFiat}} and \code{\link{getClip}} into a single function.
+#'
+#' @param state     \code{character}.  Full name or two character abbriviation. Not case senstive
+#' @param county    \code{character}.  County name(s). Requires \code{state} input. Not case senstive
+#' @param clip      \code{Spatial} object, a \code{Raster} object, or a \code{list} (see details and \code{\link{getClip}})
+#'
+#' @details If \code{clip} is a list, a clip unit requires a minimum of 3 inputs:
 #'                               \enumerate{
 #'                                      \item  A point: \itemize{
 #'                                             \item  'location name' ex: "UCSB"
-#'                                             \item 'latitude, longitude' pair: ex: '-36, -120'
+#'                                             \item lat/lon pair: ex: '-36, -120'
 #'                                          }
-#'                                      \item  Bounding box diminsions \itemize{
-#'                                      \item  A bounding box height \strong{in miles} ex: 10
-#'                                      \item A bounding box width \strong{in miles} ex: 10
+#'                                      \item  A bounding box height \itemize{
+#'                                              \item{in miles} ex: 10
+#'                                          }
+#'                                      \item A bounding box width \itemize{
+#'                                              \item{in miles} ex: 10
+#'                                          }
 #'                                      }
-#'                                      \item The realtive location of the point to the bounding box \itemize{
-#'                                         \item 'center', 'lowerleft', 'lowerright', 'upperright', 'upperleft'
-#'                                         \item Default is: 'center'
+#'
+#'                                      The bounding box is always drawn in relation to the location. By default the point is treated
+#'                                      as the center of the box. To define the realtive location of the point to the bounding box
+#'                                      a fourth input can be used:
+#'                                      \enumerate{
+#'                                      \item Origin \itemize{
+#'                                         \item 'center' (default)
+#'                                         \item 'upperleft'
+#'                                         \item 'upperright'
+#'                                         \item 'lowerleft'
+#'                                         \item 'lowerright'
 #'                                      }
 #'                                  }
-#' 3 to 5 elements can be used to describe and refine these inputs but \strong{ORDER MATTERS (point, height, width, origin)}.
+#' 3 to 5 elements can be used to paramaterize the \code{clip} element but \strong{ORDER MATTERS} (point, height, width, origin).
 #' Acceptable variations include:
 #' \itemize{
 #'                                     \item 3 members: (1) location name, (2) height, (3) width \itemize{
@@ -34,7 +52,7 @@
 #'                                         \item \emph{list(36,-120, 10, 10, "upperright) }}
 #'                                     }
 #'
-#' @return All AOI outputs are projected to \emph{'+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0+no_defs'}.
+#' @return a \code{SpatialPolygons} object projected to \emph{EPSG:4269}.
 #'
 #' @export
 #'
@@ -46,17 +64,16 @@
 #'
 #' # Get AOI defined by state & county pair(s)
 #'     getAOI(state = 'California', county = 'Santa Barbara')
-#'     getAOI(state = 'California', county = c('Santa Barbara', 'ventura'))
+#'     getAOI(state = 'CA', county = c('Santa Barbara', 'ventura'))
 #'
-#' # Get AOI defined by external shapefile
+#' # Get AOI defined by external spatial file:
 #'     getAOI(clip = rgdal::readOGR('la_metro.shp'))
 #'     getAOI(clip = raster('AOI.tif'))
 #'
-#' # Get AOI defined by 10 mile bounding box using users location as centroid
-#'     getAOI(clip = c(get_ip_loc(), 10, 10))
+#' # Get AOI defined by 10 mile bounding box using lat/lon
+#'     getAOI(clip = c(35, -119, 10, 10))
 #'
 #' # Get AOI defined by 10 mile2 bounding box using the 'KMART near UCSB' as lower left corner
-#'     getAOI(clip = list('KMART near UCSB', 10, 10))
 #'     getAOI(clip = list('KMART near UCSB', 10, 10, 'lowerleft'))
 #' }
 #'
@@ -73,6 +90,9 @@ getAOI = function(state = NULL,
                   county = NULL,
                   clip = NULL) {
 
+  stateAbb = AOI::states$state_abbr
+  stateName = AOI::states$state_name
+
   #------------------------------------------------------------------------------#
   # Error Catching                                                               #
   #------------------------------------------------------------------------------#
@@ -84,7 +104,7 @@ getAOI = function(state = NULL,
       if (!is.character(value)) {
         stop("State must be a character value. Try surrounding in qoutes...")
       }
-      if (!(toupper(value) %in% AOI::stateAbb || tolower(value) %in% tolower(AOI::stateName))) {
+      if (!(toupper(value) %in% stateAbb || tolower(value) %in% tolower(stateName))) {
         stop("State not recongized. Full names or abbreviations can be used. Please check spelling.")
       }
     }
@@ -98,12 +118,12 @@ getAOI = function(state = NULL,
   }
 
   #-----------------------------------------------------------------------------------#
-  # Fiat Boundary Defintion (Exisiting Spatial/Raster Feature or getFiatBoundary())   #
+  # Fiat Boundary Defintion (Exisiting Spatial/Raster Feature or getFiat())   #
   #-----------------------------------------------------------------------------------#
 
   # AOI by state
 
-  if (is.null(clip) && !is.null(state)) {
+  if (all(is.null(clip), !is.null(state))) {
     shp <- getFiat(state = state, county = county)
     #return(shp)
   }
@@ -125,7 +145,7 @@ getAOI = function(state = NULL,
     class(clip),
     ignore.case = T,
     fixed = F)) {
-    shp =  clip %>% spTransform(aoiProj)
+    shp = sp::spTransform(clip, aoiProj)
   }
 
   #------------------------------------------------------------------------------#

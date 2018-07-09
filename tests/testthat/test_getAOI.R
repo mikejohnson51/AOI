@@ -36,7 +36,7 @@ test_that("getAOI throws correct errors", {
 test_that("check AOI routines", {
   map = try(check(AOI = NULL))
   one_state <- try(getAOI(state = "Colorado"))
-  sp_def <- try(getAOI(clip = one_state))
+  sp_def <- getAOI(clip = one_state)
   map2 = check(sp_def)
   rast  = raster::raster(matrix(rnorm(400),20,20), crs = AOI::aoiProj)
   raster::extent(rast) = raster::extent(sp_def)

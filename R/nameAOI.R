@@ -1,18 +1,20 @@
-#' A function for returning a text string name of AOI
+#' Provide the plain-english description of an AOi
 #'
-#' @param state a character string. Can be full name or state abbriviation
-#' @param county a character string. Can be full name or state abbriviation
-#' @param clip can be provided as a shapefile or as a vector defineing centroid and bounding box diminsion
+#' @description This function is a mirror of \code{\link{getAOI}} but instead of returning a \code{SpatilaPolygons} object,
+#' returns a plain-english description of the AOI. (eg: 'AOI defined as a 10 mile tall by 10 mile wide region centered on (the) UCSB')
+#'
+#' @param state     \code{character}.  Full name or two character abbriviation. Not case senstive
+#' @param county    \code{character}.  County name(s). Requires \code{state} input. Not case senstive
+#' @param clip      \code{Spatial} object, a \code{Raster} object, or a \code{list} (see details and \code{\link{getClip}})
 #'
 #' @examples
 #' \dontrun{
 #' nameAOI(state = "CA")
 #'}
-#' @return
-#'
-#' A character string
+#' @return A character string
 #'
 #' @export
+#' @seealso \code{\link{nameClip}}
 #'
 #' @author Mike Johnson
 #'
@@ -20,44 +22,35 @@
 nameAOI = function(state = NULL,
                    county = NULL,
                    clip = NULL) {
-  unit = NULL
 
   if (!is.null(clip)) {
     unit = nameClip(clip)
-  }
+  } else {
 
-  if (all(!is.null(state), is.null(county))) {
+    states_name = vector(mode = 'character')
 
     for (i in seq_along(state)) {
-      if (nchar(state[i]) == 2) {
-        unit = append(unit, stats::setNames(AOI::stateName, AOI::stateAbb)[state[i]])
-      } else{
-        unit = append(unit, simpleCap(tolower(state[i])))
+          if(nchar(state[i]) == 2){states_name[i] = AOI::states$state_name[which(AOI::states$state_abbr == state[i])]
+        } else {
+        states_name[i] = simpleCap(state[i])
       }
     }
 
-    if (length(unit) > 1) {
-      unit[length(unit)] = paste("and", tail(unit, n = 1))
-    }
-
-    unit = paste0("boundary of ", paste(unit, collapse = ", "))
+  if (length(state) > 1) {
+        states_name[length(states_name)] = paste("and", tail(states_name, n = 1))
+        states_name = paste(states_name, collapse = ", ")
   }
 
-  if (!is.null(county)) {
 
-    states = vector(mode = 'character')
+  if(is.null(county)){
+    unit = paste0("boundary of ", states_name)
+
+  } else {
+
     county_map = vector(mode = 'character')
 
-    for (i in seq_along(state)) {
-      if (nchar(state[i]) == 2) {
-        states = append(states, stats::setNames(AOI::stateName, AOI::stateAbb)[state[i]])
-      } else{
-        states = append(states, simpleCap(tolower(state[i])))
-      }
-    }
-
     for (i in 1:length(county)) {
-      county_map = append(county_map, simpleCap(tolower(county[i])))
+      county_map[i] = AOI::simpleCap(tolower(county[i]))
     }
 
     if (length(county_map) > 1) {
@@ -66,9 +59,11 @@ nameAOI = function(state = NULL,
 
     county_map = paste(county_map, collapse = ', ')
 
-    unit = paste0("boundary of ", county_map, " County, ", states)
+    unit = paste0("boundary of ", county_map, " County, ", states_name)
+  }
   }
   return(unit)
 }
+
 
 

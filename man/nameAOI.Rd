@@ -2,27 +2,31 @@
 % Please edit documentation in R/nameAOI.R
 \name{nameAOI}
 \alias{nameAOI}
-\title{A function for returning a text string name of AOI}
+\title{Provide the plain-english description of an AOi}
 \usage{
-nameAOI(state = NULL, county = NULL, clip_unit = NULL)
+nameAOI(state = NULL, county = NULL, clip = NULL)
 }
 \arguments{
-\item{state}{a character string. Can be full name or state abbriviation}
+\item{state}{\code{character}.  Full name or two character abbriviation. Not case senstive}
 
-\item{county}{a character string. Can be full name or state abbriviation}
+\item{county}{\code{character}.  County name(s). Requires \code{state} input. Not case senstive}
 
-\item{clip_unit}{can be provided as a shapefile or as a vector defineing centroid and bounding box diminsion}
+\item{clip}{\code{Spatial} object, a \code{Raster} object, or a \code{list} (see details and \code{\link{getClip}})}
 }
 \value{
 A character string
 }
 \description{
-A function for returning a text string name of AOI
+This function is a mirror of \code{\link{getAOI}} but instead of returning a \code{SpatilaPolygons} object,
+returns a plain-english description of the AOI. (eg: 'AOI defined as a 10 mile tall by 10 mile wide region centered on (the) UCSB')
 }
 \examples{
 \dontrun{
 nameAOI(state = "CA")
 }
+}
+\seealso{
+\code{\link{nameClip}}
 }
 \author{
 Mike Johnson

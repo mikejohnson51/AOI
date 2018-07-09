@@ -9,10 +9,11 @@
 \code{AOI} package
 }
 \details{
-The area of interest (AOI) is the geographic extent of a project.
-This helps confine the unit of work to a geographic area, and helps to not only proritize and define research and subsetting efforts,
-but to improve reproducabilty across studies. This package aims to make finding state, county and geographic AOI easier,
-through a common query system based on 'state', 'county' and 'clip' parameters. AOIs for all queryies are retruned a a SpatialPolygon.
+The area of interest (AOI) is the geographic extent. It helps confin the unit of work to a geographic area,
+tproritize and define research and subsetting efforts, and to improve reproducabilty across studies.
+This package aims to make finding fiat and geographic AOIs easier,
+through a common query system based on 'state', 'county' and 'clip' parameters.
+AOIs for all queryies are retruned a a SpatialPolygon projeted to EPSG:4269.
 
-See the README on github
+See the \href{https://github.com/mikejohnson51/AOI/blob/master/README.md}{README} on github
 }

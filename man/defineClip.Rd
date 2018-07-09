@@ -2,18 +2,30 @@
 % Please edit documentation in R/defineClip.R
 \name{defineClip}
 \alias{defineClip}
-\title{Interpret a clip unit from a user input}
+\title{Parse a clip list from user input}
 \usage{
-defineClip(clip_unit)
+defineClip(clip = NULL)
 }
 \arguments{
-\item{clip_unit}{a user supplied input}
+\item{clip}{a user supplied list (see \code{\link{getAOI}})}
 }
 \value{
-a list of features defining the AOI
+a 4-element list of features defining an AOI including:
 }
 \description{
-Interpret a clip unit from a user input
+\code{defineClip} parses user supplied lists to a format usable by \code{\link{getClip}}
+}
+\examples{
+\dontrun{
+defineClip(list("UCSB", 10, 10))
+defineClip(list(37,-115, 10, 10))
+}
+
+}
+\seealso{
+\code{\link{getClip}}
+
+\code{\link{getAOI}}
 }
 \author{
 Mike Johnson

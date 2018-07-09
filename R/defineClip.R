@@ -1,14 +1,23 @@
-#' Interpret a clip unit from a user input
+#' Parse a clip list from user input
 #'
-#' @param clip a user supplied input
+#' @description \code{defineClip} parses user supplied lists to a format usable by \code{\link{getClip}}
 #'
-#' @return a list of features defining the AOI
+#' @seealso \code{\link{getClip}}
+#' @seealso \code{\link{getAOI}}
+#'
+#' @param clip a user supplied list (see \code{\link{getAOI}})
+#' @examples
+#' \dontrun{
+#' defineClip(list("UCSB", 10, 10))
+#' defineClip(list(37,-115, 10, 10))
+#' }
+#'
+#' @return a 4-element list of features defining an AOI including:
 #' @author Mike Johnson
 #' @export
-#'
-#'
 
-defineClip = function(clip) {
+
+defineClip = function(clip = NULL) {
   #------------------------------------------------------------------------------#
   # Clip Unit Defintion  (getClipUnit() for 3,4, or 5 inputs)                    #
   #------------------------------------------------------------------------------#

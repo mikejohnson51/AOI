@@ -1,8 +1,8 @@
 #' Get a bouding box for a location
 #'
-#' @details
-#' \code{getClip} generates a \code{SpatialPolygon} based on a location, bounding box height and width and point position.
-#'  All HydroData outputs are projected to \emph{'+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0+no_defs'}.
+#' @description
+#' \code{getClip} generates a \code{SpatialPolygon} based on bounding box dimisions its relation to a point.
+#'  All HydroData outputs are projected to \emph{EPSG:4269}.
 #'  Locations given by a character string are geocoded via the \code{dismo} package to get a lat, long pair. All bounding boxes defined by a width an a height.
 #'  The point from chich these are drawn ins defined by a given location and origin.
 #'
@@ -17,33 +17,22 @@
 #'     \item{"upperleft"}
 #'   }
 #'
-#' @return \code{getClip} returns a \code{SpatialPolygon} Object
+#' @return a \code{SpatialPolygons} object projected to \emph{EPSG:4269}.
 #' @export
 #' @seealso \itemize{
-#'          \item \code{\link{getFiat}}
-#'          \item \code{\link{getAOI}}
+#'          \item \code{\link{getClip}}
 #'          }
-#'
-#' @family AOI
-#' @author Mike Johnson
 #'
 #' @examples
 
 #' \dontrun{
-#' # Get clip unit using name
-#'     get
 #'
-#' # Get Multi-state
-#'     getFiatBoundary(state = c("CA","Utah","Nevada"))
 #'
-#' # Get County
-#'     getFiatBoundary(state = "CA", county = "San Luis Obispo")
+#' # Get AOI defined by 10 mile bounding box using "UCSB" as the point
+#'     getClip(location = "UCSB", width = 10, height = 10, origin = "center")
 #'
-#' # Get Muli-county
-#'    getFiatBoundary(state = "CA", county = c("San Luis Obispo", "Santa Barbara", "Ventura"))
-#'
-#' # Get counties that intersect with defined clip
-#'    getFiatBoundary(clip = list("UCSB", 10, 10, "lowerleft"))
+#' # Get AOI defined by 10 mile2 bounding box using the 'KMART near UCSB' as lower left corner
+#'     getClip(clocation = NULL, width = NULL, height = NULL, origin = NULL)
 #'}
 #'
 #' @author

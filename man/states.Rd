@@ -4,7 +4,7 @@
 \name{states}
 \alias{states}
 \title{USA States}
-\format{a \code{dataframe} instance, 1 row per station with columns:
+\format{a \code{SpatialPolygonsDataFrame}, 52 observations of 5 variables
 \itemize{
 \item 'statefp':    A \code{character}  State 2-digit FederalInformationProcessingStandards (FIPS) code
 \item 'statens':    A \code{character}  American National Standards Institute (ANSI) code
@@ -19,11 +19,10 @@
 states
 }
 \description{
-Dataset containing \code{SpatialPolygons} of USA States. Data is taken from the USAboundaries and USAboundariesData
-package, converted to spatial \code{sp} objects, and cleaned-up for this packages purposes.
-}
-\details{
-The primary reason for doing this is because of the challenges associated with using the USAboundariesData as a dependency for this, and other packages.
+Dataset containing \code{SpatialPolygons} of USA States. Data is initalized from the USAboundaries and USAboundariesData
+package, converted to spatial \code{sp} objects, and cleaned-up for this package purposes.The primary reason for doing this is to limit
+the challenges associated with using the USAboundariesData (not on CRAN) as a dependency for this, and other packages, while also providing
+a more minmualistic dataset.
 }
 \examples{
 \dontrun{

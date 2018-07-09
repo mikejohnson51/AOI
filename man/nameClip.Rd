@@ -2,18 +2,19 @@
 % Please edit documentation in R/nameClip.R
 \name{nameClip}
 \alias{nameClip}
-\title{Interprete the plain-english description of a clip unit}
+\title{Provide the plain-english description of a clip unit}
 \usage{
-nameClip(clip_unit)
+nameClip(clip)
 }
 \arguments{
-\item{clip_unit}{a user supplied clip_unit}
+\item{clip}{a user supplied clip list (see \code{\link{getAOI}} and \code{\link{getClip}})}
 }
 \value{
-a string describing the clipt unit in plain english
+a string describing the clip list in plain english
 }
 \description{
-Interprete the plain-english description of a clip unit
+This function is a mirror of \code{\link{getAOI}} but instead of returning a \code{SpatilaPolygons} object,
+returns a plain-english description of the clip list (eg: 'AOI defined as a 10 mile tall by 10 mile wide region centered on (the) UCSB')
 }
 \author{
 Mike Johnson

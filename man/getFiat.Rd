@@ -12,41 +12,35 @@ getFiat(state = NULL, county = NULL)
 \item{county}{character. Provide county name(s). Requires 'state' input.}
 }
 \value{
-\code{getFiat} returns a \code{SpatialPolygon} Object
+a \code{SpatialPolygons} object projected to \emph{EPSG:4269}.
 }
 \description{
 Get County and State SpatialPolygon(s)
 }
 \details{
-\code{getFiat} gets a \code{SpatialPolygon} for a defiend state and/or county or those intersecting a clip_unit.
-Fiat boundaries come from the 2017 US Census Bureau 2017 TIGER Dataset.
-
-All HydroData outputs are projected to \emph{'+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0+no_defs'}
+\code{getFiat} returns a \code{SpatialPolygons} object for a defiend state and/or county.
+Boundaries come from the 2017 US Census TIGER Dataset and are projected to \emph{EPSG:4269}.
 }
 \examples{
 \dontrun{
 # Get Single State
-    getFiatBoundary(state = "CA")
+    getFiat(state = "CA")
 
 # Get Multi-state
-    getFiatBoundary(state = c("CA","Utah","Nevada"))
+    getFiat(state = c("CA","Utah","Nevada"))
 
 # Get County
-    getFiatBoundary(state = "CA", county = "San Luis Obispo")
+    getFiat(state = "CA", county = "San Luis Obispo")
 
 # Get Muli-county
-   getFiatBoundary(state = "CA", county = c("San Luis Obispo", "Santa Barbara", "Ventura"))
-
-# Get counties that intersect with defined clip_unit
-   getFiatBoundary(clip_unit = list("UCSB", 10, 10, "lowerleft"))
+   getFiat(state = "CA", county = c("San Luis Obispo", "Santa Barbara", "Ventura"))
 }
 
 }
 \seealso{
-\itemize{
-         \item \code{\link{getClip}}
-         \item \code{\link{getAOI}}
-         }
+\code{\link{getClip}}
+
+\code{\link{getAOI}}
 }
 \author{
 Mike Johnson

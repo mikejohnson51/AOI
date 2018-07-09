@@ -1,22 +1,16 @@
 #' Get County and State SpatialPolygon(s)
 #'
 #' @details
-#' \code{getFiat} gets a \code{SpatialPolygon} for a defiend state and/or county or those intersecting a clip.
-#' Fiat boundaries come from the 2017 US Census Bureau 2017 TIGER Dataset.
-#'
-#' All HydroData outputs are projected to \emph{'+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0+no_defs'}
+#' \code{getFiat} returns a \code{SpatialPolygons} object for a defiend state and/or county.
+#' Boundaries come from the 2017 US Census TIGER Dataset and are projected to \emph{EPSG:4269}.
 #'
 #' @param state     character. Full name or two character abbriviation. Not case senstive
 #' @param county    character. Provide county name(s). Requires 'state' input.
 #'
-#' @return \code{getFiat} returns a \code{SpatialPolygon} Object
+#' @return a \code{SpatialPolygons} object projected to \emph{EPSG:4269}.
 #' @export
-#' @seealso \itemize{
-#'          \item \code{\link{getClip}}
-#'          \item \code{\link{getAOI}}
-#'          }
-#'
-#'
+#' @seealso \code{\link{getClip}}
+#' @seealso \code{\link{getAOI}}
 #' @examples
 #' \dontrun{
 #' # Get Single State
@@ -30,7 +24,6 @@
 #'
 #' # Get Muli-county
 #'    getFiat(state = "CA", county = c("San Luis Obispo", "Santa Barbara", "Ventura"))
-
 #'}
 #'
 #' @author Mike Johnson

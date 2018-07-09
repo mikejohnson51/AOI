@@ -1,14 +1,15 @@
 #' Check AOI extents
 #'
-#' Plot an interactive \code{leaflet} map for defining, checking, and refining AOI queries. Can be chained to \code{getAOI} calls via
-#' \code{ %>% }.
+#' @description Generate an interactive \code{leaflet} map for defining, checking, and refining AOI queries. Can be chained to \link{getAOI} via
+#' %>%. Useful \code{leaflet} tools allow for the marking of points, measuring of distances, and interactive panning and zooming to help define
+#' an approapriate AOI
 #'
-#' @param AOI an AOI obtained from \code{getAOI}
+#' @param AOI an AOI obtained from \link{getAOI}. Can be left \code{NULL}
 #'
 #' @return a \code{leaflet} map object
-#' @example
+#' @examples
 #' \dontrun{
-#' # Call empty map:
+#' # Generate an empty map:
 #' check()
 #'
 #' # Check a defined AOI
