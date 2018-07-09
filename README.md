@@ -1,4 +1,4 @@
-## AOI
+## AOI <img src=".github/docs/logo.png" width=40 align="left" />
 
 [![Build Status](https://travis-ci.org/mikejohnson51/AOI.svg?branch=master)](https://travis-ci.org/mikejohnson51/AOI) 
 [![Coveralls github](https://img.shields.io/coveralls/github/mikejohnson51/AOI.svg)](https://coveralls.io/github/mikejohnson51/AOI?branch=master)
