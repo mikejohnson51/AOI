@@ -1,7 +1,7 @@
 Package: AOI
 Type: Package
 Title: Defining an Area of Interest
-Version: 0.0.1
+Version: 0.1.0
 Authors@R: person("Mike", "Johnson", role = c("aut", "cre"), email = "mike.johnson@geog.ucsb.edu")
 Maintainer: Mike Johnson <mike.johnson@geog.ucsb.edu>
 BugReports: https://github.com/mikejohnson51/AOI/issues
