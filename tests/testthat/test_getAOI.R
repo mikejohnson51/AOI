@@ -48,6 +48,7 @@ test_that("check AOI routines", {
 
   clip   <- try(getAOI(clip = list('KMART near UCSB', 10, 10)))
   clip2 <- try(getAOI(clip = list('University of Alabama', 10, 10, "upperleft")))
+  clip3   <- try(getAOI(clip = list(37, -105, 10, 10)))
 
   clip_c <- try(getAOI(clip = list(37, -115, 10, 10, "center")))
   clip_lr   <- try(getAOI(clip = list(35, -115, 10, 10, "lowerright")))
