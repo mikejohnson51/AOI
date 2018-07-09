@@ -6,7 +6,7 @@
 #'
 #' @param state     character.  Full name or two character abbriviation. Not case senstive
 #' @param county    character.  County name(s). Requires \code{state} input. Not case senstive
-#' @param clip_unit SpatialObject* or list. If a list, a clip unit requires 3 inputs:
+#' @param clip SpatialObject* or list. If a list, a clip unit requires 3 inputs:
 #'                               \enumerate{
 #'                                      \item  A point: \itemize{
 #'                                             \item  'location name' ex: "UCSB"
@@ -49,15 +49,15 @@
 #'     getAOI(state = 'California', county = c('Santa Barbara', 'ventura'))
 #'
 #' # Get AOI defined by external shapefile
-#'     getAOI(clip_unit = rgdal::readOGR('la_metro.shp'))
-#'     getAOI(clip_unit = raster('AOI.tif'))
+#'     getAOI(clip = rgdal::readOGR('la_metro.shp'))
+#'     getAOI(clip = raster('AOI.tif'))
 #'
 #' # Get AOI defined by 10 mile bounding box using users location as centroid
-#'     getAOI(clip_unit = c(get_ip_loc(), 10, 10))
+#'     getAOI(clip = c(get_ip_loc(), 10, 10))
 #'
 #' # Get AOI defined by 10 mile2 bounding box using the 'KMART near UCSB' as lower left corner
-#'     getAOI(clip_unit = list('KMART near UCSB', 10, 10))
-#'     getAOI(clip_unit = list('KMART near UCSB', 10, 10, 'lowerleft'))
+#'     getAOI(clip = list('KMART near UCSB', 10, 10))
+#'     getAOI(clip = list('KMART near UCSB', 10, 10, 'lowerleft'))
 #' }
 #'
 #' @seealso \itemize{
@@ -71,14 +71,14 @@
 
 getAOI = function(state = NULL,
                   county = NULL,
-                  clip_unit = NULL) {
+                  clip = NULL) {
 
   #------------------------------------------------------------------------------#
   # Error Catching                                                               #
   #------------------------------------------------------------------------------#
   if (!is.null(state)) {
-    if (!is.null(clip_unit)) {
-      stop("Only 'state' or 'clip_unit' can be used. Set the other to NULL")
+    if (!is.null(clip)) {
+      stop("Only 'state' or 'clip' can be used. Set the other to NULL")
     }
     for (value in state) {
       if (!is.character(value)) {
@@ -92,8 +92,8 @@ getAOI = function(state = NULL,
     if (!is.null(county)) {
       stop("The use of 'county' requires the 'state' parameter be used as well.")
     }
-    if (is.null(clip_unit)) {
-      stop("Requires a 'clip_unit' or 'state' parameter to execute")
+    if (is.null(clip)) {
+      stop("Requires a 'clip' or 'state' parameter to execute")
     }
   }
 
@@ -103,7 +103,7 @@ getAOI = function(state = NULL,
 
   # AOI by state
 
-  if (is.null(clip_unit) && !is.null(state)) {
+  if (is.null(clip) && !is.null(state)) {
     shp <- getFiat(state = state, county = county)
     #return(shp)
   }
@@ -112,20 +112,20 @@ getAOI = function(state = NULL,
 
   if (grepl(
     pattern = "Raster",
-    class(clip_unit),
+    class(clip),
     ignore.case = T,
     fixed = F)){
 
-    shp =  raster::rasterToPolygons(clip_unit) %>% spTransform(aoiProj)
+    shp =  raster::rasterToPolygons(clip) %>% spTransform(aoiProj)
 
     }
 
   if (grepl(
     pattern = "Spatial",
-    class(clip_unit),
+    class(clip),
     ignore.case = T,
     fixed = F)) {
-    shp =  clip_unit %>% spTransform(aoiProj)
+    shp =  clip %>% spTransform(aoiProj)
   }
 
   #------------------------------------------------------------------------------#
@@ -134,7 +134,7 @@ getAOI = function(state = NULL,
 
   if(!exists("shp")){
 
-   fin = defineClip(clip_unit)
+   fin = defineClip(clip)
 
    shp <- getClip(location = fin$location,
                       width = fin$w,
@@ -146,7 +146,7 @@ getAOI = function(state = NULL,
   # Return AOI                                                                   #
   #------------------------------------------------------------------------------#
 
-  message("AOI defined as ", firstLower(nameAOI(state, county, clip_unit)))
+  message("AOI defined as ", firstLower(nameAOI(state, county, clip)))
 
   return(shp)
 

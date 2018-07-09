@@ -1,21 +1,36 @@
 #' Check AOI extents
 #'
+#' Plot an interactive \code{leaflet} map for defining, checking, and refining AOI queries. Can be chained to \code{getAOI} calls via
+#' \code{ %>% }.
+#'
 #' @param AOI an AOI obtained from \code{getAOI}
 #'
-#' @return a leaflet map object
+#' @return a \code{leaflet} map object
+#' @example
+#' \dontrun{
+#' # Call empty map:
+#' check()
+#'
+#' # Check a defined AOI
+#' AOI = getAOI(clip = list("UCSB", 10, 10))
+#' check(AOI)
+#'
+#' # Chain to AOI calls:
+#' getAOI(clip = list("UCSB", 10, 10)) %>% check()
+#' }
 #' @export
 #' @author Mike Johnson
 
 check = function(AOI = NULL) {
 
-  m = leaflet() %>%
-    addProviderTiles("CartoDB.Positron", group = "Base") %>%
+  base= leaflet() %>%
+    addProviderTiles("Esri.NatGeoWorldMap", group = "Terrain") %>%
+    addProviderTiles("CartoDB.Positron", group = "Grayscale") %>%
     addProviderTiles("Esri.WorldImagery", group = "Imagery") %>%
-    addProviderTiles("Esri.NatGeoWorldMap" , group = "Terrain") %>%
-
     addScaleBar("bottomleft") %>%
-    addMiniMap(tiles = "OpenStreetMap.BlackAndWhite",
-               toggleDisplay = TRUE, minimized = TRUE) %>%
+    addMiniMap(
+               toggleDisplay = TRUE,
+               minimized = TRUE) %>%
     addMeasure(
       position = "bottomleft",
       primaryLengthUnit = "feet",
@@ -24,16 +39,14 @@ check = function(AOI = NULL) {
       completedColor = "green"
     ) %>%
     addLayersControl(
-      baseGroups = c("Base", "Imagery", "Terrain"),
+      baseGroups = c("Terrain", "Grayscale", "Imagery"),
       options = layersControlOptions(collapsed = T)
     )
 
   if(is.null(AOI)){
-    m = setView(m , lat = 39.311825, lng = -101.275972, zoom = 4)
-  }
-
-  if(!is.null(AOI)){
-    m = addPolygons(m,
+    m = setView(base, lat = 39.311825, lng = -101.275972, zoom = 4)
+  } else {
+    m = addPolygons(base,
       data = AOI,
       stroke = TRUE,
       fillColor = 'transparent',
@@ -43,6 +56,5 @@ check = function(AOI = NULL) {
   }
 
   return(m)
-
 }
 

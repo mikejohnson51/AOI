@@ -17,9 +17,19 @@ col1 = '#212f3f'
 
 ## Defining an Area of Interest (AOI)
 
-An area of interest (AOI) is the geographic extent. It helps confine the unit of work to a geographic area, and helps to not only prioritize and define research and subsetting efforts, but improves reproducabilty across studies. 'AOI` is an R package that lets users define an AOI through a common query and return a 'SpatialPolygon' of that area.  
+An area of interest (AOI) is a geographic extent. It helps confine the unit of work to a geographic area, and helps to not only prioritize and define research and subsetting efforts, but improves reproducabilty across studies. 'AOI` is an R package that lets users define an AOI through a common query and return a 'SpatialPolygon' of that area.  
 
-Three parameters can be used to define a query:  *state*, *county*, and *clip_unit*. This page illustrates how these parameters can be used define -- and refine -- a query. 
+Three parameters can be used to define a query:  *state*, *county*, and *clip*. This page illustrates how these parameters can be used define -- and refine -- a query. 
+
+###Installation:
+
+First things first, get up and running in R by downlaoding and installing the `AOI` package:
+
+```{r, eval = F}
+install.packages("devtools")
+library(devtools)
+install_github("mikejohnson51/AOI")
+```
 
 ###Method 1: Defining an AOI by **state**  
 
@@ -73,25 +83,25 @@ leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 7, maxZoom = 7)) %>%
 
 <br>
 
-###Method 3: Defining an AOI with a **clip_unit**
+###Method 3: Defining an AOI with a **clip**
 
-In `HydroData` a **clip_unit** is user defined region. Most commonly a bounding box or a supplied shapefile - both of which can be input as a **clip_unit**. 
+In `HydroData` a **clip** is user defined region. Most commonly a bounding box or a supplied shapefile - both of which can be input as a **clip**. 
 <br>
 
-### The clip_unit list()
+### The clip list()
 
-To define a bounding box **clip_unit** has four inputs given as a list:
+To define a bounding box **clip** has four inputs given as a list:
 
 (1) Location   
 (2) Bounding box height (in miles)   
 (3) Bounding box width (in miles)  
 (4) location origin (default = 'center')   
 
-Again, all **clip_unit** inputs **must** be provided as a list. It is also important to note that order **DOES** matter if each parameter is not explicitly assigned (eg `h = 10`). Examples for each input follow: 
+Again, all **clip** inputs **must** be provided as a list. It is also important to note that order **DOES** matter if each parameter is not explicitly assigned (eg `h = 10`). Examples for each input follow: 
 
 ###1. Location
 
-A Location is the first input in  **clip_unit** list and can be given as a colloquial name (*character string*) or as a (lat/long) pair (*numeric*). Names are geocoded by the Google API via the `dismo` R package. 
+A Location is the first input in  **clip** list and can be given as a colloquial name (*character string*) or as a (lat/long) pair (*numeric*). Names are geocoded by the Google API via the `dismo` R package. 
 
 <br>
 
@@ -100,9 +110,9 @@ A Location is the first input in  **clip_unit** list and can be given as a collo
 Here we query an AOI surrounding the Grand Canyon, using both the colloquial name, and the (lat/long) pair found with a <a target="_blank"href="http://www.Google.com/search?q=grand+canyon+lat+long">Google search.</a> Notice slightly different locations are generated:
 
 ```{r, message = F}
-GC_name = getAOI(clip_unit = list("grand canyon", 10, 10))
+GC_name = getAOI(clip = list("grand canyon", 10, 10))
 
-GC_lat_lon = getAOI(clip_unit = list(36.0544, -112.1401, 10, 10))
+GC_lat_lon = getAOI(clip = list(36.0544, -112.1401, 10, 10))
 ```
 
 ```{r echo = FALSE}
@@ -132,8 +142,8 @@ Once a location is specified, the next two needed values are a bounding box heig
 ####*National Water Center bounding box diminsions example*:
 
 ```{r, message = FALSE}
-nwc.tall = getAOI(clip_unit = list("National Water Center, AL", 30, 10))
-nwc.wide = getAOI(clip_unit = list("National Water Center, AL", 10, 30))
+nwc.tall = getAOI(clip = list("National Water Center, AL", 30, 10))
+nwc.wide = getAOI(clip = list("National Water Center, AL", 10, 30))
 ```
 
 ```{r, echo = FALSE}
@@ -147,17 +157,17 @@ leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 9, maxZoom = 9)) %>%
 
 ###3. Origin
 
-With a location, height, and width defined the relationship of the box to the location is needed. By default (and in the previous examples) each bounding box was generated using the location as a centroid. You can change this by adding a final argument to the **clip_unit** list specifying where the location lies in reference to the box. Options include 'center', 'lowerleft', 'lowerright', 'upperleft', 'upperright':
+With a location, height, and width defined the relationship of the box to the location is needed. By default (and in the previous examples) each bounding box was generated using the location as a centroid. You can change this by adding a final argument to the **clip** list specifying where the location lies in reference to the box. Options include 'center', 'lowerleft', 'lowerright', 'upperleft', 'upperright':
 
 
 ####*UCSB origin example*:
 
 ```{r, message = FALSE}
-ucsb.c =  getAOI(clip_unit = list("UCSB", 10, 10, "center"))
-ucsb.ul = getAOI(clip_unit = list("UCSB", 10, 10, "upperleft"))
-ucsb.ur = getAOI(clip_unit = list("UCSB", 10, 10, "upperright"))
-ucsb.ll = getAOI(clip_unit = list("UCSB", 10, 10, "lowerleft"))
-ucsb.lr = getAOI(clip_unit = list("UCSB", 10, 10, "lowerright"))
+ucsb.c =  getAOI(clip = list("UCSB", 10, 10, "center"))
+ucsb.ul = getAOI(clip = list("UCSB", 10, 10, "upperleft"))
+ucsb.ur = getAOI(clip = list("UCSB", 10, 10, "upperright"))
+ucsb.ll = getAOI(clip = list("UCSB", 10, 10, "lowerleft"))
+ucsb.lr = getAOI(clip = list("UCSB", 10, 10, "lowerright"))
 ```
 
 ```{r, echo = FALSE}
@@ -172,9 +182,9 @@ leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 10, maxZoom = 10)) %
 
 <br>
 
-### Clip_unit by User Shapefile
+### clip by User Shapefile
 
-A user supplied shapefile can  be used as input for the clip_unit parameter in lieu of a list() bounding box.
+A user supplied shapefile can  be used as input for the clip parameter in lieu of a list() bounding box.
 
 <br>
 
@@ -186,7 +196,7 @@ LA = rgdal::readOGR("shp/LA.shp", verbose = FALSE)
 #Subset Santa Monica
 SM = LA[LA$LABEL_CITY == 'Santa Monica',] %>% spTransform(aoiProj)
 #Define AOI
-AOI = getAOI(clip_unit = SM)
+AOI = getAOI(clip = SM)
 ```
 
 ```{r, echo = FALSE}
@@ -214,7 +224,7 @@ Give it a try!
 The `check()` function can also be chained to existing AOI call to immediately see the region being queried:
 <br>
 ```{r, message = FALSE}
-getAOI(clip_unit = list("San Luis Obispo", 10, 10 )) %>% check()
+getAOI(clip = list("San Luis Obispo", 10, 10 )) %>% check()
 ```
 <br>
 <br>

@@ -42,8 +42,8 @@
 #' # Get Muli-county
 #'    getFiatBoundary(state = "CA", county = c("San Luis Obispo", "Santa Barbara", "Ventura"))
 #'
-#' # Get counties that intersect with defined clip_unit
-#'    getFiatBoundary(clip_unit = list("UCSB", 10, 10, "lowerleft"))
+#' # Get counties that intersect with defined clip
+#'    getFiatBoundary(clip = list("UCSB", 10, 10, "lowerleft"))
 #'}
 #'
 #' @author

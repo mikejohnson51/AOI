@@ -1,6 +1,6 @@
 #' Interprete the plain-english description of a clip unit
 #'
-#' @param clip_unit a user supplied clip_unit
+#' @param clip a user supplied clip
 #'
 #' @return a string describing the clipt unit in plain english
 #' @family HydroData 'helper' functions
@@ -8,9 +8,9 @@
 #' @export
 
 
-nameClip = function(clip_unit){
+nameClip = function(clip){
 
-test = defineClip(clip_unit)
+test = defineClip(clip)
 
 if(class(test$location) == 'numeric'){
  test$location =  paste(paste(round(test$location,2), collapse = "/"), "(lat/lon)")

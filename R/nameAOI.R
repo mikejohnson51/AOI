@@ -2,7 +2,7 @@
 #'
 #' @param state a character string. Can be full name or state abbriviation
 #' @param county a character string. Can be full name or state abbriviation
-#' @param clip_unit can be provided as a shapefile or as a vector defineing centroid and bounding box diminsion
+#' @param clip can be provided as a shapefile or as a vector defineing centroid and bounding box diminsion
 #'
 #' @examples
 #' \dontrun{
@@ -19,11 +19,11 @@
 
 nameAOI = function(state = NULL,
                    county = NULL,
-                   clip_unit = NULL) {
+                   clip = NULL) {
   unit = NULL
 
-  if (!is.null(clip_unit)) {
-    unit = nameClip(clip_unit)
+  if (!is.null(clip)) {
+    unit = nameClip(clip)
   }
 
   if (all(!is.null(state), is.null(county))) {

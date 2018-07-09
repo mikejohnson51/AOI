@@ -1,7 +1,7 @@
 #' Get County and State SpatialPolygon(s)
 #'
 #' @details
-#' \code{getFiat} gets a \code{SpatialPolygon} for a defiend state and/or county or those intersecting a clip_unit.
+#' \code{getFiat} gets a \code{SpatialPolygon} for a defiend state and/or county or those intersecting a clip.
 #' Fiat boundaries come from the 2017 US Census Bureau 2017 TIGER Dataset.
 #'
 #' All HydroData outputs are projected to \emph{'+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0+no_defs'}
@@ -16,56 +16,57 @@
 #'          \item \code{\link{getAOI}}
 #'          }
 #'
-#' @family HydroData 'get' functions
 #'
 #' @examples
 #' \dontrun{
 #' # Get Single State
-#'     getFiatBoundary(state = "CA")
+#'     getFiat(state = "CA")
 #'
 #' # Get Multi-state
-#'     getFiatBoundary(state = c("CA","Utah","Nevada"))
+#'     getFiat(state = c("CA","Utah","Nevada"))
 #'
 #' # Get County
-#'     getFiatBoundary(state = "CA", county = "San Luis Obispo")
+#'     getFiat(state = "CA", county = "San Luis Obispo")
 #'
 #' # Get Muli-county
-#'    getFiatBoundary(state = "CA", county = c("San Luis Obispo", "Santa Barbara", "Ventura"))
-#'
-#' # Get counties that intersect with defined clip_unit
-#'    getFiatBoundary(clip_unit = list("UCSB", 10, 10, "lowerleft"))
+#'    getFiat(state = "CA", county = c("San Luis Obispo", "Santa Barbara", "Ventura"))
+
 #'}
 #'
 #' @author Mike Johnson
-#'
+
 
 getFiat <- function(state = NULL, county = NULL) {
 
   states = AOI::states
-  counties = AOI::counties
 
-  state_map = states[(state == states$state_name | state == states$state_abbr),]
-  county_map = counties[(state == counties$state_name | state == counties$state_abbr),]
+  for(i in 1:length(state)){
+    if(nchar(state[i]) == 2){state[i] = states$state_name[which(states$state_abbr == state[i])]}
+  }
+
+  state_map = states[tolower(states$state_name) %in% tolower(state),]
 
   if(is.null(county)) {
     map = state_map
-    } else {
+    rm(states)
+
+  } else {
+
+    counties = AOI::counties
+    county_map = counties[tolower(counties$state_name) %in% tolower(state),]
 
     county = simpleCap(county)
     check = county %in% county_map$name
 
     if(!all(check)) {
       bad_counties  = county[which(!(check))]
-      if(nchar(state) == 2){state = states$state_name[which(states$state_abbr == state)]}
       stop(paste(bad_counties, collapse = ", "), " not a valid county in ", state, ".")
     }
 
-    map = county_map[county == county_map$name,]
+    map = county_map[county_map$name %in% county,]
+    rm(counties)
 
   }
-
-  rm(states)
-  rm(counties)
 
   return(map)
 

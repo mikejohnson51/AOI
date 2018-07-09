@@ -2,7 +2,7 @@
 % Please edit documentation in R/simpleCap.R
 \name{simpleCap}
 \alias{simpleCap}
-\title{Camel Case}
+\title{Camel Case (Simple Capitalization)}
 \usage{
 simpleCap(x)
 }
@@ -13,7 +13,10 @@ simpleCap(x)
 \code{simpleCap} capitilizes all words in a given text string
 }
 \examples{
+\dontrun{
 simpleCap("santa barbara")
+}
+
 }
 \seealso{
 Other AOI 'utility': \code{\link{firstLower}}

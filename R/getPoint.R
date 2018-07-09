@@ -9,6 +9,7 @@
 #' @author Mike Johnson
 
 getPoint = function(name = "UCSB") {
+
   x = FALSE
 
   trash <-  capture.output(while (!isTRUE(x)) {

@@ -1,11 +1,14 @@
-#' Camel Case
+#' Camel Case (Simple Capitalization)
 #'
 #' @description  \code{simpleCap} capitilizes all words in a given text string
 #'
-#' @param x a string to be parsed.
+#' @param x a text \code{character} string
 #'
 #' @examples
+#' \dontrun{
 #' simpleCap("santa barbara")
+#' }
+#'
 #' @export
 #'
 #' @author Mike Johnson
