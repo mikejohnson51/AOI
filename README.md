@@ -9,6 +9,10 @@ An area of interest (AOI) is the geographic extent of a project. It helps confin
 
 All returned objects from AOI functions are ``sp::SpatialPolygons`` projected to ```+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0+no_defs')``` / ```EPSG:4269```
 
+### Examples:
+
+See a documented set of examples [here](https://mikejohnson51.github.io/AOI/)
+
 Packages and services currently requiring a spatial AOI include (but are not limited to):
 
 [HydroData](http://mikejohnson51.github.io/HydroData/) <br>
@@ -23,11 +27,6 @@ Packages and services currently requiring a spatial AOI include (but are not lim
 install.packages("devtools")
 devtools::install_github("mikejohnson51/AOI")
 ```
-
-### Examples:
-
-See a documented set of examples [here](https://mikejohnson51.github.io/AOI/)
-
 ### Support:
 
 Package development is supported with funds from the UCAR COMET program; the NOAA National Water Center; and the University of California, Santa Barbara
