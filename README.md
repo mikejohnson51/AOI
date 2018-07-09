@@ -17,11 +17,13 @@ See a documented set of examples [here](https://mikejohnson51.github.io/AOI/)
 
 Packages and services currently requiring a spatial AOI include (but are not limited to):
 
-[HydroData](http://mikejohnson51.github.io/HydroData/) <br>
-[nwm](https://github.com/mikejohnson51/NWM)<br>
-[FlowlineFinder](https://github.com/mikejohnson51/FlowlineFinder)<br>
+[HydroData*](http://mikejohnson51.github.io/HydroData/) <br>
+[nwm*](https://github.com/mikejohnson51/NWM)<br>
+[FlowlineFinder*](https://github.com/mikejohnson51/FlowlineFinder)<br>
 [FedData](https://cran.r-project.org/web/packages/FedData/index.html)<br>
 [nhdplusTools](https://github.com/dblodgett-usgs/nhdplusTools)<br>
+
+* using the AOI package
 
 ### Installation:
 
