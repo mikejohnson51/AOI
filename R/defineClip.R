@@ -17,7 +17,7 @@
 #' @export
 
 
-defineClip = function(clip = NULL) {
+defineClip = function(clip = NULL, km = FALSE) {
   #------------------------------------------------------------------------------#
   # Clip Unit Defintion  (getClipUnit() for 3,4, or 5 inputs)                    #
   #------------------------------------------------------------------------------#
@@ -148,9 +148,8 @@ defineClip = function(clip = NULL) {
 
   return(list(
     location = location,
-    h = h,
-    w = w,
+    h = ifelse(km, (h*0.62137119224), h),
+    w = ifelse(km, (w*0.62137119224), w),
     o = o
   ))
-
-  }
+ }

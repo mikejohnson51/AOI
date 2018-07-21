@@ -12,6 +12,7 @@
 #' @param state     \code{character}.  Full name or two character abbriviation. Not case senstive
 #' @param county    \code{character}.  County name(s). Requires \code{state} input. Not case senstive
 #' @param clip      \code{Spatial} object, a \code{Raster} object, or a \code{list} (see details and \code{\link{getClip}})
+#' @param km        \code{logical}. If \code{TRUE} distance are in kilometers,  default is \code{FALSE} and in miles
 #'
 #' @details If \code{clip} is a list, a clip unit requires a minimum of 3 inputs:
 #'                               \enumerate{
@@ -88,7 +89,8 @@
 
 getAOI = function(state = NULL,
                   county = NULL,
-                  clip = NULL) {
+                  clip = NULL,
+                  km = FALSE) {
 
   stateAbb = AOI::states$state_abbr
   stateName = AOI::states$state_name
@@ -136,7 +138,8 @@ getAOI = function(state = NULL,
     ignore.case = T,
     fixed = F)){
 
-    shp =  raster::rasterToPolygons(clip) %>% spTransform(aoiProj)
+    shp =  raster::rasterToPolygons(clip)
+    shp =  sp::spTransform(shp, aoiProj)
 
     }
 
@@ -154,7 +157,7 @@ getAOI = function(state = NULL,
 
   if(!exists("shp")){
 
-   fin = defineClip(clip)
+   fin = defineClip(clip, km = km)
 
    shp <- getClip(location = fin$location,
                       width = fin$w,
@@ -166,7 +169,7 @@ getAOI = function(state = NULL,
   # Return AOI                                                                   #
   #------------------------------------------------------------------------------#
 
-  message("AOI defined as ", firstLower(nameAOI(state, county, clip)))
+  message("AOI defined as ", firstLower(nameAOI(state, county, clip, km = km)))
 
   return(shp)
 

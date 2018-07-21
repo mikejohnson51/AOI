@@ -21,10 +21,11 @@
 
 nameAOI = function(state = NULL,
                    county = NULL,
-                   clip = NULL) {
+                   clip = NULL,
+                   km = FALSE) {
 
   if (!is.null(clip)) {
-    unit = nameClip(clip)
+    unit = nameClip(clip, km = km)
   } else {
 
     states_name = vector(mode = 'character')
