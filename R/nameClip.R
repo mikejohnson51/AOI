@@ -4,6 +4,7 @@
 #' returns a plain-english description of the clip list (eg: 'AOI defined as a 10 mile tall by 10 mile wide region centered on (the) UCSB')
 #'
 #' @param clip a user supplied clip list (see \code{\link{getAOI}} and \code{\link{getClip}})
+#' @param km  \code{logical}. If \code{TRUE} distance are in kilometers,  default is \code{FALSE} and with distances in miles
 #'
 #' @return a string describing the clip list in plain english
 #' @author Mike Johnson

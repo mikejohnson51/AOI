@@ -6,6 +6,8 @@
 #' @seealso \code{\link{getAOI}}
 #'
 #' @param clip a user supplied list (see \code{\link{getAOI}})
+#' @param km  \code{logical}. If \code{TRUE} distance are in kilometers,  default is \code{FALSE} and with distances in miles
+#'
 #' @examples
 #' \dontrun{
 #' defineClip(list("UCSB", 10, 10))

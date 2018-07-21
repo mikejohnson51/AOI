@@ -12,7 +12,7 @@
 #' @param state     \code{character}.  Full name or two character abbriviation. Not case senstive
 #' @param county    \code{character}.  County name(s). Requires \code{state} input. Not case senstive
 #' @param clip      \code{Spatial} object, a \code{Raster} object, or a \code{list} (see details and \code{\link{getClip}})
-#' @param km        \code{logical}. If \code{TRUE} distance are in kilometers,  default is \code{FALSE} and in miles
+#' @param km        \code{logical}. If \code{TRUE} distance are in kilometers,  default is \code{FALSE} and with distances in miles
 #'
 #' @details If \code{clip} is a list, a clip unit requires a minimum of 3 inputs:
 #'                               \enumerate{

@@ -12,6 +12,8 @@ nameAOI(state = NULL, county = NULL, clip = NULL, km = FALSE)
 \item{county}{\code{character}.  County name(s). Requires \code{state} input. Not case senstive}
 
 \item{clip}{\code{Spatial} object, a \code{Raster} object, or a \code{list} (see details and \code{\link{getClip}})}
+
+\item{km}{\code{logical}. If \code{TRUE} distance are in kilometers,  default is \code{FALSE} and with distances in miles}
 }
 \value{
 A character string

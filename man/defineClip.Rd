@@ -8,6 +8,8 @@ defineClip(clip = NULL, km = FALSE)
 }
 \arguments{
 \item{clip}{a user supplied list (see \code{\link{getAOI}})}
+
+\item{km}{\code{logical}. If \code{TRUE} distance are in kilometers,  default is \code{FALSE} and with distances in miles}
 }
 \value{
 a 4-element list of features defining an AOI including:

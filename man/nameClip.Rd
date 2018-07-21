@@ -8,6 +8,8 @@ nameClip(clip, km = FALSE)
 }
 \arguments{
 \item{clip}{a user supplied clip list (see \code{\link{getAOI}} and \code{\link{getClip}})}
+
+\item{km}{\code{logical}. If \code{TRUE} distance are in kilometers,  default is \code{FALSE} and with distances in miles}
 }
 \value{
 a string describing the clip list in plain english

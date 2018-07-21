@@ -13,7 +13,7 @@ getAOI(state = NULL, county = NULL, clip = NULL, km = FALSE)
 
 \item{clip}{\code{Spatial} object, a \code{Raster} object, or a \code{list} (see details and \code{\link{getClip}})}
 
-\item{km}{\code{logical}. If \code{TRUE} distance are in kilometers,  default is \code{FALSE} and in miles}
+\item{km}{\code{logical}. If \code{TRUE} distance are in kilometers,  default is \code{FALSE} and with distances in miles}
 }
 \value{
 a \code{SpatialPolygons} object projected to \emph{EPSG:4269}.
