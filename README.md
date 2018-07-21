@@ -6,7 +6,7 @@
 [![Coveralls github](https://img.shields.io/coveralls/github/mikejohnson51/AOI.svg)](https://coveralls.io/github/mikejohnson51/AOI?branch=master) [![DOI](https://zenodo.org/badge/139353238.svg)](https://zenodo.org/badge/latestdoi/139353238)
 
 
-An area of interest (AOI) is the geographic extent of a project. It helps confine the unit of work to a geographic area, and helps to not only proritize and define research and subsetting efforts, but to improve reproducabilty across studies. This package aims to make finding state, county and geographic AOIs easier, through a common query system based on 'state', 'county' and 'clip' parameters. AOIs for all queryies are retruned as a  ```sp::SpatialPolygons```.  It is intended to backend spatial subsetting packages/tasks; serve front end applications; or stand alone.
+An area of interest (AOI) is the geographic extent of a project. It helps confine the unit of work to a geographic area, and helps to not only prioritize and define research and subsetting efforts, but to improve reproducibility across studies. This package aims to make finding state, county and geographic AOIs easier, through a common query system based on 'state', 'county' and 'clip' parameters. AOIs for all queries are returned as a `sp::SpatialPolygon`. It is intended to backend spatial subsetting packages/tasks; serve front end applications; or stand alone. Find a documented see of example @ https://mikejohnson51.github.io/AOI/
 
 ## Returned Objects
 
@@ -18,13 +18,13 @@ See a documented set of examples [here](https://mikejohnson51.github.io/AOI/)
 
 Packages and services currently requiring a spatial AOI include (but are not limited to):
 
-[HydroData*](http://mikejohnson51.github.io/HydroData/) <br>
-[nwm*](https://github.com/mikejohnson51/NWM)<br>
-[FlowlineFinder*](https://github.com/mikejohnson51/FlowlineFinder)<br>
+[HydroData^](http://mikejohnson51.github.io/HydroData/) <br>
+[nwm^](https://github.com/mikejohnson51/NWM)<br>
+[FlowlineFinder^](https://github.com/mikejohnson51/FlowlineFinder)<br>
 [FedData](https://cran.r-project.org/web/packages/FedData/index.html)<br>
 [nhdplusTools](https://github.com/dblodgett-usgs/nhdplusTools)<br>
 
-* using the AOI package
+ ^using the AOI package
 
 ### Installation:
 
