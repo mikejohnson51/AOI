@@ -14,7 +14,6 @@ matrix:
     - os: linux
       r: release
     - os: linux
-      r: devel
       env: R_CODECOV=true
 
 before_install:

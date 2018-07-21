@@ -4,7 +4,7 @@
 \alias{nameClip}
 \title{Provide the plain-english description of a clip unit}
 \usage{
-nameClip(clip)
+nameClip(clip, km = FALSE)
 }
 \arguments{
 \item{clip}{a user supplied clip list (see \code{\link{getAOI}} and \code{\link{getClip}})}

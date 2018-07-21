@@ -4,7 +4,7 @@
 \alias{defineClip}
 \title{Parse a clip list from user input}
 \usage{
-defineClip(clip = NULL)
+defineClip(clip = NULL, km = FALSE)
 }
 \arguments{
 \item{clip}{a user supplied list (see \code{\link{getAOI}})}

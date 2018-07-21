@@ -4,7 +4,7 @@
 \alias{nameAOI}
 \title{Provide the plain-english description of an AOi}
 \usage{
-nameAOI(state = NULL, county = NULL, clip = NULL)
+nameAOI(state = NULL, county = NULL, clip = NULL, km = FALSE)
 }
 \arguments{
 \item{state}{\code{character}.  Full name or two character abbriviation. Not case senstive}
