@@ -13,6 +13,7 @@
 #' @param county    \code{character}.  County name(s). Requires \code{state} input. Not case senstive
 #' @param clip      \code{Spatial} object, a \code{Raster} object, or a \code{list} (see details and \code{\link{getClip}})
 #' @param km        \code{logical}. If \code{TRUE} distance are in kilometers,  default is \code{FALSE} and with distances in miles
+#' @param sf        \code{logical}. If \code{TRUE} object return is of class sf,  default is \code{FALSE} and returns class SpatialPolygons
 #'
 #' @details If \code{clip} is a list, a clip unit requires a minimum of 3 inputs:
 #'                               \enumerate{
@@ -90,6 +91,7 @@
 getAOI = function(state = NULL,
                   county = NULL,
                   clip = NULL,
+                  sf = FALSE,
                   km = FALSE) {
 
   stateAbb = AOI::states$state_abbr
@@ -172,6 +174,8 @@ getAOI = function(state = NULL,
   #------------------------------------------------------------------------------#
 
   message("AOI defined as ", firstLower(nameAOI(state, county, clip, km = km)))
+
+  if(sf){ shp = sf::st_as_sf(shp)}
 
   return(shp)
 

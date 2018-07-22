@@ -19,7 +19,7 @@
 #' @importFrom  dismo geocode
 #' @importFrom  utils capture.output tail install.packages
 #' @importFrom  raster rasterToPolygons
-#' @importFrom  rgdal readOGR
+#' @importFrom  sf st_as_sf
 
 NULL
 

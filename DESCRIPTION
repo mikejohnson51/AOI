@@ -14,8 +14,8 @@ Imports:
     dismo,
     leaflet,
     raster,
-    rgdal,
     utils,
+    sf,
     sp
 Suggests: 
     testthat
