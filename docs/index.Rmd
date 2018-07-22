@@ -250,9 +250,8 @@ Give it a try!
 
 ## Bounding Box of States / Counties
 
-```{r}
-sb = getAOI(state = "CA", sf = T)
-ca.bb = getAOI(clip = sb, sf = T)
+```{r, messages = FALSE}
+getAOI(state = "WI", bb = TRUE) %>% check()
 ```
 
 

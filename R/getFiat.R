@@ -4,8 +4,9 @@
 #' \code{getFiat} returns a \code{SpatialPolygons} object for a defiend state and/or county.
 #' Boundaries come from the 2017 US Census TIGER Dataset and are projected to \emph{EPSG:4269}.
 #'
-#' @param state     character. Full name or two character abbriviation. Not case senstive
-#' @param county    character. Provide county name(s). Requires 'state' input.
+#' @param state     \code{character}. Full name or two character abbriviation. Not case senstive
+#' @param county    \code{character}. Provide county name(s). Requires 'state' input.
+#' @param bb        \code{logical}. If \code{TRUE} then the bounding geometry of state/county is returned,  default is \code{FALSE} and returns fiat geometries
 #'
 #' @return a \code{SpatialPolygons} object projected to \emph{EPSG:4269}.
 #' @export
@@ -29,7 +30,7 @@
 #' @author Mike Johnson
 
 
-getFiat <- function(state = NULL, county = NULL) {
+getFiat <- function(state = NULL, county = NULL, bb = FALSE) {
 
   states = AOI::states
 
@@ -63,9 +64,10 @@ getFiat <- function(state = NULL, county = NULL) {
 
     map = county_map[county_map$name %in% county,]
     rm(counties)
-
     }
   }
+
+  if(bb){map = getBoundingBox(map)}
 
   return(map)
 

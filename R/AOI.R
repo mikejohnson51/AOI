@@ -15,11 +15,11 @@
 #' @name AOI
 #'
 #' @import      leaflet
-#' @importFrom  sp Polygon SpatialPolygons spTransform Polygons CRS plot
+#' @importFrom  sp Polygon SpatialPolygons spTransform Polygons CRS
 #' @importFrom  dismo geocode
-#' @importFrom  utils capture.output tail install.packages
+#' @importFrom  utils capture.output tail
 #' @importFrom  raster rasterToPolygons
-#' @importFrom  sf st_as_sf
+#' @importFrom  sf st_as_sf as_Spatial st_bbox st_transform
 
 NULL
 

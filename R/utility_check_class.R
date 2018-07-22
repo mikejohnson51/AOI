@@ -14,8 +14,6 @@
 #'
 #' @family HydroData 'utility' function
 
-
-
 checkClass = function(x, type){
 
   log = any(grepl(
