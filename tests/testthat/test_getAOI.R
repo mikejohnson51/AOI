@@ -119,15 +119,15 @@ test_that("check external routines", {
 
   vec = c(
 
-    AOI::checkClass(clip_counties_all, 'Spatial'),
+    !is.null(clip_counties_all),
 
-    AOI::checkClass(state.bb, 'Spatial'),
+    !is.null(state.bb),
 
-    AOI::checkClass(clip_4, 'sf'),
+    !is.null(clip_4),
 
-    AOI::checkClass(clip_sf, 'sf'),
+    !is.null(clip_sf),
 
-    (clip_mi@bbox[1,1] != clip_km@bbox[1,1]))
+    clip_mi@bbox[1,1] != clip_km@bbox[1,1])
 
   rm(clip_counties_all)
   rm(state.bb)
