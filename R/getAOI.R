@@ -138,8 +138,9 @@ getAOI = function(state = NULL,
     ignore.case = T,
     fixed = F)){
 
-    shp =  raster::rasterToPolygons(clip)
-    shp =  sp::spTransform(shp, aoiProj)
+    shp = getBoundingBox(clip)
+    shp = sp::spTransform(shp, aoiProj)
+
 
     }
 
@@ -149,6 +150,7 @@ getAOI = function(state = NULL,
     ignore.case = T,
     fixed = F)) {
     shp = sp::spTransform(clip, aoiProj)
+    shp = getBoundingBox(shp)
   }
 
   #------------------------------------------------------------------------------#
