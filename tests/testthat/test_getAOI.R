@@ -62,16 +62,34 @@ test_that("check AOI routines", {
 })
 
 
-test_that("check clip routines", {
+test_that("check external routines", {
+  clip_counties_all = getAOI(state = "NY", county = "all")
+  state.bb = getAOI(state = "CA", bb = T)
+  clip_4 = getAOI(clip = list("UCSB", 10,10, "lowerleft"), sf = TRUE)
+  clip_sf = getAOI(clip = list("UCSB", 10,10), sf = TRUE)
 
+  clip_mi  = getAOI(clip = clip_sf)
+  clip_km = getAOI(clip = list(35, -115, 10, 10), km = T)
 
-clip_counties_all = getAOI(state = "NY", county = "all")
-state.bb = getAOI(state = "CA", bb = T)
-clip_4 = getAOI(clip = list("UCSB", 10,10, "lowerleft"), sf = TRUE)
-clip_sf = getAOI(clip = list("UCSB", 10,10), sf = TRUE)
+  vec = c(
 
-clip_mi  = getAOI(clip = clip_sf)
-clip_km = getAOI(clip = list(35, -115, 10, 10), km = T)
+    checkClass(clip_counties_all, 'Spatial'),
+
+    checkClass(state.bb, 'Spatial'),
+
+    checkClass(clip_4, 'sf'),
+
+    checkClass(clip_sf, 'sf'),
+
+    !all(clip_mi@bbox==clip_km@bbox))
+
+  print(all(vec))
+  check = all(vec)
+  expect_true(check)
+
+})
+
+test_that("check clip origin routines", {
 
 clip_c   <- getAOI(clip = list(35, -115, 10, 10, "center"))@bbox
 clip_lr  <- getAOI(clip = list(35, -115, 10, 10, "lowerright"))@bbox
@@ -80,14 +98,6 @@ clip_ur  <- getAOI(clip = list(35, -115, 10, 10, "upperright"))@bbox
 clip_ul  <- getAOI(clip = list(35, -115, 10, 10, "upperleft"))@bbox
 
 vec = c(
-
-  checkClass(clip_4, 'sf'),
-  checkClass(clip_counties_all, 'Spatial'),
-  checkClass(state.bb, 'Spatial'),
-
-  !all(clip_mi@bbox==clip_km@bbox),
-
-  checkClass(clip_sf, 'sf'),
 
   !all(clip_c==clip_lr),
   !all(clip_c==clip_ll),

@@ -17,12 +17,17 @@ icon.r <- makeAwesomeIcon(icon = 'home', iconColor = col1, markerColor = 'gray')
 icon.b <- makeAwesomeIcon(icon = 'home', iconColor = col,  markerColor = 'gray')
 ```
 
-
 ## Defining an Area of Interest (AOI)
 
-An area of interest (AOI) is a geographic extent. It helps confine the unit of work to a geographic area, and helps to not only prioritize and define research and subsetting efforts, but improves reproducabilty across studies. 'AOI` is an R package that lets users define an AOI through a common query and return a 'SpatialPolygon' of that area.  
+An area of interest (AOI) is a geographic extent. It helps confine the unit of work to a geographic area, and helps to not only prioritize and define research and subsetting efforts, but improves reproducabilty across studies. 'AOI` is an R package that lets users define an AOI through a common query and return a geometry of that area.  This is not only usefull for defining a region of interest but aids in subsetting, clipping, and mapping operations:
 
-Three parameters can be used to define a query:  *state*, *county*, and *clip*. This page illustrates how these parameters can be used define -- and refine -- a query. 
+In principle the AOI package three main task increasing in order of simply providing convenience to providing new functionality to the deep, and broad, R spatial ecosystem. These include helping:
+
+1. Create bounding geometries of existing `sp`, `sf`, and `raster` objects
+2. Get `sp`, or `sf`, state and county geometries or their bounding geometries
+3. Create `sp` or `sf` geometries from a given location and bounding box dimensions.
+
+Three main parameters can be used to define a query:  *state*, *county*, and *clip*. This page illustrates how these parameters can be used define -- and refine -- a query. 
 
 ###Installation:
 
