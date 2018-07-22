@@ -12,13 +12,13 @@ test_that("getAOI throws correct errors", {
   expect_error(getAOI(state = "CA", county = "Sant Barbara"), "Sant Barbara not a valid county in California.")
 
 
-  expect_error(getAOI(clip = list(37,10,10)),  cat("A clip with length 3 must be defined by:\n",
+  expect_error(getAOI(clip = list(37,10,10)),  paste0("A clip with length 3 must be defined by:\n",
                                                            "1. A name (i.e 'UCSB') (character)\n",
                                                            "2. A bound box height (in miles) (numeric)\n",
                                                            "3. A bound box width (in miles) (numeric)"
-  ))
+  ), fixed = TRUE)
 
-  expect_error(getAOI(clip = list(37,10,10, "upperleft")),  cat("A clip with length 4 must be defined by:\n",
+  expect_error(getAOI(clip = list(37,10,10, "upperleft")),  paste0("A clip with length 4 must be defined by:\n",
                                                                          "1. A latitude (numeric)",
                                                                          "2. A longitude (numeric)\n",
                                                                          "2. A bounding box height (in miles) (numeric)\n",
@@ -28,7 +28,7 @@ test_that("getAOI throws correct errors", {
                                                                          "2. A bound box height (in miles) (numeric)\n",
                                                                          "3. A bounding box width (in miles) (numeric)\n",
                                                                          "4. A bounding box origin (character)"
-))
+), fixed = TRUE)
 
 })
 
@@ -55,6 +55,16 @@ test_that("check AOI routines", {
           length(two_state) == 2,
           length(one_county) ==1,
           length(two_county) == 2)
+
+  rm(map)
+  rm(one_state)
+  rm(sp_def)
+  rm(map2)
+  rm(rast)
+  rm(ras_def)
+  rm(two_state)
+  rm(one_county)
+  rm(two_county)
 
   print(all(vec))
   check = all(vec)
@@ -87,6 +97,11 @@ vec = c(
 
   !all(clip_ll==clip_lr))
 
+rm(clip_c)
+rm(clip_lr)
+rm(clip_ll)
+rm(clip_ul)
+
 print(all(vec))
 check = all(vec)
 expect_true(check)
@@ -94,11 +109,11 @@ expect_true(check)
 
 
 test_that("check external routines", {
+
   clip_counties_all <-  getAOI(state = "NY", county = "all")
   state.bb <-  getAOI(state = "CA", bb = T)
   clip_4 <-  getAOI(clip = list("UCSB", 10,10, "lowerleft"), sf = TRUE)
   clip_sf <-  getAOI(clip = list("UCSB", 10,10), sf = TRUE)
-
   clip_mi  <-  getAOI(clip = clip_sf)
   clip_km <-  getAOI(clip = list(35, -115, 10, 10), km = T)
 
@@ -113,6 +128,13 @@ test_that("check external routines", {
     AOI::checkClass(clip_sf, 'sf'),
 
     (clip_mi@bbox[1,1] != clip_km@bbox[1,1]))
+
+  rm(clip_counties_all)
+  rm(state.bb)
+  rm(clip_4)
+  rm(clip_sf)
+  rm(clip_mi)
+  rm(clip_km)
 
   print(all(vec))
   check = all(vec)

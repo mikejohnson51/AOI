@@ -1,6 +1,6 @@
 ---
 title: AOI for R
-subtitle: Mike Johnson
+subtitle: Mike Johnson & Keith Clarke
 output:
   prettydoc::html_pretty:
     theme: tactile
