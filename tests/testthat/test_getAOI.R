@@ -56,7 +56,7 @@ test_that("check AOI routines", {
           class(sp_def) == "SpatialPolygons",
           length(two_state) == 2,
           length(one_county) ==1,
-          length(two_county) == 2))
+          length(two_county) == 2)
 
   print(all(vec))
   check = all(vec)
