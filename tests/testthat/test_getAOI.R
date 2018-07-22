@@ -33,5 +33,35 @@ test_that("getAOI throws correct errors", {
 })
 
 
+test_that("check AOI routines", {
+  map <- try(check(AOI = NULL))
+  one_state <- try(getAOI(state = "Colorado"))
+  sp_def <- getAOI(clip = one_state)
+  map2 = check(sp_def)
+  rast  = raster::raster(matrix(rnorm(400),20,20), crs = AOI::aoiProj)
+  raster::extent(rast) = raster::extent(sp_def)
+  ras_def <- try(getAOI(clip = rast))
+  two_state <- try(getAOI(state = c("AZ", "utah")))
+
+  one_county <- try(getAOI(state = 'TX', county = 'Harris'))
+  two_county <- try(getAOI(state = 'California', county = c('Santa Barbara', 'ventura')))
+
+ 
+
+  vec = c(any(class(map) == "leaflet"),
+          any(class(map2) == "leaflet"),
+          length(one_state) == 1,
+          class(rast) == "RasterLayer",
+          class(ras_def) == "SpatialPolygons",
+          class(sp_def) == "SpatialPolygons",
+          length(two_state) == 2,
+          length(one_county) ==1,
+          length(two_county) == 2))
+
+  print(all(vec))
+  check = all(vec)
+  expect_true(check)
+})
+
 
 
