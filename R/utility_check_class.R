@@ -6,6 +6,7 @@
 #' @param type a class
 #'
 #' @return logical
+#' @export
 #'
 #' @examples
 #' \dontrun{

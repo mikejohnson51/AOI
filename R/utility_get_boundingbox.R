@@ -5,6 +5,7 @@
 #' @param x a \code{data.frame} with a lat and long column, a Raster or a Spatial Object
 #'
 #' @return a \code{SpatialPolygon} bounding box of input points \code{x}
+#' @export
 #'
 #' @family HydroData 'utility' function
 

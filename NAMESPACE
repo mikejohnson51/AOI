@@ -2,9 +2,11 @@
 
 export(aoiProj)
 export(check)
+export(checkClass)
 export(defineClip)
 export(firstLower)
 export(getAOI)
+export(getBoundingBox)
 export(getClip)
 export(getFiat)
 export(getPoint)
