@@ -4,12 +4,14 @@
 \alias{getFiat}
 \title{Get County and State SpatialPolygon(s)}
 \usage{
-getFiat(state = NULL, county = NULL)
+getFiat(state = NULL, county = NULL, bb = FALSE)
 }
 \arguments{
-\item{state}{character. Full name or two character abbriviation. Not case senstive}
+\item{state}{\code{character}. Full name or two character abbriviation. Not case senstive}
 
-\item{county}{character. Provide county name(s). Requires 'state' input.}
+\item{county}{\code{character}. Provide county name(s). Requires 'state' input.}
+
+\item{bb}{\code{logical}. If \code{TRUE} then the bounding geometry of state/county is returned,  default is \code{FALSE} and returns fiat geometries}
 }
 \value{
 a \code{SpatialPolygons} object projected to \emph{EPSG:4269}.

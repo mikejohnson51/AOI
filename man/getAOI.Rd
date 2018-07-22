@@ -5,7 +5,7 @@
 \title{Get Area of interest (AOI) boundary}
 \usage{
 getAOI(state = NULL, county = NULL, clip = NULL, sf = FALSE,
-  km = FALSE)
+  km = FALSE, bb = FALSE)
 }
 \arguments{
 \item{state}{\code{character}.  Full name or two character abbriviation. Not case senstive}
@@ -14,9 +14,11 @@ getAOI(state = NULL, county = NULL, clip = NULL, sf = FALSE,
 
 \item{clip}{\code{Spatial} object, a \code{Raster} object, or a \code{list} (see details and \code{\link{getClip}})}
 
-\item{sf}{\code{logical}. If \code{TRUE} object return is of class sf,  default is \code{FALSE} and returns class SpatialPolygons}
+\item{sf}{\code{logical}. If \code{TRUE} object returned is of class sf,  default is \code{FALSE} and returns class SpatialPolygons}
 
 \item{km}{\code{logical}. If \code{TRUE} distance are in kilometers,  default is \code{FALSE} and with distances in miles}
+
+\item{bb}{\code{logical}. If \code{TRUE} then the bounding geometry of state/county is returned,  default is \code{FALSE} and returns fiat geometries}
 }
 \value{
 a \code{SpatialPolygons} object projected to \emph{EPSG:4269}.
