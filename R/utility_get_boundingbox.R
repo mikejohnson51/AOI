@@ -10,15 +10,20 @@
 
 getBoundingBox = function(x) {
 
-  if(grepl("Spatial", class(x))) {
+  if(any(grepl("Spatial", class(x)))) {
     x = data.frame(t(x@bbox))
     row.names(x) = NULL
     colnames(x) = c("long", "lat")
   }
 
-  if(grepl("Raster", class(x))) {
+  if(any(grepl("Raster", class(x)))) {
     x = x@extent
     x = data.frame(long = c(x@xmin, x@xmax), lat = c(x@ymin, x@ymax))
+  }
+
+  if(any(grepl("sf", class(x)))) {
+    x = sf::st_bbox(x)
+    x = data.frame(long = c(x[1], x[3]), lat = c(x[2],x[4]))
   }
 
   coords = matrix(

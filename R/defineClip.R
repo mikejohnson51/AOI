@@ -24,12 +24,21 @@ defineClip = function(clip = NULL, km = FALSE) {
   # Clip Unit Defintion  (getClipUnit() for 3,4, or 5 inputs)                    #
   #------------------------------------------------------------------------------#
 
-  if (grepl(
+  if (any(grepl(
+    pattern = "sf",
+    class(clip),
+    ignore.case = T,
+    fixed = F
+  ))) {
+    clip = sf::as_Spatial(clip)
+  }
+
+  if (any(grepl(
     pattern = "Spatial",
     class(clip),
     ignore.case = T,
     fixed = F
-  )) {
+  ))) {
     x = mean(clip@bbox[1, ])
     y = mean(clip@bbox[2, ])
 
@@ -39,12 +48,12 @@ defineClip = function(clip = NULL, km = FALSE) {
     o        <- "center"
   }
 
-  if (grepl(
+  if (any(grepl(
     pattern = "Raster",
     class(clip),
     ignore.case = T,
     fixed = F
-  )) {
+  ))){
     e = raster::extent(clip)
     x = mean(e[1:2])
     y = mean(e[3:4])

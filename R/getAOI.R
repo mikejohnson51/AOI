@@ -96,6 +96,7 @@ getAOI = function(state = NULL,
 
   stateAbb = AOI::states$state_abbr
   stateName = AOI::states$state_name
+  shp = NULL
 
   #------------------------------------------------------------------------------#
   # Error Catching                                                               #
@@ -134,11 +135,11 @@ getAOI = function(state = NULL,
 
   # AOI by user shapefile
 
-  if (grepl(
+  if (any(grepl(
     pattern = "Raster",
     class(clip),
     ignore.case = T,
-    fixed = F)){
+    fixed = F))){
 
     shp = getBoundingBox(clip)
     shp = sp::spTransform(shp, aoiProj)
@@ -146,12 +147,25 @@ getAOI = function(state = NULL,
 
     }
 
-  if (grepl(
+  if (any(grepl(
     pattern = "Spatial",
     class(clip),
     ignore.case = T,
-    fixed = F)) {
+    fixed = F))) {
+
     shp = sp::spTransform(clip, aoiProj)
+    shp = getBoundingBox(shp)
+
+
+  }
+
+  if (any(grepl(
+    pattern = "sf",
+    class(clip),
+    ignore.case = T,
+    fixed = F))) {
+
+    shp = sf::st_transform(clip, as.character(aoiProj))
     shp = getBoundingBox(shp)
   }
 
@@ -159,7 +173,7 @@ getAOI = function(state = NULL,
   # Clip Unit Defintion  (getClipUnit() for 3,4, or 5 inputs)                    #
   #------------------------------------------------------------------------------#
 
-  if(!exists("shp")){
+  if(is.null(shp)){
 
    fin = defineClip(clip, km = km)
 

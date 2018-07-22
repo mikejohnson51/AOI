@@ -12,6 +12,8 @@ library(leaflet)
 library(sp)
 col  = 'red'
 col1 = '#212f3f'
+icon.r <- makeAwesomeIcon(icon = 'home', iconColor = col1, markerColor = 'gray')
+icon.b <- makeAwesomeIcon(icon = 'home', iconColor = col,  markerColor = 'gray')
 ```
 
 
@@ -56,6 +58,17 @@ leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 4, maxZoom = 4)) %>%
 ```
 
 <br>
+
+If you wanted to get the boundaries of a state with the county features intact, simply call getAOI and set county to 'all'
+
+```{r, message = FALSE}
+AL = getAOI(state = "AL", county = 'all')
+```
+
+```{r, echo = FALSE}
+leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 6, maxZoom = 4)) %>% addProviderTiles(providers$CartoDB.Positron) %>% addPolygons(data = AL,fillColor = col, color = col1, weight = 1)
+```
+
 
 ###Method 2: Defining an AOI by **county**  
 
@@ -120,10 +133,6 @@ GC_lat_lon = getAOI(clip = list(36.0544, -112.1401, 10, 10))
 latlon = "<strong>Query by Lat Long</strong>"
 API = "<strong>Query by Name</strong>"
 gc = dismo::geocode("grand canyon")
-
-icon.r <- makeAwesomeIcon(icon = 'home', iconColor = col1, markerColor = 'gray')
-icon.b <- makeAwesomeIcon(icon = 'home', iconColor = col,  markerColor = 'gray')
-
 
 leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 10, maxZoom = 10)) %>% addProviderTiles(providers$CartoDB.Positron) %>% 
   addPolygons(data = GC_name, fillColor = "transparent", color = col, weight = 4) %>% 
@@ -201,6 +210,7 @@ AOI = getAOI(clip = SM)
 
 ```{r, echo = FALSE}
 leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 12, maxZoom = 12)) %>% addProviderTiles(providers$CartoDB.Positron) %>% 
+  addPolygons(data = SM, fillColor = 'transparent', color = 'black', weight = 1) %>% 
   addPolygons(data = AOI,fillColor = col, color = col1, weight = 4, label = "Santa Monica")
 ```
 
@@ -234,6 +244,41 @@ Using the tabs in the upper right corner allow you to toggle between base maps t
 Give it a try!
 <br>
 <br>
+
+## Additional Calls
+
+## Bounding Box of States / Counties
+
+```{r}
+sb = getAOI(state = "CA", sf = T)
+ca.bb = getAOI(clip = sb, sf = T)
+```
+
+
+### Kilometers instead of miles
+
+```{r, message = FALSE}
+mi.ex = getAOI(clip = list("UCSB", 10, 10), km = F)
+km.ex = getAOI(clip = list("UCSB", 10, 10), km = T)
+```
+
+```{r, echo = FALSE}
+leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 10, maxZoom = 4)) %>% addProviderTiles(providers$CartoDB.Positron) %>% 
+  addPolygons(data = mi.ex,fillColor = col, color = col1, weight = 1, label = "miles") %>% 
+ addPolygons(data = km.ex, fillColor = col1, color = col1, weight = 1, label = "kilometers") %>% 
+  addAwesomeMarkers(icon = icon.b, lat = 34.41396, lng = -119.8489, popup = 'UCSB')
+
+```
+
+### sf instead of sp
+
+As R grows more popular in the spatial community the use of simple feature (sf) objects are becomeing more common. To get you AOI is sf simply set the 'sf' parameter to TRUE. 
+
+```{r}
+CA.sf = getAOI(state = c('CA', 'NV'), sf = TRUE)
+head(CA.sf)
+plot(CA.sf, main = nameAOI(state = c('CA', 'NV')))
+```
 
 ### Use Cases
 
