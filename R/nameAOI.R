@@ -50,9 +50,16 @@ nameAOI = function(state = NULL,
   } else {
 
     county_map = vector(mode = 'character')
+    noun = "county"
 
+    if(any(county == 'all')){
+      county_map = 'all'
+      noun = 'counties'
+
+      } else {
     for (i in 1:length(county)) {
       county_map[i] = AOI::simpleCap(tolower(county[i]))
+    }
     }
 
     if (length(county_map) > 1) {
@@ -61,7 +68,7 @@ nameAOI = function(state = NULL,
 
     county_map = paste(county_map, collapse = ', ')
 
-    unit = paste0("boundary of ", county_map, " County, ", states_name)
+    unit = paste("boundary of", county_map, noun, states_name)
   }
   }
   return(unit)

@@ -48,6 +48,11 @@ getFiat <- function(state = NULL, county = NULL) {
     counties = AOI::counties
     county_map = counties[tolower(counties$state_name) %in% tolower(state),]
 
+    if(any(county == 'all')) {
+      map = county_map
+      rm(counties)
+    } else {
+
     county = simpleCap(county)
     check = county %in% county_map$name
 
@@ -59,6 +64,7 @@ getFiat <- function(state = NULL, county = NULL) {
     map = county_map[county_map$name %in% county,]
     rm(counties)
 
+    }
   }
 
   return(map)
