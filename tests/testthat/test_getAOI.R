@@ -50,14 +50,6 @@ test_that("check AOI routines", {
   clip2 <- try(getAOI(clip = list('University of Alabama', 10, 10, "upperleft")))
   clip3   <- try(getAOI(clip = list(37, -105, 10, 10)))
 
-  clip_c   <- try(getAOI(clip = list(37, -115, 10, 10, "center")))
-  clip_lr  <- try(getAOI(clip = list(35, -115, 10, 10, "lowerright")))
-  clip_ll  <- try(getAOI(clip = list(35, -115, 10, 10, "lowerleft")))
-  clip_ur  <- try(getAOI(clip = list(35, -115, 10, 10, "upperright")))
-  clip_ul  <- try(getAOI(clip = list(35, -115, 10, 10, "upperleft")))
-
- 
-
   vec = c(any(class(map) == "leaflet"),
           any(class(map2) == "leaflet"),
           length(one_state) == 1,
@@ -70,20 +62,7 @@ test_that("check AOI routines", {
           
           class(clip) ==  "SpatialPolygons",
           class(clip2) == "SpatialPolygons",
-
-          any(clip_c@bbox != clip_lr@bbox),
-          any(clip_c@bbox != clip_ll@bbox),
-          any(clip_c@bbox != clip_ur@bbox),
-          any(clip_c@bbox != clip_ul@bbox),
-
-          any(clip_ul@bbox != clip_ur@bbox),
-          any(clip_ul@bbox != clip_lr@bbox),
-          any(clip_ul@bbox != clip_ll@bbox),
-
-          any(clip_ur@bbox != clip_lr@bbox),
-          any(clip_ur@bbox != clip_ll@bbox),
-
-          any(clip_lr@bbox != clip_ll@bbox))
+          class(clip3) == "SpatialPolygons")
 
   print(all(vec))
   check = all(vec)
