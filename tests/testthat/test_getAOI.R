@@ -122,13 +122,14 @@ test_that("check external routines", {
 
     AOI::checkClass(clip_counties_all, 'Spatial'),
 
-    AOI::checkClass(state.bb, 'Spatial'),
+    AOI::checkClass(state.bb, 'Spatial')
 
     #AOI::checkClass(clip_4, 'sf'),
 
     #AOI::checkClass(clip_sf, 'sf'),
 
     #(clip_mi@bbox[1,1] != clip_km@bbox[1,1]))
+    )
 
   rm(clip_counties_all)
   rm(state.bb)
