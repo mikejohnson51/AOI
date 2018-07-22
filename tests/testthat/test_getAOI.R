@@ -45,10 +45,6 @@ test_that("check AOI routines", {
 
   one_county <- try(getAOI(state = 'TX', county = 'Harris'))
   two_county <- try(getAOI(state = 'California', county = c('Santa Barbara', 'ventura')))
-  
-  clip   <- try(getAOI(clip = list('KMART near UCSB', 10, 10)))
-  clip2 <- try(getAOI(clip = list('University of Alabama', 10, 10, "upperleft")))
-  clip3   <- try(getAOI(clip = list(37, -105, 10, 10)))
 
   vec = c(any(class(map) == "leaflet"),
           any(class(map2) == "leaflet"),
@@ -58,11 +54,7 @@ test_that("check AOI routines", {
           class(sp_def) == "SpatialPolygons",
           length(two_state) == 2,
           length(one_county) ==1,
-          length(two_county) == 2,
-          
-          class(clip) ==  "SpatialPolygons",
-          class(clip2) == "SpatialPolygons",
-          class(clip3) == "SpatialPolygons")
+          length(two_county) == 2)
 
   print(all(vec))
   check = all(vec)
@@ -70,4 +62,32 @@ test_that("check AOI routines", {
 })
 
 
+test_that("check clip routines", {
+
+clip_c   <- getAOI(clip = list(35, -115, 10, 10, "center"))@bbox
+clip_lr  <- getAOI(clip = list(35, -115, 10, 10, "lowerright"))@bbox
+clip_ll  <- getAOI(clip = list(35, -115, 10, 10, "lowerleft"))@bbox
+clip_ur  <- getAOI(clip = list(35, -115, 10, 10, "upperright"))@bbox
+clip_ul  <- getAOI(clip = list(35, -115, 10, 10, "upperleft"))@bbox
+
+vec = c(
+
+  !all(clip_c==clip_lr),
+  !all(clip_c==clip_ll),
+  !all(clip_c==clip_ur),
+  !all(clip_c==clip_ul),
+
+  !all(clip_ul==clip_ur),
+  !all(clip_ul==clip_lr),
+  !all(clip_ul==clip_ll),
+
+  !all(clip_ur==clip_lr),
+  !all(clip_ur==clip_ll),
+
+  !all(clip_ll==clip_lr))
+
+print(all(vec))
+check = all(vec)
+expect_true(check)
+})
 
