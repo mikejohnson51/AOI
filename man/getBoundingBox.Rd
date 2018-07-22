@@ -15,3 +15,6 @@ a \code{SpatialPolygon} bounding box of input points \code{x}
 \description{
 A function to define a minimum bounding box for a set of points
 }
+\seealso{
+Other HydroData 'utility' function: \code{\link{checkClass}}
+}

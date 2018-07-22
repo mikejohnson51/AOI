@@ -135,36 +135,17 @@ getAOI = function(state = NULL,
 
   # AOI by user shapefile
 
-  if (any(grepl(
-    pattern = "Raster",
-    class(clip),
-    ignore.case = T,
-    fixed = F))){
-
+  if (checkClass(clip, "Raster")){
     shp = getBoundingBox(clip)
     shp = sp::spTransform(shp, aoiProj)
-
-
     }
 
-  if (any(grepl(
-    pattern = "Spatial",
-    class(clip),
-    ignore.case = T,
-    fixed = F))) {
-
+  if (checkClass(clip, "Spatial")) {
     shp = sp::spTransform(clip, aoiProj)
     shp = getBoundingBox(shp)
-
-
   }
 
-  if (any(grepl(
-    pattern = "sf",
-    class(clip),
-    ignore.case = T,
-    fixed = F))) {
-
+  if (checkClass(clip, "sf")) {
     shp = sf::st_transform(clip, as.character(aoiProj))
     shp = getBoundingBox(shp)
   }
