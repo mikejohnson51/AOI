@@ -34,7 +34,7 @@ test_that("getAOI throws correct errors", {
 
 
 test_that("check AOI routines", {
-  map = try(check(AOI = NULL))
+  map <- try(check(AOI = NULL))
   one_state <- try(getAOI(state = "Colorado"))
   sp_def <- getAOI(clip = one_state)
   map2 = check(sp_def)
@@ -50,23 +50,26 @@ test_that("check AOI routines", {
   clip2 <- try(getAOI(clip = list('University of Alabama', 10, 10, "upperleft")))
   clip3   <- try(getAOI(clip = list(37, -105, 10, 10)))
 
-  clip_c <- try(getAOI(clip = list(37, -115, 10, 10, "center")))
-  clip_lr   <- try(getAOI(clip = list(35, -115, 10, 10, "lowerright")))
+  clip_c   <- try(getAOI(clip = list(37, -115, 10, 10, "center")))
+  clip_lr  <- try(getAOI(clip = list(35, -115, 10, 10, "lowerright")))
   clip_ll  <- try(getAOI(clip = list(35, -115, 10, 10, "lowerleft")))
   clip_ur  <- try(getAOI(clip = list(35, -115, 10, 10, "upperright")))
   clip_ul  <- try(getAOI(clip = list(35, -115, 10, 10, "upperleft")))
+
+  sp::plot(clip_c)
+  sp::plot(clip_lr, add = T)
 
   vec = c(any(class(map) == "leaflet"),
           any(class(map2) == "leaflet"),
           length(one_state) == 1,
           class(rast) == "RasterLayer",
-          class(ras_def) == "SpatialPolygonsDataFrame",
-          class(sp_def) == "SpatialPolygonsDataFrame",
+          class(ras_def) == "SpatialPolygons",
+          class(sp_def) == "SpatialPolygons",
           length(two_state) == 2,
           length(one_county) ==1,
           length(two_county) == 2,
 
-          class(clip) == "SpatialPolygons",
+          class(clip) ==  "SpatialPolygons",
           class(clip2) == "SpatialPolygons",
 
           any(clip_c@bbox != clip_lr@bbox),
