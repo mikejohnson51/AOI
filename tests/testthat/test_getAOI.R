@@ -62,3 +62,35 @@ test_that("check AOI routines", {
 })
 
 
+
+test_that("check clip origin routines", {
+
+clip_c   <- getAOI(clip = list(35, -115, 10, 10, "center"))@bbox
+clip_lr  <- getAOI(clip = list(35, -115, 10, 10, "lowerright"))@bbox
+clip_ll  <- getAOI(clip = list(35, -115, 10, 10, "lowerleft"))@bbox
+clip_ur  <- getAOI(clip = list(35, -115, 10, 10, "upperright"))@bbox
+clip_ul  <- getAOI(clip = list(35, -115, 10, 10, "upperleft"))@bbox
+
+vec = c(
+
+  !all(clip_c==clip_lr),
+  !all(clip_c==clip_ll),
+  !all(clip_c==clip_ur),
+  !all(clip_c==clip_ul),
+
+  !all(clip_ul==clip_ur),
+  !all(clip_ul==clip_lr),
+  !all(clip_ul==clip_ll),
+
+  !all(clip_ur==clip_lr),
+  !all(clip_ur==clip_ll),
+
+  !all(clip_ll==clip_lr))
+
+print(all(vec))
+check = all(vec)
+expect_true(check)
+})
+
+
+
