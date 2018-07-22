@@ -34,17 +34,17 @@ test_that("getAOI throws correct errors", {
 
 
 test_that("check AOI routines", {
-  map <- try(check(AOI = NULL))
-  one_state <- try(getAOI(state = "Colorado"))
-  sp_def <- getAOI(clip = one_state)
-  map2 = check(sp_def)
-  rast  = raster::raster(matrix(rnorm(400),20,20), crs = AOI::aoiProj)
-  raster::extent(rast) = raster::extent(sp_def)
-  ras_def <- try(getAOI(clip = rast))
-  two_state <- try(getAOI(state = c("AZ", "utah")))
+  map       <- check(AOI = NULL)
+  one_state <- getAOI(state = "Colorado")
+  sp_def    <- getAOI(clip = one_state)
+  map2      <- check(sp_def)
+  rast      <- raster::raster(matrix(rnorm(100),10,10), crs = AOI::aoiProj)
+  raster::extent(rast) <- raster::extent(sp_def)
+  ras_def   <- getAOI(clip = rast)
+  two_state <- getAOI(state = c("AZ", "utah"))
 
-  one_county <- try(getAOI(state = 'TX', county = 'Harris'))
-  two_county <- try(getAOI(state = 'California', county = c('Santa Barbara', 'ventura')))
+  one_county <- getAOI(state = 'TX', county = 'Harris')
+  two_county <- getAOI(state = 'California', county = c('Santa Barbara', 'ventura'))
 
   vec = c(any(class(map) == "leaflet"),
           any(class(map2) == "leaflet"),
@@ -88,33 +88,3 @@ test_that("check external routines", {
   expect_true(check)
 
 })
-
-test_that("check clip origin routines", {
-
-clip_c   <- getAOI(clip = list(35, -115, 10, 10, "center"))@bbox
-clip_lr  <- getAOI(clip = list(35, -115, 10, 10, "lowerright"))@bbox
-clip_ll  <- getAOI(clip = list(35, -115, 10, 10, "lowerleft"))@bbox
-clip_ur  <- getAOI(clip = list(35, -115, 10, 10, "upperright"))@bbox
-clip_ul  <- getAOI(clip = list(35, -115, 10, 10, "upperleft"))@bbox
-
-vec = c(
-
-  !all(clip_c==clip_lr),
-  !all(clip_c==clip_ll),
-  !all(clip_c==clip_ur),
-  !all(clip_c==clip_ul),
-
-  !all(clip_ul==clip_ur),
-  !all(clip_ul==clip_lr),
-  !all(clip_ul==clip_ll),
-
-  !all(clip_ur==clip_lr),
-  !all(clip_ur==clip_ll),
-
-  !all(clip_ll==clip_lr))
-
-print(all(vec))
-check = all(vec)
-expect_true(check)
-})
-
