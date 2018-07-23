@@ -11,7 +11,7 @@
 #' @examples
 #' \dontrun{
 #' sf = getAOI(state = "CA", sf = TRUE)
-#' checkClass(sd, "sf")
+#' checkClass(sf, "sf")
 #' }
 #'
 #' @family HydroData 'utility' function
