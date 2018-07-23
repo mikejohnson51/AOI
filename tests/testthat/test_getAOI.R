@@ -113,26 +113,26 @@ test_that("check external routines", {
 
   clip_counties_all <-  !is.null(getAOI(state = "NY", county = "all"))
   state.bb          <-  !is.null(getAOI(state = "CA", bb = TRUE))
-  clip_4            <-  !is.null(getAOI(clip = list("UCSB", 10,10, "lowerleft"), sf = TRUE))
-  clip_sf           <-  !is.nul(getAOI(clip = list("UCSB", 10,10), sf = TRUE))
-  #clip_mi           <-  getAOI(clip = clip_sf)
-  #clip_km           <-  getAOI(clip = list(35, -115, 10, 10), km = TRUE)
+  #clip_4            <-  !is.null(getAOI(clip = list("UCSB", 10,10, "lowerleft"), sf = TRUE))
+  #clip_sf           <-  !is.nul(getAOI(clip = list("UCSB", 10,10), sf = TRUE))
+  clip_mi           <-  getAOI(clip = list(35, -115, 10, 10, "center"))
+  clip_km           <-  getAOI(clip = list(35, -115, 10, 10, "center"), km = TRUE)
 
   vec = c(
 
     clip_counties_all,
     state.bb,
-    clip_4,
-    clip_sf
-    #(clip_mi@bbox[1,1] != clip_km@bbox[1,1])
+    #clip_4,
+    #clip_sf,
+    (clip_mi@bbox[1,1] != clip_km@bbox[1,1])
     )
 
   rm(clip_counties_all)
   rm(state.bb)
-  rm(clip_4)
-  rm(clip_sf)
-  #rm(clip_mi)
-  #rm(clip_km)
+  #rm(clip_4)
+  #rm(clip_sf)
+  rm(clip_mi)
+  rm(clip_km)
 
   print(all(vec))
   check = all(vec)
