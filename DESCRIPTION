@@ -15,7 +15,7 @@ Imports:
     leaflet,
     raster,
     utils,
-    sf,
+    sf(>= 0.6-0),
     sp
 Suggests: 
     testthat
