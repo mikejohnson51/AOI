@@ -10,10 +10,12 @@
 #'
 #' @examples
 #' \dontrun{
-#' sp = getAOI(state = "CA", sf = TRUE)
-#' checkClass(sp, "sf")}
+#' sf = getAOI(state = "CA", sf = TRUE)
+#' checkClass(sd, "sf")
+#' }
 #'
 #' @family HydroData 'utility' function
+#' @author Mike Johnson
 
 checkClass = function(x, type){
 
