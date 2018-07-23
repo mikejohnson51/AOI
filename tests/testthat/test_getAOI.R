@@ -124,8 +124,6 @@ test_that("check external routines", {
     state.bb,
     clip_4,
     clip_sf
-  )
-
     #(clip_mi@bbox[1,1] != clip_km@bbox[1,1])
     )
 
