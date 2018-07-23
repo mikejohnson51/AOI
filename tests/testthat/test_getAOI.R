@@ -109,32 +109,45 @@ expect_true(check)
 
 
 
-test_that("check external routines", {
+test_that("check external routines 1", {
 
   clip_counties_all <-  !is.null(getAOI(state = "NY", county = "all"))
   state.bb          <-  !is.null(getAOI(state = "CA", bb = TRUE))
   clip_4            <-  !is.null(getAOI(clip = list("UCSB", 10,10, "lowerleft")))
   clip_sf           <-  !is.null(getAOI(clip = list("UCSB", 10,10, "center")))
-  clip_sf1           <- !is.null(getAOI(clip = list("UCSB", 10,10)))
-  clip_mi           <-  getAOI(clip = list(35, -115, 1, 1))
-  clip_mi1          <-  !is.null(getAOI(clip = list(35, -115, 10, 10)))
-  clip_km           <-  getAOI(clip = list(35, -115, 1, 1), km = TRUE)
-
+  
   vec = c(
-
     clip_counties_all,
     state.bb,
     clip_4,
     clip_sf,
-    clip_sf1,
-    clip_mi1,
-    (clip_mi@bbox[1,1] != clip_km@bbox[1,1])
     )
 
   rm(clip_counties_all)
   rm(state.bb)
   rm(clip_4)
   rm(clip_sf)
+ 
+
+  print(all(vec))
+  check = all(vec)
+  expect_true(check)
+
+})
+
+test_that("check external routines 2", {
+
+  clip_sf1           <- !is.null(getAOI(clip = list("UCSB", 10,10)))
+  clip_mi           <-  getAOI(clip = list(35, -115, 1, 1))
+  clip_mi1          <-  !is.null(getAOI(clip = list(35, -115, 10, 10)))
+  clip_km           <-  getAOI(clip = list(35, -115, 1, 1), km = TRUE)
+
+  vec = c(
+    clip_sf1,
+    clip_mi1,
+    (clip_mi@bbox[1,1] != clip_km@bbox[1,1])
+    )
+  
   rm(clip_sf1)
   rm(clip_mi)
   rm(clip_mi1)
@@ -145,7 +158,6 @@ test_that("check external routines", {
   expect_true(check)
 
 })
-
 
 
 
