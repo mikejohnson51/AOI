@@ -121,17 +121,18 @@ test_that("check external routines", {
   vec = c(
 
     clip_counties_all,
-    state.bb
-    is.null(clip_4),
-    is.null(clip_sf)
+    state.bb,
+    clip_4,
+    clip_sf
+  )
 
     #(clip_mi@bbox[1,1] != clip_km@bbox[1,1])
     )
 
   rm(clip_counties_all)
   rm(state.bb)
-  #rm(clip_4)
-  #rm(clip_sf)
+  rm(clip_4)
+  rm(clip_sf)
   #rm(clip_mi)
   #rm(clip_km)
 
