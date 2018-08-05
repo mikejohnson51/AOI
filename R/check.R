@@ -56,6 +56,7 @@ check = function(AOI = NULL) {
     )
   }
 
-  return(m)
+  print(m)
+  return(AOI)
 }
 

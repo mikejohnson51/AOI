@@ -19,10 +19,14 @@ A function check the class of an object, will return TRUE if x is of class type
 }
 \examples{
 \dontrun{
-sp = getAOI(state = "CA", sf = TRUE)
-checkClass(sp, "sf")}
+sf = getAOI(state = "CA", sf = TRUE)
+checkClass(sf, "sf")
+}
 
 }
 \seealso{
 Other HydroData 'utility' function: \code{\link{getBoundingBox}}
+}
+\author{
+Mike Johnson
 }

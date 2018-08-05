@@ -34,10 +34,9 @@ test_that("getAOI throws correct errors", {
 
 
 test_that("check AOI routines", {
-  map       <- check(AOI = NULL)
+
   one_state <- getAOI(state = "Colorado")
   sp_def    <- getAOI(clip = one_state)
-  map2      <- check(sp_def)
   rast      <- raster::raster(matrix(rnorm(100),10,10), crs = AOI::aoiProj)
   raster::extent(rast) <- raster::extent(sp_def)
   ras_def   <- getAOI(clip = rast)
@@ -46,9 +45,7 @@ test_that("check AOI routines", {
   one_county <- getAOI(state = 'TX', county = 'Harris')
   two_county <- getAOI(state = 'California', county = c('Santa Barbara', 'ventura'))
 
-  vec = c(any(class(map) == "leaflet"),
-          any(class(map2) == "leaflet"),
-          length(one_state) == 1,
+  vec = c(length(one_state) == 1,
           class(rast) == "RasterLayer",
           class(ras_def) == "SpatialPolygons",
           class(sp_def) == "SpatialPolygons",
@@ -56,10 +53,9 @@ test_that("check AOI routines", {
           length(one_county) ==1,
           length(two_county) == 2)
 
-  rm(map)
+
   rm(one_state)
   rm(sp_def)
-  rm(map2)
   rm(rast)
   rm(ras_def)
   rm(two_state)
@@ -115,7 +111,7 @@ expect_true(check)
   #state.bb          <-  !is.null(getAOI(state = "CA", bb = TRUE))
   #clip_4            <-  !is.null(getAOI(clip = list("UCSB", 10,10, "lowerleft"), km = TRUE))
   #clip_sf           <-  !is.null(getAOI(clip = list("UCSB", 10,10, "center")))
-  
+
   #vec = c(
   #  clip_counties_all,
   #  state.bb,
@@ -127,7 +123,7 @@ expect_true(check)
   #rm(state.bb)
   #rm(clip_4)
   #rm(clip_sf)
- 
+
 
   #print(all(vec))
   #check = all(vec)
@@ -147,7 +143,7 @@ test_that("check external routines 2", {
     clip_mi1,
     (clip_mi@bbox[1,1] != clip_km@bbox[1,1])
     )
-  
+
   rm(clip_sf1)
   rm(clip_mi)
   rm(clip_mi1)
