@@ -5,9 +5,7 @@
 #' default is \code{FALSE} with distances in miles
 #' @return a 4-element list of features defining an AOI
 #' @author Mike Johnson
-#' @examples
-#' defineClip(list("UCSB", 10, 10))
-#' defineClip(list(37,-115, 10, 10))
+
 
 defineClip = function(clip = NULL, km = FALSE) {
   #------------------------------------------------------------------------------#

@@ -3,6 +3,7 @@
 #' @param x an object
 #' @param type a class
 #' @return logical
+#' @export
 #' @examples
 #' sf = getAOI(state = "CA", sf = TRUE)
 #' checkClass(sf, "sf")

@@ -15,12 +15,7 @@
 #' @return a \code{SpatialPolygons} object projected to \emph{EPSG:4269}.
 #' @export
 #' @author Mike Johnson
-#' @examples
-#' # Get AOI defined by 10 mile bounding box using "UCSB" as the point
-#'     getClip(location = "UCSB", width = 10, height = 10, origin = "center")
-#'
-#' # Get AOI defined by 10 mile2 bounding box using the 'KMART near UCSB' as lower left corner
-#'     getClip(clocation = NULL, width = NULL, height = NULL, origin = NULL)
+
 
 getClip = function(location = NULL, width = NULL, height = NULL, origin = NULL){
 

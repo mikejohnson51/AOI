@@ -3,3 +3,5 @@
 ^\.travis\.yml$
 docs
 tests
+_pkgdown.yml
+vignettes

@@ -18,10 +18,6 @@ a 4-element list of features defining an AOI
 \description{
 \code{defineClip} parses user supplied lists to a format usable by \code{\link{getClip}}
 }
-\examples{
-defineClip(list("UCSB", 10, 10))
-defineClip(list(37,-115, 10, 10))
-}
 \author{
 Mike Johnson
 }

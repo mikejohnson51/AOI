@@ -8,8 +8,7 @@
 #' @return A character string
 #' @seealso \code{\link{nameClip}}
 #' @author Mike Johnson
-#' @examples
-#' nameAOI(state = "CA")
+
 
 nameAOI = function(state = NULL,
                    county = NULL,

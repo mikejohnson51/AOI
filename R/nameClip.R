@@ -5,8 +5,7 @@
 #' @param km  \code{logical}. If \code{TRUE} distance are in kilometers,  default is \code{FALSE} and with distances in miles
 #' @return a string describing the clip region in plain english
 #' @author Mike Johnson
-#' @examples
-#' nameClip(getAOI(clip = list("UCSB", 10, 10)))
+
 
 nameClip = function(clip, km = FALSE){
 

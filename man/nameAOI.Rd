@@ -22,9 +22,6 @@ A character string
 This function is a mirror of \code{\link{getAOI}} but instead of returning a Spatial object,
 returns a plain-english description of the AOI. (eg: 'AOI defined as a 10 mile tall by 10 mile wide region centered on (the) 'UCSB')
 }
-\examples{
-nameAOI(state = "CA")
-}
 \seealso{
 \code{\link{nameClip}}
 }

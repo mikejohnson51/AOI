@@ -2,6 +2,7 @@
 #' @description  \code{simpleCap} capitilizes all words in a given text string
 #' @param x a string
 #' @author Mike Johnson
+#' @export
 #' @examples
 #' simpleCap("santa barbara")
 

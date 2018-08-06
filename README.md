@@ -15,11 +15,11 @@ An area of interest (AOI) is a geographic extent. It helps confine - and formali
 
 In principle, the AOI package helps accomplish four main tasks increasing in order of simply providing convenience to providing new functionality to the deep R spatial ecosystem. These include helping:
 
-1. Create bounding geometries of existing `sp`, `sf`, and `raster` objects (see [here](clipAreas.html))
-2. Get `sp`, or `sf`, state and county geometries or their bounding geometries (see [here](stateCounty.html))
-3. Create `sp` or `sf` geometries from a given location and bounding box dimensions. (see [here](clipAreas.html))
-4. Map, describe and communicate AOIs to others. (see [here](tools.html))
-5. Integrate with other spatial packages in the R ecosystem (see [here](useCases.html))
+1. Create bounding geometries of existing `sp`, `sf`, and `raster` objects (see [here](./articles/clipAreas.html))
+2. Get `sp`, or `sf`, state and county geometries or their bounding geometries (see [here](./articles/stateCounty.html))
+3. Create `sp` or `sf` geometries from a given location and bounding box dimensions. (see [here](./articles/clipAreas.html))
+4. Map, describe and communicate AOIs to others. (see [here](./articles/tools.html))
+5. Integrate with other spatial packages in the R ecosystem (see [here](./articles/useCases.html))
 
 All functions are designed to be used with the magrittr pipe operation `%>%`.
 

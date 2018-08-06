@@ -18,9 +18,6 @@ a string describing the clip region in plain english
 Return a plain-english description of the clip list
 (eg: 'AOI defined as a 10 mile tall by 10 mile wide region centered on (the) UCSB')
 }
-\examples{
-nameClip(getAOI(clip = list("UCSB", 10, 10)))
-}
 \author{
 Mike Johnson
 }

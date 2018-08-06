@@ -2,6 +2,7 @@
 #' @description  \code{firstLower} lower cases the first character of a string
 #' @param x a string to be parsed.
 #' @author Mike Johnson
+#' @export
 #' @examples
 #' firstLower("SANTA BARBARA")
 
