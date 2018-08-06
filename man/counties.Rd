@@ -3,11 +3,7 @@
 \docType{data}
 \name{counties}
 \alias{counties}
-\title{USA Counites
-Dataset containing \code{SpatialPolygons} of USA Counties. Data is initalized from the USAboundaries and USAboundariesData
-package, converted to spatial \code{sp} objects, and cleaned-up for this package purposes.The primary reason for doing this is to limit
-the challenges associated with using the USAboundariesData (not on CRAN) as a dependency for this, and other packages, while also providing
-a more minmualistic dataset.}
+\title{USA Counites}
 \format{a \code{SpatialPolygonsDataFrame}, 3220 observations of 7 variables
 \itemize{
 \item 'statefp':    A \code{character}  State 2-digit FederalInformationProcessingStandards (FIPS) code
@@ -25,15 +21,12 @@ a more minmualistic dataset.}
 counties
 }
 \description{
-USA Counites
 Dataset containing \code{SpatialPolygons} of USA Counties. Data is initalized from the USAboundaries and USAboundariesData
-package, converted to spatial \code{sp} objects, and cleaned-up for this package purposes.The primary reason for doing this is to limit
+package, converted to spatial \code{sp} objects, and cleaned-up for this package. The primary reason for doing this is to limit
 the challenges associated with using the USAboundariesData (not on CRAN) as a dependency for this, and other packages, while also providing
 a more minmualistic dataset.
 }
 \examples{
-\dontrun{
  counties = AOI::counties
-}
 }
 \keyword{datasets}

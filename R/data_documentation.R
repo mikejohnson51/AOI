@@ -1,12 +1,9 @@
-#' USA States
-#'
-#' Dataset containing \code{SpatialPolygons} of USA States. Data is initalized from the USAboundaries and USAboundariesData
-#' package, converted to spatial \code{sp} objects, and cleaned-up for this package purposes.The primary reason for doing this is to limit
+#' @title USA States
+#' @description Dataset containing \code{SpatialPolygons} of USA States. Data is initalized from the USAboundaries and USAboundariesData
+#' package, converted to spatial \code{sp} objects, and cleaned-up for this package. The primary reason for doing this is to limit
 #' the challenges associated with using the USAboundariesData (not on CRAN) as a dependency for this, and other packages, while also providing
 #' a more minmualistic dataset.
-#'
 #' @docType data
-#'
 #' @format a \code{SpatialPolygonsDataFrame}, 52 observations of 5 variables
 #' \itemize{
 #' \item 'statefp':    A \code{character}  State 2-digit FederalInformationProcessingStandards (FIPS) code
@@ -15,23 +12,18 @@
 #' \item 'state_name':    A \code{character}    State Name
 #' \item 'state_abbr':     A \code{character}    State Abbriviation
 #' }
-#'
 #' @source  \href{https://cran.r-project.org/web/packages/USAboundaries/index.html}{USAboundaries}
 #' @examples
-#' \dontrun{
 #'  states = AOI::states
-#' }
 
 "states"
 
-#' USA Counites
-#' Dataset containing \code{SpatialPolygons} of USA Counties. Data is initalized from the USAboundaries and USAboundariesData
-#' package, converted to spatial \code{sp} objects, and cleaned-up for this package purposes.The primary reason for doing this is to limit
+#' @title USA Counites
+#' @description Dataset containing \code{SpatialPolygons} of USA Counties. Data is initalized from the USAboundaries and USAboundariesData
+#' package, converted to spatial \code{sp} objects, and cleaned-up for this package. The primary reason for doing this is to limit
 #' the challenges associated with using the USAboundariesData (not on CRAN) as a dependency for this, and other packages, while also providing
 #' a more minmualistic dataset.
-#'
 #' @docType data
-#
 #' @format a \code{SpatialPolygonsDataFrame}, 3220 observations of 7 variables
 #' \itemize{
 #' \item 'statefp':    A \code{character}  State 2-digit FederalInformationProcessingStandards (FIPS) code
@@ -42,13 +34,9 @@
 #' \item 'state_name':    A \code{character}    State name
 #' \item 'state_abbr':     A \code{character}    State Abbriviation
 #' }
-#'
 #' @source  \href{https://cran.r-project.org/web/packages/USAboundaries/index.html}{USAboundaries}
-#'
 #' @examples
-#' \dontrun{
 #'  counties = AOI::counties
-#' }
 
 "counties"
 

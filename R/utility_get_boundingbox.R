@@ -1,15 +1,12 @@
-#' Get Bounding box
-#'
-#' @description A function to define a minimum bounding box for a set of points
-#'
+#' @title Get bounding box
+#' @description Reeurn a minimum bounding box spatial object for a set or single Spatial, raster or sf object(s)
 #' @param x a \code{data.frame} with a lat and long column, a Raster or a Spatial Object
-#'
-#' @return a \code{SpatialPolygon} bounding box of input points \code{x}
+#' @param sf \code{logical}. If \code{TRUE} object returned is of class sf,
+#' default is \code{FALSE} and returns class SpatialPolygonsounding box of input points \code{x}
 #' @export
-#'
-#' @family HydroData 'utility' function
+#' @author Mike Johnson
 
-getBoundingBox = function(x) {
+getBoundingBox = function(x, sf = FALSE) {
 
   if(checkClass(x, "Spatial")) {
     x = data.frame(t(x@bbox))
@@ -46,6 +43,8 @@ getBoundingBox = function(x) {
 
   bb = sp::Polygon(coords)
   bb = sp::SpatialPolygons(list(Polygons(list(bb), ID = "AOI")), proj4string = AOI::aoiProj)
+
+  if(sf){bb = as_Spatial(bb)}
 
   return(bb)
 }

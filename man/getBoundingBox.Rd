@@ -2,19 +2,19 @@
 % Please edit documentation in R/utility_get_boundingbox.R
 \name{getBoundingBox}
 \alias{getBoundingBox}
-\title{Get Bounding box}
+\title{Get bounding box}
 \usage{
-getBoundingBox(x)
+getBoundingBox(x, sf = FALSE)
 }
 \arguments{
 \item{x}{a \code{data.frame} with a lat and long column, a Raster or a Spatial Object}
-}
-\value{
-a \code{SpatialPolygon} bounding box of input points \code{x}
+
+\item{sf}{\code{logical}. If \code{TRUE} object returned is of class sf,
+default is \code{FALSE} and returns class SpatialPolygonsounding box of input points \code{x}}
 }
 \description{
-A function to define a minimum bounding box for a set of points
+Reeurn a minimum bounding box spatial object for a set or single Spatial, raster or sf object(s)
 }
-\seealso{
-Other HydroData 'utility' function: \code{\link{checkClass}}
+\author{
+Mike Johnson
 }

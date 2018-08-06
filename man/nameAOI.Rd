@@ -2,7 +2,7 @@
 % Please edit documentation in R/nameAOI.R
 \name{nameAOI}
 \alias{nameAOI}
-\title{Provide the plain-english description of an AOi}
+\title{Provide the plain-english description of an AOI}
 \usage{
 nameAOI(state = NULL, county = NULL, clip = NULL, km = FALSE)
 }
@@ -19,13 +19,11 @@ nameAOI(state = NULL, county = NULL, clip = NULL, km = FALSE)
 A character string
 }
 \description{
-This function is a mirror of \code{\link{getAOI}} but instead of returning a \code{SpatilaPolygons} object,
-returns a plain-english description of the AOI. (eg: 'AOI defined as a 10 mile tall by 10 mile wide region centered on (the) UCSB')
+This function is a mirror of \code{\link{getAOI}} but instead of returning a Spatial object,
+returns a plain-english description of the AOI. (eg: 'AOI defined as a 10 mile tall by 10 mile wide region centered on (the) 'UCSB')
 }
 \examples{
-\dontrun{
 nameAOI(state = "CA")
-}
 }
 \seealso{
 \code{\link{nameClip}}

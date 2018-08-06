@@ -2,7 +2,7 @@
 % Please edit documentation in R/nameClip.R
 \name{nameClip}
 \alias{nameClip}
-\title{Provide the plain-english description of a clip unit}
+\title{Provide the plain-english description of a clip region}
 \usage{
 nameClip(clip, km = FALSE)
 }
@@ -12,11 +12,14 @@ nameClip(clip, km = FALSE)
 \item{km}{\code{logical}. If \code{TRUE} distance are in kilometers,  default is \code{FALSE} and with distances in miles}
 }
 \value{
-a string describing the clip list in plain english
+a string describing the clip region in plain english
 }
 \description{
-This function is a mirror of \code{\link{getAOI}} but instead of returning a \code{SpatilaPolygons} object,
-returns a plain-english description of the clip list (eg: 'AOI defined as a 10 mile tall by 10 mile wide region centered on (the) UCSB')
+Return a plain-english description of the clip list
+(eg: 'AOI defined as a 10 mile tall by 10 mile wide region centered on (the) UCSB')
+}
+\examples{
+nameClip(getAOI(clip = list("UCSB", 10, 10)))
 }
 \author{
 Mike Johnson

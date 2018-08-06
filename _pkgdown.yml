@@ -1,0 +1,37 @@
+reference:
+  - title: Core Functionalites
+    desc: >
+      Functions for finding points, AOIs, and bounding regions
+    contents:
+      - '`getAOI`'
+      - '`getBoundingBox`'
+      - '`getPoint`'
+  - title: Tools
+    desc: >
+      Tools for exploring, describing and defining AOIs
+    contents:
+      - '`check`'
+      - '`bbox_st`'
+      - '`describe`'
+      - '`revGeo`'
+  - title: Data and Package Helpers
+    desc: >
+      Data and function that make the package useable
+    contents:
+      - '`counties`'
+      - '`states`'
+      - '`aoiProj`'
+      - '`definePoint`'
+      - '`defineClip`'
+      - '`checkClass`'
+      - '`getClip`'
+      - '`getFiat`'
+      - '`nameAOI`'
+      - '`nameClip`'
+      - '`firstLower`'
+      - '`simpleCap`'
+      - '`%>%`'
+
+
+
+

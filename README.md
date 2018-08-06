@@ -1,30 +1,27 @@
-## AOI <img src="https://github.com/mikejohnson51/AOI/blob/master/docs/logo.png" width=40 align="left" />
-
-<br>
+# AOI: Areas of Interest <img src="man/figures/logo.png" width=130 height = 150 align="right" />
 
 [![Build Status](https://travis-ci.org/mikejohnson51/AOI.svg?branch=master)](https://travis-ci.org/mikejohnson51/AOI) 
-[![Coveralls github](https://img.shields.io/coveralls/github/mikejohnson51/AOI.svg)](https://coveralls.io/github/mikejohnson51/AOI?branch=master) [![DOI](https://zenodo.org/badge/139353238.svg)](https://zenodo.org/badge/latestdoi/139353238)
+[![Coveralls github](https://img.shields.io/coveralls/github/mikejohnson51/AOI.svg)](https://coveralls.io/github/mikejohnson51/AOI?branch=master)
+[![DOI](https://zenodo.org/badge/139353238.svg)](https://zenodo.org/badge/latestdoi/139353238)
 
 
-An area of interest (AOI) is the geographic extent of a project. It helps confine the unit of work to a geographic area, and helps to not only prioritize and define research and subsetting efforts, but to improve reproducibility across studies. This package aims to make finding state, county and geographic AOIs easier, through a common query system based on 'state', 'county' and 'clip' parameters. AOIs for all queries are returned as a `sp::SpatialPolygon`. It is intended to backend spatial subsetting packages/tasks; serve front end applications; or stand alone. Find a documented see of example @ https://mikejohnson51.github.io/AOI/
+Welcome to the AOI R homepage! <br>
 
-## Returned Objects
+If you ever find yourself needing to formalize areas of interest, get bounding geometries, or better understand spatial locations this package should be able to help. 
 
-All returned objects from AOI functions are ``sp::SpatialPolygons`` projected to ```+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0+no_defs')``` / ```EPSG:4269```
+An area of interest (AOI) is a geographic extent. It helps confine - and formalize - a unit of work to a geographic area, and prioritize and define research and sub setting efforts while improving reproducibilty. 
 
-### Examples:
+'AOI` lets users define an regions through a common query to achieve a spatial geometry of that area that can be used in sub setting, clipping, and mapping operations. Tool are also provided to help define, describe, and converts points, boundaries, and features to usable forms.
 
-See a documented set of examples [here](https://mikejohnson51.github.io/AOI/)
+In principle, the AOI package helps accomplish four main tasks increasing in order of simply providing convenience to providing new functionality to the deep R spatial ecosystem. These include helping:
 
-Packages and services currently requiring a spatial AOI include (but are not limited to):
+1. Create bounding geometries of existing `sp`, `sf`, and `raster` objects (see [here](clipAreas.html))
+2. Get `sp`, or `sf`, state and county geometries or their bounding geometries (see [here](stateCounty.html))
+3. Create `sp` or `sf` geometries from a given location and bounding box dimensions. (see [here](clipAreas.html))
+4. Map, describe and communicate AOIs to others. (see [here](tools.html))
+5. Integrate with other spatial packages in the R ecosystem (see [here](useCases.html))
 
-[HydroData^](http://mikejohnson51.github.io/HydroData/) <br>
-[nwm^](https://github.com/mikejohnson51/NWM)<br>
-[FlowlineFinder^](https://github.com/mikejohnson51/FlowlineFinder)<br>
-[FedData](https://cran.r-project.org/web/packages/FedData/index.html)<br>
-[nhdplusTools](https://github.com/dblodgett-usgs/nhdplusTools)<br>
-
- ^using the AOI package
+All functions are designed to be used with the magrittr pipe operation `%>%`.
 
 ### Installation:
 
@@ -32,6 +29,10 @@ Packages and services currently requiring a spatial AOI include (but are not lim
 install.packages("devtools")
 devtools::install_github("mikejohnson51/AOI")
 ```
+
 ### Support:
 
-Package development is supported with funds from the UCAR COMET program; the NOAA National Water Center; and the University of California, Santa Barbara
+The "AOI" R package is written by [Mike Johnson](https://mikejohnson51.github.io), 2018.<br/>
+A graduate Student at the [University of California, Santa Barbara](https://geog.ucsb.edu) in [Keith C. Clarke's](http://www.geog.ucsb.edu/~kclarke/) Lab. <br>
+Package development is supported with funds from the [UCAR COMET program](http://www.comet.ucar.edu); the [NOAA National Water Center](http://water.noaa.gov); and the University of California, Santa Barbara
+

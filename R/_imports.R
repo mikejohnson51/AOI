@@ -6,3 +6,6 @@
 #' @export
 
 NULL
+
+
+pkgdown::build_site()

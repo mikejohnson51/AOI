@@ -1,23 +1,13 @@
-#' Parse a clip list from user input
-#'
+#' @title Parse a clip list from user input
 #' @description \code{defineClip} parses user supplied lists to a format usable by \code{\link{getClip}}
-#'
-#' @seealso \code{\link{getClip}}
-#' @seealso \code{\link{getAOI}}
-#'
 #' @param clip a user supplied list (see \code{\link{getAOI}})
-#' @param km  \code{logical}. If \code{TRUE} distance are in kilometers,  default is \code{FALSE} and with distances in miles
-#'
+#' @param km  \code{logical}. If \code{TRUE} distance are in kilometers,
+#' default is \code{FALSE} with distances in miles
+#' @return a 4-element list of features defining an AOI
+#' @author Mike Johnson
 #' @examples
-#' \dontrun{
 #' defineClip(list("UCSB", 10, 10))
 #' defineClip(list(37,-115, 10, 10))
-#' }
-#'
-#' @return a 4-element list of features defining an AOI including:
-#' @author Mike Johnson
-#' @export
-
 
 defineClip = function(clip = NULL, km = FALSE) {
   #------------------------------------------------------------------------------#

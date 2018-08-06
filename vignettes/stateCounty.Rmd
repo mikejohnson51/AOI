@@ -1,0 +1,118 @@
+---
+title: "State and County AOIs"
+author: "jmj00@ucsb.edu"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{pkgdown}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width=6, 
+  fig.height=4
+)
+options(scipen = 9999)
+```
+
+```{r echo = FALSE, results='hide', warning= FALSE,message=FALSE}
+devtools::load_all()
+library(leaflet)
+library(sp)
+
+col  = '#1c26a9'
+col1 = '#212f3f'
+icon.r <- makeAwesomeIcon(icon = 'home', iconColor = col1, markerColor = 'gray')
+icon.b <- makeAwesomeIcon(icon = 'home', iconColor = col,  markerColor = 'gray')
+```
+
+Three main parameters are used to define all queries:  *state*, *county*, and *clip*. This page illustrates how the state and county parameters can be used define -- and refine -- a query, while the  [Clip Areas](clipAreas.html) page describes the clip parameter.
+
+# Defining an AOI by **state**  
+
+An AOI can be defined by a **state** name or abbreviation:
+
+```{r, message = FALSE}
+CA = getAOI(state = 'CA')
+```
+
+```{r, echo = FALSE}
+leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 5, maxZoom = 5)) %>% addProviderTiles(providers$CartoDB.Positron) %>% addPolygons(data = CA,fillColor = col, color = col1, weight = 2)
+```
+
+<br>
+<br>
+A query can also be defined using multiple **states** provided as a vector:
+
+```{r, message = FALSE}
+WestCoast = getAOI(state = c("Oregon", "Washington", "CA"))
+```
+
+```{r, echo = FALSE}
+leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 4, maxZoom = 4)) %>% addProviderTiles(providers$CartoDB.Positron) %>% addPolygons(data = WestCoast,fillColor = col, color = col1, weight = 1)
+```
+
+<br>
+
+If you want to get the boundaries of a state with the county features intact, simply call getAOI and set `county = 'all'`
+
+```{r, message = FALSE}
+AL = getAOI(state = "AL", county = 'all')
+```
+
+```{r, echo = FALSE}
+leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 6, maxZoom = 4)) %>% addProviderTiles(providers$CartoDB.Positron) %>% addPolygons(data = AL,fillColor = col, color = col1, weight = 1)
+```
+
+# Defining a **county** AOI 
+
+Defining an AOI by **county** requires a **state** as well:
+
+```{r, message = FALSE}
+EP = getAOI(state = "CO", county = "El Paso")
+```
+
+```{r, echo = FALSE}
+leaflet() %>% addProviderTiles(providers$CartoDB.Positron) %>% addPolygons(data = EP,fillColor = col, color = col1, weight = 4)
+```
+
+<br>
+<br>
+Multiple counties can be queried if provided as a vector:
+
+```{r, message = F}
+centralCoast = getAOI(state ="CA", county = c("Santa Barbara", "San Luis Obispo", "Ventura"))
+```
+
+```{r, echo = FALSE}
+leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 7, maxZoom = 7)) %>% addProviderTiles(providers$CartoDB.Positron) %>% addPolygons(data = centralCoast,fillColor = col, color = col1, weight = 2)
+```
+
+<br>
+<br>
+Cross-state pairs can be called as well if provided as a vector:
+
+```{r, message = F}
+twoCounty = getAOI(state =c("CA", "CO"), county = c("Santa Barbara", "El Paso"))
+```
+
+```{r, echo = FALSE}
+leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 5, maxZoom = 5)) %>% addProviderTiles(providers$CartoDB.Positron) %>% addPolygons(data = twoCounty, fillColor = col, color = col1, weight = 2)
+```
+<br>
+
+#Additional Calls
+
+###Bounding Box of States / Counties
+
+```{r, messages = FALSE}
+AOI = getAOI(state = "WI", bb = TRUE) %>% check()
+```
+
+```{r, echo = F}
+AOI$map
+```
+

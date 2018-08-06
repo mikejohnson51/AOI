@@ -2,7 +2,7 @@
 % Please edit documentation in R/getFiat.R
 \name{getFiat}
 \alias{getFiat}
-\title{Get County and State SpatialPolygon(s)}
+\title{Get State of County Spatial Boundary}
 \usage{
 getFiat(state = NULL, county = NULL, bb = FALSE)
 }
@@ -17,7 +17,7 @@ getFiat(state = NULL, county = NULL, bb = FALSE)
 a \code{SpatialPolygons} object projected to \emph{EPSG:4269}.
 }
 \description{
-Get County and State SpatialPolygon(s)
+Get State of County Spatial Boundary
 }
 \details{
 \code{getFiat} returns a \code{SpatialPolygons} object for a defiend state and/or county.

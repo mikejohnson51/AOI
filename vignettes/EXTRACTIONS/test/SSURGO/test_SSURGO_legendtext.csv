@@ -1,0 +1,32 @@
+recdate,legendtextkind,textcat,textsubcat,text,lkey,legtextkey
+08/08/2016 00:00:00,Correlation notes,amendment,FY 2016,"FY 2016 Amendment to the Classification and Correlation of the Soils of Boulder County Area, Colorado, August 2016
+U.S. Department of Agriculture, Natural Resources Conservation Service, Central Great Plains MLRA Regional Office Salina, Kansas 
+______________________________ Clint Evans	    	State Conservationist	  Date:_____________
+______________________________ Chad Remley  	    SSR5 Director             Date:______________
+
+The U.S. Department of Agriculture (USDA) prohibits discrimination against its customers, employees and applicants for employment on the bases of race, color, national origin, age, disability, sex, gender identity, religion, reprisal, and where applicable, political beliefs, marital status, familial or parental status, sexual orientation, or all or part of an individuals income is derived from any public assistance program, or protected genetic information in employment or in any program or activity conducted or funded by the Department.  (Not all prohibited bases apply to all programs and/or employment activities.) 
+
+FY 2016 Amendment to Classification and Correlation of the Soils of Boulder County Area, Colorado, (CO643)
+Introduction
+This amendment was prepared during September 2016 in Salina, Kansas by Paul Rindfleisch, Soil Data Quality Specialist, Central Great Plains MLRA Regional Office.  This correlation updates the soil survey legend of the Boulder County Area, Colorado, Soil Survey, issued January 1975.
+
+As a result of the Soil Data Join Re-correlation (SDJR) initiative, the following mapunits have been changed as indicated
+
+Nunn clay loam, 1 to 3 percent slopes (NuB) (jpsd) was changed to Nunn clay loam, 1 to 3 percent slopes (NuB) (2tlpl)
+Nunn clay loam, 2 to 5 percent slopes (NuC) (jpsf) was changed to Nunn clay loam, 3 to 5 percent slopes (NuC) (2tlpm)
+Nunn clay loam, 5 to 9 percent slopes (NuD) (jpsg) was changed to Nunn clay loam, 5 to 9 percent slopes (NuD) (2tlpn)
+Weld loam, 1 to 3 percent slopes (WlB) (jpt4) was changed to Weld loam, 1 to 3 percent slopes (WlB) (2x0hw)",14376,59048
+06/21/2017 00:00:00,Correlation notes,amendment,FY 2017 Amendment,"FY 2017 Amendment to the Classification and Correlation of the Soils of Boulder County Area, Colorado, August 2017
+U.S. Department of Agriculture, Natural Resources Conservation Service, Central Great Plains MLRA Regional Office Salina, Kansas 
+______________________________ Clint Evans	    	State Conservationist	  Date:_____________
+______________________________ Chad Remley  	    SSR5 Director             Date:______________
+
+FY 2017 Amendment to Classification and Correlation of the Soils of Boulder County Area, Colorado, (CO643)
+Introduction
+This amendment was prepared during September 2017 in Denver, Colorado by Paul Rindfleisch, Soil Data Quality Specialist, Central Great Plains MLRA Regional Office.  This correlation updates the soil survey legend of the Boulder County Area, Colorado, Soil Survey, issued January 1975.
+
+As a result of the Soil Data Join Re-correlation (SDJR) initiative, the following mapunits have been changed as indicated
+
+Project_ID	User_Proj_ID	Area_Name						Area_Sym	Old_Sym	Old_Nat_Sym	Old_MUname							Old_DMUID				Corr_Sym	Corr_Nat_Sym	Corr_MUname							Corr_Status	New_DMIUD	Map_Unit_acres
+  158340	FY17FTMRND1-013	Boulder County Area, Colorado	  CO643			WlA		jpt3	Weld loam, 0 to 1 percent slopes	  326446	changed to	  WlA			2x0hy		Weld loam, 0 to 1 percent slopes	 correlated	  783728		500
+",14376,59049

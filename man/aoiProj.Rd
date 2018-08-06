@@ -9,7 +9,7 @@
 aoiProj
 }
 \description{
-The projection used for all AOI calls \emph{EPSG:4269}
+The projection used for all AOI calls: \emph{EPSG:4269}
 }
 \author{
 Mike Johnson

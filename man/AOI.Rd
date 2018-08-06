@@ -7,8 +7,6 @@
 \title{AOI}
 \description{
 \code{AOI} package
-}
-\details{
 The area of interest (AOI) is the geographic extent. It helps confin the unit of work to a geographic area,
 tproritize and define research and subsetting efforts, and to improve reproducabilty across studies.
 This package aims to make finding fiat and geographic AOIs easier,

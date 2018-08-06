@@ -1,3 +1,26 @@
+#' @title Describe an AOI
+#' @description Convert an AOI object to a data.frame of describing factors. Can be usefull for sharing,
+#' documenting and repaeating AOI calls.
+#' @param AOI an AOI obtained using \link{getAOI}.
+#' @return a data.frame of AOI descriptors including
+#' \describe{
+#'   \item{latCent}{the AOI center latitude}
+#'   \item{lngCent}{the AOI center longitude}
+#'   \item{height}{ height in (miles)}
+#'   \item{width}{width in(miles)}
+#'   \item{origin}{AOI origin}
+#'   \item{name}{Most descriptive geocoded name from \code{revGeo}}
+#' }
+#' @export
+#' @author Mike Johnson
+#' @examples
+#' #Get an AOI
+#' AOI = getAOI(clip = list("UCSB", 10, 10))
+#' describe(AOI)
+#'
+#' # Chain to AOI calls:
+#' AOI = getAOI(clip = list("UCSB", 10, 10)) %>% describe()
+
 describe = function(AOI){
 
   latCent = mean(AOI@bbox[2,])
@@ -23,7 +46,7 @@ describe = function(AOI){
     cat(paste(df[i], ext))
   }
 
-  return(AOI)
+  return(df)
 
 }
 

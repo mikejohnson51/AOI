@@ -1,17 +1,9 @@
-#' Camel Case (Simple Capitalization)
-#'
+#' @title Camel Case (Simple Capitalization)
 #' @description  \code{simpleCap} capitilizes all words in a given text string
-#'
-#' @param x a text \code{character} string
-#'
-#' @examples
-#' \dontrun{
-#' simpleCap("santa barbara")
-#' }
-#'
-#' @export
+#' @param x a string
 #' @author Mike Johnson
-
+#' @examples
+#' simpleCap("santa barbara")
 
 simpleCap <- function(x) {
 

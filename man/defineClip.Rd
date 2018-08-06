@@ -9,25 +9,18 @@ defineClip(clip = NULL, km = FALSE)
 \arguments{
 \item{clip}{a user supplied list (see \code{\link{getAOI}})}
 
-\item{km}{\code{logical}. If \code{TRUE} distance are in kilometers,  default is \code{FALSE} and with distances in miles}
+\item{km}{\code{logical}. If \code{TRUE} distance are in kilometers,
+default is \code{FALSE} with distances in miles}
 }
 \value{
-a 4-element list of features defining an AOI including:
+a 4-element list of features defining an AOI
 }
 \description{
 \code{defineClip} parses user supplied lists to a format usable by \code{\link{getClip}}
 }
 \examples{
-\dontrun{
 defineClip(list("UCSB", 10, 10))
 defineClip(list(37,-115, 10, 10))
-}
-
-}
-\seealso{
-\code{\link{getClip}}
-
-\code{\link{getAOI}}
 }
 \author{
 Mike Johnson

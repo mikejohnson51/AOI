@@ -2,33 +2,32 @@
 % Please edit documentation in R/check.R
 \name{check}
 \alias{check}
-\title{Check AOI extents}
+\title{Map AOI extents}
 \usage{
 check(AOI = NULL)
 }
 \arguments{
-\item{AOI}{an AOI obtained from \link{getAOI}. Can be left \code{NULL}}
+\item{AOI}{an AOI obtained using \link{getAOI}. Can be left \code{NULL}}
 }
 \value{
 a \code{leaflet} map object
 }
 \description{
 Generate an interactive \code{leaflet} map for defining, checking, and refining AOI queries. Can be chained to \link{getAOI} via
-%>%. Useful \code{leaflet} tools allow for the marking of points, measuring of distances, and interactive panning and zooming to help define
+`%>%`. Useful \code{leaflet} tools allow for the marking of points, measuring of distances, and interactive panning and zooming to help define
 an approapriate AOI
 }
 \examples{
-\dontrun{
 # Generate an empty map:
 check()
 
-# Check a defined AOI
+# Check a defined AOI:
 AOI = getAOI(clip = list("UCSB", 10, 10))
 check(AOI)
 
 # Chain to AOI calls:
 getAOI(clip = list("UCSB", 10, 10)) \%>\% check()
-}
+
 }
 \author{
 Mike Johnson

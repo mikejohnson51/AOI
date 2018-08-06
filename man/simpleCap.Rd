@@ -7,16 +7,13 @@
 simpleCap(x)
 }
 \arguments{
-\item{x}{a text \code{character} string}
+\item{x}{a string}
 }
 \description{
 \code{simpleCap} capitilizes all words in a given text string
 }
 \examples{
-\dontrun{
 simpleCap("santa barbara")
-}
-
 }
 \author{
 Mike Johnson

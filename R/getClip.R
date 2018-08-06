@@ -1,11 +1,6 @@
-#' Get a bouding box for a location
-#'
+#' @title Get a bouding box for and AOI
 #' @description
-#' \code{getClip} generates a \code{SpatialPolygon} based on bounding box dimisions its relation to a point.
-#'  All HydroData outputs are projected to \emph{EPSG:4269}.
-#'  Locations given by a character string are geocoded via the \code{dismo} package to get a lat, long pair. All bounding boxes defined by a width an a height.
-#'  The point from chich these are drawn ins defined by a given location and origin.
-#'
+#' \code{getClip} generates a Spatial object based on a point; bounding box dimisions; and their relation to the point.
 #' @param location Defined by a location or lat, long pair
 #' @param height   define the height of the desired bounding box in miles
 #' @param width    define the width of the desired bounding box in miles
@@ -16,28 +11,16 @@
 #'    \item{"upperright"}
 #'     \item{"upperleft"}
 #'   }
-#'
+
 #' @return a \code{SpatialPolygons} object projected to \emph{EPSG:4269}.
 #' @export
-#' @seealso \itemize{
-#'          \item \code{\link{getClip}}
-#'          }
-#'
+#' @author Mike Johnson
 #' @examples
-
-#' \dontrun{
-#'
-#'
 #' # Get AOI defined by 10 mile bounding box using "UCSB" as the point
 #'     getClip(location = "UCSB", width = 10, height = 10, origin = "center")
 #'
 #' # Get AOI defined by 10 mile2 bounding box using the 'KMART near UCSB' as lower left corner
 #'     getClip(clocation = NULL, width = NULL, height = NULL, origin = NULL)
-#'}
-#'
-#' @author
-#' Mike Johnson
-
 
 getClip = function(location = NULL, width = NULL, height = NULL, origin = NULL){
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/getAOI.R
 \name{getAOI}
 \alias{getAOI}
-\title{Get Area of interest (AOI) boundary}
+\title{Get area of interest (AOI) boundary}
 \usage{
 getAOI(state = NULL, county = NULL, clip = NULL, sf = FALSE,
   km = FALSE, bb = FALSE)
@@ -21,16 +21,16 @@ getAOI(state = NULL, county = NULL, clip = NULL, sf = FALSE,
 \item{bb}{\code{logical}. If \code{TRUE} then the bounding geometry of state/county is returned,  default is \code{FALSE} and returns fiat geometries}
 }
 \value{
-a \code{SpatialPolygons} object projected to \emph{EPSG:4269}.
+a Spatial* object projected to \emph{EPSG:4269}.
 }
 \description{
-Get a \code{SpatialPolygons} representation of an AOI defined by:
+Get a Spatial* representation of an AOI defined by:
 \enumerate{
              \item  a US state name(s)
              \item  a US state, county pair(s)
-             \item  a clipping unit
+             \item  a user Spatial, sf or raster object or
+             \item  a clipping unit (see details)
              }
-
 \code{getAOI} wraps \code{\link{getFiat}} and \code{\link{getClip}} into a single function.
 }
 \details{
@@ -74,7 +74,6 @@ Acceptable variations include:
                                     }
 }
 \examples{
-\dontrun{
 # Get AOI defined by a state(s)
     getAOI(state = 'CA')
     getAOI(state = c('CA', 'nevada'))
@@ -93,13 +92,10 @@ Acceptable variations include:
 # Get AOI defined by 10 mile2 bounding box using the 'KMART near UCSB' as lower left corner
     getAOI(clip = list('KMART near UCSB', 10, 10, 'lowerleft'))
 }
-
-}
 \seealso{
-\itemize{
-         \item \code{\link{getClip}}
-         \item \code{\link{getFiat}}
-         }
+\code{\link{getClip}}
+
+\code{\link{getFiat}}
 }
 \author{
 Mike Johnson

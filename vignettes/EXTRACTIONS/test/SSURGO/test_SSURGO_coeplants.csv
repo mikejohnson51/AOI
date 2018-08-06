@@ -1,0 +1,502 @@
+plantsym,plantsciname,plantcomname,forestunprod,rangeprod,cokey,coeplantskey
+AGSM,Agropyron smithii,western wheatgrass,NA,NA,14877251,64101204
+ANHA,Andropogon hallii,sand bluestem,NA,5,14877251,64101239
+BOCU,Bouteloua curtipendula,sideoats grama,NA,15,14877251,64101330
+BOGR2,Bouteloua gracilis,blue grama,NA,NA,14877251,64101368
+CALO,Calamovilfa longifolia,prairie sandreed,NA,20,14877251,64101470
+HECOC8,Hesperostipa comata ssp. comata,needleandthread,NA,15,14877251,64101536
+SCSC,Schizachyrium scoparium,little bluestem,NA,15,14877251,64101821
+SPCR,Sporobolus cryptandrus,sand dropseed,NA,NA,14877251,64101873
+ANHA,Andropogon hallii,sand bluestem,NA,5,14877252,64101240
+ARFI2,Artemisia filifolia,sand sagebrush,NA,3,14877252,64101257
+BOCU,Bouteloua curtipendula,sideoats grama,NA,10,14877252,64101331
+BOGR2,Bouteloua gracilis,blue grama,NA,25,14877252,64101369
+CALO,Calamovilfa longifolia,prairie sandreed,NA,25,14877252,64101471
+HECOC8,Hesperostipa comata ssp. comata,needleandthread,NA,5,14877252,64101537
+PAVI2,Panicum virgatum,switchgrass,NA,5,14877252,64101760
+SCSC,Schizachyrium scoparium,little bluestem,NA,10,14877252,64101822
+SPCR,Sporobolus cryptandrus,sand dropseed,NA,3,14877252,64101874
+ANHA,Andropogon hallii,sand bluestem,NA,10,14877253,64101241
+BOCU,Bouteloua curtipendula,sideoats grama,NA,10,14877253,64101332
+BOGR2,Bouteloua gracilis,blue grama,NA,25,14877253,64101370
+CALO,Calamovilfa longifolia,prairie sandreed,NA,25,14877253,64101472
+HECOC8,Hesperostipa comata ssp. comata,needleandthread,NA,10,14877253,64101527
+PASM,Pascopyrum smithii,western wheatgrass,NA,5,14877253,64101712
+SPCR,Sporobolus cryptandrus,sand dropseed,NA,5,14877253,64101875
+2FP,,other perennial forbs,NA,10,14877257,64101171
+2GP,,other perennial grasses,NA,85,14877257,64101182
+2SD,,other  shrubs,NA,5,14877257,64101202
+ANGE,Andropogon gerardii,big bluestem,NA,15,14877038,64101206
+ANHA,Andropogon hallii,sand bluestem,NA,15,14877038,64101231
+ARFI2,Artemisia filifolia,sand sagebrush,NA,1,14877038,64101248
+BOCU,Bouteloua curtipendula,sideoats grama,NA,2,14877038,64101314
+BOGR2,Bouteloua gracilis,blue grama,NA,15,14877038,64101345
+CALO,Calamovilfa longifolia,prairie sandreed,NA,20,14877038,64101462
+HECOC8,Hesperostipa comata ssp. comata,needleandthread,NA,5,14877038,64101521
+PRPUB,Prunus pumila var. besseyi,western sandcherry,NA,10,14877038,64101785
+SCSC,Schizachyrium scoparium,little bluestem,NA,10,14877038,64101807
+ANGE,Andropogon gerardii,big bluestem,NA,15,14877046,64101209
+ANHA,Andropogon hallii,sand bluestem,NA,15,14877046,64101234
+ARFI2,Artemisia filifolia,sand sagebrush,NA,1,14877046,64101251
+BOCU,Bouteloua curtipendula,sideoats grama,NA,2,14877046,64101317
+BOGR2,Bouteloua gracilis,blue grama,NA,15,14877046,64101348
+CALO,Calamovilfa longifolia,prairie sandreed,NA,20,14877046,64101465
+HECOC8,Hesperostipa comata ssp. comata,needleandthread,NA,5,14877046,64101524
+PRPUB,Prunus pumila var. besseyi,western sandcherry,NA,10,14877046,64101788
+SCSC,Schizachyrium scoparium,little bluestem,NA,10,14877046,64101810
+ANGE,Andropogon gerardii,big bluestem,NA,15,14877047,64101210
+ANHA,Andropogon hallii,sand bluestem,NA,15,14877047,64101235
+ARFI2,Artemisia filifolia,sand sagebrush,NA,1,14877047,64101252
+BOCU,Bouteloua curtipendula,sideoats grama,NA,2,14877047,64101318
+BOGR2,Bouteloua gracilis,blue grama,NA,15,14877047,64101349
+CALO,Calamovilfa longifolia,prairie sandreed,NA,20,14877047,64101466
+HECOC8,Hesperostipa comata ssp. comata,needleandthread,NA,5,14877047,64101525
+PRPUB,Prunus pumila var. besseyi,western sandcherry,NA,10,14877047,64101789
+SCSC,Schizachyrium scoparium,little bluestem,NA,10,14877047,64101811
+ANGE,Andropogon gerardii,big bluestem,NA,15,14877050,64101211
+ANHA,Andropogon hallii,sand bluestem,NA,15,14877050,64101236
+ARFI2,Artemisia filifolia,sand sagebrush,NA,1,14877050,64101253
+BOCU,Bouteloua curtipendula,sideoats grama,NA,2,14877050,64101319
+BOGR2,Bouteloua gracilis,blue grama,NA,15,14877050,64101350
+CALO,Calamovilfa longifolia,prairie sandreed,NA,20,14877050,64101467
+HECOC8,Hesperostipa comata ssp. comata,needleandthread,NA,5,14877050,64101526
+PRPUB,Prunus pumila var. besseyi,western sandcherry,NA,10,14877050,64101790
+SCSC,Schizachyrium scoparium,little bluestem,NA,10,14877050,64101812
+ANGE,Andropogon gerardii,big bluestem,NA,15,14877051,64101225
+ANHA,Andropogon hallii,sand bluestem,NA,15,14877051,64101242
+ARFI2,Artemisia filifolia,sand sagebrush,NA,1,14877051,64101254
+BOCU,Bouteloua curtipendula,sideoats grama,NA,2,14877051,64101339
+BOGR2,Bouteloua gracilis,blue grama,NA,15,14877051,64101415
+CALO,Calamovilfa longifolia,prairie sandreed,NA,20,14877051,64101473
+HECOC8,Hesperostipa comata ssp. comata,needleandthread,NA,5,14877051,64101544
+PRPUB,Prunus pumila var. besseyi,western sandcherry,NA,10,14877051,64101793
+SCSC,Schizachyrium scoparium,little bluestem,NA,10,14877051,64101835
+ANGE,Andropogon gerardii,big bluestem,NA,15,14877055,64101226
+ANHA,Andropogon hallii,sand bluestem,NA,15,14877055,64101243
+ARFI2,Artemisia filifolia,sand sagebrush,NA,1,14877055,64101255
+BOCU,Bouteloua curtipendula,sideoats grama,NA,2,14877055,64101340
+BOGR2,Bouteloua gracilis,blue grama,NA,15,14877055,64101416
+CALO,Calamovilfa longifolia,prairie sandreed,NA,20,14877055,64101474
+HECOC8,Hesperostipa comata ssp. comata,needleandthread,NA,5,14877055,64101545
+PRPUB,Prunus pumila var. besseyi,western sandcherry,NA,10,14877055,64101794
+SCSC,Schizachyrium scoparium,little bluestem,NA,10,14877055,64101836
+ANGE,Andropogon gerardii,big bluestem,NA,15,14877056,64101227
+ANHA,Andropogon hallii,sand bluestem,NA,15,14877056,64101244
+ARFI2,Artemisia filifolia,sand sagebrush,NA,1,14877056,64101256
+BOCU,Bouteloua curtipendula,sideoats grama,NA,2,14877056,64101341
+BOGR2,Bouteloua gracilis,blue grama,NA,15,14877056,64101417
+CALO,Calamovilfa longifolia,prairie sandreed,NA,20,14877056,64101475
+HECOC8,Hesperostipa comata ssp. comata,needleandthread,NA,5,14877056,64101546
+PRPUB,Prunus pumila var. besseyi,western sandcherry,NA,10,14877056,64101795
+SCSC,Schizachyrium scoparium,little bluestem,NA,10,14877056,64101837
+ANGE,Andropogon gerardii,big bluestem,NA,20,14877060,64101228
+BOCU,Bouteloua curtipendula,sideoats grama,NA,5,14877060,64101342
+BOGR2,Bouteloua gracilis,blue grama,NA,3,14877060,64101418
+CERCO,Cercocarpus,mountain mahogany,NA,5,14877060,64101492
+ELLAA,Elymus lanceolatus ssp. albicans,Griffith wheatgrass,NA,10,14877060,64101508
+HECOC8,Hesperostipa comata ssp. comata,needleandthread,NA,2,14877060,64101547
+JUSC2,Juniperus scopulorum,Rocky Mountain juniper,NA,5,14877060,64101559
+PAVI2,Panicum virgatum,switchgrass,NA,10,14877060,64101749
+PIED,Pinus edulis,twoneedle pinyon,NA,5,14877060,64101767
+PIPO,Pinus ponderosa,ponderosa pine,NA,5,14877060,64101770
+SCSC,Schizachyrium scoparium,little bluestem,NA,10,14877060,64101838
+SONU2,Sorghastrum nutans,yellow Indiangrass,NA,10,14877060,64101842
+2GP,,other perennial grasses,NA,5,14877065,64101174
+2SD,,other  shrubs,NA,5,14877065,64101191
+ANHA,Andropogon hallii,sand bluestem,NA,20,14877065,64101245
+BOGR2,Bouteloua gracilis,blue grama,NA,5,14877065,64101419
+CAINH2,Carex inops ssp. heliophila,sun sedge,NA,2,14877065,64101447
+CALO,Calamovilfa longifolia,prairie sandreed,NA,15,14877065,64101476
+PASM,Pascopyrum smithii,western wheatgrass,NA,5,14877065,64101683
+PAVI2,Panicum virgatum,switchgrass,NA,15,14877065,64101750
+PRPUB,Prunus pumila var. besseyi,western sandcherry,NA,5,14877065,64101796
+SONU2,Sorghastrum nutans,yellow Indiangrass,NA,15,14877065,64101843
+2GP,,other perennial grasses,NA,5,14877068,64101175
+2SD,,other  shrubs,NA,5,14877068,64101192
+ANHA,Andropogon hallii,sand bluestem,NA,20,14877068,64101246
+BOGR2,Bouteloua gracilis,blue grama,NA,5,14877068,64101420
+CAINH2,Carex inops ssp. heliophila,sun sedge,NA,2,14877068,64101448
+CALO,Calamovilfa longifolia,prairie sandreed,NA,15,14877068,64101477
+PASM,Pascopyrum smithii,western wheatgrass,NA,5,14877068,64101684
+PAVI2,Panicum virgatum,switchgrass,NA,15,14877068,64101751
+PRPUB,Prunus pumila var. besseyi,western sandcherry,NA,5,14877068,64101797
+SONU2,Sorghastrum nutans,yellow Indiangrass,NA,15,14877068,64101844
+ATCA2,Atriplex canescens,fourwing saltbush,NA,5,14877075,64101269
+BOGR2,Bouteloua gracilis,blue grama,NA,20,14877075,64101410
+CAINH2,Carex inops ssp. heliophila,sun sedge,NA,5,14877075,64101450
+HECOC8,Hesperostipa comata ssp. comata,needleandthread,NA,2,14877075,64101549
+KRASC,Krascheninnikovia,winterfat,NA,5,14877075,64101573
+NAVI4,Nassella viridula,green needlegrass,NA,20,14877075,64101626
+PASM,Pascopyrum smithii,western wheatgrass,NA,35,14877075,64101686
+ATCA2,Atriplex canescens,fourwing saltbush,NA,10,14877086,64101272
+BOGR2,Bouteloua gracilis,blue grama,NA,20,14877086,64101413
+CAINH2,Carex inops ssp. heliophila,sun sedge,NA,5,14877086,64101456
+HECOC8,Hesperostipa comata ssp. comata,needleandthread,NA,2,14877086,64101540
+KRASC,Krascheninnikovia,winterfat,NA,5,14877086,64101576
+NAVI4,Nassella viridula,green needlegrass,NA,15,14877086,64101629
+PASM,Pascopyrum smithii,western wheatgrass,NA,35,14877086,64101743
+ATCA2,Atriplex canescens,fourwing saltbush,NA,5,14877087,64101273
+BOCU,Bouteloua curtipendula,sideoats grama,NA,10,14877087,64101343
+BOGR2,Bouteloua gracilis,blue grama,NA,15,14877087,64101414
+BUDA,Buchloe dactyloides,buffalograss,NA,5,14877087,64101421
+KRASC,Krascheninnikovia,winterfat,NA,5,14877087,64101577
+NAVI4,Nassella viridula,green needlegrass,NA,20,14877087,64101630
+PASM,Pascopyrum smithii,western wheatgrass,NA,30,14877087,64101744
+SPAI,Sporobolus airoides,alkali sacaton,NA,5,14877087,64101855
+2FP,,other perennial forbs,5,NA,14877095,64101164
+2GP,,other perennial grasses,5,NA,14877095,64101176
+2SD,,other  shrubs,5,NA,14877095,64101193
+AMUT,Amelanchier utahensis,Utah serviceberry,5,NA,14877095,64101205
+ARUV,Arctostaphylos uva-ursi,kinnikinnick,20,NA,14877095,64101265
+BLTR,Blepharoneuron tricholepis,pine dropseed,10,NA,14877095,64101311
+CEMO2,Cercocarpus montanus,true mountain mahogany,10,NA,14877095,64101487
+FEID,Festuca idahoensis,Idaho fescue,10,NA,14877095,64101520
+JUCO6,Juniperus communis,common juniper,10,NA,14877095,64101552
+MUMO,Muhlenbergia montana,mountain muhly,10,NA,14877095,64101615
+QUGA,Quercus gambelii,Gambel oak,5,NA,14877095,64101801
+SYOR2,Symphoricarpos oreophilus,mountain snowberry,5,NA,14877095,64101890
+2FP,,other perennial forbs,5,NA,14877096,64101165
+2SD,,other  shrubs,10,NA,14877096,64101194
+BLTR,Blepharoneuron tricholepis,pine dropseed,10,NA,14877096,64101312
+CAREX,Carex,sedge,10,NA,14877096,64101483
+FEAR2,Festuca arizonica,Arizona fescue,15,NA,14877096,64101514
+JUCO6,Juniperus communis,common juniper,5,NA,14877096,64101553
+MUMO,Muhlenbergia montana,mountain muhly,25,NA,14877096,64101616
+PAMY,Paxistima myrsinites,boxleaf myrtle,5,NA,14877096,64101682
+SHCA,Shepherdia canadensis,russet buffaloberry,5,NA,14877096,64101841
+2FP,,other perennial forbs,NA,5,14877110,64101166
+2GP,,other perennial grasses,NA,5,14877110,64101177
+2SD,,other  shrubs,NA,5,14877110,64101195
+CEMO2,Cercocarpus montanus,true mountain mahogany,NA,10,14877110,64101488
+DAPA2,Danthonia parryi,Parry's Oatgrass,NA,20,14877110,64101494
+FEAR2,Festuca arizonica,Arizona fescue,NA,20,14877110,64101515
+JUCO6,Juniperus communis,common juniper,NA,2,14877110,64101554
+LEKI2,Leucopoa kingii,spike fescue,NA,3,14877110,64101612
+MUMO,Muhlenbergia montana,mountain muhly,NA,20,14877110,64101617
+PASM,Pascopyrum smithii,western wheatgrass,NA,10,14877110,64101747
+ATCA2,Atriplex canescens,fourwing saltbush,NA,5,14877114,64101307
+BOGR2,Bouteloua gracilis,blue grama,NA,20,14877114,64101405
+KRASC,Krascheninnikovia,winterfat,NA,5,14877114,64101601
+NAVI4,Nassella viridula,green needlegrass,NA,20,14877114,64101676
+PASM,Pascopyrum smithii,western wheatgrass,NA,35,14877114,64101748
+POSE,Poa secunda,Sandberg bluegrass,NA,5,14877114,64101779
+SCSC,Schizachyrium scoparium,little bluestem,NA,2,14877114,64101839
+ATCA2,Atriplex canescens,fourwing saltbush,NA,5,14877117,64101308
+BOGR2,Bouteloua gracilis,blue grama,NA,20,14877117,64101406
+KRASC,Krascheninnikovia,winterfat,NA,5,14877117,64101602
+NAVI4,Nassella viridula,green needlegrass,NA,20,14877117,64101677
+PASM,Pascopyrum smithii,western wheatgrass,NA,35,14877117,64101737
+POSE,Poa secunda,Sandberg bluegrass,NA,5,14877117,64101780
+SCSC,Schizachyrium scoparium,little bluestem,NA,2,14877117,64101840
+ATCA2,Atriplex canescens,fourwing saltbush,NA,5,14877121,64101309
+BOGR2,Bouteloua gracilis,blue grama,NA,20,14877121,64101407
+KRASC,Krascheninnikovia,winterfat,NA,5,14877121,64101603
+NAVI4,Nassella viridula,green needlegrass,NA,20,14877121,64101678
+PASM,Pascopyrum smithii,western wheatgrass,NA,35,14877121,64101738
+POSE,Poa secunda,Sandberg bluegrass,NA,5,14877121,64101781
+SCSC,Schizachyrium scoparium,little bluestem,NA,2,14877121,64101829
+ATCA2,Atriplex canescens,fourwing saltbush,NA,5,14877125,64101310
+BOGR2,Bouteloua gracilis,blue grama,NA,20,14877125,64101408
+KRASC,Krascheninnikovia,winterfat,NA,5,14877125,64101604
+NAVI4,Nassella viridula,green needlegrass,NA,20,14877125,64101679
+PASM,Pascopyrum smithii,western wheatgrass,NA,35,14877125,64101739
+POSE,Poa secunda,Sandberg bluegrass,NA,5,14877125,64101782
+SCSC,Schizachyrium scoparium,little bluestem,NA,2,14877125,64101830
+ARUV,Arctostaphylos uva-ursi,kinnikinnick,10,NA,14877129,64101266
+CAGE2,Carex geyeri,elk sedge,5,NA,14877129,64101445
+CEMO2,Cercocarpus montanus,true mountain mahogany,5,NA,14877129,64101489
+FEAR2,Festuca arizonica,Arizona fescue,15,NA,14877129,64101516
+JUCO6,Juniperus communis,common juniper,10,NA,14877129,64101555
+MUMO,Muhlenbergia montana,mountain muhly,15,NA,14877129,64101618
+POA,Poa,bluegrass,5,NA,14877129,64101775
+QUGA,Quercus gambelii,Gambel oak,20,NA,14877129,64101802
+ATCA2,Atriplex canescens,fourwing saltbush,NA,5,14877134,64101299
+BOCU,Bouteloua curtipendula,sideoats grama,NA,15,14877134,64101334
+BOGR2,Bouteloua gracilis,blue grama,NA,20,14877134,64101397
+ERNAN5,Ericameria nauseosa ssp. nauseosa var. nauseosa,rubber rabbitbrush,NA,1,14877134,64101511
+KOMA,Koeleria macrantha,prairie Junegrass,NA,1,14877134,64101565
+KRASC,Krascheninnikovia,winterfat,NA,5,14877134,64101593
+NAVI4,Nassella viridula,green needlegrass,NA,15,14877134,64101668
+PASM,Pascopyrum smithii,western wheatgrass,NA,25,14877134,64101740
+SCSC,Schizachyrium scoparium,little bluestem,NA,5,14877134,64101831
+2GP,,other perennial grasses,NA,2,14877143,64101178
+2SD,,other  shrubs,NA,2,14877143,64101196
+ANGE,Andropogon gerardii,big bluestem,NA,2,14877143,64101229
+CANE2,Carex nebrascensis,Nebraska sedge,NA,5,14877143,64101479
+DISP,Distichlis spicata,inland saltgrass,NA,2,14877143,64101500
+JUNCU,Juncus,rush,NA,1,14877143,64101557
+PASM,Pascopyrum smithii,western wheatgrass,NA,15,14877143,64101741
+PAVI2,Panicum virgatum,switchgrass,NA,20,14877143,64101752
+POSE,Poa secunda,Alkali bluegrass,NA,2,14877143,64101777
+PUNU2,Puccinellia nuttalliana,Nuttall's alkaligrass,NA,2,14877143,64101799
+SCSC,Schizachyrium scoparium,little bluestem,NA,5,14877143,64101833
+SPAI,Sporobolus airoides,alkali sacaton,NA,35,14877143,64101858
+SPGR,Spartina gracilis,alkali cordgrass,NA,2,14877143,64101882
+SPPE,Spartina pectinata,prairie cordgrass,NA,5,14877143,64101885
+2GP,,other perennial grasses,NA,2,14877146,64101179
+2SD,,other  shrubs,NA,2,14877146,64101198
+ANGE,Andropogon gerardii,big bluestem,NA,2,14877146,64101230
+CANE2,Carex nebrascensis,Nebraska sedge,NA,5,14877146,64101480
+DISP,Distichlis spicata,inland saltgrass,NA,2,14877146,64101501
+JUNCU,Juncus,rush,NA,1,14877146,64101558
+PASM,Pascopyrum smithii,western wheatgrass,NA,15,14877146,64101742
+PAVI2,Panicum virgatum,switchgrass,NA,20,14877146,64101753
+POSE,Poa secunda,Alkali bluegrass,NA,2,14877146,64101778
+PUNU2,Puccinellia nuttalliana,Nuttall's alkaligrass,NA,2,14877146,64101800
+SCSC,Schizachyrium scoparium,little bluestem,NA,5,14877146,64101834
+SPAI,Sporobolus airoides,alkali sacaton,NA,35,14877146,64101859
+SPGR,Spartina gracilis,alkali cordgrass,NA,2,14877146,64101883
+SPPE,Spartina pectinata,prairie cordgrass,NA,5,14877146,64101886
+ANHA,Andropogon hallii,sand bluestem,NA,10,14877151,64101247
+BOGR2,Bouteloua gracilis,blue grama,NA,20,14877151,64101399
+CALO,Calamovilfa longifolia,prairie sandreed,NA,15,14877151,64101478
+PAVI2,Panicum virgatum,switchgrass,NA,10,14877151,64101754
+PRPUB,Prunus pumila var. besseyi,western sandcherry,NA,5,14877151,64101798
+SCSC,Schizachyrium scoparium,little bluestem,NA,10,14877151,64101823
+SONU2,Sorghastrum nutans,yellow Indiangrass,NA,5,14877151,64101845
+SPCR,Sporobolus cryptandrus,sand dropseed,NA,2,14877151,64101870
+ANHA,Andropogon hallii,sand bluestem,NA,10,14877154,64101237
+BOGR2,Bouteloua gracilis,blue grama,NA,20,14877154,64101400
+CALO,Calamovilfa longifolia,prairie sandreed,NA,15,14877154,64101468
+PAVI2,Panicum virgatum,switchgrass,NA,10,14877154,64101761
+PRPUB,Prunus pumila var. besseyi,western sandcherry,NA,5,14877154,64101791
+SCSC,Schizachyrium scoparium,little bluestem,NA,10,14877154,64101824
+SONU2,Sorghastrum nutans,yellow Indiangrass,NA,5,14877154,64101846
+SPCR,Sporobolus cryptandrus,sand dropseed,NA,2,14877154,64101871
+ANHA,Andropogon hallii,sand bluestem,NA,10,14877157,64101238
+BOGR2,Bouteloua gracilis,blue grama,NA,20,14877157,64101401
+CALO,Calamovilfa longifolia,prairie sandreed,NA,15,14877157,64101469
+PAVI2,Panicum virgatum,switchgrass,NA,10,14877157,64101762
+PRPUB,Prunus pumila var. besseyi,western sandcherry,NA,5,14877157,64101792
+SCSC,Schizachyrium scoparium,little bluestem,NA,10,14877157,64101825
+SONU2,Sorghastrum nutans,yellow Indiangrass,NA,5,14877157,64101849
+SPCR,Sporobolus cryptandrus,sand dropseed,NA,2,14877157,64101872
+ANGE,Andropogon gerardii,big bluestem,NA,5,14877163,64101219
+CANE2,Carex nebrascensis,Nebraska sedge,NA,10,14877163,64101481
+DISP,Distichlis spicata,inland saltgrass,NA,2,14877163,64101502
+JUBA,Juncus balticus,Baltic rush,NA,5,14877163,64101550
+PASM,Pascopyrum smithii,western wheatgrass,NA,10,14877163,64101732
+PAVI2,Panicum virgatum,switchgrass,NA,20,14877163,64101763
+SCSC,Schizachyrium scoparium,little bluestem,NA,5,14877163,64101826
+SONU2,Sorghastrum nutans,yellow Indiangrass,NA,5,14877163,64101850
+SPAI,Sporobolus airoides,alkali sacaton,NA,25,14877163,64101860
+SPGR,Spartina gracilis,alkali cordgrass,NA,3,14877163,64101884
+SPPE,Spartina pectinata,prairie cordgrass,NA,2,14877163,64101887
+ANGE,Andropogon gerardii,big bluestem,NA,20,14877166,64101220
+BOCU,Bouteloua curtipendula,sideoats grama,NA,5,14877166,64101336
+BOGR2,Bouteloua gracilis,blue grama,NA,5,14877166,64101391
+KOMA,Koeleria macrantha,prairie Junegrass,NA,2,14877166,64101566
+MUMO,Muhlenbergia montana,mountain muhly,NA,15,14877166,64101619
+PASM,Pascopyrum smithii,western wheatgrass,NA,5,14877166,64101733
+PAVI2,Panicum virgatum,switchgrass,NA,15,14877166,64101764
+SCSC,Schizachyrium scoparium,little bluestem,NA,10,14877166,64101827
+SONU2,Sorghastrum nutans,yellow Indiangrass,NA,20,14877166,64101851
+ANGE,Andropogon gerardii,big bluestem,NA,15,14877168,64101221
+CANE2,Carex nebrascensis,Nebraska sedge,NA,10,14877168,64101482
+ELCA4,Elymus canadensis,Canada wildrye,NA,4,14877168,64101503
+JUBA,Juncus balticus,Baltic rush,NA,2,14877168,64101551
+PASM,Pascopyrum smithii,western wheatgrass,NA,10,14877168,64101734
+PAVI2,Panicum virgatum,switchgrass,NA,20,14877168,64101765
+SONU2,Sorghastrum nutans,yellow Indiangrass,NA,10,14877168,64101852
+SPPE,Spartina pectinata,prairie cordgrass,NA,15,14877168,64101888
+2FP,,other perennial forbs,NA,3,14877172,64101167
+2GP,,other perennial grasses,NA,3,14877172,64101185
+2SD,,other  shrubs,NA,3,14877172,64101199
+ATCA2,Atriplex canescens,fourwing saltbush,NA,5,14877172,64101301
+BOGR2,Bouteloua gracilis,blue grama,NA,20,14877172,64101392
+BUDA,Buchloe dactyloides,buffalograss,NA,5,14877172,64101424
+KRASC,Krascheninnikovia,winterfat,NA,5,14877172,64101594
+NAVI4,Nassella viridula,green needlegrass,NA,15,14877172,64101671
+PASM,Pascopyrum smithii,western wheatgrass,NA,35,14877172,64101735
+2FP,,other perennial forbs,NA,3,14877175,64101168
+2GP,,other perennial grasses,NA,3,14877175,64101186
+2SD,,other  shrubs,NA,3,14877175,64101200
+ATCA2,Atriplex canescens,fourwing saltbush,NA,5,14877175,64101302
+BOGR2,Bouteloua gracilis,blue grama,NA,20,14877175,64101393
+BUDA,Buchloe dactyloides,buffalograss,NA,5,14877175,64101425
+KRASC,Krascheninnikovia,winterfat,NA,5,14877175,64101595
+NAVI4,Nassella viridula,green needlegrass,NA,15,14877175,64101672
+PASM,Pascopyrum smithii,western wheatgrass,NA,35,14877175,64101736
+ATCA2,Atriplex canescens,fourwing saltbush,NA,NA,14877254,64101283
+BOGR2,Bouteloua gracilis,blue grama,NA,30,14877254,64101371
+KRASC,Krascheninnikovia,winterfat,NA,NA,14877254,64101584
+NAVI4,Nassella viridula,green needlegrass,NA,20,14877254,64101646
+PASM,Pascopyrum smithii,western wheatgrass,NA,40,14877254,64101701
+SPAI,Sporobolus airoides,alkali sacaton,NA,NA,14877254,64101861
+ATCA2,Atriplex canescens,fourwing saltbush,NA,10,14877255,64101284
+BOGR2,Bouteloua gracilis,blue grama,NA,25,14877255,64101372
+KRLA2,Krascheninnikovia lanata,winterfat,NA,5,14877255,64101608
+NAVI4,Nassella viridula,green needlegrass,NA,10,14877255,64101647
+PASM,Pascopyrum smithii,western wheatgrass,NA,5,14877255,64101702
+SPAI,Sporobolus airoides,alkali sacaton,NA,5,14877255,64101862
+ARLO3,Aristida longiseta,red threeawn,NA,2,14877256,64101259
+ATCA2,Atriplex canescens,fourwing saltbush,NA,5,14877256,64101285
+BOGR2,Bouteloua gracilis,blue grama,NA,40,14877256,64101361
+BUDA,Buchloe dactyloides,buffalograss,NA,5,14877256,64101440
+ELEL5,Elymus elymoides,bottlebrush squirreltail,NA,3,14877256,64101504
+KOMA,Koeleria macrantha,prairie Junegrass,NA,5,14877256,64101569
+KRASC,Krascheninnikovia,winterfat,NA,5,14877256,64101585
+NAVI4,Nassella viridula,green needlegrass,NA,5,14877256,64101648
+PASM,Pascopyrum smithii,western wheatgrass,NA,10,14877256,64101703
+PLJA,Pleuraphis jamesii,galleta,NA,10,14877256,64101772
+SPCR,Sporobolus cryptandrus,sand dropseed,NA,5,14877256,64101876
+ATCA2,Atriplex canescens,fourwing saltbush,NA,NA,14877261,64101286
+BOGR2,Bouteloua gracilis,blue grama,NA,30,14877261,64101362
+KRASC,Krascheninnikovia,winterfat,NA,NA,14877261,64101586
+NAVI4,Nassella viridula,green needlegrass,NA,20,14877261,64101649
+PASM,Pascopyrum smithii,western wheatgrass,NA,40,14877261,64101704
+SPAI,Sporobolus airoides,alkali sacaton,NA,NA,14877261,64101863
+ATCA2,Atriplex canescens,fourwing saltbush,NA,10,14877262,64101275
+BOGR2,Bouteloua gracilis,blue grama,NA,25,14877262,64101363
+KRLA2,Krascheninnikovia lanata,winterfat,NA,5,14877262,64101609
+NAVI4,Nassella viridula,green needlegrass,NA,10,14877262,64101638
+PASM,Pascopyrum smithii,western wheatgrass,NA,5,14877262,64101705
+SPAI,Sporobolus airoides,alkali sacaton,NA,5,14877262,64101864
+ARLO3,Aristida longiseta,red threeawn,NA,2,14877263,64101260
+ATCA2,Atriplex canescens,fourwing saltbush,NA,5,14877263,64101276
+BOGR2,Bouteloua gracilis,blue grama,NA,40,14877263,64101364
+BUDA,Buchloe dactyloides,buffalograss,NA,5,14877263,64101441
+ELEL5,Elymus elymoides,bottlebrush squirreltail,NA,3,14877263,64101505
+KOMA,Koeleria macrantha,prairie Junegrass,NA,5,14877263,64101570
+KRASC,Krascheninnikovia,winterfat,NA,5,14877263,64101578
+NAVI4,Nassella viridula,green needlegrass,NA,5,14877263,64101639
+PASM,Pascopyrum smithii,western wheatgrass,NA,10,14877263,64101706
+PLJA,Pleuraphis jamesii,galleta,NA,10,14877263,64101773
+SPCR,Sporobolus cryptandrus,sand dropseed,NA,5,14877263,64101877
+ATCA2,Atriplex canescens,fourwing saltbush,NA,NA,14877264,64101277
+BOGR2,Bouteloua gracilis,blue grama,NA,30,14877264,64101365
+KRASC,Krascheninnikovia,winterfat,NA,NA,14877264,64101579
+NAVI4,Nassella viridula,green needlegrass,NA,20,14877264,64101640
+PASM,Pascopyrum smithii,western wheatgrass,NA,40,14877264,64101695
+SPAI,Sporobolus airoides,alkali sacaton,NA,NA,14877264,64101865
+ARLO3,Aristida longiseta,red threeawn,NA,2,14877265,64101261
+ATCA2,Atriplex canescens,fourwing saltbush,NA,5,14877265,64101278
+BOGR2,Bouteloua gracilis,blue grama,NA,40,14877265,64101366
+BUDA,Buchloe dactyloides,buffalograss,NA,5,14877265,64101442
+ELEL5,Elymus elymoides,bottlebrush squirreltail,NA,3,14877265,64101506
+KOMA,Koeleria macrantha,prairie Junegrass,NA,5,14877265,64101571
+KRASC,Krascheninnikovia,winterfat,NA,5,14877265,64101580
+NAVI4,Nassella viridula,green needlegrass,NA,5,14877265,64101641
+PASM,Pascopyrum smithii,western wheatgrass,NA,10,14877265,64101696
+PLJA,Pleuraphis jamesii,galleta,NA,10,14877265,64101774
+SPCR,Sporobolus cryptandrus,sand dropseed,NA,5,14877265,64101878
+BOGR2,Bouteloua gracilis,blue grama,NA,10,14877183,64101396
+DAPA2,Danthonia parryi,Parry's Oatgrass,NA,20,14877183,64101495
+FEAR2,Festuca arizonica,Arizona fescue,NA,20,14877183,64101517
+HECOC8,Hesperostipa comata ssp. comata,needleandthread,NA,2,14877183,64101542
+KOMA,Koeleria macrantha,prairie Junegrass,NA,10,14877183,64101567
+MUMO,Muhlenbergia montana,mountain muhly,NA,20,14877183,64101620
+PASM,Pascopyrum smithii,western wheatgrass,NA,10,14877183,64101727
+SCSC,Schizachyrium scoparium,little bluestem,NA,10,14877183,64101828
+ARUV,Arctostaphylos uva-ursi,kinnikinnick,10,NA,14877184,64101267
+CAGE2,Carex geyeri,elk sedge,5,NA,14877184,64101446
+CEMO2,Cercocarpus montanus,true mountain mahogany,5,NA,14877184,64101491
+FEAR2,Festuca arizonica,Arizona fescue,15,NA,14877184,64101518
+JUCO6,Juniperus communis,common juniper,10,NA,14877184,64101556
+MUMO,Muhlenbergia montana,mountain muhly,15,NA,14877184,64101621
+POA,Poa,bluegrass,5,NA,14877184,64101776
+QUGA,Quercus gambelii,Gambel oak,20,NA,14877184,64101803
+2FP,,other perennial forbs,10,NA,14877187,64101170
+BLTR,Blepharoneuron tricholepis,pine dropseed,10,NA,14877187,64101313
+CERCO,Cercocarpus,mountain mahogany,5,NA,14877187,64101493
+FEAR2,Festuca arizonica,Arizona fescue,20,NA,14877187,64101519
+JUSC2,Juniperus scopulorum,Rocky Mountain juniper,5,NA,14877187,64101561
+KOMA,Koeleria macrantha,prairie Junegrass,5,NA,14877187,64101568
+MUMO,Muhlenbergia montana,mountain muhly,15,NA,14877187,64101622
+PASM,Pascopyrum smithii,western wheatgrass,10,NA,14877187,64101728
+PIED,Pinus edulis,twoneedle pinyon,5,NA,14877187,64101769
+QUGA,Quercus gambelii,Gambel oak,10,NA,14877187,64101804
+ATCA2,Atriplex canescens,fourwing saltbush,NA,10,14877193,64101293
+BOGR2,Bouteloua gracilis,blue grama,NA,15,14877193,64101385
+CAINH2,Carex inops ssp. heliophila,sun sedge,NA,2,14877193,64101457
+KRASC,Krascheninnikovia,winterfat,NA,5,14877193,64101598
+NAVI4,Nassella viridula,green needlegrass,NA,15,14877193,64101663
+PASM,Pascopyrum smithii,western wheatgrass,NA,35,14877193,64101729
+ATCA2,Atriplex canescens,fourwing saltbush,NA,10,14877197,64101294
+BOGR2,Bouteloua gracilis,blue grama,NA,15,14877197,64101386
+CAINH2,Carex inops ssp. heliophila,sun sedge,NA,2,14877197,64101458
+KRASC,Krascheninnikovia,winterfat,NA,5,14877197,64101587
+NAVI4,Nassella viridula,green needlegrass,NA,15,14877197,64101664
+PASM,Pascopyrum smithii,western wheatgrass,NA,35,14877197,64101730
+ATCA2,Atriplex canescens,fourwing saltbush,NA,10,14877201,64101295
+BOGR2,Bouteloua gracilis,blue grama,NA,15,14877201,64101387
+CAINH2,Carex inops ssp. heliophila,sun sedge,NA,2,14877201,64101459
+KRASC,Krascheninnikovia,winterfat,NA,5,14877201,64101588
+NAVI4,Nassella viridula,green needlegrass,NA,15,14877201,64101665
+PASM,Pascopyrum smithii,western wheatgrass,NA,35,14877201,64101719
+ATCA2,Atriplex canescens,fourwing saltbush,NA,5,14877205,64101296
+BOGR2,Bouteloua gracilis,blue grama,NA,20,14877205,64101388
+BUDA,Buchloe dactyloides,buffalograss,NA,5,14877205,64101437
+KRLA2,Krascheninnikovia lanata,winterfat,NA,5,14877205,64101606
+NAVI4,Nassella viridula,green needlegrass,NA,15,14877205,64101666
+PASM,Pascopyrum smithii,western wheatgrass,NA,35,14877205,64101720
+ATCA2,Atriplex canescens,fourwing saltbush,NA,5,14877208,64101297
+BOGR2,Bouteloua gracilis,blue grama,NA,20,14877208,64101389
+BUDA,Buchloe dactyloides,buffalograss,NA,5,14877208,64101438
+KRLA2,Krascheninnikovia lanata,winterfat,NA,5,14877208,64101607
+NAVI4,Nassella viridula,green needlegrass,NA,15,14877208,64101667
+PASM,Pascopyrum smithii,western wheatgrass,NA,35,14877208,64101721
+ATCA2,Atriplex canescens,fourwing saltbush,NA,5,14877209,64101298
+BOCU,Bouteloua curtipendula,sideoats grama,NA,10,14877209,64101337
+BOGR2,Bouteloua gracilis,blue grama,NA,10,14877209,64101390
+KRASC,Krascheninnikovia,winterfat,NA,5,14877209,64101589
+NAVI4,Nassella viridula,green needlegrass,NA,15,14877209,64101656
+PASM,Pascopyrum smithii,western wheatgrass,NA,30,14877209,64101722
+SCSC,Schizachyrium scoparium,little bluestem,NA,10,14877209,64101817
+ANGE,Andropogon gerardii,big bluestem,NA,25,14877218,64101222
+BOGR2,Bouteloua gracilis,blue grama,NA,10,14877218,64101381
+ELLAA,Elymus lanceolatus ssp. albicans,Griffith wheatgrass,NA,10,14877218,64101510
+NAVI4,Nassella viridula,green needlegrass,NA,5,14877218,64101659
+PASM,Pascopyrum smithii,western wheatgrass,NA,5,14877218,64101713
+PAVI2,Panicum virgatum,switchgrass,NA,15,14877218,64101766
+SONU2,Sorghastrum nutans,yellow Indiangrass,NA,10,14877218,64101853
+ANGE,Andropogon gerardii,big bluestem,NA,10,14877222,64101223
+ATCA2,Atriplex canescens,fourwing saltbush,NA,5,14877222,64101288
+BOGR2,Bouteloua gracilis,blue grama,NA,5,14877222,64101382
+HECOC8,Hesperostipa comata ssp. comata,needleandthread,NA,5,14877222,64101543
+NAVI4,Nassella viridula,green needlegrass,NA,20,14877222,64101660
+PASM,Pascopyrum smithii,western wheatgrass,NA,35,14877222,64101714
+PAVI2,Panicum virgatum,switchgrass,NA,10,14877222,64101755
+POSE,Poa secunda,Sandberg bluegrass,NA,10,14877222,64101783
+ANGE,Andropogon gerardii,big bluestem,NA,10,14877226,64101224
+ATCA2,Atriplex canescens,fourwing saltbush,NA,5,14877226,64101289
+BOGR2,Bouteloua gracilis,blue grama,NA,5,14877226,64101383
+HECOC8,Hesperostipa comata ssp. comata,needleandthread,NA,5,14877226,64101532
+NAVI4,Nassella viridula,green needlegrass,NA,20,14877226,64101661
+PASM,Pascopyrum smithii,western wheatgrass,NA,35,14877226,64101715
+PAVI2,Panicum virgatum,switchgrass,NA,10,14877226,64101756
+POSE,Poa secunda,Sandberg bluegrass,NA,10,14877226,64101784
+ANGE,Andropogon gerardii,big bluestem,NA,20,14877230,64101213
+BOCU,Bouteloua curtipendula,sideoats grama,NA,5,14877230,64101327
+BOGR2,Bouteloua gracilis,blue grama,NA,5,14877230,64101384
+HECOC8,Hesperostipa comata ssp. comata,needleandthread,NA,2,14877230,64101533
+MUMO,Muhlenbergia montana,mountain muhly,NA,15,14877230,64101623
+NAVI4,Nassella viridula,green needlegrass,NA,5,14877230,64101650
+PASM,Pascopyrum smithii,western wheatgrass,NA,5,14877230,64101716
+PAVI2,Panicum virgatum,switchgrass,NA,15,14877230,64101757
+SCSC,Schizachyrium scoparium,little bluestem,NA,5,14877230,64101819
+SONU2,Sorghastrum nutans,yellow Indiangrass,NA,20,14877230,64101854
+ANGE,Andropogon gerardii,big bluestem,NA,20,14877231,64101214
+BOCU,Bouteloua curtipendula,sideoats grama,NA,5,14877231,64101328
+BOGR2,Bouteloua gracilis,blue grama,NA,5,14877231,64101373
+HECOC8,Hesperostipa comata ssp. comata,needleandthread,NA,2,14877231,64101534
+MUMO,Muhlenbergia montana,mountain muhly,NA,15,14877231,64101624
+NAVI4,Nassella viridula,green needlegrass,NA,5,14877231,64101651
+PASM,Pascopyrum smithii,western wheatgrass,NA,5,14877231,64101717
+PAVI2,Panicum virgatum,switchgrass,NA,15,14877231,64101758
+SCSC,Schizachyrium scoparium,little bluestem,NA,5,14877231,64101820
+SONU2,Sorghastrum nutans,yellow Indiangrass,NA,20,14877231,64101847
+2GP,,other perennial grasses,NA,10,14877241,64101190
+ATCA2,Atriplex canescens,fourwing saltbush,NA,5,14877241,64101291
+BOGR2,Bouteloua gracilis,blue grama,NA,20,14877241,64101376
+CAREX,Carex,sedge,NA,5,14877241,64101486
+KRASC,Krascheninnikovia,winterfat,NA,5,14877241,64101592
+NAVI4,Nassella viridula,green needlegrass,NA,15,14877241,64101654
+PASM,Pascopyrum smithii,western wheatgrass,NA,35,14877241,64101708
+2GP,,other perennial grasses,NA,10,14877242,64101180
+ATCA2,Atriplex canescens,fourwing saltbush,NA,5,14877242,64101292
+BOGR2,Bouteloua gracilis,blue grama,NA,20,14877242,64101377
+CAINH2,Carex inops ssp. heliophila,sun sedge,NA,5,14877242,64101460
+KRASC,Krascheninnikovia,winterfat,NA,5,14877242,64101581
+NAVI4,Nassella viridula,green needlegrass,NA,15,14877242,64101655
+PASM,Pascopyrum smithii,western wheatgrass,NA,35,14877242,64101709

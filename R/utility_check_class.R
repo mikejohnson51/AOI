@@ -1,29 +1,19 @@
-#' Check Objects Class
-#'
-#' @description A function check the class of an object, will return TRUE if x is of class type
-#'
+#' @title Check an objects class
+#' @description A function to check the class of an object, will return TRUE if `x`` is of class `type``
 #' @param x an object
 #' @param type a class
-#'
 #' @return logical
-#' @export
-#'
 #' @examples
-#' \dontrun{
 #' sf = getAOI(state = "CA", sf = TRUE)
 #' checkClass(sf, "sf")
-#' }
-#'
-#' @family HydroData 'utility' function
 #' @author Mike Johnson
 
-checkClass = function(x, type){
-
+checkClass = function(x, type) {
   log = any(grepl(
     pattern = type,
     class(x),
-    ignore.case = T,
-    fixed = F
+    ignore.case = TRUE,
+    fixed = FALSE
   ))
 
   return(log)

@@ -1,24 +1,15 @@
-#' Provide the plain-english description of an AOi
-#'
-#' @description This function is a mirror of \code{\link{getAOI}} but instead of returning a \code{SpatilaPolygons} object,
-#' returns a plain-english description of the AOI. (eg: 'AOI defined as a 10 mile tall by 10 mile wide region centered on (the) UCSB')
-#'
-#' @param state     \code{character}.  Full name or two character abbriviation. Not case senstive
-#' @param county    \code{character}.  County name(s). Requires \code{state} input. Not case senstive
-#' @param clip      \code{Spatial} object, a \code{Raster} object, or a \code{list} (see details and \code{\link{getClip}})
-#' @param km       \code{logical}. If \code{TRUE} distance are in kilometers,  default is \code{FALSE} and with distances in miles
-#'
-#' @examples
-#' \dontrun{
-#' nameAOI(state = "CA")
-#'}
+#' @title Provide the plain-english description of an AOI
+#' @description This function is a mirror of \code{\link{getAOI}} but instead of returning a Spatial object,
+#' returns a plain-english description of the AOI. (eg: 'AOI defined as a 10 mile tall by 10 mile wide region centered on (the) 'UCSB')
+#' @param state   \code{character}.  Full name or two character abbriviation. Not case senstive
+#' @param county  \code{character}.  County name(s). Requires \code{state} input. Not case senstive
+#' @param clip    \code{Spatial} object, a \code{Raster} object, or a \code{list} (see details and \code{\link{getClip}})
+#' @param km      \code{logical}. If \code{TRUE} distance are in kilometers,  default is \code{FALSE} and with distances in miles
 #' @return A character string
-#'
-#' @export
 #' @seealso \code{\link{nameClip}}
-#'
 #' @author Mike Johnson
-#'
+#' @examples
+#' nameAOI(state = "CA")
 
 nameAOI = function(state = NULL,
                    county = NULL,

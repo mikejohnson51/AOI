@@ -1,0 +1,149 @@
+---
+title: "Use Cases"
+author: "jmj00@ucsb.edu"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{pkgdown}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width=7, 
+  fig.height=6
+)
+options(scipen = 9999)
+```
+
+```{r echo = FALSE, results='hide', warning= FALSE,message=FALSE}
+devtools::load_all("/Users/mikejohnson/Documents/GitHub/HydroData")
+devtools::load_all()
+library(osmdata)
+library(leaflet)
+library(sp)
+library(ggplot2)
+library(RColorBrewer)
+
+col  = '#1c26a9'
+col1 = '#212f3f'
+icon.r <- makeAwesomeIcon(icon = 'home', iconColor = col1, markerColor = 'gray')
+icon.b <- makeAwesomeIcon(icon = 'home', iconColor = col,  markerColor = 'gray')
+```
+
+AOI was not developed not for its internal use but rather to integrates and easy the use of the many great spatial packages avialable in the R ecosystem. A few case studies will be demonstrated to provide a sense of how clear, intuitive AOI calls can make the use of many other packages easier. It should be emphasised these represent only a small number of the available geographic data packages and services available:
+
+#soilDB
+
+```{r, message = FALSE}
+bb = getAOI(clip = list("Temecula" , 10, 30)) %>% bbox_st()
+
+soils = soilDB::fetchKSSL(bbox=c(bb$xmax, bb$ymin, bb$xmin, bb$ymax))
+
+str(soils, max.level = 2)
+
+```
+
+#HydroData
+
+```{r, message = FALSE}
+
+AOI = getAOI(clip = list("UCSB", 10, 10)) %>% 
+  HydroData::findNHD() %>% 
+  HydroData::findWaterbodies() %>% 
+  HydroData::explore()
+
+```
+```{r, echo = FALSE}
+AOI$map
+```
+
+
+#Rayshader
+
+```{r, eval = FALSE}
+library(rayshader)
+
+AOI = getAOI(clip = list("UCSB", 10, 10)) %>% HydroData::findNED()
+
+ned = matrix(raster::extract(AOI$NED,raster::extent(AOI$NED),buffer=1000),
+               nrow=ncol(AOI$NED),ncol=nrow(AOI$NED))
+
+ned %>%
+  sphere_shade(texture = "imhof1") %>%
+  add_water(detect_water(ned), color="desert") %>%
+  add_shadow(ray_shade(ned)) %>%
+  add_shadow(ambient_shade(ned)) %>%
+  plot_map(filename = paste0(getwd(), "/rayshade_ex.png"))
+  
+
+```
+
+![](./imgs/rayshade_ex.png)
+
+
+#NWM
+
+```{r, message = FALSE}
+
+files = nwm::getFilelist(type = 'land', date = "20180803", t = 0, f = c(3,6,9,12))
+
+AOI = getAOI(clip = list("Devils Tower, SD", 10, 10)) %>% nwm::downloadNWM(files, param = 'accet')
+
+rasterVis::levelplot(AOI$accet, 
+                     main = "National Water Model: Accumulated ET", 
+                     names.attr = as.character(nwm::getGridTime(AOI$accet)),
+                     col.regions = colorRampPalette(brewer.pal(9,"YlOrRd")))
+
+```
+
+#FedData
+
+```{r}
+AOI = getAOI(clip = list("Boulder", 10, 10)) %>% FedData::get_ssurgo(label = "test")
+
+ggplot() + 
+  geom_polygon(data = AOI$spatial, aes(x = long, y = lat, group = group, fill = id), color =     'gray') + 
+  guides(fill=FALSE) + 
+  labs(title = "Temecula Soils MUSYM") + 
+  theme(plot.title = element_text(size=30))
+```
+
+#OSMDATA
+
+```{r}
+office = definePoint("Ellision Hall, UCSB", geo = TRUE)
+
+AOI = getAOI(clip = list(office$coords$lat, office$coords$lon, 2, 2)) %>% bbox_st()
+
+q0 = opq(bbox = c(AOI$xmin, AOI$ymin, AOI$xmax, AOI$ymax)) %>%
+     add_osm_feature (key="highway") %>% 
+     osmdata_sp() 
+
+roads = q0$osm_lines
+
+{
+ plot(roads, main = "Bike Paths Near My Office", cex.main = 2)
+ plot(roads[roads$bicycle =="yes", ], col= "red", add = T, lwd = 3)
+ plot(office$geo, col = 'blue', cex = 2, pch = 16, add = T)
+}
+
+```
+
+#WorldClim
+
+```{r}
+
+r <- raster::getData("worldclim", var = 'tmean', res=10)
+
+rr = raster::crop(r, getAOI(state = "CO"))
+
+rasterVis::levelplot(rr/10, 
+                     names.attr = month.name,
+                     main = "Colorado Average Monthly Tempertures")
+
+```
+
+

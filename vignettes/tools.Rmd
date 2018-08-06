@@ -1,0 +1,174 @@
+---
+title: "AOI Tools"
+author: "jmj00@ucsb.edu"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{pkgdown}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7, 
+  fig.height= 4
+)
+options(scipen = 9999)
+```
+
+```{r echo = FALSE, results='hide', warning= FALSE,message=FALSE}
+devtools::load_all("/Users/mikejohnson/Documents/GitHub/HydroData")
+devtools::load_all()
+library(osmdata)
+library(leaflet)
+library(sp)
+library(ggplot2)
+
+col  = '#1c26a9'
+col1 = '#212f3f'
+icon.r <- makeAwesomeIcon(icon = 'home', iconColor = col1, markerColor = 'gray')
+icon.b <- makeAwesomeIcon(icon = 'home', iconColor = col,  markerColor = 'gray')
+```
+
+#Finding and refining an AOI
+
+One on the hardest aspects of defining an AOI is deciding on the query parameters (eg the location, width and height). To help with this the `AOI` package has a `check` function that can be used to define OR refine AOI queries.
+
+If you have no idea about the constraints of your AOI you can run check() alone:
+
+```{r, eval = FALSE}
+check()
+```
+
+```{r, echo = FALSE}
+AOI = check()
+AOI$map
+```
+
+<br>
+<br>
+Doing so brings up a map centered on the United States (panning is available). Zooming to your general AOI, you can use the tools in the lower left hand corner of the map to mark locations to get lat/long, and measure distances. These values can then be input directly into the `getAOI()` call. 
+
+![](./imgs/search.gif)
+<br>
+<br>
+Give it a try!
+<br>
+<br>
+The `check()` function can also be chained to existing AOI call to immediately see the region being queried:
+<br>
+```{r, message = FALSE}
+AOI = getAOI(clip = list("San Luis Obispo", 10, 10 )) %>% check()
+```
+
+```{r, echo = FALSE}
+AOI$map
+```
+<br>
+<br>
+Using the tabs in the upper right corner allow you to toggle between base maps to better understand the area you are defining. 
+<br>
+<br>
+Give it a try!
+<br>
+<br>
+
+#Kilometers 
+
+```{r, message = FALSE}
+mi.ex = getAOI(clip = list("UCSB", 10, 10), km = F)
+km.ex = getAOI(clip = list("UCSB", 10, 10), km = T)
+```
+
+```{r, echo = FALSE}
+leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 10, maxZoom = 4)) %>% addProviderTiles(providers$CartoDB.Positron) %>% 
+  addPolygons(data = mi.ex,fillColor = col, color = col1, weight = 1, label = "miles") %>% 
+ addPolygons(data = km.ex, fillColor = col1, color = col1, weight = 1, label = "kilometers") %>% 
+  addAwesomeMarkers(icon = icon.b, lat = 34.41396, lng = -119.8489, popup = 'UCSB')
+
+```
+
+#Simple Features (sf)
+
+As R grows more popular in the spatial community the use of simple feature (sf) objects are becoming more common. To get your AOI as sf simply set the 'sf' parameter to TRUE. In the future this parameter may default to TRUE.
+
+```{r}
+CA.sf = getAOI(state = c('CA', 'NV'), sf = TRUE)
+head(CA.sf)
+plot(CA.sf, main = nameAOI(state = c('CA', 'NV')))
+```
+
+#Describe
+
+In addtion to `check()` the AOI package provides a describe function that decribes an AOI in terms of the clip parameters:
+
+```{r, message=F}
+
+AOI = getAOI(clip = list("Temecula" , 10, 30)) %>% describe()
+
+```
+
+#Bounding box as string
+
+Often users will want to use a bounding box for external packages that require input as a list (eg soilDB). In those cases `bbox_st` is helpful:
+
+```{r, message = FALSE}
+getAOI(clip = list("Temecula" , 10, 30)) %>% bbox_st()
+```
+
+#Defining a point
+
+```{r}
+definePoint("UCSB")
+```
+
+```{r}
+definePoint("UCSB", geo = TRUE)
+```
+
+```{r}
+definePoint("UCSB", geo = TRUE, coords = FALSE)
+```
+
+#Get Bounding Area for a set of objects:
+
+Sometimes a user has a set of features they want to define an AOI. For this the getBoundingBox() function is helpful for returning the minimum bounding area containing all features. In this example we will use the HydroData package to find the 20 USGS NWIS stations nearest Austin TX, and use these to define our AOI. 
+
+```{r}
+
+nwis = definePoint("AUSTIN, TX") %>% HydroData::findNearestNWIS(n = 20)
+
+head(nwis)
+
+bb = getBoundingBox(nwis)
+
+check(bb)$map %>% addMarkers(data = nwis, popup = paste("USGS Gage: ",nwis$site_no)) 
+
+```
+
+```{r}
+describe(bb)
+```
+
+#Geocoding
+
+At times users will want to look up information about a location (either lat/long or character). For these cases `AOI` offers a geocoding (and reverse geocoding) interface built into the geoCode function.
+
+For example, I am a big fan of the restraunt "Rasta Pasta" in downtown Colorado Springs, but finding the spatial information regarding this location (such as lat/lon, address, city, ect) can be difficult. For this the revGeo function can be handy.
+
+```{r, message = FALSE}
+pt = revGeo("Rasta Pasta, Colorado Springs")
+print(pt)
+
+RP = getAOI(clip = list(pt$LongLabel, 1, 1)) %>% check()
+
+RP$map %>% addMarkers(lat = pt$lat, lng = pt$lon, popup = pt$Match_addr)
+```
+
+Other times users may be given a lat/long with out much context of where it it. For example, can anyone off the top of there head describe where 38/-107 is?
+
+```{r, message = FALSE}
+revGeo(c(38, -107))
+```

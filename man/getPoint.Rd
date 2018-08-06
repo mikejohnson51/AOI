@@ -2,7 +2,7 @@
 % Please edit documentation in R/getPoint.R
 \name{getPoint}
 \alias{getPoint}
-\title{Geocode a Point}
+\title{Geocode}
 \usage{
 getPoint(name = "UCSB")
 }
@@ -13,10 +13,10 @@ getPoint(name = "UCSB")
 a data.frame of lat,lon values
 }
 \description{
-Overwrite the dismo::geocode function to only return lat/long, remove excessive print statements; and to retry on query errors.
+Overwrite dismo::geocode to only return lat/long only, remove excessive print statements, and to retry on query errors.
 }
 \examples{
-\dontrun{ getPoint("UCSB") }
+getPoint("UCSB")
 }
 \author{
 Mike Johnson

@@ -2,7 +2,7 @@
 % Please edit documentation in R/utility_check_class.R
 \name{checkClass}
 \alias{checkClass}
-\title{Check Objects Class}
+\title{Check an objects class}
 \usage{
 checkClass(x, type)
 }
@@ -15,17 +15,11 @@ checkClass(x, type)
 logical
 }
 \description{
-A function check the class of an object, will return TRUE if x is of class type
+A function to check the class of an object, will return TRUE if `x`` is of class `type``
 }
 \examples{
-\dontrun{
 sf = getAOI(state = "CA", sf = TRUE)
 checkClass(sf, "sf")
-}
-
-}
-\seealso{
-Other HydroData 'utility' function: \code{\link{getBoundingBox}}
 }
 \author{
 Mike Johnson
