@@ -13,7 +13,9 @@ simpleCap(x)
 \code{simpleCap} capitilizes all words in a given text string
 }
 \examples{
+\dontrun{
 simpleCap("santa barbara")
+}
 }
 \author{
 Mike Johnson

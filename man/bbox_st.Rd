@@ -16,6 +16,7 @@ a bb oject
 Convert an AOI or spatial object to a data.frame of xmin, xmax, ymin, ymax
 }
 \examples{
+\dontrun{
 #Get a bounding box data.frame for AOI
 AOI = getAOI(clip = list("UCSB", 10, 10))
 bb = bbox_st(AOI)
@@ -24,6 +25,7 @@ print(bb)
 # Chain to AOI calls:
 AOI = getAOI(clip = list("UCSB", 10, 10)) \%>\% bbox_st()
 print(AOI)
+}
 }
 \author{
 Mike Johnson

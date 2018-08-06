@@ -14,7 +14,9 @@
 #' }
 #' @source  \href{https://cran.r-project.org/web/packages/USAboundaries/index.html}{USAboundaries}
 #' @examples
+#' \dontrun{
 #'  states = AOI::states
+#'}
 
 "states"
 
@@ -36,7 +38,9 @@
 #' }
 #' @source  \href{https://cran.r-project.org/web/packages/USAboundaries/index.html}{USAboundaries}
 #' @examples
+#' \dontrun{
 #'  counties = AOI::counties
+#'}
 
 "counties"
 

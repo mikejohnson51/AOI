@@ -20,10 +20,12 @@ a lat/lon data.frame and/or `sf` object
 Return a lat/long data.frame and/or `sf` point from an input
 }
 \examples{
+\dontrun{
 definePoint("UCSB")
 definePoint(c(37, -118))
 definePoint("UCSB", geo = TRUE)
 definePoint("UCSB", coords = FALSE)
+}
 }
 \author{
 Mike Johnson

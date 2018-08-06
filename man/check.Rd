@@ -18,6 +18,7 @@ Generate an interactive \code{leaflet} map for defining, checking, and refining 
 an approapriate AOI
 }
 \examples{
+\dontrun{
 # Generate an empty map:
 check()
 
@@ -27,6 +28,7 @@ check(AOI)
 
 # Chain to AOI calls:
 getAOI(clip = list("UCSB", 10, 10)) \%>\% check()
+}
 
 }
 \author{

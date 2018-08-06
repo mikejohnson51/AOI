@@ -7,10 +7,12 @@
 #' @return a lat/lon data.frame and/or `sf` object
 #' @author Mike Johnson
 #' @examples
+#' \dontrun{
 #' definePoint("UCSB")
 #' definePoint(c(37, -118))
 #' definePoint("UCSB", geo = TRUE)
 #' definePoint("UCSB", coords = FALSE)
+#' }
 
 definePoint = function(point, geo = FALSE, coords = TRUE) {
   if (any(class(point) == "sf")) {

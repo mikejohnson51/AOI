@@ -15,6 +15,7 @@ print.bb = function(x){
 #' @export
 #' @author Mike Johnson
 #' @examples
+#' \dontrun{
 #' #Get a bounding box data.frame for AOI
 #' AOI = getAOI(clip = list("UCSB", 10, 10))
 #' bb = bbox_st(AOI)
@@ -23,6 +24,7 @@ print.bb = function(x){
 #' # Chain to AOI calls:
 #' AOI = getAOI(clip = list("UCSB", 10, 10)) %>% bbox_st()
 #' print(AOI)
+#' }
 
 bbox_st = function(AOI){
 

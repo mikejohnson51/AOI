@@ -5,8 +5,10 @@
 #' @return logical
 #' @export
 #' @examples
+#' \dontrun{
 #' sf = getAOI(state = "CA", sf = TRUE)
 #' checkClass(sf, "sf")
+#' }
 #' @author Mike Johnson
 
 checkClass = function(x, type) {

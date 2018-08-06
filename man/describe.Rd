@@ -25,12 +25,14 @@ Convert an AOI object to a data.frame of describing factors. Can be usefull for 
 documenting and repaeating AOI calls.
 }
 \examples{
+\dontrun{
 #Get an AOI
 AOI = getAOI(clip = list("UCSB", 10, 10))
 describe(AOI)
 
 # Chain to AOI calls:
 AOI = getAOI(clip = list("UCSB", 10, 10)) \%>\% describe()
+}
 }
 \author{
 Mike Johnson

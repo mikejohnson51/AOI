@@ -13,7 +13,9 @@ firstLower(x)
 \code{firstLower} lower cases the first character of a string
 }
 \examples{
+\dontrun{
 firstLower("SANTA BARBARA")
+}
 }
 \author{
 Mike Johnson

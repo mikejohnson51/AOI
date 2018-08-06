@@ -18,8 +18,10 @@ logical
 A function to check the class of an object, will return TRUE if `x`` is of class `type``
 }
 \examples{
+\dontrun{
 sf = getAOI(state = "CA", sf = TRUE)
 checkClass(sf, "sf")
+}
 }
 \author{
 Mike Johnson

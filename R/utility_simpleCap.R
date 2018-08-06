@@ -4,7 +4,9 @@
 #' @author Mike Johnson
 #' @export
 #' @examples
+#' \dontrun{
 #' simpleCap("santa barbara")
+#' }
 
 simpleCap <- function(x) {
 

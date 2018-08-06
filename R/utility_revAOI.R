@@ -14,12 +14,14 @@
 #' @export
 #' @author Mike Johnson
 #' @examples
+#' \dontrun{
 #' #Get an AOI
 #' AOI = getAOI(clip = list("UCSB", 10, 10))
 #' describe(AOI)
 #'
 #' # Chain to AOI calls:
 #' AOI = getAOI(clip = list("UCSB", 10, 10)) %>% describe()
+#' }
 
 describe = function(AOI){
 

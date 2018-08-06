@@ -16,11 +16,13 @@ a data.frame of input point descriptions
 Describe a point using the ERSI server geocoding  and reverse geocoding functionalities
 }
 \examples{
+\dontrun{
 pt1 = revGeo("UCSB")
 print(pt1)
 
 pt2 = revGeo(c(38,-115))
 print(pt2)
+}
 }
 \author{
 Mike Johnson

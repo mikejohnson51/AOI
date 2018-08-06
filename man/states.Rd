@@ -25,6 +25,8 @@ the challenges associated with using the USAboundariesData (not on CRAN) as a de
 a more minmualistic dataset.
 }
 \examples{
+\dontrun{
  states = AOI::states
+}
 }
 \keyword{datasets}

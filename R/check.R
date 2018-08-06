@@ -5,6 +5,7 @@
 #' @param AOI an AOI obtained using \link{getAOI}. Can be left \code{NULL}
 #' @return a \code{leaflet} map object
 #' @examples
+#' \dontrun{
 #' # Generate an empty map:
 #' check()
 #'
@@ -14,6 +15,7 @@
 #'
 #' # Chain to AOI calls:
 #' getAOI(clip = list("UCSB", 10, 10)) %>% check()
+#' }
 #'
 #' @export
 #' @author Mike Johnson

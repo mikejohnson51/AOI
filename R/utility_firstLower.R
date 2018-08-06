@@ -4,7 +4,9 @@
 #' @author Mike Johnson
 #' @export
 #' @examples
+#' \dontrun{
 #' firstLower("SANTA BARBARA")
+#' }
 
 firstLower <- function(x) {
   substr(x, 1, 1) <- tolower(substr(x, 1, 1))

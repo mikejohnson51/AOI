@@ -74,6 +74,7 @@ Acceptable variations include:
                                     }
 }
 \examples{
+\dontrun{
 # Get AOI defined by a state(s)
     getAOI(state = 'CA')
     getAOI(state = c('CA', 'nevada'))
@@ -82,17 +83,16 @@ Acceptable variations include:
     getAOI(state = 'California', county = 'Santa Barbara')
     getAOI(state = 'CA', county = c('Santa Barbara', 'ventura'))
 
-\dontrun{
 # Get AOI defined by external spatial file:
     getAOI(clip = rgdal::readOGR('la_metro.shp'))
     getAOI(clip = raster('AOI.tif'))
- }
 
 # Get AOI defined by 10 mile bounding box using lat/lon
     getAOI(clip = c(35, -119, 10, 10))
 
 # Get AOI defined by 10 mile2 bounding box using the 'KMART near UCSB' as lower left corner
     getAOI(clip = list('KMART near UCSB', 10, 10, 'lowerleft'))
+}
 
 }
 \seealso{

@@ -16,7 +16,9 @@ a data.frame of lat,lon values
 Overwrite dismo::geocode to only return lat/long only, remove excessive print statements, and to retry on query errors.
 }
 \examples{
+\dontrun{
 getPoint("UCSB")
+}
 }
 \author{
 Mike Johnson

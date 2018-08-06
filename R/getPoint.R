@@ -5,7 +5,9 @@
 #' @export
 #' @author Mike Johnson
 #' @examples
+#' \dontrun{
 #' getPoint("UCSB")
+#' }
 
 getPoint = function(name = "UCSB") {
 
