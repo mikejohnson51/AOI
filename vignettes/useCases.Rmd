@@ -33,7 +33,7 @@ icon.r <- makeAwesomeIcon(icon = 'home', iconColor = col1, markerColor = 'gray')
 icon.b <- makeAwesomeIcon(icon = 'home', iconColor = col,  markerColor = 'gray')
 ```
 
-AOI was not developed not for its internal use but rather to integrates and easy the use of the many great spatial packages avialable in the R ecosystem. A few case studies will be demonstrated to provide a sense of how clear, intuitive AOI calls can make the use of many other packages easier. It should be emphasised these represent only a small number of the available geographic data packages and services available:
+AOI was not developed not for isolated use but rather to integrate and ease the use of great spatial packages avialable in the R ecosystem. A few case studies will be demonstrated to provide a sense of how clear, intuitive AOI calls can couple with these packages to grab and process data. It should be emphasised that these packages represent only a small number packages and services available:
 
 #soilDB
 

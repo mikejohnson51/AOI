@@ -7,5 +7,3 @@
 
 NULL
 
-
-pkgdown::build_site()
