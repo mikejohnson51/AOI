@@ -16,8 +16,18 @@ library(ggplot2)
 
 col  = '#1c26a9'
 col1 = '#212f3f'
-icon.r <- makeAwesomeIcon(icon = 'home', iconColor = col1, markerColor = 'gray')
-icon.b <- makeAwesomeIcon(icon = 'home', iconColor = col,  markerColor = 'gray')
+
+icon.r <- awesomeIcons(
+    icon='home',
+    iconColor = col1,
+    markerColor = "gray",
+    library='fa')
+
+icon.b <- awesomeIcons(
+    icon='home',
+    iconColor = col1,
+    markerColor = 138,
+    library='fa')
 ```
 
 #Finding and refining an AOI
@@ -90,7 +100,7 @@ plot(CA.sf, main = nameAOI(state = c('CA', 'NV')))
 
 #Describe
 
-In addtion to `check()` the AOI package provides a describe function that decribes an AOI in terms of the clip parameters:
+In addition to `check()` the AOI package provides a describe function that describes an AOI in terms of the clip parameters:
 
 ```{r, message=F}
 
@@ -144,7 +154,7 @@ describe(bb)
 
 At times users will want to look up information about a location (either lat/long or character). For these cases `AOI` offers a geocoding (and reverse geocoding) interface built into the geoCode function.
 
-For example, I am a big fan of the restraunt "Rasta Pasta" in downtown Colorado Springs, but finding the spatial information regarding this location (such as lat/lon, address, city, ect) can be difficult. For this the geoCode function can be handy.
+For example, I am a big fan of the restaurant "Rasta Pasta" in downtown Colorado Springs, but finding the spatial information regarding this location (such as lat/lon, address, city, ect) can be difficult. For this the geoCode function can be handy.
 
 ```{r, message = FALSE}
 pt = geoCode("Rasta Pasta, Colorado Springs")
