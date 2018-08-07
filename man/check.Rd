@@ -29,7 +29,6 @@ check(AOI)
 # Chain to AOI calls:
 getAOI(clip = list("UCSB", 10, 10)) \%>\% check()
 }
-
 }
 \author{
 Mike Johnson

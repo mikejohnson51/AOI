@@ -15,14 +15,14 @@ print.geoloc <- function(x) {
 #' @author Mike Johnson
 #' @examples
 #' \dontrun{
-#' pt1 = revGeo("UCSB")
+#' pt1 = geoCode("UCSB")
 #' print(pt1)
 #'
-#' pt2 = revGeo(c(38,-115))
+#' pt2 = geoCode(c(38,-115))
 #' print(pt2)
 #' }
 
-revGeo = function(point) {
+geoCode = function(point) {
   pt = definePoint(point, geo = F)
 
   connectStr <-

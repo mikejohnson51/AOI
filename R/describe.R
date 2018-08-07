@@ -9,7 +9,7 @@
 #'   \item{height}{ height in (miles)}
 #'   \item{width}{width in(miles)}
 #'   \item{origin}{AOI origin}
-#'   \item{name}{Most descriptive geocoded name from \code{revGeo}}
+#'   \item{name}{Most descriptive geocoded name from \code{geoCode}}
 #' }
 #' @export
 #' @author Mike Johnson
@@ -36,7 +36,7 @@ describe = function(AOI){
     origin = "center",
     stringsAsFactors = F)
 
-  df[["name"]] = revGeo(c(df$latCent, df$lngCent))[1,1]
+  df[["name"]] = geoCode(c(df$latCent, df$lngCent))[1,1]
 
   cat("AOI Parameters:\n")
 

@@ -18,7 +18,7 @@ reference:
       - '`check`'
       - '`bbox_st`'
       - '`describe`'
-      - '`revGeo`'
+      - '`geoCode`'
   - title: Data and Package Helpers
     desc: ~
       Data and function that make the package useable
@@ -40,7 +40,7 @@ navbar:
   left:
     - icon: fa-home
       href: index.html
-    - text: "Examples"
+    - text: "Documentation"
       icon: fas fa-book
       menu:
       -  text: State & County AOI

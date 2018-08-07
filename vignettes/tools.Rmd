@@ -7,14 +7,6 @@ vignette: >
 ---
 
 ```{r setup, include = FALSE}
-
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.width = 6, 
-  fig.height = 4
-)
-
 devtools::load_all("/Users/mikejohnson/Documents/GitHub/HydroData")
 devtools::load_all()
 library(osmdata)
@@ -24,18 +16,8 @@ library(ggplot2)
 
 col  = '#1c26a9'
 col1 = '#212f3f'
-
-icon.r <- awesomeIcons(
-    icon='home',
-    iconColor = col1,
-    markerColor = "gray",
-    library='fa')
-
-icon.b <- awesomeIcons(
-    icon='home',
-    iconColor = col1,
-    markerColor = 138,
-    library='fa')
+icon.r <- makeAwesomeIcon(icon = 'home', iconColor = col1, markerColor = 'gray')
+icon.b <- makeAwesomeIcon(icon = 'home', iconColor = col,  markerColor = 'gray')
 ```
 
 #Finding and refining an AOI
@@ -108,7 +90,7 @@ plot(CA.sf, main = nameAOI(state = c('CA', 'NV')))
 
 #Describe
 
-In addition to `check()` the AOI package provides a describe function that describes an AOI in terms of the clip parameters:
+In addtion to `check()` the AOI package provides a describe function that decribes an AOI in terms of the clip parameters:
 
 ```{r, message=F}
 
@@ -162,10 +144,10 @@ describe(bb)
 
 At times users will want to look up information about a location (either lat/long or character). For these cases `AOI` offers a geocoding (and reverse geocoding) interface built into the geoCode function.
 
-For example, I am a big fan of the restaurant "Rasta Pasta" in downtown Colorado Springs, but finding the spatial information regarding this location (such as lat/lon, address, city, ect) can be difficult. For this the revGeo function can be handy.
+For example, I am a big fan of the restraunt "Rasta Pasta" in downtown Colorado Springs, but finding the spatial information regarding this location (such as lat/lon, address, city, ect) can be difficult. For this the geoCode function can be handy.
 
 ```{r, message = FALSE}
-pt = revGeo("Rasta Pasta, Colorado Springs")
+pt = geoCode("Rasta Pasta, Colorado Springs")
 print(pt)
 
 RP = getAOI(clip = list(pt$LongLabel, 1, 1)) %>% check()
@@ -176,7 +158,5 @@ RP$map %>% addMarkers(lat = pt$lat, lng = pt$lon, popup = pt$Match_addr)
 Other times users may be given a lat/long with out much context of where it it. For example, can anyone off the top of there head describe where 38/-107 is?
 
 ```{r, message = FALSE}
-revGeo(c(38, -107))
+geoCode(c(38, -107))
 ```
-
-Now that you are a AOI extraordinaire, be sure to check out some use cases on [use cases](./articles/usseCases.html) page. 

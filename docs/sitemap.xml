@@ -34,6 +34,9 @@
     <loc>https://github.com/mikejohnson51/AOI/reference/firstLower.html</loc>
   </url>
   <url>
+    <loc>https://github.com/mikejohnson51/AOI/reference/geoCode.html</loc>
+  </url>
+  <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/getAOI.html</loc>
   </url>
   <url>
@@ -56,9 +59,6 @@
   </url>
   <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/revGeo.html</loc>
   </url>
   <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/simpleCap.html</loc>

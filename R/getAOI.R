@@ -122,7 +122,6 @@ getAOI = function(state = NULL,
 
   if (all(is.null(clip), !is.null(state))) {
     shp <- getFiat(state = state, county = county, bb)
-    #return(shp)
   }
 
   # AOI by user shapefile
