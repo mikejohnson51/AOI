@@ -1,7 +1,5 @@
 ---
-title: "State and County AOIs"
-author: "jmj00@ucsb.edu"
-output: rmarkdown::html_vignette
+title: "State & County AOIs: Fiat Boundaries"
 vignette: >
   %\VignetteIndexEntry{pkgdown}
   %\VignetteEngine{knitr::rmarkdown}
@@ -9,27 +7,23 @@ vignette: >
 ---
 
 ```{r setup, include = FALSE}
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.width=6, 
-  fig.height=4
+  fig.width = 6, 
+  fig.height = 4
 )
-options(scipen = 9999)
-```
 
-```{r echo = FALSE, results='hide', warning= FALSE,message=FALSE}
 devtools::load_all()
 library(leaflet)
 library(sp)
 
 col  = '#1c26a9'
 col1 = '#212f3f'
-icon.r <- makeAwesomeIcon(icon = 'home', iconColor = col1, markerColor = 'gray')
-icon.b <- makeAwesomeIcon(icon = 'home', iconColor = col,  markerColor = 'gray')
 ```
 
-Three main parameters are used to define all queries:  *state*, *county*, and *clip*. This page illustrates how the state and county parameters can be used define -- and refine -- a query, while the  [Clip Areas](clipAreas.html) page describes the clip parameter.
+Three main parameters are used to define all queries:  *state*, *county*, and *clip*. This page illustrates how the state and county parameters can be used define  a query, while the [Clip Areas](./articles/clipAreas.html) page describes the clip parameters.
 
 # Defining an AOI by **state**  
 
@@ -116,3 +110,5 @@ AOI = getAOI(state = "WI", bb = TRUE) %>% check()
 AOI$map
 ```
 
+
+Now that you have a good understanding of how to call existing fiat boundaries take a look at the [Clip Areas](./articles/clipAreas.html) page to learn how to define your own extents!

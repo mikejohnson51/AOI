@@ -1,7 +1,5 @@
 ---
 title: "Use Cases"
-author: "jmj00@ucsb.edu"
-output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{pkgdown}
   %\VignetteEngine{knitr::rmarkdown}
@@ -9,16 +7,15 @@ vignette: >
 ---
 
 ```{r setup, include = FALSE}
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.width=7, 
-  fig.height=6
+  fig.width = 6, 
+  fig.height = 4
 )
-options(scipen = 9999)
-```
 
-```{r echo = FALSE, results='hide', warning= FALSE,message=FALSE}
+
 devtools::load_all("/Users/mikejohnson/Documents/GitHub/HydroData")
 devtools::load_all()
 library(osmdata)
@@ -33,12 +30,14 @@ icon.r <- makeAwesomeIcon(icon = 'home', iconColor = col1, markerColor = 'gray')
 icon.b <- makeAwesomeIcon(icon = 'home', iconColor = col,  markerColor = 'gray')
 ```
 
-AOI was not developed not for isolated use but rather to integrate and ease the use of great spatial packages avialable in the R ecosystem. A few case studies will be demonstrated to provide a sense of how clear, intuitive AOI calls can couple with these packages to grab and process data. It should be emphasised that these packages represent only a small number packages and services available:
+The AOI package was not developed for isolated use but rather to ease the use of many great spatial packages in the R ecosystem. Here, a few case studies will be demonstrated but it should be emphasized these represent only a small fraction of the packages and services available. If you find a use or a need please file an [issue](https://github.com/mikejohnson51/AOI/issues) to get it included!
 
 #soilDB
 
+The [soilDB](https://github.com/ncss-tech/soilDB) package provides streamlined access to the NCSS soil databases. `fetchKSSL` gets soil characterization and morphologic data from a bounding box from the KSSL database. These calls must be provided in [xmax,ymin,xmin,ymax] order setting up a nice use case for `bbox_st`. Here, we want to find the KSSL data for 30 mile by 30 mile squared region centered on Temecula California.
+
 ```{r, message = FALSE}
-bb = getAOI(clip = list("Temecula" , 10, 30)) %>% bbox_st()
+bb = getAOI(clip = list("Temecula" , 30, 30)) %>% bbox_st()
 
 soils = soilDB::fetchKSSL(bbox=c(bb$xmax, bb$ymin, bb$xmin, bb$ymax))
 
@@ -48,20 +47,26 @@ str(soils, max.level = 2)
 
 #HydroData
 
+The [HydroData](https://github.com/ncss-tech/soilDB) package offers quick access to geospatial earth systems data for an area of interest. In total the packages offers access to 20+ data sources as well as visualization functions. Here we can chain an AOI call for the 100sqmile region surrounding UCSB to a series of HydroData function to the HydroData calls to get NHD flowlines. NHD waterbodies and USGS NWIS stations. 
+
 ```{r, message = FALSE}
 
 AOI = getAOI(clip = list("UCSB", 10, 10)) %>% 
   HydroData::findNHD() %>% 
   HydroData::findWaterbodies() %>% 
+  HydroData::findNWIS() %>% 
   HydroData::explore()
 
 ```
+
 ```{r, echo = FALSE}
 AOI$map
 ```
 
 
 #Rayshader
+
+[Rayshader](https://github.com/tylermorganwall/rayshader) is a package for generating beautiful hillshade maps of elevation matrices. Here we pipe the AOI seen above to HydroData findNED (find data from the USGS National Elevation Dataset) to get a elevation tiff to pass to the rayshader functionalities.
 
 ```{r, eval = FALSE}
 library(rayshader)
@@ -76,15 +81,16 @@ ned %>%
   add_water(detect_water(ned), color="desert") %>%
   add_shadow(ray_shade(ned)) %>%
   add_shadow(ambient_shade(ned)) %>%
-  plot_map(filename = paste0(getwd(), "/rayshade_ex.png"))
+  write_png(filename = paste0(getwd(), "/rayshade_ex.png"))
   
 
 ```
 
 ![](./imgs/rayshade_ex.png)
 
-
 #NWM
+
+[NWM](https://github.com/mikejohnson51/NWM/) is a new package interfacing with the NOAA National Water Model. Here we use the AOI package to define and the 100sqmile region surrounding Devils Tower, South Dakota and extract the modeled evapotranspiration for four timeslices:
 
 ```{r, message = FALSE}
 
@@ -99,24 +105,29 @@ rasterVis::levelplot(AOI$accet,
 
 ```
 
+
 #FedData
+
+[FedData](https://github.com/ropensci/FedData) is a useful package for automatically downloading federal datasets. Here we chain chain the `get_ssurgo` function to an AOI call to quickly get a soils map from the SSURGO database for the 100sqmile regions surrounding Boulder, Colorado.
 
 ```{r}
 AOI = getAOI(clip = list("Boulder", 10, 10)) %>% FedData::get_ssurgo(label = "test")
 
 ggplot() + 
-  geom_polygon(data = AOI$spatial, aes(x = long, y = lat, group = group, fill = id), color =     'gray') + 
+  geom_polygon(data = AOI$spatial, aes(x = long, y = lat, group = group, fill = id), color = 'gray') + 
   guides(fill=FALSE) + 
-  labs(title = "Temecula Soils MUSYM") + 
+  labs(title = "Boulder Soils MUSYM") + 
   theme(plot.title = element_text(size=30))
 ```
 
 #OSMDATA
 
-```{r}
-office = definePoint("Ellision Hall, UCSB", geo = TRUE)
+Open Street Map provides one of the most extensive databases/cartographic representations of the world and the [osmdata](https://github.com/ropensci/osmdata) packages offers an interface to this resource. Here we look at answering the question "Where are the bike paths near my office in Ellison Hall?". 
 
-AOI = getAOI(clip = list(office$coords$lat, office$coords$lon, 2, 2)) %>% bbox_st()
+```{r}
+office = getPoint("Ellison Hall, UCSB")
+
+AOI = getAOI(clip = list(office$lat, office$lon, 2, 2)) %>% bbox_st()
 
 q0 = opq(bbox = c(AOI$xmin, AOI$ymin, AOI$xmax, AOI$ymax)) %>%
      add_osm_feature (key="highway") %>% 
@@ -125,16 +136,19 @@ q0 = opq(bbox = c(AOI$xmin, AOI$ymin, AOI$xmax, AOI$ymax)) %>%
 roads = q0$osm_lines
 
 {
+ par(mar=c(.1,.1,2,.1))
  plot(roads, main = "Bike Paths Near My Office", cex.main = 2)
  plot(roads[roads$bicycle =="yes", ], col= "red", add = T, lwd = 3)
- plot(office$geo, col = 'blue', cex = 2, pch = 16, add = T)
+ points(x = office$lon, y = office$lat, col = 'blue', cex = 2, pch = 16)
 }
 
 ```
 
 #WorldClim
 
-```{r}
+The WorldClim dataset offers a set of global climate layers and ships with the [raster](https://cran.r-project.org/web/packages/raster/raster.pdf) package. Here we download and sub set the mean temperature data for the state of Colorado.
+
+```{r, fig.height= 6}
 
 r <- raster::getData("worldclim", var = 'tmean', res=10)
 
@@ -145,5 +159,4 @@ rasterVis::levelplot(rr/10,
                      main = "Colorado Average Monthly Tempertures")
 
 ```
-
 

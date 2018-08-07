@@ -9,7 +9,7 @@ Welcome to the AOI R homepage! <br>
 
 If you ever find yourself needing to formalize areas of interest, get bounding geometries, or better understand spatial locations this package should be able to help. 
 
-An area of interest (AOI) is a geographic extent. It helps confine - and formalize - a unit of work to a geographic area, and prioritize and define research and sub setting efforts while improving reproducibilty. 
+An area of interest (AOI) is a geographic extent. It helps confine - and formalize - a unit of work to a geographic area, and prioritize and define research and sub setting efforts while improving reproducibility. 
 
 'AOI` lets users define an regions through a common query to achieve a spatial geometry of that area that can be used in sub setting, clipping, and mapping operations. Tool are also provided to help define, describe, and converts points, boundaries, and features to usable forms.
 
@@ -29,6 +29,12 @@ All functions are designed to be used with the magrittr pipe operation `%>%`.
 install.packages("devtools")
 devtools::install_github("mikejohnson51/AOI")
 ```
+
+Current packages and applications using AOI:
+
+1. [HydroData](https://github.com/mikejohnson51/HydroData)
+2. [NWM](https://github.com/mikejohnson51/NWM)
+3. [FlowFinder](https://github.com/mikejohnson51/FlowFinder)
 
 ### Support:
 

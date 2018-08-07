@@ -1,13 +1,18 @@
+title: "Areas of Interest: AOI   "
+url: https://github.com/mikejohnson51/AOI
+template:
+  params:
+    bootswatch: flatly
 reference:
   - title: Core Functionalites
-    desc: >
+    desc: ~
       Functions for finding points, AOIs, and bounding regions
     contents:
       - '`getAOI`'
       - '`getBoundingBox`'
       - '`getPoint`'
   - title: Tools
-    desc: >
+    desc: ~
       Tools for exploring, describing and defining AOIs
     contents:
       - '`check`'
@@ -15,7 +20,7 @@ reference:
       - '`describe`'
       - '`revGeo`'
   - title: Data and Package Helpers
-    desc: >
+    desc: ~
       Data and function that make the package useable
     contents:
       - '`counties`'
@@ -31,6 +36,24 @@ reference:
       - '`firstLower`'
       - '`simpleCap`'
       - '`%>%`'
+navbar:
+  left:
+    - icon: fa-home
+      href: index.html
+    - text: "Examples"
+      icon: fas fa-book
+      menu:
+      -  text: State & County AOI
+         href: articles/stateCounty.html
+      -  text: Clip based AOI
+         href: articles/clipAreas.html
+      -  text: AOI Tools
+         href: articles/tools.html
+      -  text: Use Cases
+         href: articles/useCases.html
+    - icon: fa-file-code-o
+      text: "functions"
+      href: reference/index.html
 
 
 

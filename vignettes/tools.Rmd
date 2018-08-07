@@ -1,7 +1,5 @@
 ---
 title: "AOI Tools"
-author: "jmj00@ucsb.edu"
-output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{pkgdown}
   %\VignetteEngine{knitr::rmarkdown}
@@ -9,16 +7,14 @@ vignette: >
 ---
 
 ```{r setup, include = FALSE}
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.width = 7, 
-  fig.height= 4
+  fig.width = 6, 
+  fig.height = 4
 )
-options(scipen = 9999)
-```
 
-```{r echo = FALSE, results='hide', warning= FALSE,message=FALSE}
 devtools::load_all("/Users/mikejohnson/Documents/GitHub/HydroData")
 devtools::load_all()
 library(osmdata)
@@ -28,13 +24,23 @@ library(ggplot2)
 
 col  = '#1c26a9'
 col1 = '#212f3f'
-icon.r <- makeAwesomeIcon(icon = 'home', iconColor = col1, markerColor = 'gray')
-icon.b <- makeAwesomeIcon(icon = 'home', iconColor = col,  markerColor = 'gray')
+
+icon.r <- awesomeIcons(
+    icon='home',
+    iconColor = col1,
+    markerColor = "gray",
+    library='fa')
+
+icon.b <- awesomeIcons(
+    icon='home',
+    iconColor = col1,
+    markerColor = 138,
+    library='fa')
 ```
 
 #Finding and refining an AOI
 
-One on the hardest aspects of defining an AOI is deciding on the query parameters (eg the location, width and height). To help with this the `AOI` package has a `check` function that can be used to define OR refine AOI queries.
+One on the hardest aspects of defining an AOI is deciding on the query parameters (eg the location, width and height). To help with this the AOI package has a check function that can be used to define OR refine AOI queries.
 
 If you have no idea about the constraints of your AOI you can run check() alone:
 
@@ -102,7 +108,7 @@ plot(CA.sf, main = nameAOI(state = c('CA', 'NV')))
 
 #Describe
 
-In addtion to `check()` the AOI package provides a describe function that decribes an AOI in terms of the clip parameters:
+In addition to `check()` the AOI package provides a describe function that describes an AOI in terms of the clip parameters:
 
 ```{r, message=F}
 
@@ -156,7 +162,7 @@ describe(bb)
 
 At times users will want to look up information about a location (either lat/long or character). For these cases `AOI` offers a geocoding (and reverse geocoding) interface built into the geoCode function.
 
-For example, I am a big fan of the restraunt "Rasta Pasta" in downtown Colorado Springs, but finding the spatial information regarding this location (such as lat/lon, address, city, ect) can be difficult. For this the revGeo function can be handy.
+For example, I am a big fan of the restaurant "Rasta Pasta" in downtown Colorado Springs, but finding the spatial information regarding this location (such as lat/lon, address, city, ect) can be difficult. For this the revGeo function can be handy.
 
 ```{r, message = FALSE}
 pt = revGeo("Rasta Pasta, Colorado Springs")
@@ -172,3 +178,5 @@ Other times users may be given a lat/long with out much context of where it it. 
 ```{r, message = FALSE}
 revGeo(c(38, -107))
 ```
+
+Now that you are a AOI extraordinaire, be sure to check out some use cases on [use cases](./articles/usseCases.html) page. 

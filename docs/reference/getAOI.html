@@ -6,13 +6,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get area of interest (AOI) boundary — getAOI • AOI</title>
+<title>Get area of interest (AOI) boundary — getAOI • Areas of Interest: AOI   </title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -39,7 +39,7 @@ a user Spatial, sf or raster object or
 a clipping unit (see details)
 getAOI wraps getFiat and getClip into a single function." />
 
-<meta property="og:image" content="/logo.png" />
+<meta property="og:image" content="https://github.com/mikejohnson51/AOI/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -67,7 +67,7 @@ getAOI wraps getFiat and getClip into a single function." />
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">AOI</a>
+        <a class="navbar-link" href="../index.html">Areas of Interest: AOI   </a>
         <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.0</span>
       </span>
     </div>
@@ -76,25 +76,24 @@ getAOI wraps getFiat and getClip into a single function." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
+    <span class="fas fa fas fa-book"></span>
+     
+    Examples
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/clipAreas.html">Clip Area AOIs</a>
+      <a href="../articles/stateCounty.html">State &amp; County AOI</a>
     </li>
     <li>
-      <a href="../articles/stateCounty.html">State and County AOIs</a>
+      <a href="../articles/clipAreas.html">Clip based AOI</a>
     </li>
     <li>
       <a href="../articles/tools.html">AOI Tools</a>
@@ -103,6 +102,13 @@ getAOI wraps getFiat and getClip into a single function." />
       <a href="../articles/useCases.html">Use Cases</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../reference/index.html">
+    <span class="fa fa-file-code-o"></span>
+     
+    functions
+  </a>
 </li>
       </ul>
       
@@ -224,48 +230,26 @@ Acceptable variations include:</p><ul>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Get AOI defined by a state(s)</span>
-    <span class='fu'>getAOI</span>(<span class='kw'>state</span> <span class='kw'>=</span> <span class='st'>'CA'</span>)</div><div class='output co'>#&gt; <span class='message'>AOI defined as boundary of California</span></div><div class='output co'>#&gt; class       : SpatialPolygonsDataFrame 
-#&gt; features    : 1 
-#&gt; extent      : -124.4096, -114.1391, 32.53416, 42.00925  (xmin, xmax, ymin, ymax)
-#&gt; coord. ref. : +proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0+no_defs 
-#&gt; variables   : 5
-#&gt; names       : statefp,  statens,    affgeoid, state_name, state_abbr 
-#&gt; value       :      06, 01779778, 0400000US06, California,         CA </div><div class='input'>    <span class='fu'>getAOI</span>(<span class='kw'>state</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>'CA'</span>, <span class='st'>'nevada'</span>))</div><div class='output co'>#&gt; <span class='message'>AOI defined as boundary of California, and Nevada</span></div><div class='output co'>#&gt; class       : SpatialPolygonsDataFrame 
-#&gt; features    : 2 
-#&gt; extent      : -124.4096, -114.0399, 32.53416, 42.00925  (xmin, xmax, ymin, ymax)
-#&gt; coord. ref. : +proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0+no_defs 
-#&gt; variables   : 5
-#&gt; names       : statefp,  statens,    affgeoid, state_name, state_abbr 
-#&gt; min values  :      06, 01779778, 0400000US06, California,         CA 
-#&gt; max values  :      32, 01779793, 0400000US32,     Nevada,         NV </div><div class='input'>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'># Get AOI defined by a state(s)</span>
+    <span class='fu'>getAOI</span>(<span class='kw'>state</span> <span class='kw'>=</span> <span class='st'>'CA'</span>)
+    <span class='fu'>getAOI</span>(<span class='kw'>state</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>'CA'</span>, <span class='st'>'nevada'</span>))
+
 <span class='co'># Get AOI defined by state &amp; county pair(s)</span>
-    <span class='fu'>getAOI</span>(<span class='kw'>state</span> <span class='kw'>=</span> <span class='st'>'California'</span>, <span class='kw'>county</span> <span class='kw'>=</span> <span class='st'>'Santa Barbara'</span>)</div><div class='output co'>#&gt; <span class='message'>AOI defined as boundary of Santa Barbara county California</span></div><div class='output co'>#&gt; class       : SpatialPolygonsDataFrame 
-#&gt; features    : 1 
-#&gt; extent      : -120.6708, -119.4423, 33.89571, 35.11468  (xmin, xmax, ymin, ymax)
-#&gt; coord. ref. : +proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0+no_defs 
-#&gt; variables   : 7
-#&gt; names       : statefp, countyfp,       affgeoid, geoid,          name, state_name, state_abbr 
-#&gt; value       :      06,      083, 0500000US06083, 06083, Santa Barbara, California,         CA </div><div class='input'>    <span class='fu'>getAOI</span>(<span class='kw'>state</span> <span class='kw'>=</span> <span class='st'>'CA'</span>, <span class='kw'>county</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>'Santa Barbara'</span>, <span class='st'>'ventura'</span>))</div><div class='output co'>#&gt; <span class='message'>AOI defined as boundary of Santa Barbara, and Ventura county California</span></div><div class='output co'>#&gt; class       : SpatialPolygonsDataFrame 
-#&gt; features    : 2 
-#&gt; extent      : -120.6708, -118.6335, 33.21543, 35.11468  (xmin, xmax, ymin, ymax)
-#&gt; coord. ref. : +proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0+no_defs 
-#&gt; variables   : 7
-#&gt; names       : statefp, countyfp,       affgeoid, geoid,          name, state_name, state_abbr 
-#&gt; min values  :      06,      083, 0500000US06083, 06083, Santa Barbara, California,         CA 
-#&gt; max values  :      06,      111, 0500000US06111, 06111,       Ventura, California,         CA </div><div class='input'>
+    <span class='fu'>getAOI</span>(<span class='kw'>state</span> <span class='kw'>=</span> <span class='st'>'California'</span>, <span class='kw'>county</span> <span class='kw'>=</span> <span class='st'>'Santa Barbara'</span>)
+    <span class='fu'>getAOI</span>(<span class='kw'>state</span> <span class='kw'>=</span> <span class='st'>'CA'</span>, <span class='kw'>county</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>'Santa Barbara'</span>, <span class='st'>'ventura'</span>))
+
 <span class='co'># Get AOI defined by external spatial file:</span>
-    <span class='fu'>getAOI</span>(<span class='kw'>clip</span> <span class='kw'>=</span> <span class='kw pkg'>rgdal</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/rgdal/topics/readOGR'>readOGR</a></span>(<span class='st'>'la_metro.shp'</span>))</div><div class='output co'>#&gt; <span class='error'>Error in ogrListLayers(dsn = dsn): Cannot open data source</span></div><div class='input'>    <span class='fu'>getAOI</span>(<span class='kw'>clip</span> <span class='kw'>=</span> <span class='fu'>raster</span>(<span class='st'>'AOI.tif'</span>))</div><div class='output co'>#&gt; <span class='error'>Error in raster("AOI.tif"): could not find function "raster"</span></div><div class='input'>
+    <span class='fu'>getAOI</span>(<span class='kw'>clip</span> <span class='kw'>=</span> <span class='kw pkg'>rgdal</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/rgdal/topics/readOGR'>readOGR</a></span>(<span class='st'>'la_metro.shp'</span>))
+    <span class='fu'>getAOI</span>(<span class='kw'>clip</span> <span class='kw'>=</span> <span class='fu'>raster</span>(<span class='st'>'AOI.tif'</span>))
+
 <span class='co'># Get AOI defined by 10 mile bounding box using lat/lon</span>
-    <span class='fu'>getAOI</span>(<span class='kw'>clip</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>35</span>, -<span class='fl'>119</span>, <span class='fl'>10</span>, <span class='fl'>10</span>))</div><div class='output co'>#&gt; <span class='message'>AOI defined as a 10 mile tall by 10 mile wide region centered on 35/-119 (lat/lon)</span></div><div class='output co'>#&gt; class       : SpatialPolygons 
-#&gt; features    : 1 
-#&gt; extent      : -119.0885, -118.9115, 34.92754, 35.07246  (xmin, xmax, ymin, ymax)
-#&gt; coord. ref. : +proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0+no_defs </div><div class='input'>
+    <span class='fu'>getAOI</span>(<span class='kw'>clip</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>35</span>, -<span class='fl'>119</span>, <span class='fl'>10</span>, <span class='fl'>10</span>))
+
 <span class='co'># Get AOI defined by 10 mile2 bounding box using the 'KMART near UCSB' as lower left corner</span>
-    <span class='fu'>getAOI</span>(<span class='kw'>clip</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='st'>'KMART near UCSB'</span>, <span class='fl'>10</span>, <span class='fl'>10</span>, <span class='st'>'lowerleft'</span>))</div><div class='output co'>#&gt; <span class='message'>AOI defined as a 10 mile tall by 10 mile wide region with (the) KMART near UCSB in the lower left corner</span></div><div class='output co'>#&gt; class       : SpatialPolygons 
-#&gt; features    : 1 
-#&gt; extent      : -119.8677, -119.692, 34.42859, 34.57352  (xmin, xmax, ymin, ymax)
-#&gt; coord. ref. : +proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0+no_defs </div></pre>
+    <span class='fu'>getAOI</span>(<span class='kw'>clip</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='st'>'KMART near UCSB'</span>, <span class='fl'>10</span>, <span class='fl'>10</span>, <span class='st'>'lowerleft'</span>))
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
