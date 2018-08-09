@@ -23,6 +23,7 @@ print.geoloc <- function(x) {
 #' }
 
 geoCode = function(point) {
+
   pt = definePoint(point, geo = F)
 
   connectStr <-

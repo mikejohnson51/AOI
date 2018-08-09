@@ -54,7 +54,7 @@ geocodeOSM = function (location, pt = FALSE, bb = FALSE) {
 
   loc = data.frame(lat = fin$lat, lon = fin$lon)
 
-  if(all(!sf, !bb)) {return(loc)} else {
+  if(all(!pt, !bb)) {return(loc)} else {
     items = list(coords = loc)
     if(pt){items[["pt"]] = pt}
     if(bb){items[["bb"]] = Ps1}
