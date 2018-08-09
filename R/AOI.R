@@ -14,10 +14,11 @@
 #'
 #' @import      leaflet
 #' @importFrom  sp Polygon SpatialPolygons spTransform Polygons CRS
-#' @importFrom  dismo geocode
-#' @importFrom  utils capture.output tail
+#' @importFrom  utils tail
 #' @importFrom  raster rasterToPolygons
 #' @importFrom  sf st_as_sf as_Spatial st_bbox st_transform
+#' @importFrom  xml2 read_xml xml_children xml_attrs
 
 NULL
+
 

@@ -20,7 +20,7 @@ definePoint = function(point, geo = FALSE, coords = TRUE) {
     colnames(pts) = c("lon", "lat")
     pts = data.frame(pts)
   } else if (class(point) == "character") {
-    pts = AOI::getPoint(point)
+    pts = AOI::geocodeOSM(point)
 
     if (geo) {
       point = sf::st_as_sf(

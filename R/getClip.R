@@ -22,7 +22,7 @@ getClip = function(location = NULL, width = NULL, height = NULL, origin = NULL){
     if(class(location) == "numeric"){ location = location }
 
     if(class(location) == "character"){
-      location = getPoint(name = location)
+      location = geocodeOSM(location = location)
       location = unlist(location)
     }
 

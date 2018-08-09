@@ -17,7 +17,8 @@ Imports:
     raster,
     utils,
     sf(>= 0.6-0),
-    sp
+    sp,
+    xml2
 Suggests: 
     testthat
 License: MIT + file LICENSE

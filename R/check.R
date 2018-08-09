@@ -55,6 +55,9 @@ check = function(AOI = NULL) {
 
   m
 
-  return(list(AOI = if(!is.null(AOI)){AOI = AOI}, map = m))
+  if(is.null(AOI)){return(map)} else {
+
+  return(list(AOI = AOI, map = m))
+  }
 }
 
