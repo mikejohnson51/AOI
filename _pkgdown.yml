@@ -10,7 +10,6 @@ reference:
     contents:
       - '`getAOI`'
       - '`getBoundingBox`'
-      - '`getPoint`'
   - title: Tools
     desc: ~
       Tools for exploring, describing and defining AOIs
@@ -18,7 +17,8 @@ reference:
       - '`check`'
       - '`bbox_st`'
       - '`describe`'
-      - '`geoCode`'
+      - '`geocode`'
+      - '`revgeocode`'
   - title: Data and Package Helpers
     desc: ~
       Data and function that make the package useable

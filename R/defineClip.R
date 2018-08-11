@@ -39,6 +39,16 @@ defineClip = function(clip = NULL, km = FALSE) {
 
   # AOI defined by location and bounding box width and height
 
+  if (length(clip) == 1) {
+    if(!checkClass(clip, 'character')){ stop("If only one item is entered for 'clip' it must be a character place name")} else{
+      location <- clip
+      h        <- NULL
+      w        <- NULL
+      o        <- NULL
+    }
+  }
+
+
   if (length(clip) == 3) {
     if (all(is.numeric(unlist(clip)))) {
       stop(
@@ -132,8 +142,8 @@ defineClip = function(clip = NULL, km = FALSE) {
 
   return(list(
     location = location,
-    h = ifelse(km, (h*0.62137119224), h),
-    w = ifelse(km, (w*0.62137119224), w),
+    h = if(is.null(h)){NULL} else{ ifelse(km, (h*0.62137119224), h) },
+    w = if(is.null(w)){NULL} else {ifelse(km, (w*0.62137119224), w) },
     o = o
   ))
  }

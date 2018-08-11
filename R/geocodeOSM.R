@@ -1,5 +1,5 @@
 #' @title Geocode with Open Street Maps
-#' @description \code{geocodeOSM} takes an input string and converts it to a geolocation.
+#' @description \code{geocode} takes an input string and converts it to a geolocation.
 #' Addtionally it can return the location as a simple features point and the minimun bounding area
 #' of the location extent.
 #' @param location a place name
@@ -14,7 +14,10 @@
 #' geocodeOSM("Garden of the Gods", bb = TRUE)
 #' }
 
-geocodeOSM = function (location, pt = FALSE, bb = FALSE) {
+geocode = function (location, pt = FALSE, bb = FALSE) {
+
+  if(class(location) != 'character'){stop("\nInput location is not a place name. \nYou might be looking for reverse geocodeing.\nTry: AOI::revgeocode")}
+
   URL <- paste0("http://nominatim.openstreetmap.org",
                  "/search?q=",
                  gsub(" ", "+", location, fixed = TRUE),
@@ -31,34 +34,18 @@ geocodeOSM = function (location, pt = FALSE, bb = FALSE) {
   fin$lat = as.numeric(fin$lat)
   fin$lon = as.numeric(fin$lon)
 
-  if(pt) { pt = sf::st_as_sf(x = fin, coords = c("lon", "lat"), crs = as.character(AOI::aoiProj)) }
+  if(pt) { point = sf::st_as_sf(x = fin, coords = c("lon", "lat"), crs = as.character(AOI::aoiProj)) }
 
-  if(bb) {
-
-    tmp = as.numeric(unlist(strsplit(fin$boundingbox, ",")))
-    b = as.data.frame(t(tmp), stringsAsFactors = FALSE)
-    names(b) = c("ymax","ymin", "xmin", "xmax")
-
-    coords = matrix(c(b$xmin, b$ymin,
-                      b$xmin, b$ymax,
-                      b$xmax, b$ymax,
-                      b$xmax, b$ymin,
-                      b$xmin, b$ymin),
-                    ncol = 2, byrow = TRUE)
-
-
-    P1 = sp::Polygon(coords)
-    Ps1 = sp::SpatialPolygons(list(sp::Polygons(list(P1), ID = "bb")), proj4string=AOI::aoiProj)
-
-  }
+  if(bb) { bbox = osmbb_sp(fin$boundingbox) }
 
   loc = data.frame(lat = fin$lat, lon = fin$lon)
 
   if(all(!pt, !bb)) {return(loc)} else {
     items = list(coords = loc)
-    if(pt){items[["pt"]] = pt}
-    if(bb){items[["bb"]] = Ps1}
+    if(pt){items[["pt"]] = point}
+    if(bb){items[["bb"]] = bbox}
     return(items)
   }
   }
 }
+

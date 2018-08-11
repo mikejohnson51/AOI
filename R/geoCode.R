@@ -22,18 +22,18 @@ print.geoloc <- function(x) {
 #' print(pt2)
 #' }
 
-geoCode = function(point) {
+revgeocode = function(point){
 
-  pt = definePoint(point, geo = F)
+  if(class(point) == 'character') { pt = geocode(point) } else { pt = data.frame(lat =point[1], lon = point[2]) }
 
-  connectStr <-
-    paste0(
-      "http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode",
-      "?f=pjson&featureTypes=&location=",
-      paste(pt$lon, pt$lat, sep = ",")
-    )
+# ESRI Rgeocode -----------------------------------------------------------
 
-  ll = readLines(connectStr, warn = F)
+  esri.url <-paste0("http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode",
+                      "?f=pjson&featureTypes=&location=",
+                      paste(pt$lon, pt$lat, sep = ",")
+  )
+
+  ll = readLines(esri.url, warn = F)
 
   x = rbind(
     Match_addr = gsub(" ", " ", gsub(".*: \"s*|\".*", "", ll[grepl("\"Match_addr\":", ll)])),
@@ -58,17 +58,67 @@ geoCode = function(point) {
     CountryCode = gsub(" ", " ", gsub(".*: \"s*|\".*", "", ll[grepl("\"CountryCode\":", ll)]))
   )
 
-  xx = x[x[, 1] != "",]
-  xxx = as.data.frame(t(xx), stringsAsFactors = F)
-  xxx[['lon']] = as.numeric(pt$lon)
-  xxx[['lat']]  = as.numeric(pt$lat)
-  class(xxx) <- c("geoloc", class(xxx))
+  esri = x[x[, 1] != "",]
+  esri = as.data.frame(t(esri), stringsAsFactors = F)
+  esri[['lon']] = as.numeric(pt$lon)
+  esri[['lat']]  = as.numeric(pt$lat)
 
-  return(xxx)
+
+# OSM Rgeocode ------------------------------------------------------------
+
+
+  URL = paste0("https://nominatim.openstreetmap.org/reverse?format=xml&lat=",
+               pt$lat,
+               "&lon=",
+               pt$lon,
+               "&zoom=18&addressdetails=1")
+
+  xx = xml2::read_xml(URL)
+  xx = xml2::xml_children(xx)
+
+  ll = xml2::xml_attrs(xx[1] )
+
+  fin = as.data.frame(t(ll[[1]]), stringsAsFactors = F)
+
+  y = as.character(xx[2])
+
+  val = gsub("<.*?>", "", y)
+  val = unlist(strsplit(val, "\n"))
+  val = val[val != ""]
+  val = trimws(val)
+
+  nam = gsub(">.*?<", " ", y)
+  nam = gsub("/", "", nam)
+  nam = unlist(strsplit(nam, " "))
+  nam = nam[duplicated(nam)]
+
+
+  val = as.data.frame(t(val), stringsAsFactors = F)
+  names(val) = nam
+
+  val[["place_id"]] = fin$place_id
+  val[["osm_type"]] = fin$osm_type
+  val[["osm_id"]] = fin$osm_id
+  val[["lat"]] = fin$lat
+  val[["lon"]] = fin$lon
+  val[["bb"]] = fin$boundingbox
+
+  osm = val
+
+  tmp = c(osm, esri)
+
+  tmp = tmp[!duplicated(tmp)]
+
+  tmp = as.data.frame(tmp, stringsAsFactors = F)
+
+  tmp = tmp[!(names(tmp) %in% c("lat.1", "lon.1", "country_code","Neighborhood", "shorlabel"))]
+  names(tmp) = tolower(names(tmp))
+
+  class(tmp) <- c("geoloc", class(tmp))
+
+  return(tmp)
 
 }
-
-
 
 
 

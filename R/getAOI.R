@@ -147,19 +147,20 @@ getAOI = function(state = NULL,
 
   if(is.null(shp)){
 
-   fin = defineClip(clip, km = km)
+        fin = defineClip(clip, km = km)
 
-   shp <- getClip(location = fin$location,
+        shp <- getClip(location = fin$location,
                       width = fin$w,
                       height = fin$h,
                       origin = fin$o)
+
   }
 
   #------------------------------------------------------------------------------#
   # Return AOI                                                                   #
   #------------------------------------------------------------------------------#
 
-  message("AOI defined as ", firstLower(nameAOI(state, county, clip, km = km)))
+  #message("AOI defined as ", firstLower(nameAOI(state, county, clip, km = km)))
 
   if(sf){ shp = sf::st_as_sf(shp) }
 

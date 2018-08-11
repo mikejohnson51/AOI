@@ -19,10 +19,16 @@
 
 getClip = function(location = NULL, width = NULL, height = NULL, origin = NULL){
 
+  if(all(is.null(h), is.null(w), is.null(origin))){
+    shp = geocode(location, bb =T)$bb
+  } else {
+
     if(class(location) == "numeric"){ location = location }
 
     if(class(location) == "character"){
-      location = geocodeOSM(location = location)
+
+
+      location = geocode(location = location)
       location = unlist(location)
     }
 
@@ -82,6 +88,7 @@ getClip = function(location = NULL, width = NULL, height = NULL, origin = NULL){
 
     P1 = sp::Polygon(coords)
     shp = sp::SpatialPolygons(list(sp::Polygons(list(P1), ID = "a")), proj4string= aoiProj)
+  }
     return(shp)
 }
 
