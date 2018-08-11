@@ -150,7 +150,7 @@ getAOI = function(state = NULL,
         fin = defineClip(clip, km = km)
 
         shp <- getClip(location = fin$location,
-                      width = fin$w,
+                      width =  fin$w,
                       height = fin$h,
                       origin = fin$o)
 

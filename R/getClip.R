@@ -19,7 +19,7 @@
 
 getClip = function(location = NULL, width = NULL, height = NULL, origin = NULL){
 
-  if(all(is.null(h), is.null(w), is.null(origin))){
+  if(all(is.null(height), is.null(width), is.null(origin))){
     shp = geocode(location, bb =T)$bb
   } else {
 
