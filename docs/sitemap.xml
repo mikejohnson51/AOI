@@ -34,7 +34,7 @@
     <loc>https://github.com/mikejohnson51/AOI/reference/firstLower.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/geoCode.html</loc>
+    <loc>https://github.com/mikejohnson51/AOI/reference/geocode.html</loc>
   </url>
   <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/getAOI.html</loc>
@@ -49,16 +49,19 @@
     <loc>https://github.com/mikejohnson51/AOI/reference/getFiat.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/getPoint.html</loc>
-  </url>
-  <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/nameAOI.html</loc>
   </url>
   <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/nameClip.html</loc>
   </url>
   <url>
+    <loc>https://github.com/mikejohnson51/AOI/reference/osmbb_sp.html</loc>
+  </url>
+  <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/mikejohnson51/AOI/reference/revgeocode.html</loc>
   </url>
   <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/simpleCap.html</loc>
@@ -68,6 +71,9 @@
   </url>
   <url>
     <loc>https://github.com/mikejohnson51/AOI/articles/clipAreas.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/mikejohnson51/AOI/articles/geocode.html</loc>
   </url>
   <url>
     <loc>https://github.com/mikejohnson51/AOI/articles/stateCounty.html</loc>

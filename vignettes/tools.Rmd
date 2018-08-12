@@ -116,19 +116,6 @@ Often users will want to use a bounding box for external packages that require i
 getAOI(clip = list("Temecula" , 10, 30)) %>% bbox_st()
 ```
 
-#Defining a point
-
-```{r}
-definePoint("UCSB")
-```
-
-```{r}
-definePoint("UCSB", geo = TRUE)
-```
-
-```{r}
-definePoint("UCSB", geo = TRUE, coords = FALSE)
-```
 
 #Get Bounding Area for a set of objects:
 
@@ -136,7 +123,7 @@ Sometimes a user has a set of features they want to define an AOI. For this the 
 
 ```{r}
 
-nwis = definePoint("AUSTIN, TX") %>% HydroData::findNearestNWIS(n = 20)
+nwis = geocode("AUSTIN, TX") %>% HydroData::findNearestNWIS(n = 20)
 
 head(nwis)
 
@@ -150,23 +137,4 @@ check(bb)$map %>% addMarkers(data = nwis, popup = paste("USGS Gage: ",nwis$site_
 describe(bb)
 ```
 
-#Geocoding
 
-At times users will want to look up information about a location (either lat/long or character). For these cases `AOI` offers a geocoding (and reverse geocoding) interface built into the geoCode function.
-
-For example, I am a big fan of the restaurant "Rasta Pasta" in downtown Colorado Springs, but finding the spatial information regarding this location (such as lat/lon, address, city, ect) can be difficult. For this the geoCode function can be handy.
-
-```{r, message = FALSE}
-pt = geoCode("Rasta Pasta, Colorado Springs")
-print(pt)
-
-RP = getAOI(clip = list(pt$LongLabel, 1, 1)) %>% check()
-
-RP$map %>% addMarkers(lat = pt$lat, lng = pt$lon, popup = pt$Match_addr)
-```
-
-Other times users may be given a lat/long with out much context of where it it. For example, can anyone off the top of there head describe where 38/-107 is?
-
-```{r, message = FALSE}
-geoCode(c(38, -107))
-```

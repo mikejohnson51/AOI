@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Reverse Geocode — geoCode • Areas of Interest: AOI   </title>
+<title>Geocode with Open Street Maps — geocode • Areas of Interest: AOI   </title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,11 @@
 
 
 
-<meta property="og:title" content="Reverse Geocode — geoCode" />
+<meta property="og:title" content="Geocode with Open Street Maps — geocode" />
 
-<meta property="og:description" content="Describe a point using the ERSI server geocoding  and reverse geocoding functionalities" />
+<meta property="og:description" content="geocode takes an input string and converts it to a geolocation.
+Addtionally it can return the location as a simple features point and the minimun bounding area
+of the location extent." />
 
 <meta property="og:image" content="https://github.com/mikejohnson51/AOI/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -85,6 +87,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/geocode.html">Geocoding</a>
+    </li>
+    <li>
       <a href="../articles/stateCounty.html">State &amp; County AOI</a>
     </li>
     <li>
@@ -126,40 +131,47 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Reverse Geocode</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mikejohnson51/AOI//blob/master/R/geoCode.R'><code>R/geoCode.R</code></a></small>
-    <div class="hidden name"><code>geoCode.Rd</code></div>
+    <h1>Geocode with Open Street Maps</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mikejohnson51/AOI//blob/master/R/geocodeOSM.R'><code>R/geocodeOSM.R</code></a></small>
+    <div class="hidden name"><code>geocode.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Describe a point using the ERSI server geocoding  and reverse geocoding functionalities</p>
+    <p><code>geocode</code> takes an input string and converts it to a geolocation.
+Addtionally it can return the location as a simple features point and the minimun bounding area
+of the location extent.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>geoCode</span>(<span class='no'>point</span>)</pre>
+    <pre class="usage"><span class='fu'>geocode</span>(<span class='no'>location</span>, <span class='kw'>pt</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>bb</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>point</th>
-      <td><p>a point provided a lat,long vector or data.frame; or a string</p></td>
+      <th>location</th>
+      <td><p>a place name</p></td>
+    </tr>
+    <tr>
+      <th>pt</th>
+      <td><p>if TRUE a simple feature point is appended to returned list</p></td>
+    </tr>
+    <tr>
+      <th>bb</th>
+      <td><p>if TRUE the OSM bounding area of the location is appended to returned list</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a data.frame of input point descriptions</p>
+    <p>at minimum a data.frame of lat, long</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>pt1</span> <span class='kw'>=</span> <span class='fu'>geoCode</span>(<span class='st'>"UCSB"</span>)
-<span class='fu'>print</span>(<span class='no'>pt1</span>)
-
-<span class='no'>pt2</span> <span class='kw'>=</span> <span class='fu'>geoCode</span>(<span class='fu'>c</span>(<span class='fl'>38</span>,-<span class='fl'>115</span>))
-<span class='fu'>print</span>(<span class='no'>pt2</span>)
+<span class='fu'>geocodeOSM</span>(<span class='st'>"UCSB"</span>)
+<span class='fu'>geocodeOSM</span>(<span class='st'>"Garden of the Gods"</span>, <span class='kw'>bb</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

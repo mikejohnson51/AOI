@@ -1,7 +1,7 @@
 print.geoloc <- function(x) {
 
   for(i in 1:NCOL(x)){
-    cat(paste0("\n", names(x)[i], paste(rep(" ", 12 - nchar(names(x)[i])), collapse = ""), ":\t"))
+    cat(paste0("\n", names(x)[i], paste(rep(" ", 16 - nchar(names(x)[i])), collapse = ""), ":\t"))
     cat(paste(x[i]))
   }
 }

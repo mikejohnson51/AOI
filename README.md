@@ -7,14 +7,15 @@
 
 **Welcome to the AOI R homepage!** <br>
 
-If you've ever found yourself needing to formalize an area of interest, get bounding geometries, decribe a place by lat/long, or better understand spatial locations this package should be able to help. 
+If you've ever found yourself needing to geocode or reverse geocode a location, formalize an area of interest, get bounding geometries, decribe a place by lat/long, or better understand spatial locations this package should be able to help. 
 
-An area of interest (AOI) is a geographic extent. It helps confine and formalize a unit of work to a geographic area, and prioritize and define research and sub setting efforts while improving reproducibility. 
+An area of interest (AOI) is a geographic extent. It helps confine and formalize a unit of work to a geographic area, and prioritize and define research and sub setting efforts while improving reproducibility. They are built around concrete spatail attributes but often are discussed in a more colloquail way. The aim of the is package is to help make the colloquial understanding of space more concrete.
 
 'AOI` lets users define regions through a common query to achieve a spatial geometries that can be used in sub setting, clipping, and mapping operations. Tools are  provided to help define, describe, and convert points, boundaries, and features to usable forms. In principle, the AOI package helps accomplish four main tasks increasing in order of simply providing convenience to providing new functionality to the deep R spatial ecosystem. These include helping:
 
 1. Create bounding geometries of existing `sp`, `sf`, and `raster` objects (see [here](./articles/clipAreas.html))
 2. Get `sp`, or `sf`, state and county geometries or their bounding geometries (see [here](./articles/stateCounty.html))
+3. Provide geocoding and reverse geocoding functionalities
 3. Create `sp` or `sf` geometries from a given location and bounding box dimensions. (see [here](./articles/clipAreas.html))
 4. Map, describe and communicate AOIs to others. (see [here](./articles/tools.html))
 5. Integrate with other spatial packages in the R ecosystem (see [here](./articles/useCases.html))

@@ -96,7 +96,7 @@ ned %>%
 
 files = nwm::getFilelist(type = 'land', date = "20180803", t = 0, f = c(3,6,9,12))
 
-AOI = getAOI(clip = list("Devils Tower, SD", 10, 10)) %>% nwm::downloadNWM(files, param = 'accet')
+AOI = getAOI(clip = list("Devils Tower, WY", 10, 10)) %>% nwm::downloadNWM(files, param = 'accet')
 
 rasterVis::levelplot(AOI$accet, 
                      main = "National Water Model: Accumulated ET", 
@@ -125,7 +125,7 @@ ggplot() +
 Open Street Map provides one of the most extensive databases/cartographic representations of the world and the [osmdata](https://github.com/ropensci/osmdata) packages offers an interface to this resource. Here we look at answering the question "Where are the bike paths near my office in Ellison Hall?". 
 
 ```{r}
-office = getPoint("Ellison Hall, UCSB")
+office = geocode("UCSB")
 
 AOI = getAOI(clip = list(office$lat, office$lon, 2, 2)) %>% bbox_st()
 

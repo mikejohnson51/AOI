@@ -43,6 +43,8 @@ navbar:
     - text: "Documentation"
       icon: fas fa-book
       menu:
+      -  text: Geocoding
+         href: articles/geocode.html
       -  text: State & County AOI
          href: articles/stateCounty.html
       -  text: Clip based AOI

@@ -36,7 +36,11 @@ describe = function(AOI){
     origin = "center",
     stringsAsFactors = F)
 
-  df[["name"]] = geoCode(c(df$latCent, df$lngCent))[1,1]
+  rc = revgeocode(c(df$latCent, df$lngCent))
+
+  if(!is.null(rc$match_addr)) { df[["name"]] = rc$match_addr } else
+  if(!is.null(rc$city)) { df[["name"]] = rc$city } else
+  if(!is.null(rc$county)) { df[["name"]] = rc$county }
 
   cat("AOI Parameters:\n")
 
