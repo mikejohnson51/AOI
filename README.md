@@ -15,10 +15,10 @@ An area of interest (AOI) is a geographic extent. It helps confine and formalize
 
 1. Create bounding geometries of existing `sp`, `sf`, and `raster` objects (see [here](./articles/clipAreas.html))
 2. Get `sp`, or `sf`, state and county geometries or their bounding geometries (see [here](./articles/stateCounty.html))
-3. Provide geocoding and reverse geocoding functionalities
-3. Create `sp` or `sf` geometries from a given location and bounding box dimensions. (see [here](./articles/clipAreas.html))
-4. Map, describe and communicate AOIs to others. (see [here](./articles/tools.html))
-5. Integrate with other spatial packages in the R ecosystem (see [here](./articles/useCases.html))
+3. Provide geocoding and reverse geocoding functionalities from google, OSM and ESRI
+4. Create `sp` or `sf` geometries from a given location and bounding box dimensions. (see [here](./articles/clipAreas.html))
+5. Map, describe and communicate AOIs to others. (see [here](./articles/tools.html))
+6. Integrate with other spatial packages in the R ecosystem (see [here](./articles/useCases.html))
 
 All functions are designed to be used with the magrittr pipe operation `%>%`.
 

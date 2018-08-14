@@ -5,13 +5,14 @@ Version: 0.1.0
 Authors@R: person("Mike", "Johnson", role = c("aut", "cre"), email = "mike.johnson@geog.ucsb.edu")
 Maintainer: Mike Johnson <mike.johnson@geog.ucsb.edu>
 BugReports: https://github.com/mikejohnson51/AOI/issues
-Description: An area of interest (AOI) is a geographic extent used to describe a subset of space.
-    The AOI package is developed to help define, refine, and construct AOI spatial objects for subsetting,
-    mapping, and enhanced research reproducibility.
+Description: An area of interest (AOI) is a geographic extent. 
+    It helps confine and formalize a unit of work to a geographic area, and prioritize and define research and sub setting efforts while improving reproducibility. 
+    They are built around concrete spatail attributes but often are discussed in a more colloquail way. 
+    The aim of the is package is to help make the colloquial understanding of space more concrete.
 Depends:
     R(>= 3.3.0)
 Imports:
-    dismo,
+    jsonlite,
     leaflet,
     magrittr,
     raster,

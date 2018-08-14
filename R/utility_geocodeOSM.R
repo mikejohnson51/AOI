@@ -14,7 +14,7 @@
 #' geocodeOSM("Garden of the Gods", bb = TRUE)
 #' }
 
-geocode = function (location, pt = FALSE, bb = FALSE) {
+geocodeOSM = function (location, pt = FALSE, bb = FALSE) {
 
   if(class(location) != 'character'){stop("\nInput location is not a place name. \nYou might be looking for reverse geocodeing.\nTry: AOI::revgeocode")}
 

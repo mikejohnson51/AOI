@@ -1,0 +1,40 @@
+geocodeGoogle = function(location, pt = FALSE, bb = FALSE){
+
+s = jsonlite::fromJSON(paste0("https://maps.googleapis.com/maps/api/geocode/json?address=", gsub(" ", "+", location)))
+
+f = data.frame(tmp = s$results$formatted_address, stringsAsFactors = F)
+t = as.data.frame(t(unlist(s$results$address_components)), stringsAsFactors = F)
+g = as.data.frame(t(unlist(s$results$geometry)), stringsAsFactors = F)
+
+fin = c(f,t,g)
+
+fin$address = paste(fin[grepl("long", names(fin))], collapse = ", ")
+
+fin$bb = paste(fin[grepl("northeast.lat", names(fin))],
+       fin[grepl("southwest.lat", names(fin))],
+       fin[grepl("southwest.lng", names(fin))],
+       fin[grepl("northeast.lng", names(fin))], sep = ",")
+names(fin) = gsub("location.", "", names(fin))
+
+x = c("viewport", "type", "short", "tmp", "long")
+
+fin = fin[!grepl(paste(x, collapse = "|"), names(fin))]
+
+fin = as.data.frame(fin, stringsAsFactors = F)
+fin$lat = as.numeric(fin$lat)
+fin$lng = as.numeric(fin$lng)
+
+if(pt) { point = sf::st_as_sf(x = fin, coords = c("lng", "lat"), crs = as.character(AOI::aoiProj)) }
+
+if(bb) { bbox = osmbb_sp(fin$bb) }
+
+loc = data.frame(lat = fin$lat, lon = fin$lng)
+
+if(all(!pt, !bb)) {return(loc)} else {
+  items = list(coords = loc)
+  if(pt){items[["pt"]] = point}
+  if(bb){items[["bb"]] = bbox}
+  return(items)
+}
+}
+

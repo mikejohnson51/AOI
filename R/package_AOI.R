@@ -13,6 +13,7 @@
 #' @name AOI
 #'
 #' @import      leaflet
+#' @importFrom  jsonlite fromJSON
 #' @importFrom  sp Polygon SpatialPolygons spTransform Polygons CRS
 #' @importFrom  utils tail
 #' @importFrom  raster rasterToPolygons
