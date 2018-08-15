@@ -49,3 +49,4 @@ getBoundingBox = function(x, sf = FALSE) {
   return(bb)
 }
 
+

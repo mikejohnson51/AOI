@@ -21,46 +21,53 @@ library(sp)
 col  = '#1c26a9'
 col1 = '#212f3f'
 
-icon.r <- awesomeIcons(
+icon.g <- awesomeIcons(
     icon='home',
     iconColor = col1,
     markerColor = "gray",
     library='fa')
 
-icon.b <- awesomeIcons(
+icon.r <- awesomeIcons(
     icon='home',
     iconColor = col1,
     markerColor = 138,
     library='fa')
 
+icon.b <- awesomeIcons(
+    icon='home',
+    iconColor = col1,
+    markerColor = "blue",
+    library='fa')
+
 ```
 
 
-At times users will want to look up information about a location (either lat/long or character). For these cases `AOI` offers a geocoding (and reverse geocoding) interface built into the geoCode function.
+Th times users will want to look up information about a location (either lat/long or character). For these cases `AOI` offers a geocoding (and reverse geocoding) interface built into the geoCode function.
 
 For example, I am a big fan of the restaurant "Rasta Pasta" in downtown Colorado Springs, but finding the spatial information regarding this location (such as lat/lon, address, city, ect) can be difficult. For this the geoCode function can be handy.
 
 ##*Geocoding*:
 
-Here we use AOI's geocode to find the lat/lon of the Grand Canyon, using both the colloquial name, and the (lat/long) pair found with a <a target="_blank"href="http://www.Google.com/search?q=grand+canyon+lat+long">Google search.</a> Notice slightly different locations are generated:
+`AOI` offers a geocoding function wrapping both the [Google Maps](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwivqciF8e3cAhUm34MKHRrlBncQFjAAegQICBAB&url=https%3A%2F%2Fmaps.google.com%2F&usg=AOvVaw3z2z03MnvIwD2K6kwtdD9z) and [OpenStreetMaps Nominatim](https://wiki.openstreetmap.org/wiki/Nominatim) API. The default is to use the google API however users can select specific services via the `server` parameter. The reason for offering both is the announced (yet unimplemented) limitations to be placed on non-keyed API calls to goolge maps. Here we use AOI's geocode to find the lat/lon of the Grand Canyon, using both the colloquial name, and the (lat/long) pair found with a <a target="_blank"href="http://www.Google.com/search?q=grand+canyon+lat+long">Google search.</a> Notice slightly different locations are generated:
 
 ```{r, message = F}
-GC_name = geocode("grand canyon")
-GC_lat_lon = getAOI(clip = list(36.0544, -112.1401, 10, 10))
+GC_google = geocode("grand canyon")
+
+GC_osm = geocode("grand canyon", server = "osm")
 ```
 
 ```{r, echo = FALSE}
 
 latlon = "<strong>Query by Lat Long</strong>"
 API = "<strong>Geocode by Name</strong>"
-gc = geocode("grand canyon")
 
 leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 10, maxZoom = 10)) %>% addProviderTiles(providers$CartoDB.Positron) %>% 
-   #addPolygons(data = GC_name, fillColor = "transparent", color = col, weight = 4)  %>% 
-   #addPolygons(data = GC_lat_lon, fillColor = "transparent", color = col1, weight = 4) %>% 
-   addAwesomeMarkers(icon = icon.b, lat = gc$lat, lng = gc$lon, popup = API) %>% 
-   addAwesomeMarkers(icon = icon.r, lat = 36.0544 , lng = -112.1401, popup = latlon)
+   addAwesomeMarkers(icon = icon.g, lat = GC_google$lat, lng = GC_google$lon, popup = "<strong>Geocode via Google Maps</strong>") %>% 
+   addAwesomeMarkers(icon = icon.b, lat = GC_osm$lat, lng = GC_osm$lon, popup = "<strong>Geocode via OSM</strong>") %>% 
+   addAwesomeMarkers(icon = icon.r, lat = 36.0544 , lng = -112.1401, popup = "<strong>Google search</strong>")
 ```
+
+There are 
 
 ```{r, message = F}
 GC = geocode("grand canyon", bb = T)
