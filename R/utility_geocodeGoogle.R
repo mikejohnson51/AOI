@@ -1,6 +1,7 @@
 geocodeGoogle = function(location, pt = FALSE, bb = FALSE){
 
 s = jsonlite::fromJSON(paste0("https://maps.googleapis.com/maps/api/geocode/json?address=", gsub(" ", "+", location)))
+if(s$status == "OVER_QUERY_LIMIT"){break}
 
 f = data.frame(tmp = s$results$formatted_address, stringsAsFactors = F)
 t = as.data.frame(t(unlist(s$results$address_components)), stringsAsFactors = F)

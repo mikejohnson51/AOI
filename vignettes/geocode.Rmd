@@ -71,7 +71,7 @@ There are
 
 ```{r, message = F}
 GC = geocode("grand canyon", bb = T)
-GC
+
 ```
 
 ```{r, echo = FALSE}
