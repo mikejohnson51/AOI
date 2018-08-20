@@ -2,18 +2,18 @@
 % Please edit documentation in R/getBoundingBox.R
 \name{getBoundingBox}
 \alias{getBoundingBox}
-\title{Get bounding box}
+\title{Get mimimum bounding box of spatial Objects}
 \usage{
 getBoundingBox(x, sf = FALSE)
 }
 \arguments{
-\item{x}{a \code{data.frame} with a lat and long column, a Raster or a Spatial Object}
+\item{x}{a \code{data.frame} with a lat and long column, a Raster, sf, or Spatial Objects}
 
-\item{sf}{\code{logical}. If \code{TRUE} object returned is of class sf,
-default is \code{FALSE} and returns class SpatialPolygonsounding box of input points \code{x}}
+\item{sf}{\code{logical}. If \code{TRUE} object returned is of class sf
+default is \code{FALSE} and returns class SpatialPolygon}
 }
 \description{
-Reeurn a minimum bounding box spatial object for a set or single Spatial, raster or sf object(s)
+Returns a minimum bounding box for a set or  Spatial*, raster or sf object(s)
 }
 \author{
 Mike Johnson

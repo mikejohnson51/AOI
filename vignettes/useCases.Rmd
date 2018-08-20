@@ -71,7 +71,7 @@ AOI$map
 ```{r, eval = FALSE}
 library(rayshader)
 
-AOI = getAOI(clip = list("UCSB", 10, 10)) %>% HydroData::findNED()
+AOI = getAOI(clip = list("Universty of Oregon", 10, 30)) %>% HydroData::findNED()
 
 ned = matrix(raster::extract(AOI$NED,raster::extent(AOI$NED),buffer=1000),
                nrow=ncol(AOI$NED),ncol=nrow(AOI$NED))
@@ -160,3 +160,9 @@ rasterVis::levelplot(rr/10,
 
 ```
 
+#Getting Basemaps with OSMR
+
+```{r, message=F}
+library(rosm)
+bb = getAOI(clip = list("Lake Cachuma", 20,20)) %>% osm.plot(type="stamenbw")
+```

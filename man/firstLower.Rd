@@ -2,7 +2,7 @@
 % Please edit documentation in R/utility_firstLower.R
 \name{firstLower}
 \alias{firstLower}
-\title{Lower case first character}
+\title{Convert first character to lower case}
 \usage{
 firstLower(x)
 }

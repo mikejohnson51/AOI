@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Bounding box as string — bbox_st • Areas of Interest: AOI   </title>
+<title>Convert bounding box geometry to string — bbox_st • Areas of Interest: AOI   </title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Bounding box as string — bbox_st" />
+<meta property="og:title" content="Convert bounding box geometry to string — bbox_st" />
 
-<meta property="og:description" content="Convert an AOI or spatial object to a data.frame of xmin, xmax, ymin, ymax" />
+<meta property="og:description" content="Convert an AOI or spatial object to a data.frame of (xmin, xmax, ymin, ymax)" />
 
 <meta property="og:image" content="https://github.com/mikejohnson51/AOI/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -129,14 +129,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Bounding box as string</h1>
+    <h1>Convert bounding box geometry to string</h1>
     <small class="dont-index">Source: <a href='https://github.com/mikejohnson51/AOI//blob/master/R/bbox_st.R'><code>R/bbox_st.R</code></a></small>
     <div class="hidden name"><code>bbox_st.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Convert an AOI or spatial object to a data.frame of xmin, xmax, ymin, ymax</p>
+    <p>Convert an AOI or spatial object to a data.frame of (xmin, xmax, ymin, ymax)</p>
     
     </div>
 
@@ -147,20 +147,20 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>AOI</th>
-      <td><p>an AOI obtained using <a href='getAOI.html'>getAOI</a>.</p></td>
+      <td><p>an AOI obtained using <a href='getAOI.html'>getAOI</a> (or any sp/sf object).</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a bb oject</p>
+    <p>a bounding box data.frame</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'>#Get a bounding box data.frame for AOI</span>
-<span class='no'>AOI</span> <span class='kw'>=</span> <span class='fu'><a href='getAOI.html'>getAOI</a></span>(<span class='kw'>clip</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='st'>"UCSB"</span>, <span class='fl'>10</span>, <span class='fl'>10</span>))
-<span class='no'>bb</span> <span class='kw'>=</span> <span class='fu'>bbox_st</span>(<span class='no'>AOI</span>)
+   <span class='no'>AOI</span> <span class='kw'>=</span> <span class='fu'><a href='getAOI.html'>getAOI</a></span>(<span class='kw'>clip</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='st'>"UCSB"</span>, <span class='fl'>10</span>, <span class='fl'>10</span>))
+   <span class='no'>bb</span> <span class='kw'>=</span> <span class='fu'>bbox_st</span>(<span class='no'>AOI</span>)
 <span class='fu'>print</span>(<span class='no'>bb</span>)
 
 <span class='co'># Chain to AOI calls:</span>

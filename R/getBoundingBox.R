@@ -1,8 +1,8 @@
-#' @title Get bounding box
-#' @description Reeurn a minimum bounding box spatial object for a set or single Spatial, raster or sf object(s)
-#' @param x a \code{data.frame} with a lat and long column, a Raster or a Spatial Object
-#' @param sf \code{logical}. If \code{TRUE} object returned is of class sf,
-#' default is \code{FALSE} and returns class SpatialPolygonsounding box of input points \code{x}
+#' @title Get mimimum bounding box of spatial Objects
+#' @description Returns a minimum bounding box for a set or  Spatial*, raster or sf object(s)
+#' @param x a \code{data.frame} with a lat and long column, a Raster, sf, or Spatial Objects
+#' @param sf \code{logical}. If \code{TRUE} object returned is of class sf
+#' default is \code{FALSE} and returns class SpatialPolygon
 #' @export
 #' @author Mike Johnson
 
@@ -25,26 +25,18 @@ getBoundingBox = function(x, sf = FALSE) {
   }
 
   coords = matrix(
-    c(
-      min(x$long),
-      min(x$lat),
-      min(x$long),
-      max(x$lat),
-      max(x$long),
-      max(x$lat),
-      max(x$long),
-      min(x$lat),
-      min(x$long),
-      min(x$lat)
-    ),
-    ncol = 2,
-    byrow = TRUE
-  )
+    c(min(x$long), min(x$lat),
+      min(x$long), max(x$lat),
+      max(x$long), max(x$lat),
+      max(x$long), min(x$lat),
+      min(x$long), min(x$lat)
+    ), ncol = 2, byrow = TRUE )
 
   bb = sp::Polygon(coords)
-  bb = sp::SpatialPolygons(list(Polygons(list(bb), ID = "AOI")), proj4string = AOI::aoiProj)
+  bb = sp::SpatialPolygons(list(Polygons(list(bb), ID = "AOI")),
+                           proj4string = AOI::aoiProj)
 
-  if(sf){bb = as_Spatial(bb)}
+  if(sf){bb = sf::st_as_sf(bb)}
 
   return(bb)
 }

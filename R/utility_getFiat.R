@@ -1,7 +1,5 @@
-#' Get State of County Spatial Boundary
-#'
-#' @details
-#' \code{getFiat} returns a \code{SpatialPolygons} object for a defiend state and/or county.
+#' @title Get State of County Spatial Boundary
+#' @details \code{getFiat} returns a \code{SpatialPolygons} object for a defiend state and/or county.
 #' Boundaries come from the 2017 US Census TIGER Dataset and are projected to \emph{EPSG:4269}.
 #' @param state     \code{character}. Full name or two character abbriviation. Not case senstive
 #' @param county    \code{character}. Provide county name(s). Requires 'state' input.

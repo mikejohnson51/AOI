@@ -2,24 +2,24 @@
 % Please edit documentation in R/bbox_st.R
 \name{bbox_st}
 \alias{bbox_st}
-\title{Bounding box as string}
+\title{Convert bounding box geometry to string}
 \usage{
 bbox_st(AOI)
 }
 \arguments{
-\item{AOI}{an AOI obtained using \link{getAOI}.}
+\item{AOI}{an AOI obtained using \link{getAOI} (or any sp/sf object).}
 }
 \value{
-a bb oject
+a bounding box data.frame
 }
 \description{
-Convert an AOI or spatial object to a data.frame of xmin, xmax, ymin, ymax
+Convert an AOI or spatial object to a data.frame of (xmin, xmax, ymin, ymax)
 }
 \examples{
 \dontrun{
 #Get a bounding box data.frame for AOI
-AOI = getAOI(clip = list("UCSB", 10, 10))
-bb = bbox_st(AOI)
+   AOI = getAOI(clip = list("UCSB", 10, 10))
+   bb = bbox_st(AOI)
 print(bb)
 
 # Chain to AOI calls:

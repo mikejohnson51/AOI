@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get area of interest (AOI) boundary — getAOI • Areas of Interest: AOI   </title>
+<title>Get Area of Interest (AOI) geometry — getAOI • Areas of Interest: AOI   </title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="Get area of interest (AOI) boundary — getAOI" />
+<meta property="og:title" content="Get Area of Interest (AOI) geometry — getAOI" />
 
 <meta property="og:description" content="Get a Spatial* representation of an AOI defined by:
 a US state name(s)
@@ -134,7 +134,7 @@ getAOI wraps getFiat and getClip into a single function." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get area of interest (AOI) boundary</h1>
+    <h1>Get Area of Interest (AOI) geometry</h1>
     <small class="dont-index">Source: <a href='https://github.com/mikejohnson51/AOI//blob/master/R/getAOI.R'><code>R/getAOI.R</code></a></small>
     <div class="hidden name"><code>getAOI.Rd</code></div>
     </div>
@@ -184,7 +184,7 @@ getAOI wraps getFiat and getClip into a single function." />
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a Spatial* object projected to <em>EPSG:4269</em>.</p>
+    <p>a geometry projected to <em>EPSG:4269</em>.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -226,11 +226,6 @@ Acceptable variations include:</p><ul>
 </ul></li>
 </ul>
     
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='getClip.html'>getClip</a></code></p>
-<p><code><a href='getFiat.html'>getFiat</a></code></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
@@ -251,8 +246,7 @@ Acceptable variations include:</p><ul>
 
 <span class='co'># Get AOI defined by 10 mile2 bounding box using the 'KMART near UCSB' as lower left corner</span>
     <span class='fu'>getAOI</span>(<span class='kw'>clip</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='st'>'KMART near UCSB'</span>, <span class='fl'>10</span>, <span class='fl'>10</span>, <span class='st'>'lowerleft'</span>))
-<span class='co'># }</span><div class='input'>
-</div></pre>
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -262,8 +256,6 @@ Acceptable variations include:</p><ul>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
-
-      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

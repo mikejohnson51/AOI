@@ -1,4 +1,4 @@
-#' @title Lower case first character
+#' @title Convert first character to lower case
 #' @description  \code{firstLower} lower cases the first character of a string
 #' @param x a string to be parsed.
 #' @author Mike Johnson

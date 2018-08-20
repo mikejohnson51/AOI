@@ -1,4 +1,4 @@
-#' @title Provide the plain-english description of a clip region
+#' @title Provide a plain-english description of a clip region
 #' @description Return a plain-english description of the clip list
 #' (eg: 'AOI defined as a 10 mile tall by 10 mile wide region centered on (the) UCSB')
 #' @param clip a user supplied clip list (see \code{\link{getAOI}} and \code{\link{getClip}})

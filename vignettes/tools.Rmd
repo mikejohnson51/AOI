@@ -127,9 +127,9 @@ nwis = geocode("AUSTIN, TX") %>% HydroData::findNearestNWIS(n = 20)
 
 head(nwis)
 
-bb = getBoundingBox(nwis)
+bb = getBoundingBox(nwis$nwis)
 
-check(bb)$map %>% addMarkers(data = nwis, popup = paste("USGS Gage: ",nwis$site_no)) 
+check(bb)$map %>% addMarkers(data = nwis$nwis, popup = paste("USGS Gage: ",nwis$site_no)) 
 
 ```
 

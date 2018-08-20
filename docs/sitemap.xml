@@ -10,6 +10,9 @@
     <loc>https://github.com/mikejohnson51/AOI/reference/aoiProj.html</loc>
   </url>
   <url>
+    <loc>https://github.com/mikejohnson51/AOI/reference/bbox_sp.html</loc>
+  </url>
+  <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/bbox_st.html</loc>
   </url>
   <url>
@@ -25,9 +28,6 @@
     <loc>https://github.com/mikejohnson51/AOI/reference/defineClip.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/definePoint.html</loc>
-  </url>
-  <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/describe.html</loc>
   </url>
   <url>
@@ -35,6 +35,12 @@
   </url>
   <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/geocode.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/mikejohnson51/AOI/reference/geocodeGoogle.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/mikejohnson51/AOI/reference/geocodeOSM.html</loc>
   </url>
   <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/getAOI.html</loc>
@@ -53,9 +59,6 @@
   </url>
   <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/nameClip.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/osmbb_sp.html</loc>
   </url>
   <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/pipe.html</loc>

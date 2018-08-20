@@ -27,7 +27,7 @@ defineClip = function(clip = NULL, km = FALSE) {
   }
 
   if (checkClass(clip, 'Raster')){
-    e = raster::extent(clip)
+    e = clip@extent
     x = mean(e[1:2])
     y = mean(e[3:4])
 
@@ -47,7 +47,6 @@ defineClip = function(clip = NULL, km = FALSE) {
       o        <- NULL
     }
   }
-
 
   if (length(clip) == 3) {
     if (all(is.numeric(unlist(clip)))) {
@@ -87,8 +86,6 @@ defineClip = function(clip = NULL, km = FALSE) {
             "3. A bounding box width (in miles) (numeric)\n",
             "4. A bounding box origin (character)"
         ))
-
-
 
     } else if (all(
       is.numeric(clip[[1]]),

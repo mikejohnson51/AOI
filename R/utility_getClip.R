@@ -1,4 +1,4 @@
-#' @title Get a bouding box for and AOI
+#' @title Convert clip unit ot geometry
 #' @description
 #' \code{getClip} generates a Spatial object based on a point; bounding box dimisions; and their relation to the point.
 #' @param location Defined by a location or lat, long pair
@@ -20,7 +20,7 @@
 getClip = function(location = NULL, width = NULL, height = NULL, origin = NULL){
 
   if(all(is.null(height), is.null(width), is.null(origin))){
-    shp = geocode(location = location, bb =TRUE)
+    shp = geocodeGoogle(location = location, bb =TRUE)
     shp =shp$bb
   } else {
 
@@ -32,7 +32,6 @@ getClip = function(location = NULL, width = NULL, height = NULL, origin = NULL){
       location = geocode(location = location)
       location = unlist(location)
     }
-
 
     if(origin == "center"){
       df = (height/2)/69                               # north/south

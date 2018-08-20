@@ -7,7 +7,7 @@
 describe(AOI)
 }
 \arguments{
-\item{AOI}{an AOI obtained using \link{getAOI}.}
+\item{AOI}{an AOI obtained using \link{getAOI}, or any sp/sf object.}
 }
 \value{
 a data.frame of AOI descriptors including
@@ -17,11 +17,11 @@ a data.frame of AOI descriptors including
   \item{height}{ height in (miles)}
   \item{width}{width in(miles)}
   \item{origin}{AOI origin}
-  \item{name}{Most descriptive geocoded name from \code{geoCode}}
+  \item{name}{Most descriptive geocoded name from \code{revgeocode}}
 }
 }
 \description{
-Convert an AOI object to a data.frame of describing factors. Can be usefull for sharing,
+Convert an AOI object to a data.frame of describing factors. Can be useful for sharing,
 documenting and repaeating AOI calls.
 }
 \examples{

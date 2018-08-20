@@ -11,12 +11,13 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.width = 6, 
-  fig.height = 4
+  fig.height = 4,
+  warning = F
 )
 
 devtools::load_all()
 library(leaflet)
-library(sp)
+#library(sp)
 
 col  = '#1c26a9'
 col1 = '#212f3f'
@@ -42,16 +43,18 @@ icon.b <- awesomeIcons(
 ```
 
 
-Th times users will want to look up information about a location (either lat/long or character). For these cases `AOI` offers a geocoding (and reverse geocoding) interface built into the geoCode function.
-
-For example, I am a big fan of the restaurant "Rasta Pasta" in downtown Colorado Springs, but finding the spatial information regarding this location (such as lat/lon, address, city, ect) can be difficult. For this the geoCode function can be handy.
+At times users will need information about a location either lat/long or place name. For these cases `AOI` offers a geocoding (and reverse geocoding) interface to the google, ESRI and OSM APIs, without requiring an API keys. While other packages offer geocoding capabilities (dismo, prettymapr, ggmap, opencage to name a few) they are generally tied to the google API and/or require a user key. For this packages purposes, this is not ideal.  Further from our knowledge, `AOI` is the only existing package to provide a reverse geocoding service to describe a location. This page walks through some of the functionalites within the `geocode` and `revgeocode` functions.   
 
 ##*Geocoding*:
 
-`AOI` offers a geocoding function wrapping both the [Google Maps](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwivqciF8e3cAhUm34MKHRrlBncQFjAAegQICBAB&url=https%3A%2F%2Fmaps.google.com%2F&usg=AOvVaw3z2z03MnvIwD2K6kwtdD9z) and [OpenStreetMaps Nominatim](https://wiki.openstreetmap.org/wiki/Nominatim) API. The default is to use the google API however users can select specific services via the `server` parameter. The reason for offering both is the announced (yet unimplemented) limitations to be placed on non-keyed API calls to goolge maps. Here we use AOI's geocode to find the lat/lon of the Grand Canyon, using both the colloquial name, and the (lat/long) pair found with a <a target="_blank"href="http://www.Google.com/search?q=grand+canyon+lat+long">Google search.</a> Notice slightly different locations are generated:
+Geocoding converts placenames to latitude and longitude pairs. `AOI` offers a geocoding function wrapping both the [Google Maps](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwivqciF8e3cAhUm34MKHRrlBncQFjAAegQICBAB&url=https%3A%2F%2Fmaps.google.com%2F&usg=AOvVaw3z2z03MnvIwD2K6kwtdD9z) and [OpenStreetMaps Nominatim](https://wiki.openstreetmap.org/wiki/Nominatim) API. The default is to use Google as it is a bit faster and less sensitive to user input errors. Users can select specific services via the `server` parameter. The reason for offering both is the announced (yet unimplemented) limitations to be placed on non-keyed API calls to google maps while also offering users an open source alternative.
+
+While both offer similar returns it is worth noting that the underlying data
+
+Here we use AOI's geocode to find the lat/lon of the Grand Canyon, using both the colloquial name, and the (lat/long) pair found with a <a target="_blank"href="http://www.Google.com/search?q=grand+canyon+lat+long">Google search.</a> Notice slightly different locations are generated:
 
 ```{r, message = F}
-GC_google = geocode("grand canyon")
+GC_google = geocode("grand canyon", server = 'google')
 
 GC_osm = geocode("grand canyon", server = "osm")
 ```
@@ -67,45 +70,100 @@ leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 10, maxZoom = 10)) %
    addAwesomeMarkers(icon = icon.r, lat = 36.0544 , lng = -112.1401, popup = "<strong>Google search</strong>")
 ```
 
-There are 
+In addition to returning coordinates, `geocode` can return simple feature points with varying attributes:
+
+```{r}
+pt = geocode("sterns warf", pt = T)
+
+str(pt)
+
+```
+
+```{r}
+names(pt$pt)
+pt$pt$address
+```
+
+```{r, message=F, warning=F}
+
+leaflet() %>% addTiles() %>% addMarkers(data = pt$pt)
+
+```
 
 ```{r, message = F}
-GC = geocode("grand canyon", bb = T)
-
+GC = geocode("garden of the gods", bb = T)
 ```
 
 ```{r, echo = FALSE}
-leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 13, maxZoom = 13)) %>% addProviderTiles(providers$CartoDB.Positron) %>% 
-   addPolygons(data = GC$bb, fillColor = "transparent", color = col, weight = 4) 
+leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 12, maxZoom = 15)) %>% addTiles() %>% 
+   addPolygons(data = GC$bb, fillColor = "transparent", color = 'red', weight = 6, opacity = 1) 
+```
+
+##Multiple Points
+
+Geocode can be used to query multiple points
+
+```{r}
+geocode(c("UCSB", "Goleta"))
+```
+
+```{r message = F}
+pt = geocode(c("UCSB", "Goleta", "sterns warf"), pt = T)
+leaflet() %>% addTiles() %>% addMarkers(data = pt$pts, popup = pt$pts$location)
+
+```
+
+```{r message = F}
+x = geocode(c("UCSB", "Goleta", "sterns warf"), pt = T, bb = T)
+check(x$bb)$m %>% leaflet::addMarkers(data = x$pts)
+
 ```
 
 
+
 ##*Reverse Geocoding example*:
+
+Reverse geocoding is from latitude and longitude to placename(s). Depending on the specificity of the placname requested a varying number of attributes can be used to describe the locaton. AOIs `revgeocode` provides an interface the the OSM and ESRI revgeocing services to provide a joined list of descriptors. For example, we can learn more about the location lat:38:lon:-104.
 
 ```{r}
 revgeocode(c(38,-104))
 ```
 
 
+Since it is often nice to have such a detailed description of a location the above geocoding function is baked into the revgeocode function allowing for 'psuedo' reverse geocoding:
+
 ```{r}
 rc = revgeocode("UCSB")
 print(rc)
 ```
 
-Each of these values can be isolates with the `$` operator:
+All values returned by a `revgeocode` call can be isolates with the `$` operator:
 
 ```{r}
 rc$match_addr
 ```
 
-The bounding box parameter can be used as input as to osmbb_sp to generated a spatial geometry for the region.
+The bounding box parameter can be used as input as to 'bbox_sp' to generated a spatial geometry for the region.
 
 ```{r}
-osmbb_sp(rc$bb)
+bbox_sp(rc$bb)
+```
+
+Notice howeve that this differes from the straight geocoding option 
+
+```{r}
+
+gcUCSB = geocode("UCSB", bb = T)
+
+gcUCSB$bb
+
 ```
 
 ```{r}
-leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 14, maxZoom = 14)) %>% addProviderTiles(providers$CartoDB.Positron) %>% 
-addPolygons(data = osmbb_sp(rc$bb),fillColor = "transparent", color = col, weight = 4, label = "Tall: list('National Water Center, AL', 30, 10)")
+leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 13, maxZoom = 13)) %>% addProviderTiles(providers$CartoDB.Positron) %>% 
+addPolygons(data = bbox_sp(rc$bb),fillColor = "transparent", color = col, weight = 4, label = "revgeocode") %>% 
+addPolygons(data = gcUCSB$bb, fillColor = "transparent", color = 'red', weight = 4, label = "geocode")
 
 ```
+
+Here we see that while being able to etacting bounding box information (eg AOI information) from geocoding processes there is a ceratin level of variability in these returned based on the nature of the call an the service reporting. As such the AOI pakcage offers a numbe of methods for more explicitly defining an AOI based on state, county and clip boundaries. 

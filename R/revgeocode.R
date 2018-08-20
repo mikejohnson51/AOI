@@ -1,5 +1,4 @@
 print.geoloc <- function(x) {
-
   for(i in 1:NCOL(x)){
     cat(paste0("\n", names(x)[i], paste(rep(" ", 16 - nchar(names(x)[i])), collapse = ""), ":\t"))
     cat(paste(x[i]))
@@ -7,19 +6,17 @@ print.geoloc <- function(x) {
 }
 
 
-#' @title Reverse Geocode
-#' @description Describe a point using the ERSI server geocoding  and reverse geocoding functionalities
-#' @param point a point provided a lat,long vector or data.frame; or a string
-#' @return a data.frame of input point descriptions
+#' @title Reverse Geocoding
+#' @description Describe a location using the ERSI and OSM reverse geocoding web-services.
+#' @param point a point provided by lat,long or place name
+#' @return a data.frame of descriptive features
 #' @export
 #' @author Mike Johnson
 #' @examples
 #' \dontrun{
-#' pt1 = geoCode("UCSB")
-#' print(pt1)
+#' pt1 = revgeocode("UCSB")
 #'
-#' pt2 = geoCode(c(38,-115))
-#' print(pt2)
+#' pt2 = revgeocode(c(38,-115))
 #' }
 
 revgeocode = function(point){
@@ -66,14 +63,13 @@ revgeocode = function(point){
 
 # OSM Rgeocode ------------------------------------------------------------
 
-
   URL = paste0("https://nominatim.openstreetmap.org/reverse?format=xml&lat=",
                pt$lat,
                "&lon=",
                pt$lon,
                "&zoom=18&addressdetails=1")
 
-  xx = xml2::read_xml(URL)
+  xx = xml2::read_xml(file(URL))
   xx = xml2::xml_children(xx)
 
   ll = xml2::xml_attrs(xx[1] )
@@ -91,7 +87,6 @@ revgeocode = function(point){
   nam = gsub("/", "", nam)
   nam = unlist(strsplit(nam, " "))
   nam = nam[duplicated(nam)]
-
 
   val = as.data.frame(t(val), stringsAsFactors = F)
   names(val) = nam
@@ -114,10 +109,13 @@ revgeocode = function(point){
   tmp = tmp[!(names(tmp) %in% c("lat.1", "lon.1", "country_code","Neighborhood", "shorlabel"))]
   names(tmp) = tolower(names(tmp))
 
+  bb.tmp = unlist(strsplit(tmp$bb, ","))
+
+  tmp$bb = paste(bb.tmp[3], bb.tmp[4], bb.tmp[1], bb.tmp[2], sep = ",")
+
   class(tmp) <- c("geoloc", class(tmp))
 
   return(tmp)
-
 }
 
 

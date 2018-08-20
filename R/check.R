@@ -1,9 +1,9 @@
-#' @title Map AOI extents
+#' @title Vizualize AOIs
 #' @description Generate an interactive \code{leaflet} map for defining, checking, and refining AOI queries. Can be chained to \link{getAOI} via
 #' `%>%`. Useful \code{leaflet} tools allow for the marking of points, measuring of distances, and interactive panning and zooming to help define
-#' an approapriate AOI
-#' @param AOI an AOI obtained using \link{getAOI}. Can be left \code{NULL}
-#' @return a \code{leaflet} map object
+#' an approapriate AOI.
+#' @param AOI an AOI obtained using \link{getAOI} or any/sf. Can be left \code{NULL}
+#' @return a list of AOI and \code{leaflet} html object
 #' @examples
 #' \dontrun{
 #' # Generate an empty map:
@@ -23,8 +23,8 @@ check = function(AOI = NULL) {
 
   base= leaflet() %>%
     addProviderTiles("Esri.NatGeoWorldMap", group = "Terrain") %>%
-    addProviderTiles("CartoDB.Positron", group = "Grayscale") %>%
-    addProviderTiles("Esri.WorldImagery", group = "Imagery") %>%
+    addProviderTiles("CartoDB.Positron",    group = "Grayscale") %>%
+    addProviderTiles("Esri.WorldImagery",   group = "Imagery") %>%
     addScaleBar("bottomleft") %>%
     addMiniMap(
                toggleDisplay = TRUE,
@@ -53,7 +53,7 @@ check = function(AOI = NULL) {
     )
   }
 
-  m
+  print(m)
 
   if(is.null(AOI)){return(m)} else {
 

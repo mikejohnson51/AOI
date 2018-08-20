@@ -1,4 +1,4 @@
-#' @title Geocode with Open Street Maps
+#' @title Geocode via Open Street Maps API
 #' @description \code{geocode} takes an input string and converts it to a geolocation.
 #' Addtionally it can return the location as a simple features point and the minimun bounding area
 #' of the location extent.
@@ -14,6 +14,7 @@
 #' geocodeOSM("Garden of the Gods", bb = TRUE)
 #' }
 
+
 geocodeOSM = function (location, pt = FALSE, bb = FALSE) {
 
   if(class(location) != 'character'){stop("\nInput location is not a place name. \nYou might be looking for reverse geocodeing.\nTry: AOI::revgeocode")}
@@ -23,20 +24,24 @@ geocodeOSM = function (location, pt = FALSE, bb = FALSE) {
                  gsub(" ", "+", location, fixed = TRUE),
                  "&format=xml&polygon=0&addressdetails=0")
 
-  xx = xml2::read_xml(URL)
+  xx = xml2::read_xml(file(URL)) # ensure closing of connection
   xx = xml2::xml_children(xx)
   xx = xml2::xml_attrs(xx)
 
-  if( length(xx) ==0 ){ warning("No location information found for ", location)} else {
+  if( length(xx) == 0 ){ warning("No location information found for ", location)} else {
 
   fin = as.data.frame(t(xx[[1]]), stringsAsFactors = F)
 
   fin$lat = as.numeric(fin$lat)
   fin$lon = as.numeric(fin$lon)
+  tmp.bb = unlist(strsplit(fin$boundingbox, ","))
+  fin$boundingbox = paste(tmp.bb[3], tmp.bb[4], tmp.bb[1], tmp.bb[2], sep = ",")
+
+  fin = fin[!duplicated(fin),]
 
   if(pt) { point = sf::st_as_sf(x = fin, coords = c("lon", "lat"), crs = as.character(AOI::aoiProj)) }
 
-  if(bb) { bbox = osmbb_sp(fin$boundingbox) }
+  if(bb) { bbox = bbox_sp(fin$boundingbox) }
 
   loc = data.frame(lat = fin$lat, lon = fin$lon)
 

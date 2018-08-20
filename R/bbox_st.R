@@ -8,17 +8,17 @@ print.bb = function(x){
 
 }
 
-#' @title Bounding box as string
-#' @description Convert an AOI or spatial object to a data.frame of xmin, xmax, ymin, ymax
-#' @param AOI an AOI obtained using \link{getAOI}.
-#' @return a bb oject
+#' @title Convert bounding box geometry to string
+#' @description Convert an AOI or spatial object to a data.frame of (xmin, xmax, ymin, ymax)
+#' @param AOI an AOI obtained using \link{getAOI} (or any sp/sf object).
+#' @return a bounding box data.frame
 #' @export
 #' @author Mike Johnson
 #' @examples
 #' \dontrun{
 #' #Get a bounding box data.frame for AOI
-#' AOI = getAOI(clip = list("UCSB", 10, 10))
-#' bb = bbox_st(AOI)
+#'    AOI = getAOI(clip = list("UCSB", 10, 10))
+#'    bb = bbox_st(AOI)
 #' print(bb)
 #'
 #' # Chain to AOI calls:
@@ -26,14 +26,15 @@ print.bb = function(x){
 #' print(AOI)
 #' }
 
+
 bbox_st = function(AOI){
 
   if(any(class(AOI) == 'sf')){AOI = sf::as_Spatial(AOI)}
 
   bb =  data.frame(xmin = AOI@bbox[1,1],
-         xmax = AOI@bbox[1,2],
-         ymin = AOI@bbox[2,1],
-         ymax = AOI@bbox[2,2])
+                   xmax = AOI@bbox[1,2],
+                   ymin = AOI@bbox[2,1],
+                   ymax = AOI@bbox[2,2])
 
   class(bb) = c("bb", class(bb))
 

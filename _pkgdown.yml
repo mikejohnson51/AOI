@@ -10,15 +10,16 @@ reference:
     contents:
       - '`getAOI`'
       - '`getBoundingBox`'
+      - '`geocode`'
+      - '`revgeocode`'
   - title: Tools
     desc: ~
       Tools for exploring, describing and defining AOIs
     contents:
-      - '`check`'
       - '`bbox_st`'
+      - '`bbox_sp`'
+      - '`check`'
       - '`describe`'
-      - '`geocode`'
-      - '`revgeocode`'
   - title: Data and Package Helpers
     desc: ~
       Data and function that make the package useable
@@ -26,16 +27,6 @@ reference:
       - '`counties`'
       - '`states`'
       - '`aoiProj`'
-      - '`definePoint`'
-      - '`defineClip`'
-      - '`checkClass`'
-      - '`getClip`'
-      - '`getFiat`'
-      - '`nameAOI`'
-      - '`nameClip`'
-      - '`firstLower`'
-      - '`simpleCap`'
-      - '`%>%`'
 navbar:
   left:
     - icon: fa-home

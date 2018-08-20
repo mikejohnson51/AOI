@@ -97,7 +97,9 @@
 <script src="geocode_files/Proj4Leaflet-1.0.1/proj4-compressed.js"></script><script src="geocode_files/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="geocode_files/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
 <script src="geocode_files/leaflet-binding-2.0.1/leaflet.js"></script><script src="geocode_files/leaflet-providers-1.1.17/leaflet-providers.js"></script><script src="geocode_files/leaflet-providers-plugin-2.0.1/leaflet-providers-plugin.js"></script><link href="geocode_files/leaflet-awesomemarkers-2.0.3/leaflet.awesome-markers.css" rel="stylesheet">
 <script src="geocode_files/leaflet-awesomemarkers-2.0.3/leaflet.awesome-markers.min.js"></script><link href="geocode_files/fontawesome-4.7.0/font-awesome.min.css" rel="stylesheet">
-<div class="row">
+<link href="geocode_files/leaflet-minimap-3.3.1/Control.MiniMap.min.css" rel="stylesheet">
+<script src="geocode_files/leaflet-minimap-3.3.1/Control.MiniMap.min.js"></script><script src="geocode_files/leaflet-minimap-3.3.1/Minimap-binding.js"></script><link href="geocode_files/leaflet-measure-2.1.7/leaflet-measure.css" rel="stylesheet">
+<script src="geocode_files/leaflet-measure-2.1.7/leaflet-measure.min.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Geocoding</h1>
@@ -110,49 +112,81 @@
 
     
     
-<p>At times users will want to look up information about a location (either lat/long or character). For these cases <code>AOI</code> offers a geocoding (and reverse geocoding) interface built into the geoCode function.</p>
-<p>For example, I am a big fan of the restaurant “Rasta Pasta” in downtown Colorado Springs, but finding the spatial information regarding this location (such as lat/lon, address, city, ect) can be difficult. For this the geoCode function can be handy.</p>
+<p>At times users will need information about a location either lat/long or place name. For these cases <code>AOI</code> offers a geocoding (and reverse geocoding) interface to the google, ESRI and OSM APIs, without requiring an API keys. While other packages offer geocoding capabilities (dismo, prettymapr, ggmap, opencage to name a few) they are generally tied to the google API and/or require a user key. For this packages purposes, this is not ideal. Further from our knowledge, <code>AOI</code> is the only existing package to provide a reverse geocoding service to describe a location. This page walks through some of the functionalites within the <code>geocode</code> and <code>revgeocode</code> functions.</p>
 <div id="geocoding" class="section level2">
 <h2 class="hasAnchor">
 <a href="#geocoding" class="anchor"></a><em>Geocoding</em>:</h2>
+<p>Geocoding converts placenames to latitude and longitude pairs. <code>AOI</code> offers a geocoding function wrapping both the <a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;cad=rja&amp;uact=8&amp;ved=2ahUKEwivqciF8e3cAhUm34MKHRrlBncQFjAAegQICBAB&amp;url=https%3A%2F%2Fmaps.google.com%2F&amp;usg=AOvVaw3z2z03MnvIwD2K6kwtdD9z">Google Maps</a> and <a href="https://wiki.openstreetmap.org/wiki/Nominatim">OpenStreetMaps Nominatim</a> API. The default is to use Google as it is a bit faster and less sensitive to user input errors. Users can select specific services via the <code>server</code> parameter. The reason for offering both is the announced (yet unimplemented) limitations to be placed on non-keyed API calls to google maps while also offering users an open source alternative.</p>
+<p>While both offer similar returns it is worth noting that the underlying data</p>
 <p>Here we use AOI’s geocode to find the lat/lon of the Grand Canyon, using both the colloquial name, and the (lat/long) pair found with a <a target="_blank" href="http://www.Google.com/search?q=grand+canyon+lat+long">Google search.</a> Notice slightly different locations are generated:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">GC_name =<span class="st"> </span><span class="kw"><a href="../reference/geocode.html">geocode</a></span>(<span class="st">"grand canyon"</span>)
-GC_lat_lon =<span class="st"> </span><span class="kw"><a href="../reference/getAOI.html">getAOI</a></span>(<span class="dt">clip =</span> <span class="kw">list</span>(<span class="fl">36.0544</span>, <span class="op">-</span><span class="fl">112.1401</span>, <span class="dv">10</span>, <span class="dv">10</span>))</code></pre></div>
-<div id="htmlwidget-c6eff0630d87797b64be" style="width:576px;height:384px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c6eff0630d87797b64be">{"x":{"options":{"minZoom":10,"maxZoom":10,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"zoomControl":false},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addAwesomeMarkers","args":[36.0965604,-112.0984941,{"icon":"home","markerColor":138,"iconColor":"#212f3f","spin":false,"squareMarker":false,"iconRotate":0,"font":"monospace","prefix":"fa"},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<strong>Geocode by Name<\/strong>",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addAwesomeMarkers","args":[36.0544,-112.1401,{"icon":"home","markerColor":"gray","iconColor":"#212f3f","spin":false,"squareMarker":false,"iconRotate":0,"font":"monospace","prefix":"fa"},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<strong>Query by Lat Long<\/strong>",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[36.0544,36.0965604],"lng":[-112.1401,-112.0984941]}},"evals":[],"jsHooks":[]}</script><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">GC =<span class="st"> </span><span class="kw"><a href="../reference/geocode.html">geocode</a></span>(<span class="st">"grand canyon"</span>, <span class="dt">bb =</span> T)
-GC
-<span class="co">#&gt; $coords</span>
-<span class="co">#&gt;        lat       lon</span>
-<span class="co">#&gt; 1 36.09656 -112.0985</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $bb</span>
-<span class="co">#&gt; class       : SpatialPolygons </span>
-<span class="co">#&gt; features    : 1 </span>
-<span class="co">#&gt; extent      : -112.1185, -112.0785, 36.07656, 36.11656  (xmin, xmax, ymin, ymax)</span>
-<span class="co">#&gt; coord. ref. : +proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0+no_defs</span></code></pre></div>
-<div id="htmlwidget-efdc39a787fcca9ca63e" style="width:576px;height:384px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-efdc39a787fcca9ca63e">{"x":{"options":{"minZoom":13,"maxZoom":13,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"zoomControl":false},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addPolygons","args":[[[[{"lng":[-112.1184941,-112.0784941,-112.0784941,-112.1184941,-112.1184941],"lat":[36.1165604,36.1165604,36.0765604,36.0765604,36.1165604]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"#1c26a9","weight":4,"opacity":0.5,"fill":true,"fillColor":"transparent","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[36.0765604,36.1165604],"lng":[-112.1184941,-112.0784941]}},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">GC_google =<span class="st"> </span><span class="kw"><a href="../reference/geocode.html">geocode</a></span>(<span class="st">"grand canyon"</span>, <span class="dt">server =</span> <span class="st">'google'</span>)
+
+GC_osm =<span class="st"> </span><span class="kw"><a href="../reference/geocode.html">geocode</a></span>(<span class="st">"grand canyon"</span>, <span class="dt">server =</span> <span class="st">"osm"</span>)</code></pre></div>
+<div id="htmlwidget-8ab929143b721f41e172" style="width:576px;height:384px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8ab929143b721f41e172">{"x":{"options":{"minZoom":10,"maxZoom":10,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"zoomControl":false},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addAwesomeMarkers","args":[36.1069652,-112.1129972,{"icon":"home","markerColor":"gray","iconColor":"#212f3f","spin":false,"squareMarker":false,"iconRotate":0,"font":"monospace","prefix":"fa"},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<strong>Geocode via Google Maps<\/strong>",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addAwesomeMarkers","args":[36.0965604,-112.0984941,{"icon":"home","markerColor":"blue","iconColor":"#212f3f","spin":false,"squareMarker":false,"iconRotate":0,"font":"monospace","prefix":"fa"},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<strong>Geocode via OSM<\/strong>",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addAwesomeMarkers","args":[36.0544,-112.1401,{"icon":"home","markerColor":138,"iconColor":"#212f3f","spin":false,"squareMarker":false,"iconRotate":0,"font":"monospace","prefix":"fa"},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<strong>Google search<\/strong>",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[36.0544,36.1069652],"lng":[-112.1401,-112.0984941]}},"evals":[],"jsHooks":[]}</script><p>In addition to returning coordinates, <code>geocode</code> can return simple feature points with varying attributes:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pt =<span class="st"> </span><span class="kw"><a href="../reference/geocode.html">geocode</a></span>(<span class="st">"sterns warf"</span>, <span class="dt">pt =</span> T)
+
+<span class="kw">str</span>(pt)
+<span class="co">#&gt; List of 2</span>
+<span class="co">#&gt;  $ coords:'data.frame':  1 obs. of  2 variables:</span>
+<span class="co">#&gt;   ..$ lat: num 34.4</span>
+<span class="co">#&gt;   ..$ lon: num -120</span>
+<span class="co">#&gt;  $ pt    :Classes 'sf' and 'data.frame': 1 obs. of  3 variables:</span>
+<span class="co">#&gt;   ..$ address : chr "217, Stearns Wharf, Waterfront, Santa Barbara, Santa Barbara County, California, United States, 93101"</span>
+<span class="co">#&gt;   ..$ bb      : chr "-119.686934580292,-119.684236619708,34.4113296802915,34.4086317197085"</span>
+<span class="co">#&gt;   ..$ geometry:sfc_POINT of length 1; first list element:  'XY' num [1:2] -119.7 34.4</span>
+<span class="co">#&gt;   ..- attr(*, "sf_column")= chr "geometry"</span>
+<span class="co">#&gt;   ..- attr(*, "agr")= Factor w/ 3 levels "constant","aggregate",..: NA NA</span>
+<span class="co">#&gt;   .. ..- attr(*, "names")= chr [1:2] "address" "bb"</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(pt<span class="op">$</span>pt)
+<span class="co">#&gt; [1] "address"  "bb"       "geometry"</span>
+pt<span class="op">$</span>pt<span class="op">$</span>address
+<span class="co">#&gt; [1] "217, Stearns Wharf, Waterfront, Santa Barbara, Santa Barbara County, California, United States, 93101"</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="kw">leaflet</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">addTiles</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">addMarkers</span>(<span class="dt">data =</span> pt<span class="op">$</span>pt)</code></pre></div>
+<div id="htmlwidget-47385167ca3b98450795" style="width:576px;height:384px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-47385167ca3b98450795">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[34.4099807,-119.6855856,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[34.4099807,34.4099807],"lng":[-119.6855856,-119.6855856]}},"evals":[],"jsHooks":[]}</script><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">GC =<span class="st"> </span><span class="kw"><a href="../reference/geocode.html">geocode</a></span>(<span class="st">"garden of the gods"</span>, <span class="dt">bb =</span> T)</code></pre></div>
+<div id="htmlwidget-1a7c40e4c882837a2707" style="width:576px;height:384px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1a7c40e4c882837a2707">{"x":{"options":{"minZoom":12,"maxZoom":15,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"zoomControl":false},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addPolygons","args":[[[[{"lng":[-104.871115280292,-104.868417319708,-104.868417319708,-104.871115280292,-104.871115280292],"lat":[38.8798362802915,38.8798362802915,38.8771383197085,38.8771383197085,38.8798362802915]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"red","weight":6,"opacity":1,"fill":true,"fillColor":"transparent","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[38.8771383197085,38.8798362802915],"lng":[-104.871115280292,-104.868417319708]}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="multiple-points" class="section level2">
+<h2 class="hasAnchor">
+<a href="#multiple-points" class="anchor"></a>Multiple Points</h2>
+<p>Geocode can be used to query multiple points</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/geocode.html">geocode</a></span>(<span class="kw">c</span>(<span class="st">"UCSB"</span>, <span class="st">"Goleta"</span>))
+<span class="co">#&gt;   location      lat       lon</span>
+<span class="co">#&gt; 1     UCSB 34.41396 -119.8489</span>
+<span class="co">#&gt; 2   Goleta 34.43583 -119.8276</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pt =<span class="st"> </span><span class="kw"><a href="../reference/geocode.html">geocode</a></span>(<span class="kw">c</span>(<span class="st">"UCSB"</span>, <span class="st">"Goleta"</span>, <span class="st">"sterns warf"</span>), <span class="dt">pt =</span> T)
+<span class="kw">leaflet</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">addTiles</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">addMarkers</span>(<span class="dt">data =</span> pt<span class="op">$</span>pts, <span class="dt">popup =</span> pt<span class="op">$</span>pts<span class="op">$</span>location)</code></pre></div>
+<div id="htmlwidget-f54a0cf99057af6c650a" style="width:576px;height:384px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f54a0cf99057af6c650a">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[34.4139629,34.4358294,34.4099807],[-119.848947,-119.8276389,-119.6855856],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["UCSB","Goleta","sterns warf"],null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[34.4099807,34.4358294],"lng":[-119.848947,-119.6855856]}},"evals":[],"jsHooks":[]}</script><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x =<span class="st"> </span><span class="kw"><a href="../reference/geocode.html">geocode</a></span>(<span class="kw">c</span>(<span class="st">"UCSB"</span>, <span class="st">"Goleta"</span>, <span class="st">"sterns warf"</span>), <span class="dt">pt =</span> T, <span class="dt">bb =</span> T)
+<span class="kw"><a href="../reference/check.html">check</a></span>(x<span class="op">$</span>bb)<span class="op">$</span>m <span class="op">%&gt;%</span><span class="st"> </span>leaflet<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/leaflet/topics/map-layers">addMarkers</a></span>(<span class="dt">data =</span> x<span class="op">$</span>pts)</code></pre></div>
+<div id="htmlwidget-b1d8e2417485512e9b1d" style="width:576px;height:384px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b1d8e2417485512e9b1d">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.NatGeoWorldMap",null,"Terrain",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["CartoDB.Positron",null,"Grayscale",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"Imagery",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addMiniMap","args":[null,null,"bottomright",150,150,19,19,-5,false,false,false,true,false,true,{"color":"#ff7800","weight":1,"clickable":false},{"color":"#000000","weight":1,"clickable":false,"opacity":0,"fillOpacity":0},{"hideText":"Hide MiniMap","showText":"Show MiniMap"},[]]},{"method":"addMeasure","args":[{"position":"bottomleft","primaryLengthUnit":"feet","primaryAreaUnit":"sqmiles","activeColor":"red","completedColor":"green","popupOptions":{"className":"leaflet-measure-resultpopup","autoPanPadding":[10,10]},"captureZIndex":10000,"localization":"en","decPoint":".","thousandsSep":","}]},{"method":"addLayersControl","args":[["Terrain","Grayscale","Imagery"],[],{"collapsed":true,"autoZIndex":true,"position":"topright"}]},{"method":"addPolygons","args":[[[[{"lng":[-119.848947,-119.848947,-119.6855856,-119.6855856,-119.848947],"lat":[34.4099807,34.4358294,34.4358294,34.4099807,34.4099807]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"red","weight":5,"opacity":1,"fill":true,"fillColor":"transparent","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[[34.4139629,34.4358294,34.4099807],[-119.848947,-119.8276389,-119.6855856],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[34.4099807,34.4358294],"lng":[-119.848947,-119.6855856]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="reverse-geocoding-example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#reverse-geocoding-example" class="anchor"></a><em>Reverse Geocoding example</em>:</h2>
+<p>Reverse geocoding is from latitude and longitude to placename(s). Depending on the specificity of the placname requested a varying number of attributes can be used to describe the locaton. AOIs <code>revgeocode</code> provides an interface the the OSM and ESRI revgeocing services to provide a joined list of descriptors. For example, we can learn more about the location lat:38:lon:-104.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/revgeocode.html">revgeocode</a></span>(<span class="kw">c</span>(<span class="dv">38</span>,<span class="op">-</span><span class="dv">104</span>))
 <span class="co">#&gt; </span>
 <span class="co">#&gt; county          :    Otero County</span>
 <span class="co">#&gt; state           :    Colorado</span>
-<span class="co">#&gt; postcode        :    81039</span>
 <span class="co">#&gt; country         :    United States of America</span>
-<span class="co">#&gt; place_id        :    71512477</span>
+<span class="co">#&gt; place_id        :    76003789</span>
 <span class="co">#&gt; osm_type        :    way</span>
 <span class="co">#&gt; osm_id          :    17113700</span>
 <span class="co">#&gt; lat             :    38.002474750052</span>
 <span class="co">#&gt; lon             :    -104.000717040371</span>
-<span class="co">#&gt; bb              :    37.99644,38.002832,-104.011526,-103.979724</span>
+<span class="co">#&gt; bb              :    -104.011526,-103.979724,37.99644,38.002832</span>
 <span class="co">#&gt; match_addr      :    81039, Fowler, Colorado</span>
 <span class="co">#&gt; longlabel       :    81039, Fowler, CO, USA</span>
+<span class="co">#&gt; shortlabel      :    81039</span>
 <span class="co">#&gt; addr_type       :    Postal</span>
 <span class="co">#&gt; city            :    Fowler</span>
 <span class="co">#&gt; countrycode     :    USA</span></code></pre></div>
+<p>Since it is often nice to have such a detailed description of a location the above geocoding function is baked into the revgeocode function allowing for ‘psuedo’ reverse geocoding:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rc =<span class="st"> </span><span class="kw"><a href="../reference/revgeocode.html">revgeocode</a></span>(<span class="st">"UCSB"</span>)
 <span class="kw">print</span>(rc)
 <span class="co">#&gt; </span>
@@ -162,30 +196,40 @@ GC
 <span class="co">#&gt; state           :    California</span>
 <span class="co">#&gt; postcode        :    93106</span>
 <span class="co">#&gt; country         :    United States of America</span>
-<span class="co">#&gt; place_id        :    220785404</span>
+<span class="co">#&gt; place_id        :    187839690</span>
 <span class="co">#&gt; osm_type        :    way</span>
 <span class="co">#&gt; osm_id          :    542863702</span>
 <span class="co">#&gt; lat             :    34.4145937</span>
 <span class="co">#&gt; lon             :    -119.84581949869</span>
-<span class="co">#&gt; bb              :    34.4047282,34.4243918,-119.8851155,-119.8360437</span>
+<span class="co">#&gt; bb              :    -119.8851155,-119.8360437,34.4047282,34.4243918</span>
 <span class="co">#&gt; match_addr      :    93106, Santa Barbara, California</span>
 <span class="co">#&gt; longlabel       :    93106, Santa Barbara, CA, USA</span>
 <span class="co">#&gt; addr_type       :    Postal</span>
 <span class="co">#&gt; city            :    Santa Barbara</span>
 <span class="co">#&gt; countrycode     :    USA</span></code></pre></div>
-<p>Each of these values can be isolates with the <code>$</code> operator:</p>
+<p>All values returned by a <code>revgeocode</code> call can be isolates with the <code>$</code> operator:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rc<span class="op">$</span>match_addr
 <span class="co">#&gt; [1] "93106, Santa Barbara, California"</span></code></pre></div>
-<p>The bounding box parameter can be used as input as to osmbb_sp to generated a spatial geometry for the region.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/osmbb_sp.html">osmbb_sp</a></span>(rc<span class="op">$</span>bb)
+<p>The bounding box parameter can be used as input as to ‘bbox_sp’ to generated a spatial geometry for the region.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/bbox_sp.html">bbox_sp</a></span>(rc<span class="op">$</span>bb)
 <span class="co">#&gt; class       : SpatialPolygons </span>
 <span class="co">#&gt; features    : 1 </span>
 <span class="co">#&gt; extent      : -119.8851, -119.836, 34.40473, 34.42439  (xmin, xmax, ymin, ymax)</span>
-<span class="co">#&gt; coord. ref. : +proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0+no_defs</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">leaflet</span>(<span class="dt">option=</span><span class="kw">leafletOptions</span>(<span class="dt">zoomControl=</span> <span class="ot">FALSE</span>, <span class="dt">minZoom =</span> <span class="dv">14</span>, <span class="dt">maxZoom =</span> <span class="dv">14</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">addProviderTiles</span>(providers<span class="op">$</span>CartoDB.Positron) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="kw">addPolygons</span>(<span class="dt">data =</span> <span class="kw"><a href="../reference/osmbb_sp.html">osmbb_sp</a></span>(rc<span class="op">$</span>bb),<span class="dt">fillColor =</span> <span class="st">"transparent"</span>, <span class="dt">color =</span> col, <span class="dt">weight =</span> <span class="dv">4</span>, <span class="dt">label =</span> <span class="st">"Tall: list('National Water Center, AL', 30, 10)"</span>)</code></pre></div>
-<div id="htmlwidget-9b11ca867a589f6e8a96" style="width:576px;height:384px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-9b11ca867a589f6e8a96">{"x":{"options":{"minZoom":14,"maxZoom":14,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"zoomControl":false},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addPolygons","args":[[[[{"lng":[-119.8851155,-119.8360437,-119.8360437,-119.8851155,-119.8851155],"lat":[34.4243918,34.4243918,34.4047282,34.4047282,34.4243918]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"#1c26a9","weight":4,"opacity":0.5,"fill":true,"fillColor":"transparent","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,null,"Tall: list('National Water Center, AL', 30, 10)",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[34.4047282,34.4243918],"lng":[-119.8851155,-119.8360437]}},"evals":[],"jsHooks":[]}</script>
+<span class="co">#&gt; coord. ref. : +init=epsg:4269 +proj=longlat +datum=NAD83 +no_defs +ellps=GRS80 +towgs84=0,0,0</span></code></pre></div>
+<p>Notice howeve that this differes from the straight geocoding option</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+gcUCSB =<span class="st"> </span><span class="kw"><a href="../reference/geocode.html">geocode</a></span>(<span class="st">"UCSB"</span>, <span class="dt">bb =</span> T)
+
+gcUCSB<span class="op">$</span>bb
+<span class="co">#&gt; class       : SpatialPolygons </span>
+<span class="co">#&gt; features    : 1 </span>
+<span class="co">#&gt; extent      : -119.8503, -119.8476, 34.41261, 34.41531  (xmin, xmax, ymin, ymax)</span>
+<span class="co">#&gt; coord. ref. : +init=epsg:4269 +proj=longlat +datum=NAD83 +no_defs +ellps=GRS80 +towgs84=0,0,0</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">leaflet</span>(<span class="dt">option=</span><span class="kw">leafletOptions</span>(<span class="dt">zoomControl=</span> <span class="ot">FALSE</span>, <span class="dt">minZoom =</span> <span class="dv">13</span>, <span class="dt">maxZoom =</span> <span class="dv">13</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">addProviderTiles</span>(providers<span class="op">$</span>CartoDB.Positron) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="kw">addPolygons</span>(<span class="dt">data =</span> <span class="kw"><a href="../reference/bbox_sp.html">bbox_sp</a></span>(rc<span class="op">$</span>bb),<span class="dt">fillColor =</span> <span class="st">"transparent"</span>, <span class="dt">color =</span> col, <span class="dt">weight =</span> <span class="dv">4</span>, <span class="dt">label =</span> <span class="st">"revgeocode"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="kw">addPolygons</span>(<span class="dt">data =</span> gcUCSB<span class="op">$</span>bb, <span class="dt">fillColor =</span> <span class="st">"transparent"</span>, <span class="dt">color =</span> <span class="st">'red'</span>, <span class="dt">weight =</span> <span class="dv">4</span>, <span class="dt">label =</span> <span class="st">"geocode"</span>)</code></pre></div>
+<div id="htmlwidget-c87aa5f7046aed630f10" style="width:576px;height:384px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c87aa5f7046aed630f10">{"x":{"options":{"minZoom":13,"maxZoom":13,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"zoomControl":false},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addPolygons","args":[[[[{"lng":[-119.8851155,-119.8851155,-119.8360437,-119.8360437,-119.8851155],"lat":[34.4047282,34.4243918,34.4243918,34.4047282,34.4047282]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"#1c26a9","weight":4,"opacity":0.5,"fill":true,"fillColor":"transparent","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,null,"revgeocode",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addPolygons","args":[[[[{"lng":[-119.850295980292,-119.847598019708,-119.847598019708,-119.850295980292,-119.850295980292],"lat":[34.4153118802915,34.4153118802915,34.4126139197085,34.4126139197085,34.4153118802915]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"red","weight":4,"opacity":0.5,"fill":true,"fillColor":"transparent","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,null,"geocode",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[34.4047282,34.4243918],"lng":[-119.8851155,-119.8360437]}},"evals":[],"jsHooks":[]}</script><p>Here we see that while being able to etacting bounding box information (eg AOI information) from geocoding processes there is a ceratin level of variability in these returned based on the nature of the call an the service reporting. As such the AOI pakcage offers a numbe of methods for more explicitly defining an AOI based on state, county and clip boundaries.</p>
 </div>
   </div>
 
@@ -195,6 +239,7 @@ GC
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#geocoding"><em>Geocoding</em>:</a></li>
+      <li><a href="#multiple-points">Multiple Points</a></li>
       <li><a href="#reverse-geocoding-example"><em>Reverse Geocoding example</em>:</a></li>
       </ul>
 </div>

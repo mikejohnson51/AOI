@@ -1,26 +1,48 @@
-#' @title  OSM bounding Box to Geometry
-#' @description Convert a OSM returned bounding box to a \code{SpatialPolygon}
-#' @param osm_bb an osm bounding box
-#' @return a \code{SpatialPolygon}
+#' @title Convert bounding box string to geometry
+#' @description Convert a vector, dataframe, or bb object to a \code{SpatialPolygon}
+#' @param bbox_st a bounding box string or vector in the order ("xmin","xmax", "ymin", "ymax")
+#' @param sf logical. Should returned feature be of class sf (default = FALSE)
+#' @return a bounding box geometry
 #' @author Mike Johnson
+#' @examples
+#' \dontrun{
+#' CO = getAOI(state = 'CO') %>% bbox_st()
+#' CO.1 = CO %>% bbox_sp()
+#' }
 #' @export
 
-osmbb_sp = function(osm_bb){
+bbox_sp = function(bbox_st, sf = FALSE){
 
-  tmp = as.numeric(unlist(strsplit(osm_bb, ",")))
-  b = as.data.frame(t(tmp), stringsAsFactors = FALSE)
-  names(b) = c("ymax","ymin", "xmin", "xmax")
+  if(checkClass(bbox_st, "numeric")){
+
+    b = as.data.frame(t(bbox_st), stringsAsFactors = FALSE)
+    names(b) = c("xmin","xmax", "ymin", "ymax")
+
+  } else if(checkClass(bbox_st, 'bb')){
+
+    b = bbox_st
+
+   } else {
+
+    tmp = as.numeric(unlist(strsplit(bbox_st, ",")))
+    b = as.data.frame(t(tmp), stringsAsFactors = FALSE)
+    names(b) = c("xmin","xmax", "ymin", "ymax")
+  }
 
   coords = matrix(c(b$xmin, b$ymin,
                     b$xmin, b$ymax,
                     b$xmax, b$ymax,
                     b$xmax, b$ymin,
                     b$xmin, b$ymin),
-                  ncol = 2, byrow = TRUE)
+                    ncol = 2, byrow = TRUE)
 
-  P1 = sp::Polygon(coords)
-  Ps1 = sp::SpatialPolygons(list(sp::Polygons(list(P1), ID = "bb")), proj4string=AOI::aoiProj)
+  poly = sp::Polygon(coords)
+  poly = sp::SpatialPolygons(list(sp::Polygons(list(poly), ID = "bb")), proj4string = AOI::aoiProj)
 
-  return(Ps1)
+  if(sf){ poly = sf::st_as_sf(poly)}
+
+  return(poly)
 
 }
+
+

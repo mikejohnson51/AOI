@@ -1,4 +1,4 @@
-#' @title Get area of interest (AOI) boundary
+#' @title Get Area of Interest (AOI) geometry
 #' @description Get a Spatial* representation of an AOI defined by:
 #' \enumerate{
 #'              \item  a US state name(s)
@@ -52,7 +52,7 @@
 #'                                         \item \emph{list(36,-120, 10, 10, "upperright) }}
 #'                                     }
 #'
-#' @return a Spatial* object projected to \emph{EPSG:4269}.
+#' @return a geometry projected to \emph{EPSG:4269}.
 #' @export
 #' @author Mike Johnson
 #' @examples
@@ -75,9 +75,6 @@
 #' # Get AOI defined by 10 mile2 bounding box using the 'KMART near UCSB' as lower left corner
 #'     getAOI(clip = list('KMART near UCSB', 10, 10, 'lowerleft'))
 #'}
-#'
-#' @seealso \code{\link{getClip}}
-#' @seealso \code{\link{getFiat}}
 
 getAOI = function(state = NULL,
                   county = NULL,

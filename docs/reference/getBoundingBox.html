@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get bounding box — getBoundingBox • Areas of Interest: AOI   </title>
+<title>Get mimimum bounding box of spatial Objects — getBoundingBox • Areas of Interest: AOI   </title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Get bounding box — getBoundingBox" />
+<meta property="og:title" content="Get mimimum bounding box of spatial Objects — getBoundingBox" />
 
-<meta property="og:description" content="Reeurn a minimum bounding box spatial object for a set or single Spatial, raster or sf object(s)" />
+<meta property="og:description" content="Returns a minimum bounding box for a set or  Spatial*, raster or sf object(s)" />
 
 <meta property="og:image" content="https://github.com/mikejohnson51/AOI/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -129,14 +129,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get bounding box</h1>
+    <h1>Get mimimum bounding box of spatial Objects</h1>
     <small class="dont-index">Source: <a href='https://github.com/mikejohnson51/AOI//blob/master/R/getBoundingBox.R'><code>R/getBoundingBox.R</code></a></small>
     <div class="hidden name"><code>getBoundingBox.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Reeurn a minimum bounding box spatial object for a set or single Spatial, raster or sf object(s)</p>
+    <p>Returns a minimum bounding box for a set or  Spatial*, raster or sf object(s)</p>
     
     </div>
 
@@ -147,12 +147,12 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>a <code>data.frame</code> with a lat and long column, a Raster or a Spatial Object</p></td>
+      <td><p>a <code>data.frame</code> with a lat and long column, a Raster, sf, or Spatial Objects</p></td>
     </tr>
     <tr>
       <th>sf</th>
-      <td><p><code>logical</code>. If <code>TRUE</code> object returned is of class sf,
-default is <code>FALSE</code> and returns class SpatialPolygonsounding box of input points <code>x</code></p></td>
+      <td><p><code>logical</code>. If <code>TRUE</code> object returned is of class sf
+default is <code>FALSE</code> and returns class SpatialPolygon</p></td>
     </tr>
     </table>
     

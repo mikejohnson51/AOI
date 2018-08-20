@@ -1,7 +1,7 @@
 #' @title Describe an AOI
-#' @description Convert an AOI object to a data.frame of describing factors. Can be usefull for sharing,
+#' @description Convert an AOI object to a data.frame of describing factors. Can be useful for sharing,
 #' documenting and repaeating AOI calls.
-#' @param AOI an AOI obtained using \link{getAOI}.
+#' @param AOI an AOI obtained using \link{getAOI}, or any sp/sf object.
 #' @return a data.frame of AOI descriptors including
 #' \describe{
 #'   \item{latCent}{the AOI center latitude}
@@ -9,7 +9,7 @@
 #'   \item{height}{ height in (miles)}
 #'   \item{width}{width in(miles)}
 #'   \item{origin}{AOI origin}
-#'   \item{name}{Most descriptive geocoded name from \code{geoCode}}
+#'   \item{name}{Most descriptive geocoded name from \code{revgeocode}}
 #' }
 #' @export
 #' @author Mike Johnson
@@ -38,9 +38,10 @@ describe = function(AOI){
 
   rc = revgeocode(c(df$latCent, df$lngCent))
 
-  if(!is.null(rc$match_addr)) { df[["name"]] = rc$match_addr } else
-  if(!is.null(rc$city)) { df[["name"]] = rc$city } else
-  if(!is.null(rc$county)) { df[["name"]] = rc$county }
+  if(!is.null(rc$match_addr)) { df[["name"]] = rc$match_addr
+  } else if(!is.null(rc$city)) { df[["name"]] = rc$city
+  } else if(!is.null(rc$county)) { df[["name"]] = rc$county
+  } else { df[["name"]] = rc[1] }
 
   cat("AOI Parameters:\n")
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Map AOI extents — check • Areas of Interest: AOI   </title>
+<title>Vizualize AOIs — check • Areas of Interest: AOI   </title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,11 +30,11 @@
 
 
 
-<meta property="og:title" content="Map AOI extents — check" />
+<meta property="og:title" content="Vizualize AOIs — check" />
 
 <meta property="og:description" content="Generate an interactive leaflet map for defining, checking, and refining AOI queries. Can be chained to getAOI via
 `
-an approapriate AOI" />
+an approapriate AOI." />
 
 <meta property="og:image" content="https://github.com/mikejohnson51/AOI/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -131,7 +131,7 @@ an approapriate AOI" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Map AOI extents</h1>
+    <h1>Vizualize AOIs</h1>
     <small class="dont-index">Source: <a href='https://github.com/mikejohnson51/AOI//blob/master/R/check.R'><code>R/check.R</code></a></small>
     <div class="hidden name"><code>check.Rd</code></div>
     </div>
@@ -140,7 +140,7 @@ an approapriate AOI" />
     
     <p>Generate an interactive <code>leaflet</code> map for defining, checking, and refining AOI queries. Can be chained to <a href='getAOI.html'>getAOI</a> via
 `<!-- %&gt;%`. Useful \code{leaflet} tools allow for the marking of points, measuring of distances, and interactive panning and zooming to help define -->
-an approapriate AOI</p>
+an approapriate AOI.</p>
     
     </div>
 
@@ -151,13 +151,13 @@ an approapriate AOI</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>AOI</th>
-      <td><p>an AOI obtained using <a href='getAOI.html'>getAOI</a>. Can be left <code>NULL</code></p></td>
+      <td><p>an AOI obtained using <a href='getAOI.html'>getAOI</a> or any/sf. Can be left <code>NULL</code></p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a <code>leaflet</code> map object</p>
+    <p>a list of AOI and <code>leaflet</code> html object</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

@@ -2,20 +2,20 @@
 % Please edit documentation in R/check.R
 \name{check}
 \alias{check}
-\title{Map AOI extents}
+\title{Vizualize AOIs}
 \usage{
 check(AOI = NULL)
 }
 \arguments{
-\item{AOI}{an AOI obtained using \link{getAOI}. Can be left \code{NULL}}
+\item{AOI}{an AOI obtained using \link{getAOI} or any/sf. Can be left \code{NULL}}
 }
 \value{
-a \code{leaflet} map object
+a list of AOI and \code{leaflet} html object
 }
 \description{
 Generate an interactive \code{leaflet} map for defining, checking, and refining AOI queries. Can be chained to \link{getAOI} via
 `%>%`. Useful \code{leaflet} tools allow for the marking of points, measuring of distances, and interactive panning and zooming to help define
-an approapriate AOI
+an approapriate AOI.
 }
 \examples{
 \dontrun{
