@@ -37,7 +37,7 @@ test_that("check AOI routines", {
 
   one_state <- getAOI(state = "Colorado")
   sp_def    <- getAOI(clip = one_state)
-  rast      <- raster::raster(matrix(rnorm(100),10,10), crs = AOI::aoiProj)
+  rast      <- raster::raster(matrix(rnorm(100),10,10), crs = aoiProj)
   raster::extent(rast) <- raster::extent(sp_def)
   ras_def   <- getAOI(clip = rast)
   two_state <- getAOI(state = c("AZ", "utah"))
@@ -47,8 +47,8 @@ test_that("check AOI routines", {
 
   vec = c(length(one_state) == 1,
           class(rast) == "RasterLayer",
-          class(ras_def) == "SpatialPolygons",
-          class(sp_def) == "SpatialPolygons",
+          any(class(ras_def) %in% "sfc_POLYGON"),
+          any(class(sp_def) %in% "SpatialPolygons"),
           length(two_state) == 2,
           length(one_county) ==1,
           length(two_county) == 2)

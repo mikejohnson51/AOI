@@ -4,7 +4,7 @@
 \name{aoiProj}
 \alias{aoiProj}
 \title{AOI Projection}
-\format{An object of class \code{CRS} of length 1.}
+\format{An object of class \code{character} of length 1.}
 \usage{
 aoiProj
 }

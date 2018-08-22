@@ -3,4 +3,4 @@
 #' @export
 #' @author Mike Johnson
 
-aoiProj = sp::CRS("+init=epsg:4269")
+aoiProj = "+init=epsg:4269"

@@ -36,13 +36,15 @@ bbox_sp = function(bbox_st, sf = FALSE){
                     b$xmin, b$ymin),
                     ncol = 2, byrow = TRUE)
 
-  poly = sp::Polygon(coords)
-  poly = sp::SpatialPolygons(list(sp::Polygons(list(poly), ID = "bb")), proj4string = AOI::aoiProj)
+  poly = sf::st_sfc(sf::st_polygon(list(coords)), crs = 4269)
 
-  if(sf){ poly = sf::st_as_sf(poly)}
+  if(!sf){ poly = sf::as_Spatial(poly)}
 
   return(poly)
 
 }
+
+
+
 
 

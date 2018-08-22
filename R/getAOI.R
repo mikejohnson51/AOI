@@ -76,9 +76,9 @@
 #'     getAOI(clip = list('KMART near UCSB', 10, 10, 'lowerleft'))
 #'}
 
-getAOI = function(state = NULL,
+getAOI = function(clip = NULL,
+                  state = NULL,
                   county = NULL,
-                  clip = NULL,
                   sf = FALSE,
                   km = FALSE,
                   bb = FALSE) {
@@ -124,17 +124,17 @@ getAOI = function(state = NULL,
   # AOI by user shapefile
 
   if (checkClass(clip, "Raster")){
-    shp = getBoundingBox(clip)
-    shp = sp::spTransform(shp, aoiProj)
+    shp = getBoundingBox(clip, sf = T)
+    shp = sf::st_transform(shp, aoiProj)
     }
 
   if (checkClass(clip, "Spatial")) {
-    shp = sp::spTransform(clip, aoiProj)
+    shp = sf::st_transform(sf::st_as_sf(clip), aoiProj)
     shp = getBoundingBox(shp)
   }
 
   if (checkClass(clip, "sf")) {
-    shp = sf::st_transform(clip, as.character(aoiProj))
+    shp = sf::st_transform(clip, aoiProj)
     shp = getBoundingBox(shp)
   }
 
@@ -149,7 +149,7 @@ getAOI = function(state = NULL,
         shp <- getClip(location = fin$location,
                       width =  fin$w,
                       height = fin$h,
-                      origin = fin$o)
+                      origin = fin$o, sf = sf)
 
   }
 

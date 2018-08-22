@@ -4,15 +4,15 @@
 \alias{getAOI}
 \title{Get Area of Interest (AOI) geometry}
 \usage{
-getAOI(state = NULL, county = NULL, clip = NULL, sf = FALSE,
+getAOI(clip = NULL, state = NULL, county = NULL, sf = FALSE,
   km = FALSE, bb = FALSE)
 }
 \arguments{
+\item{clip}{\code{Spatial} object, a \code{Raster} object, or a \code{list} (see details and \code{\link{getClip}})}
+
 \item{state}{\code{character}.  Full name or two character abbriviation. Not case senstive}
 
 \item{county}{\code{character}.  County name(s). Requires \code{state} input. Not case senstive}
-
-\item{clip}{\code{Spatial} object, a \code{Raster} object, or a \code{list} (see details and \code{\link{getClip}})}
 
 \item{sf}{\code{logical}. If \code{TRUE} object returned is of class sf,  default is \code{FALSE} and returns class SpatialPolygons}
 

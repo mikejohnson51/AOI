@@ -16,7 +16,6 @@ Imports:
     jsonlite,
     magrittr,
     sf(>= 0.6-0),
-    sp,
     utils,
     xml2
 Suggests: 

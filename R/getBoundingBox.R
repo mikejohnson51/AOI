@@ -32,13 +32,10 @@ getBoundingBox = function(x, sf = FALSE) {
       min(x$long), min(x$lat)
     ), ncol = 2, byrow = TRUE )
 
-  bb = sp::Polygon(coords)
-  bb = sp::SpatialPolygons(list(Polygons(list(bb), ID = "AOI")),
-                           proj4string = AOI::aoiProj)
+  poly = sf::st_sfc(sf::st_polygon(list(coords)), crs = 4269)
 
-  if(sf){bb = sf::st_as_sf(bb)}
+  if(!sf){ poly = sf::as_Spatial(poly)}
 
-  return(bb)
+  return(poly)
 }
-
 

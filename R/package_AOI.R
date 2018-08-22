@@ -14,9 +14,8 @@
 #'
 #' @import      leaflet
 #' @importFrom  jsonlite fromJSON
-#' @importFrom  sp Polygon SpatialPolygons spTransform Polygons CRS
 #' @importFrom  utils tail
-#' @importFrom  sf st_as_sf as_Spatial st_bbox st_transform
+#' @importFrom  sf st_as_sf as_Spatial st_bbox st_transform st_sfc st_polygon
 #' @importFrom  xml2 read_xml xml_children xml_attrs
 
 NULL
