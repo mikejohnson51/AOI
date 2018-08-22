@@ -7,7 +7,7 @@
 
 **Welcome to the AOI R homepage!** <br>
 
-If you've ever found yourself needing to geocode or reverse geocode a location, formalize an area of interest, get bounding geometries, describe a place by lat/long, or better understand spatial locations, this package should be able to help. 
+If you've ever found yourself needing to geocode or reverse-geocode a location, formalize an area of interest, get bounding geometries, describe a place by lat/long, or better understand spatial locations, this package should be able to help. 
 
 An area of interest (AOI) is a geographic extent. It helps confine and formalize a unit of work to a geographic area, and prioritize and define research and sub setting efforts while improving reproducibility. They are built around concrete spatail attributes but often are discussed in a more colloquail way. The aim of the is package is to help make the colloquial understanding of space more concrete in the R environment.
 
