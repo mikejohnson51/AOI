@@ -19,7 +19,11 @@
 #' @export
 #' @author Mike Johnson
 
-check = function(AOI = NULL) {
+check = function(AOI = NULL, return = F) {
+
+  if(checkClass(AOI, 'sf')){
+    AOI = sf::st_transform(AOI, '+proj=longlat +datum=WGS84')
+  }
 
   base= leaflet() %>%
     addProviderTiles("Esri.NatGeoWorldMap", group = "Terrain") %>%
@@ -55,9 +59,7 @@ check = function(AOI = NULL) {
 
   print(m)
 
-  if(is.null(AOI)){return(m)} else {
+  if(return){return(m)}
 
-  return(list(AOI = AOI, map = m))
-  }
 }
 

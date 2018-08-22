@@ -4,7 +4,7 @@
 \alias{check}
 \title{Vizualize AOIs}
 \usage{
-check(AOI = NULL)
+check(AOI = NULL, return = F)
 }
 \arguments{
 \item{AOI}{an AOI obtained using \link{getAOI} or any/sf. Can be left \code{NULL}}
