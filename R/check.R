@@ -19,7 +19,7 @@
 #' @export
 #' @author Mike Johnson
 
-check = function(AOI = NULL, return = F) {
+check = function(AOI = NULL) {
 
   if(checkClass(AOI, 'sf')){
     AOI = sf::st_transform(AOI, '+proj=longlat +datum=WGS84')
@@ -59,7 +59,7 @@ check = function(AOI = NULL, return = F) {
 
   print(m)
 
-  if(return){return(m)}
+  return(m)
 
 }
 

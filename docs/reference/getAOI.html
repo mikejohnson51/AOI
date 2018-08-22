@@ -68,7 +68,7 @@ getAOI wraps getFiat and getClip into a single function." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Areas of Interest: AOI   </a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.9000</span>
       </span>
     </div>
 
@@ -150,12 +150,16 @@ getAOI wraps getFiat and getClip into a single function." />
     
     </div>
 
-    <pre class="usage"><span class='fu'>getAOI</span>(<span class='kw'>state</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>county</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>clip</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sf</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+    <pre class="usage"><span class='fu'>getAOI</span>(<span class='kw'>clip</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>state</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>county</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sf</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>km</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>bb</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>clip</th>
+      <td><p><code>Spatial</code> object, a <code>Raster</code> object, or a <code>list</code> (see details and <code><a href='getClip.html'>getClip</a></code>)</p></td>
+    </tr>
     <tr>
       <th>state</th>
       <td><p><code>character</code>.  Full name or two character abbriviation. Not case senstive</p></td>
@@ -163,10 +167,6 @@ getAOI wraps getFiat and getClip into a single function." />
     <tr>
       <th>county</th>
       <td><p><code>character</code>.  County name(s). Requires <code>state</code> input. Not case senstive</p></td>
-    </tr>
-    <tr>
-      <th>clip</th>
-      <td><p><code>Spatial</code> object, a <code>Raster</code> object, or a <code>list</code> (see details and <code><a href='getClip.html'>getClip</a></code>)</p></td>
     </tr>
     <tr>
       <th>sf</th>

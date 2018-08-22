@@ -129,7 +129,7 @@ head(nwis)
 
 bb = getBoundingBox(nwis$nwis)
 
-check(bb)$map %>% addMarkers(data = nwis$nwis, popup = paste("USGS Gage: ",nwis$site_no)) 
+check(bb) %>% addMarkers(data = nwis$nwis, popup = paste("USGS Gage: ",nwis$site_no)) 
 
 ```
 

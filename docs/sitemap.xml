@@ -31,9 +31,6 @@
     <loc>https://github.com/mikejohnson51/AOI/reference/describe.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/firstLower.html</loc>
-  </url>
-  <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/geocode.html</loc>
   </url>
   <url>
@@ -53,12 +50,6 @@
   </url>
   <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/getFiat.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/nameAOI.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/nameClip.html</loc>
   </url>
   <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/pipe.html</loc>

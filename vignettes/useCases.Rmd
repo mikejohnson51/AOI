@@ -51,10 +51,9 @@ The [HydroData](https://github.com/ncss-tech/soilDB) package offers quick access
 
 ```{r, message = FALSE}
 
-AOI = getAOI(clip = list("UCSB", 10, 10)) %>% 
+AOI = getAOI(list("UCSB", 10, 10)) %>% 
   HydroData::findNHD() %>% 
   HydroData::findWaterbodies() %>% 
-  HydroData::findNWIS() %>% 
   HydroData::explore()
 
 ```

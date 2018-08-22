@@ -115,7 +115,7 @@ leaflet() %>% addTiles() %>% addMarkers(data = pt$pts, popup = pt$pts$location)
 
 ```{r message = F}
 x = geocode(c("UCSB", "Goleta", "sterns warf"), pt = T, bb = T)
-check(x$bb)$m %>% leaflet::addMarkers(data = x$pts)
+check(x$bb) %>% leaflet::addMarkers(data = x$pts)
 
 ```
 
