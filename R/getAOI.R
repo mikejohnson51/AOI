@@ -1,18 +1,17 @@
 #' @title Get Area of Interest (AOI) geometry
-#' @description Get a Spatial* representation of an AOI defined by:
+#' @description Generate a spatial geometry from:
 #' \enumerate{
-#'              \item  a US state name(s)
-#'              \item  a US state, county pair(s)
-#'              \item  a user Spatial, sf or raster object or
-#'              \item  a clipping unit (see details)
+#'              \item  US state name(s)
+#'              \item  US state, county pair(s)
+#'              \item  a user spatial, sf or raster object
+#'              \item  a clip unit (see details)
 #'              }
-#' \code{getAOI} wraps \code{\link{getFiat}} and \code{\link{getClip}} into a single function.
-#' @param state     \code{character}.  Full name or two character abbriviation. Not case senstive
-#' @param county    \code{character}.  County name(s). Requires \code{state} input. Not case senstive
-#' @param clip      \code{Spatial} object, a \code{Raster} object, or a \code{list} (see details and \code{\link{getClip}})
-#' @param km        \code{logical}. If \code{TRUE} distance are in kilometers,  default is \code{FALSE} and with distances in miles
-#' @param sf        \code{logical}. If \code{TRUE} object returned is of class sf,  default is \code{FALSE} and returns class SpatialPolygons
-#' @param bb        \code{logical}. If \code{TRUE} then the bounding geometry of state/county is returned,  default is \code{FALSE} and returns fiat geometries
+#' @param state     Full name or two character abbriviation. Not case senstive
+#' @param county    County name(s). Requires \code{state} input. Not case senstive
+#' @param clip      A \code{spatial}, a \code{raster}, \code{sf} or a \code{list}
+#' @param km        If \code{TRUE} distance are in kilometers,  default is \code{FALSE} and with distances in miles
+#' @param sf        If \code{TRUE} object returned is of class sf,  default is \code{FALSE} and returns  SpatialPolygons
+#' @param bb        If \code{TRUE} the bounding geometry of state/county is returned, default is \code{FALSE} and returns fiat geometries
 #' @details If \code{clip} is a list, a clip unit requires a minimum of 3 inputs:
 #'                               \enumerate{
 #'                                      \item  A point: \itemize{
