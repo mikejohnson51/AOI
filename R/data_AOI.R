@@ -1,8 +1,7 @@
 #' @title USA States
 #' @description Dataset containing \code{SpatialPolygons} of USA States. Data is initalized from the USAboundaries and USAboundariesData
-#' package, converted to spatial \code{sp} objects, and cleaned-up for this package. The primary reason for doing this is to limit
-#' the challenges associated with using the USAboundariesData (not on CRAN) as a dependency for this, and other packages, while also providing
-#' a more minmualistic dataset.
+#' package, converted to \code{SpatialPolygons}, re-projected and cleaned-up for this package. The primary reason for doing this is to provide
+#' a more minmualistic dataset dataset primed for this package and leaflet use.
 #' @docType data
 #' @format a \code{SpatialPolygonsDataFrame}, 52 observations of 5 variables
 #' \itemize{
@@ -15,16 +14,15 @@
 #' @source  \href{https://cran.r-project.org/web/packages/USAboundaries/index.html}{USAboundaries}
 #' @examples
 #' \dontrun{
-#'  states = AOI::states
+#' AOI::states
 #'}
 
 "states"
 
 #' @title USA Counites
 #' @description Dataset containing \code{SpatialPolygons} of USA Counties. Data is initalized from the USAboundaries and USAboundariesData
-#' package, converted to spatial \code{sp} objects, and cleaned-up for this package. The primary reason for doing this is to limit
-#' the challenges associated with using the USAboundariesData (not on CRAN) as a dependency for this, and other packages, while also providing
-#' a more minmualistic dataset.
+#' package, converted to \code{SpatialPolygons}, re=projected and cleaned-up for this package. The primary reason for doing this to provide
+#' a more minmualistic dataset dataset primed for this package and leaflet use.
 #' @docType data
 #' @format a \code{SpatialPolygonsDataFrame}, 3220 observations of 7 variables
 #' \itemize{
@@ -39,7 +37,7 @@
 #' @source  \href{https://cran.r-project.org/web/packages/USAboundaries/index.html}{USAboundaries}
 #' @examples
 #' \dontrun{
-#'  counties = AOI::counties
+#'  AOI::counties
 #'}
 
 "counties"

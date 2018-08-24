@@ -9,7 +9,7 @@
 aoiProj
 }
 \description{
-The projection used for all AOI calls: \emph{EPSG:4269}
+Base projection used for all AOI calls: \emph{EPSG:4269}. `aoiProj = "+init=epsg:4269"`
 }
 \author{
 Mike Johnson

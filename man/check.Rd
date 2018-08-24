@@ -2,32 +2,42 @@
 % Please edit documentation in R/check.R
 \name{check}
 \alias{check}
-\title{Vizualize AOIs}
+\title{Generate Leafet map and tool set}
 \usage{
 check(AOI = NULL)
 }
 \arguments{
-\item{AOI}{an AOI obtained using \link{getAOI} or any/sf. Can be left \code{NULL}}
+\item{AOI}{any spatial, raster or sf object. Can be left \code{NULL}}
 }
 \value{
-a list of AOI and \code{leaflet} html object
+a \code{leaflet} html object
 }
 \description{
-Generate an interactive \code{leaflet} map for defining, checking, and refining AOI queries. Can be chained to \link{getAOI} via
-`%>%`. Useful \code{leaflet} tools allow for the marking of points, measuring of distances, and interactive panning and zooming to help define
+Generate an interactive \code{leaflet} map for checking, and refining AOI queries. Useful \code{leaflet} tools allow for the marking of points, measuring of distances, and interactive panning and zooming to help define
 an approapriate AOI.
 }
 \examples{
 \dontrun{
-# Generate an empty map:
-check()
+## Generate an empty map:
+     check()
 
-# Check a defined AOI:
-AOI = getAOI(clip = list("UCSB", 10, 10))
-check(AOI)
+## Check a defined AOI:
+     AOI = getAOI(clip = list("UCSB", 10, 10))
+     check(AOI)
 
-# Chain to AOI calls:
-getAOI(clip = list("UCSB", 10, 10)) \%>\% check()
+## Chain to AOI calls:
+     getAOI(clip = list("UCSB", 10, 10)) \%>\% check()
+
+## Add layers with standard leaflet functions:
+     r = getAOI("UCSB") \%>\%  # get AOI
+     HydroData::findNED() \%>\%  # get raster of elevation data
+     HydroData::findNWIS() # get SpatialPointsDataframe of local USGS gages
+
+     check(r$NED) \%>\% addMarkers(data = r$nwis, popup = r$nwis$site_no)
+
+## Save map for reference:
+     m = getAOI("Kansas City") \%>\% check()
+     htmlwidgets::saveWidget(m, file = paste0(getwd(), "/myMap.html"))
 }
 }
 \author{

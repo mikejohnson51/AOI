@@ -22,13 +22,12 @@ counties
 }
 \description{
 Dataset containing \code{SpatialPolygons} of USA Counties. Data is initalized from the USAboundaries and USAboundariesData
-package, converted to spatial \code{sp} objects, and cleaned-up for this package. The primary reason for doing this is to limit
-the challenges associated with using the USAboundariesData (not on CRAN) as a dependency for this, and other packages, while also providing
-a more minmualistic dataset.
+package, converted to \code{SpatialPolygons}, re=projected and cleaned-up for this package. The primary reason for doing this to provide
+a more minmualistic dataset dataset primed for this package and leaflet use.
 }
 \examples{
 \dontrun{
- counties = AOI::counties
+ AOI::counties
 }
 }
 \keyword{datasets}

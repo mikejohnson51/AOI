@@ -3,6 +3,7 @@
 #' @param x a string
 #' @author Mike Johnson
 #' @export
+#' @noRd
 #' @examples
 #' \dontrun{
 #' simpleCap("santa barbara")

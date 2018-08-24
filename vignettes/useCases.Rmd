@@ -54,14 +54,10 @@ The [HydroData](https://github.com/ncss-tech/soilDB) package offers quick access
 AOI = getAOI(list("UCSB", 10, 10)) %>% 
   HydroData::findNHD() %>% 
   HydroData::findWaterbodies() %>% 
+  HydroData::findGHCN() %>% 
   HydroData::explore()
 
 ```
-
-```{r, echo = FALSE}
-AOI$map
-```
-
 
 #Rayshader
 
@@ -70,7 +66,7 @@ AOI$map
 ```{r, eval = FALSE}
 library(rayshader)
 
-AOI = getAOI(clip = list("Universty of Oregon", 10, 30)) %>% HydroData::findNED()
+AOI = getAOI(clip = list("UCSB", 10, 30)) %>% HydroData::findNED()
 
 ned = matrix(raster::extract(AOI$NED,raster::extent(AOI$NED),buffer=1000),
                nrow=ncol(AOI$NED),ncol=nrow(AOI$NED))
@@ -165,3 +161,42 @@ rasterVis::levelplot(rr/10,
 library(rosm)
 bb = getAOI(clip = list("Lake Cachuma", 20,20)) %>% osm.plot(type="stamenbw")
 ```
+
+
+## Viewing Downscaledd Climate Forecasts with USGS-R geoknife
+
+The USGS geoknife package provides a unique interface to large-scale climate datasets. One example of these is the LOCA Downscaled climate product. Here, we are interested in finding predicted maximum daily temperture values for the Santa Barbara area in October of 2080 under two climate scenarios - RCP 4.5 and 8.5. This example is basic and developed to highlight the use of AOI with the geoknife package. A more in depth example of the geoknife package can be found [here](https://owi.usgs.gov/blog/LOCAdownscaling/).
+
+
+```{r, message = F}
+
+library(geoknife)
+
+AOI = getAOI("Santa Barbara")
+
+AOI::check(AOI)
+
+stencil = AOI %>% sp::spTransform("+proj=longlat +datum=WGS84") %>% simplegeom()
+
+fabric <- webdata(url = 'http://cida.usgs.gov/thredds/dodsC/loca_future',
+                  variables = c("tasmax_CCSM4_r6i1p1_rcp45", "tasmax_CCSM4_r6i1p1_rcp85"),
+                  times = c('2080-10-01', '2080-10-31')
+                  )
+
+knife <- webprocess(STATISTICS = "MEAN", wait = TRUE)
+
+job <- geoknife(stencil, fabric, knife)
+
+xx = result(job)
+
+ggplot(xx) + 
+  geom_line(aes(x = xx$DateTime, y = xx$ID1, color = xx$variable)) + 
+  labs(title = "October 2080 Max Temperture: LOCA", 
+       x = "Date", 
+       y = "Degrees C", 
+       color = "RCP Pathway")
+
+````
+
+
+

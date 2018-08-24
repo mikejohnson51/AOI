@@ -7,31 +7,24 @@
 describe(AOI)
 }
 \arguments{
-\item{AOI}{an AOI obtained using \link{getAOI}, or any sp/sf object.}
-}
-\value{
-a data.frame of AOI descriptors including
-\describe{
-  \item{latCent}{the AOI center latitude}
-  \item{lngCent}{the AOI center longitude}
-  \item{height}{ height in (miles)}
-  \item{width}{width in(miles)}
-  \item{origin}{AOI origin}
-  \item{name}{Most descriptive geocoded name from \code{revgeocode}}
-}
+\item{AOI}{a spatial, raster or sf object}
 }
 \description{
-Convert an AOI object to a data.frame of describing factors. Can be useful for sharing,
-documenting and repaeating AOI calls.
+Breaks a Spatial object into the features describing a reporducable clip area.
 }
 \examples{
 \dontrun{
-#Get an AOI
-AOI = getAOI(clip = list("UCSB", 10, 10))
-describe(AOI)
+ AOI = getAOI(clip = list("UCSB", 10, 10)) \%>\% describe()
 
-# Chain to AOI calls:
-AOI = getAOI(clip = list("UCSB", 10, 10)) \%>\% describe()
+ ```
+ latCent :	34.4139629
+ lngCent :	-119.848947
+ height  :	10 miles
+ width   :	10 miles
+ origin  :	center
+ name    :	93106, Santa Barbara, California
+ ```
+
 }
 }
 \author{

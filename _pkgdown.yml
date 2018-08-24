@@ -16,22 +16,26 @@ reference:
     desc: ~
       Tools for exploring, describing and defining AOIs
     contents:
-      - '`bbox_st`'
       - '`bbox_sp`'
+      - '`bbox_st`'
+      - '`buffer`'
       - '`check`'
       - '`describe`'
   - title: Data and Package Helpers
     desc: ~
       Data and function that make the package useable
     contents:
+      - '`aoiProj`'
       - '`counties`'
       - '`states`'
-      - '`aoiProj`'
 navbar:
   left:
     - icon: fa-home
       href: index.html
-    - text: "Documentation"
+    - icon:  fa-file-code-o
+      text: "functions"
+      href: reference/index.html
+    - text: "Vignettes"
       icon: fas fa-book
       menu:
       -  text: Geocoding
@@ -44,9 +48,9 @@ navbar:
          href: articles/tools.html
       -  text: Use Cases
          href: articles/useCases.html
-    - icon: fa-file-code-o
-      text: "functions"
-      href: reference/index.html
+    - icon: fa-file
+      text: "Package Manual"
+      href: AOI.pdf
 
 
 

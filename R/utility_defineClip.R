@@ -3,6 +3,7 @@
 #' @param clip a user supplied list (see \code{\link{getAOI}})
 #' @param km  \code{logical}. If \code{TRUE} distance are in kilometers,
 #' default is \code{FALSE} with distances in miles
+#' @noRd
 #' @return a 4-element list of features defining an AOI
 #' @author Mike Johnson
 

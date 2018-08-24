@@ -4,9 +4,6 @@
     <loc>https://github.com/mikejohnson51/AOI/index.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/AOI.html</loc>
-  </url>
-  <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/aoiProj.html</loc>
   </url>
   <url>
@@ -16,16 +13,13 @@
     <loc>https://github.com/mikejohnson51/AOI/reference/bbox_st.html</loc>
   </url>
   <url>
+    <loc>https://github.com/mikejohnson51/AOI/reference/buffer.html</loc>
+  </url>
+  <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/check.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/checkClass.html</loc>
-  </url>
-  <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/counties.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/defineClip.html</loc>
   </url>
   <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/describe.html</loc>
@@ -34,31 +28,13 @@
     <loc>https://github.com/mikejohnson51/AOI/reference/geocode.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/geocodeGoogle.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/geocodeOSM.html</loc>
-  </url>
-  <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/getAOI.html</loc>
   </url>
   <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/getBoundingBox.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/getClip.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/getFiat.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/pipe.html</loc>
-  </url>
-  <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/revgeocode.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/simpleCap.html</loc>
   </url>
   <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/states.html</loc>

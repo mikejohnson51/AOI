@@ -1,8 +1,7 @@
-#' re-export magrittr pipe operator
-#'
+#' @title re-export magrittr pipe operator
 #' @importFrom magrittr %>%
 #' @name %>%
-#' @rdname pipe
+#' @noRd
 #' @export
 
 NULL

@@ -108,6 +108,13 @@
     functions
   </a>
 </li>
+<li>
+  <a href="../AOI.pdf">
+    <span class="fa fa-file-code-o"></span>
+     
+    CRAN Manual
+  </a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -147,11 +154,11 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>bbox_st</th>
-      <td><p>a bounding box string or vector in the order ("xmin","xmax", "ymin", "ymax")</p></td>
+      <td><p>a bounding box string, vector, or data.frame in the order ("xmin","xmax", "ymin", "ymax")</p></td>
     </tr>
     <tr>
       <th>sf</th>
-      <td><p>logical. Should returned feature be of class sf (default = FALSE)</p></td>
+      <td><p>logical. Return simple featrures (sf) object (default = FALSE)</p></td>
     </tr>
     </table>
     
@@ -162,8 +169,14 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>CO</span> <span class='kw'>=</span> <span class='fu'><a href='getAOI.html'>getAOI</a></span>(<span class='kw'>state</span> <span class='kw'>=</span> <span class='st'>'CO'</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='bbox_st.html'>bbox_st</a></span>()
-<span class='no'>CO.1</span> <span class='kw'>=</span> <span class='no'>CO</span> <span class='kw'>%&gt;%</span> <span class='fu'>bbox_sp</span>()
+<span class='co'>## SpatialPolygon from vector</span>
+   <span class='no'>bbox</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>37</span>,<span class='fl'>38</span>,-<span class='fl'>119</span>,-<span class='fl'>118</span>) <span class='kw'>%&gt;%</span> <span class='fu'>bbox_sp</span>()
+
+<span class='co'>## Simple Feature Polygon from Data Frame</span>
+   <span class='no'>bbox</span> <span class='kw'>=</span> <span class='fu'>data.frame</span>(<span class='kw'>xmin</span> <span class='kw'>=</span> <span class='fl'>37</span>, <span class='kw'>xmax</span> <span class='kw'>=</span> <span class='fl'>38</span>, <span class='kw'>ymin</span> <span class='kw'>=</span> -<span class='fl'>119</span>, <span class='kw'>ymax</span> <span class='kw'>=</span> -<span class='fl'>118</span>) <span class='kw'>%&gt;%</span> <span class='fu'>bbox_sp</span>(<span class='kw'>sf</span> <span class='kw'>=</span> <span class='no'>T</span>)
+
+<span class='co'>## SpatialPolygon from Reverse Geocode results</span>
+   <span class='no'>bbox</span> <span class='kw'>=</span> <span class='fu'><a href='revgeocode.html'>revgeocode</a></span>(<span class='st'>"Santa Barbara"</span>)$<span class='no'>bb</span> <span class='kw'>%&gt;%</span> <span class='fu'>bbox_sp</span>()
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

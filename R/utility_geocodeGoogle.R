@@ -7,6 +7,7 @@
 #' @param bb if TRUE the OSM bounding area of the location is appended to returned list
 #' @return at minimum a data.frame of lat, long
 #' @author Mike Johnson
+#' @noRd
 #' @export
 #' @examples
 #' \dontrun{
@@ -47,7 +48,7 @@ fin = fin[!duplicated(fin),]
 
 if(pt) { point = sf::st_as_sf(x = fin, coords = c("lng", "lat"), crs = as.character(AOI::aoiProj)) }
 
-if(bb) { bbox = bbox_sp(fin$bb) }
+if(bb) { bbox = bbox_sp(bbox_st = fin$bb) }
 
 loc = data.frame(lat = fin$lat, lon = fin$lng)
 

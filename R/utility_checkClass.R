@@ -3,6 +3,7 @@
 #' @param x an object
 #' @param type a class
 #' @return logical
+#' @noRd
 #' @export
 #' @examples
 #' \dontrun{
