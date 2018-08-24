@@ -151,45 +151,50 @@ If multiple points are given the returned objects will be a matrix with columns 
     
     </div>
 
-    <pre class="usage"><span class='fu'>geocode</span>(<span class='kw'>location</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pt</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>bb</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>server</span> <span class='kw'>=</span> <span class='st'>"google"</span>)</pre>
+    <pre class="usage"><span class='fu'>geocode</span>(<span class='kw'>location</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pt</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>bb</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>sf</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>server</span> <span class='kw'>=</span> <span class='st'>"google"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>location</th>
-      <td><p>place name(s)</p></td>
+      <td><p><code>character</code>. Place name(s)</p></td>
     </tr>
     <tr>
       <th>pt</th>
-      <td><p>logical. Should the function return a SpatialPoints object of the location(s)</p></td>
+      <td><p><code>logical</code>. If TRUE points geometery is appended to the returned list()</p></td>
     </tr>
     <tr>
       <th>bb</th>
-      <td><p>return bb Should a bounding box geometery be returned with the object.</p></td>
+      <td><p><code>logical</code>. If TRUE bounding box geometry is appended to the returned list()</p></td>
+    </tr>
+    <tr>
+      <th>sf</th>
+      <td><p><code>logical</code>. If TRUE object(s) returned are of class <code>sf</code>, default is FALSE and returns <code>sp</code></p></td>
     </tr>
     <tr>
       <th>server</th>
-      <td><p>what server should be prioritized. Options inlcude "google" or "osm" (default = 'google)</p></td>
+      <td><p><code>character</code>. What server should be prioritized. Options inlcude 'google' or 'osm' (default = 'google')</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>at minimum a matrix of lat/long coordinates</p>
+    <p>at minimum a matrix of lat/long coordinates. Possible list with appended spatial features of type <code>sf</code> or <code>sp</code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
  <span class='co'>## geocode a single location</span>
      <span class='fu'>geocode</span>(<span class='st'>"UCSB"</span>)
- <span class='co'>#geocode a single location and return a SpatialPoints object</span>
+ <span class='co'>## geocode a single location and return a SpatialPoints object</span>
      <span class='fu'>geocode</span>(<span class='st'>"UCSB"</span>, <span class='kw'>pt</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
- <span class='co'>#geocode a single location and derived bounding box of location</span>
+ <span class='co'>## geocode a single location and derived bounding box of location</span>
      <span class='fu'>geocode</span>(<span class='st'>"UCSB"</span>, <span class='kw'>bb</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
- <span class='co'>#geocode multiple locations</span>
+ <span class='co'>## geocode multiple locations</span>
      <span class='fu'>geocode</span>(<span class='fu'>c</span>(<span class='st'>"UCSB"</span>, <span class='st'>"Goleta"</span>, <span class='st'>"Sterns Warf"</span>))
- <span class='co'>#geocode multiple points and generate a minimum bounding box of all locations</span>
+ <span class='co'>## geocode multiple points and generate a minimum bounding box of all locations</span>
      <span class='fu'>geocode</span>(<span class='fu'>c</span>(<span class='st'>"UCSB"</span>, <span class='st'>"Goleta"</span>, <span class='st'>"Sterns Warf"</span>), <span class='kw'>bb</span> <span class='kw'>=</span> <span class='no'>T</span>, <span class='kw'>pt</span><span class='kw'>=</span> <span class='no'>T</span>)
 <span class='co'># }</span></pre>
   </div>

@@ -1,11 +1,15 @@
 #' @title Convert bounding box string to geometry
 #' @description Convert a vector, dataframe, bb, or raster object to a spatial geometry
-#' @param bbox_st a string, vector, or data.frame in the order ("xmin","xmax", "ymin", "ymax"). Raster objects are also accepted.
-#' @param sf logical. Return simple features (sf) object (default = FALSE)
+#' @param bbox_st a \code{character} comma seperated string,\code{numeric} vector, or data.frame in the order ("xmin","xmax", "ymin", "ymax"). \code{Raster} objects are also accepted.
+#' @param sf \code{logical}. If TRUE object returned is of class \code{sf}, default is FALSE and returns \code{SpatialPolygons}
 #' @return a bounding box geometry
 #' @author Mike Johnson
 #' @examples
 #' \dontrun{
+#'
+#' ## SpatialPolygon from string
+#'    bbox = bbox_sp("37,36,-119,-118")
+#'
 #' ## SpatialPolygon from vector
 #'    bbox = c(37,38,-119,-118) %>% bbox_sp()
 #'
@@ -59,5 +63,4 @@ bbox_sp = function(bbox_st, sf = FALSE){
   return(poly)
 
 }
-
 

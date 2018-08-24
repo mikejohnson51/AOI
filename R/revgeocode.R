@@ -6,8 +6,8 @@ print.geoloc <- function(x) {
 }
 
 #' @title Reverse Geocoding
-#' @description Describe a location using the ERSI and OSM reverse geocoding web-services. This service provide tradional reverse geocoding (lat/long to placename) but can also be use to get more information about a place name.
-#' @param point a point provided by lat,long or place name
+#' @description Describe a location using the ERSI and OSM reverse geocoding web-services. This service provides tradional reverse geocoding (lat/long to placename) but can also be use to get more information about a place name.
+#' @param point a point provided by \code{numeric} lat,long pair or \code{character} place name
 #' @return a data.frame of descriptive features
 #' @export
 #' @author Mike Johnson

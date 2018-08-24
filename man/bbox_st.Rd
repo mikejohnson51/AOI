@@ -7,10 +7,10 @@
 bbox_st(AOI)
 }
 \arguments{
-\item{AOI}{any spatial object (raster, sf, sp)}
+\item{AOI}{any spatial object (\code{raster}, \code{sf}, \code{sp}). Can be piped (\%>\%) from \code{\link{getAOI}}}
 }
 \value{
-a bounding box data.frame
+a bounding box data.frame (xmin. xmax, ymin, ymax)
 }
 \description{
 Convert a spatial object to a data.frame of (xmin, xmax, ymin, ymax)

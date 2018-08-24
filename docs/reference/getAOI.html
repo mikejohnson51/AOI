@@ -165,27 +165,27 @@ a clip unit (see details)
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>clip</th>
-      <td><p>A <code>spatial</code>, a <code>raster</code>, <code>sf</code> or a <code>list</code></p></td>
+      <td><p>A <code>spatial</code>, <code>raster</code>, <code>sf</code> or a <code>list</code> object (see details for list parameters)</p></td>
     </tr>
     <tr>
       <th>state</th>
-      <td><p>Full name or two character abbriviation. Not case senstive</p></td>
+      <td><p><code>character</code>. Full name or two character abbriviation. Not case senstive</p></td>
     </tr>
     <tr>
       <th>county</th>
-      <td><p>County name(s). Requires <code>state</code> input. Not case senstive</p></td>
+      <td><p><code>character</code>. County name(s). Requires <code>state</code> input. Not case senstive. If 'all' then all counties in a state are returned</p></td>
     </tr>
     <tr>
       <th>sf</th>
-      <td><p>If <code>TRUE</code> object returned is of class sf,  default is <code>FALSE</code> and returns  SpatialPolygons</p></td>
+      <td><p><code>logical</code>. I<code>logical</code>. If TRUE object returned is of class <code>sf</code>, default is FALSE and returns <code>SpatialPolygons</code></p></td>
     </tr>
     <tr>
       <th>km</th>
-      <td><p>If <code>TRUE</code> distance are in kilometers,  default is <code>FALSE</code> and with distances in miles</p></td>
+      <td><p><code>logical</code>. If <code>TRUE</code> distances are in kilometers, default is <code>FALSE</code> with distances in miles</p></td>
     </tr>
     <tr>
       <th>bb</th>
-      <td><p>If <code>TRUE</code> the bounding geometry of state/county is returned, default is <code>FALSE</code> and returns fiat geometries</p></td>
+      <td><p><code>logical</code>.  Only applicable for state and county calls. If <code>TRUE</code> the bounding geometry of state/county is returned, default is <code>FALSE</code> and returns fiat geometries</p></td>
     </tr>
     </table>
     
@@ -195,16 +195,16 @@ a clip unit (see details)
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>A <code>clip</code> unit can be describe by just a location (eg 'UCSB'). In doing so the associated boundaries determined by <code><a href='geocode.html'>geocode</a></code> will be returned.
+    <p>A <code>clip</code> unit can be described by just a location (eg 'UCSB'). In doing so the associated boundaries determined by <code><a href='geocode.html'>geocode</a></code> will be returned.
 To have greater control over the clip unit it can be defined as a list with a minimum of 3 inputs:</p><ol>
 <li><p>A point:</p><ul>
-<li><p>'location name' ex: "UCSB"</p></li>
-<li><p>lat/lon pair: ex: '-36, -120'</p></li>
+<li><p>'location name' (<code>character</code>) ex: "UCSB"</p></li>
+<li><p>'lat/lon' pair: ex: "c(-36, -120)"</p></li>
 </ul></li>
-<li><p>A bounding box height</p><ul>
+<li><p>A bounding box height (<code>numeric</code>)</p><ul>
 <li><p>in miles ex: 10</p></li>
 </ul></li>
-<li><p>A bounding box width</p><ul>
+<li><p>A bounding box width (<code>numeric</code>)</p><ul>
 <li><p>in miles ex: 10</p></li>
 </ul></li>
 </ol>
@@ -220,8 +220,8 @@ To have greater control over the clip unit it can be defined as a list with a mi
 </ul></li>
 </ol><p>In total, 1 to 5 elements can be used to define <code>clip</code> element and <strong>ORDER MATTERS</strong> (point, height, width, origin).
 Acceptable variations include:</p><ul>
-<li><p>1 members: (1) location name</p><ul>
-<li><p><em>"UCSB</em></p></li>
+<li><p>1 member: (1) location name</p><ul>
+<li><p><em>"UCSB"</em></p></li>
 </ul></li>
 <li><p>3 members: (1) location name, (2) height, (3) width</p><ul>
 <li><p><em>list("UCSB", 10, 10) </em></p></li>
@@ -246,6 +246,10 @@ Acceptable variations include:</p><ul>
 <span class='co'># Get AOI defined by a state(s)</span>
     <span class='fu'>getAOI</span>(<span class='kw'>state</span> <span class='kw'>=</span> <span class='st'>'CA'</span>)
     <span class='fu'>getAOI</span>(<span class='kw'>state</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>'CA'</span>, <span class='st'>'nevada'</span>))
+
+<span class='co'># Get AOI defined by state &amp; county pair(s)</span>
+    <span class='fu'>getAOI</span>(<span class='kw'>state</span> <span class='kw'>=</span> <span class='st'>'California'</span>, <span class='kw'>county</span> <span class='kw'>=</span> <span class='st'>'Santa Barbara'</span>)
+    <span class='fu'>getAOI</span>(<span class='kw'>state</span> <span class='kw'>=</span> <span class='st'>'CA'</span>, <span class='kw'>county</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>'Santa Barbara'</span>, <span class='st'>'ventura'</span>))
 
 <span class='co'># Get AOI defined by state &amp; county pair(s)</span>
     <span class='fu'>getAOI</span>(<span class='kw'>state</span> <span class='kw'>=</span> <span class='st'>'California'</span>, <span class='kw'>county</span> <span class='kw'>=</span> <span class='st'>'Santa Barbara'</span>)

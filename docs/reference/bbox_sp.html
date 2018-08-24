@@ -154,11 +154,11 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>bbox_st</th>
-      <td><p>a string, vector, or data.frame in the order ("xmin","xmax", "ymin", "ymax"). Raster objects are also accepted.</p></td>
+      <td><p>a <code>character</code> comma seperated string,<code>numeric</code> vector, or data.frame in the order ("xmin","xmax", "ymin", "ymax"). <code>Raster</code> objects are also accepted.</p></td>
     </tr>
     <tr>
       <th>sf</th>
-      <td><p>logical. Return simple features (sf) object (default = FALSE)</p></td>
+      <td><p><code>logical</code>. If TRUE object returned is of class <code>sf</code>, default is FALSE and returns <code>SpatialPolygons</code></p></td>
     </tr>
     </table>
     
@@ -169,6 +169,9 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'>## SpatialPolygon from string</span>
+   <span class='no'>bbox</span> <span class='kw'>=</span> <span class='fu'>bbox_sp</span>(<span class='st'>"37,36,-119,-118"</span>)
+
 <span class='co'>## SpatialPolygon from vector</span>
    <span class='no'>bbox</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>37</span>,<span class='fl'>38</span>,-<span class='fl'>119</span>,-<span class='fl'>118</span>) <span class='kw'>%&gt;%</span> <span class='fu'>bbox_sp</span>()
 

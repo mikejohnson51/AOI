@@ -1,14 +1,14 @@
 #' @title Describe an AOI
-#' @description Breaks a Spatial object into the features describing a reporducable clip area.
-#' @param AOI a spatial, raster or sf object
-#' @return a data.frame of AOI descriptors including
+#' @description Describes a spatial, raster or sf object in terms of a reproducable clip area.
+#' @param AOI any spatial object (\code{raster}, \code{sf}, \code{sp}). Can be piped (\%>\%) from \code{\link{getAOI}}
+#' @return a data.frame of AOI descriptors including:
 #' \describe{
-#'   \item{latCent}{the AOI center latitude}
+#'   \item{latCent}{the AOI center latitude }
 #'   \item{lngCent}{the AOI center longitude}
 #'   \item{height}{ height in (miles)}
 #'   \item{width}{width in(miles)}
 #'   \item{origin}{AOI origin}
-#'   \item{name}{Most descriptive geocoded name from \code{\link{revgeocode}}}
+#'   \item{name}{Most descriptive place name from \code{\link{revgeocode}}}
 #' }
 #' @export
 #' @author Mike Johnson
@@ -24,7 +24,6 @@
 #'  origin  :	center
 #'  name    :	93106, Santa Barbara, California
 #'  ```
-#'
 #' }
 
 describe = function(AOI){

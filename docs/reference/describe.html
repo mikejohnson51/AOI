@@ -32,7 +32,7 @@
 
 <meta property="og:title" content="Describe an AOI — describe" />
 
-<meta property="og:description" content="Breaks a Spatial object into the features describing a reporducable clip area." />
+<meta property="og:description" content="Describes a spatial, raster or sf object in terms of a reproducable clip area." />
 
 <meta property="og:image" content="https://github.com/mikejohnson51/AOI/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -143,7 +143,7 @@
 
     <div class="ref-description">
     
-    <p>Breaks a Spatial object into the features describing a reporducable clip area.</p>
+    <p>Describes a spatial, raster or sf object in terms of a reproducable clip area.</p>
     
     </div>
 
@@ -154,19 +154,19 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>AOI</th>
-      <td><p>a spatial, raster or sf object</p></td>
+      <td><p>any spatial object (<code>raster</code>, <code>sf</code>, <code>sp</code>). Can be piped (%&gt;%) from <code><a href='getAOI.html'>getAOI</a></code></p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a data.frame of AOI descriptors including</p><dl class='dl-horizontal'>
+    <p>a data.frame of AOI descriptors including:</p><dl class='dl-horizontal'>
   <dt>latCent</dt><dd><p>the AOI center latitude</p></dd>
   <dt>lngCent</dt><dd><p>the AOI center longitude</p></dd>
   <dt>height</dt><dd><p>height in (miles)</p></dd>
   <dt>width</dt><dd><p>width in(miles)</p></dd>
   <dt>origin</dt><dd><p>AOI origin</p></dd>
-  <dt>name</dt><dd><p>Most descriptive geocoded name from <code><a href='revgeocode.html'>revgeocode</a></code></p></dd>
+  <dt>name</dt><dd><p>Most descriptive place name from <code><a href='revgeocode.html'>revgeocode</a></code></p></dd>
 </dl>
 
     
@@ -183,7 +183,6 @@
  origin  :	center
  name    :	93106, Santa Barbara, California
  ```
-
 # }
 </pre>
   </div>

@@ -16,10 +16,13 @@
     <loc>https://github.com/mikejohnson51/AOI/reference/bbox_st.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/buffer.html</loc>
+    <loc>https://github.com/mikejohnson51/AOI/reference/buff.html</loc>
   </url>
   <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/check.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/mikejohnson51/AOI/reference/checkClass.html</loc>
   </url>
   <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/counties.html</loc>
@@ -31,13 +34,31 @@
     <loc>https://github.com/mikejohnson51/AOI/reference/geocode.html</loc>
   </url>
   <url>
+    <loc>https://github.com/mikejohnson51/AOI/reference/geocodeGoogle.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/mikejohnson51/AOI/reference/geocodeOSM.html</loc>
+  </url>
+  <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/getAOI.html</loc>
   </url>
   <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/getBoundingBox.html</loc>
   </url>
   <url>
+    <loc>https://github.com/mikejohnson51/AOI/reference/getClip.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/mikejohnson51/AOI/reference/getFiat.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/mikejohnson51/AOI/reference/grapes-greater-than-grapes.html</loc>
+  </url>
+  <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/revgeocode.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/mikejohnson51/AOI/reference/simpleCap.html</loc>
   </url>
   <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/states.html</loc>

@@ -109,13 +109,13 @@ geocode(c("UCSB", "Goleta"))
 
 ```{r message = F}
 pt = geocode(c("UCSB", "Goleta", "sterns warf"), pt = T)
-leaflet() %>% addTiles() %>% addMarkers(data = pt$pts, popup = pt$pts$location)
+leaflet() %>% addTiles() %>% addMarkers(data = pt$pt, popup = pt$pt$location)
 
 ```
 
 ```{r message = F}
 x = geocode(c("UCSB", "Goleta", "sterns warf"), pt = T, bb = T)
-check(x$bb) %>% leaflet::addMarkers(data = x$pts)
+check(x$bb) %>% leaflet::addMarkers(data = x$pt)
 
 ```
 

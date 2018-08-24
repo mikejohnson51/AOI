@@ -1,7 +1,7 @@
 #' @title Get mimimum bounding box of spatial features
 #' @description Returns a minimum bounding box for a spatial, raster or sf object(s)
 #' @param x a \code{data.frame} with a lat and long column, a raster, sf, or spatial object
-#' @param sf \code{logical}. If \code{TRUE} object returned is of class sf.
+#' @param sf \code{logical}. If TRUE object returned is of class \code{sf}, default is FALSE and returns \code{SpatialPolygons}
 #' Default is \code{FALSE} and returns class SpatialPolygon
 #' @examples
 #' \dontrun{

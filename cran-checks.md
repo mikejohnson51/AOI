@@ -1,13 +1,22 @@
+This is the first submission of this package, and my first overall to CRAN
+
 ## Test environments
-* local OS X install, R 3.5.1
-* ubuntu 12.04 (on travis-ci), R 3.1.2
-* win-builder (through devtools)
+* local MAC OS X install, R 3.5.1
+* ubuntu 12.04 (on travis-ci), R 3.5.0
+* win-builder ("R-release", "R-devel")
 
 ## R CMD check results
-There were no ERRORs WARNINGs or NOTEs. 
+*There were no ERRORs WARNINGs or NOTEs on local MAC OS X and travis.
+
+*One NOTE on build_win()
+
+*checking CRAN incoming feasibility ... NOTE
+           Maintainer: 'Mike Johnson <jmj00@ucsb.edu>'
+           
+This appears to be due to first submission and there is nothing I can do to remove it.
 
 ## Downstream dependencies
-I have also run R CMD check on downstream dependencies of AOI with devtools::revdep_check_print_problems() 
+I have run `R CMD check` on downstream dependencies with devtools::revdep_check_print_problems() 
 
 'No ERRORs or WARNINGs found :)' is returned
 

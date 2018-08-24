@@ -10,8 +10,8 @@ print.bb = function(x){
 
 #' @title Convert spatial geometry to string (data.frame)
 #' @description Convert a spatial object to a data.frame of (xmin, xmax, ymin, ymax)
-#' @param AOI any spatial object (raster, sf, sp)
-#' @return a bounding box data.frame
+#' @param AOI any spatial object (\code{raster}, \code{sf}, \code{sp}). Can be piped (\%>\%) from \code{\link{getAOI}}
+#' @return a bounding box data.frame (xmin. xmax, ymin, ymax)
 #' @export
 #' @author Mike Johnson
 #' @examples

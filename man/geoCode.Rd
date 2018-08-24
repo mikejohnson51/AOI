@@ -4,19 +4,22 @@
 \alias{geocode}
 \title{Geocoding}
 \usage{
-geocode(location = NULL, pt = FALSE, bb = FALSE, server = "google")
+geocode(location = NULL, pt = FALSE, bb = FALSE, sf = FALSE,
+  server = "google")
 }
 \arguments{
-\item{location}{place name(s)}
+\item{location}{\code{character}. Place name(s)}
 
-\item{pt}{logical. Should the function return a SpatialPoints object of the location(s)}
+\item{pt}{\code{logical}. If TRUE points geometery is appended to the returned list()}
 
-\item{bb}{return bb Should a bounding box geometery be returned with the object.}
+\item{bb}{\code{logical}. If TRUE bounding box geometry is appended to the returned list()}
 
-\item{server}{what server should be prioritized. Options inlcude "google" or "osm" (default = 'google)}
+\item{sf}{\code{logical}. If TRUE object(s) returned are of class \code{sf}, default is FALSE and returns \code{sp}}
+
+\item{server}{\code{character}. What server should be prioritized. Options inlcude 'google' or 'osm' (default = 'google')}
 }
 \value{
-at minimum a matrix of lat/long coordinates
+at minimum a matrix of lat/long coordinates. Possible list with appended spatial features of type \code{sf} or \code{sp}
 }
 \description{
 A wrapper around the Google and OpenSteetMap geocoding web-services. Users can request a lat/long pair, spatial points, and/or a bounding box geometry.\cr\cr
@@ -27,13 +30,13 @@ If multiple points are given the returned objects will be a matrix with columns 
 \dontrun{
  ## geocode a single location
      geocode("UCSB")
- #geocode a single location and return a SpatialPoints object
+ ## geocode a single location and return a SpatialPoints object
      geocode("UCSB", pt = TRUE)
- #geocode a single location and derived bounding box of location
+ ## geocode a single location and derived bounding box of location
      geocode("UCSB", bb = TRUE)
- #geocode multiple locations
+ ## geocode multiple locations
      geocode(c("UCSB", "Goleta", "Sterns Warf"))
- #geocode multiple points and generate a minimum bounding box of all locations
+ ## geocode multiple points and generate a minimum bounding box of all locations
      geocode(c("UCSB", "Goleta", "Sterns Warf"), bb = T, pt= T)
 }
 }

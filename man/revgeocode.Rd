@@ -7,13 +7,13 @@
 revgeocode(point)
 }
 \arguments{
-\item{point}{a point provided by lat,long or place name}
+\item{point}{a point provided by \code{numeric} lat,long pair or \code{character} place name}
 }
 \value{
 a data.frame of descriptive features
 }
 \description{
-Describe a location using the ERSI and OSM reverse geocoding web-services. This service provide tradional reverse geocoding (lat/long to placename) but can also be use to get more information about a place name.
+Describe a location using the ERSI and OSM reverse geocoding web-services. This service provides tradional reverse geocoding (lat/long to placename) but can also be use to get more information about a place name.
 }
 \examples{
 \dontrun{

@@ -7,7 +7,7 @@
 check(AOI = NULL)
 }
 \arguments{
-\item{AOI}{any spatial, raster or sf object. Can be left \code{NULL}}
+\item{AOI}{any spatial object (\code{raster}, \code{sf}, \code{sp}). Can be piped (\%>\%) from \code{\link{getAOI}}}
 }
 \value{
 a \code{leaflet} html object

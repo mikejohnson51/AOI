@@ -14,7 +14,7 @@
 #' @param sf logical. Should returned feature be of class sf (default = FALSE)
 #' @return a \code{SpatialPolygons} object projected to \emph{EPSG:4269}.
 #' @export
-#' @noRd
+#' @keywords internal
 #' @author Mike Johnson
 
 

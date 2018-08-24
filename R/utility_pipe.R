@@ -1,7 +1,7 @@
 #' @title re-export magrittr pipe operator
 #' @importFrom magrittr %>%
 #' @name %>%
-#' @noRd
+#' @keywords internal
 #' @export
 
 NULL

@@ -7,9 +7,9 @@
 bbox_sp(bbox_st, sf = FALSE)
 }
 \arguments{
-\item{bbox_st}{a string, vector, or data.frame in the order ("xmin","xmax", "ymin", "ymax"). Raster objects are also accepted.}
+\item{bbox_st}{a \code{character} comma seperated string,\code{numeric} vector, or data.frame in the order ("xmin","xmax", "ymin", "ymax"). \code{Raster} objects are also accepted.}
 
-\item{sf}{logical. Return simple features (sf) object (default = FALSE)}
+\item{sf}{\code{logical}. If TRUE object returned is of class \code{sf}, default is FALSE and returns \code{SpatialPolygons}}
 }
 \value{
 a bounding box geometry
@@ -19,6 +19,10 @@ Convert a vector, dataframe, bb, or raster object to a spatial geometry
 }
 \examples{
 \dontrun{
+
+## SpatialPolygon from string
+   bbox = bbox_sp("37,36,-119,-118")
+
 ## SpatialPolygon from vector
    bbox = c(37,38,-119,-118) \%>\% bbox_sp()
 

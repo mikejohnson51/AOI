@@ -18,13 +18,14 @@ reference:
     contents:
       - '`bbox_sp`'
       - '`bbox_st`'
-      - '`buffer`'
+      - '`buff`'
       - '`check`'
       - '`describe`'
   - title: Data and Package Helpers
     desc: ~
       Data and function that make the package useable
     contents:
+      - '`AOI`'
       - '`aoiProj`'
       - '`counties`'
       - '`states`'

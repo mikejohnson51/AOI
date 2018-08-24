@@ -6,23 +6,23 @@
 #'              \item  a user spatial, sf or raster object
 #'              \item  a clip unit (see details)
 #'              }
-#' @param state     Full name or two character abbriviation. Not case senstive
-#' @param county    County name(s). Requires \code{state} input. Not case senstive
-#' @param clip      A \code{spatial}, a \code{raster}, \code{sf} or a \code{list}
-#' @param km        If \code{TRUE} distance are in kilometers,  default is \code{FALSE} and with distances in miles
-#' @param sf        If \code{TRUE} object returned is of class sf,  default is \code{FALSE} and returns  SpatialPolygons
-#' @param bb        If \code{TRUE} the bounding geometry of state/county is returned, default is \code{FALSE} and returns fiat geometries
-#' @details A \code{clip} unit can be describe by just a location (eg 'UCSB'). In doing so the associated boundaries determined by \code{\link{geocode}} will be returned.
+#' @param state     \code{character}. Full name or two character abbriviation. Not case senstive
+#' @param county    \code{character}. County name(s). Requires \code{state} input. Not case senstive. If 'all' then all counties in a state are returned
+#' @param clip      A \code{spatial}, \code{raster}, \code{sf} or a \code{list} object (see details for list parameters)
+#' @param km        \code{logical}. If \code{TRUE} distances are in kilometers, default is \code{FALSE} with distances in miles
+#' @param sf        \code{logical}. I\code{logical}. If TRUE object returned is of class \code{sf}, default is FALSE and returns \code{SpatialPolygons}
+#' @param bb        \code{logical}.  Only applicable for state and county calls. If \code{TRUE} the bounding geometry of state/county is returned, default is \code{FALSE} and returns fiat geometries
+#' @details A \code{clip} unit can be described by just a location (eg 'UCSB'). In doing so the associated boundaries determined by \code{\link{geocode}} will be returned.
 #' To have greater control over the clip unit it can be defined as a list with a minimum of 3 inputs:
 #'                               \enumerate{
 #'                                      \item  A point: \itemize{
-#'                                             \item  'location name' ex: "UCSB"
-#'                                             \item lat/lon pair: ex: '-36, -120'
+#'                                             \item  'location name' (\code{character}) ex: "UCSB"
+#'                                             \item 'lat/lon' pair: ex: "c(-36, -120)"
 #'                                          }
-#'                                      \item  A bounding box height \itemize{
+#'                                      \item  A bounding box height (\code{numeric}) \itemize{
 #'                                              \item{in miles} ex: 10
 #'                                          }
-#'                                      \item A bounding box width \itemize{
+#'                                      \item A bounding box width (\code{numeric})\itemize{
 #'                                              \item{in miles} ex: 10
 #'                                          }
 #'                                      }
@@ -42,8 +42,8 @@
 #' In total, 1 to 5 elements can be used to define \code{clip} element and \strong{ORDER MATTERS} (point, height, width, origin).
 #' Acceptable variations include:
 #' \itemize{
-#'                                     \item 1 members: (1) location name \itemize{
-#'                                         \item \emph{"UCSB}}
+#'                                     \item 1 member: (1) location name \itemize{
+#'                                         \item \emph{"UCSB"}}
 #'                                     \item 3 members: (1) location name, (2) height, (3) width \itemize{
 #'                                         \item \emph{list("UCSB", 10, 10) }}
 #'                                     \item 4 members: (1) latitude, (2) longitude, (3) height, (4) width\itemize{
@@ -64,6 +64,10 @@
 #' # Get AOI defined by a state(s)
 #'     getAOI(state = 'CA')
 #'     getAOI(state = c('CA', 'nevada'))
+#'
+#' # Get AOI defined by state & county pair(s)
+#'     getAOI(state = 'California', county = 'Santa Barbara')
+#'     getAOI(state = 'CA', county = c('Santa Barbara', 'ventura'))
 #'
 #' # Get AOI defined by state & county pair(s)
 #'     getAOI(state = 'California', county = 'Santa Barbara')

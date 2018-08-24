@@ -138,24 +138,28 @@
     </div>
 
 
+<p>This is the first submission of this package, and my first overall to CRAN</p>
 <div id="test-environments" class="section level2">
 <h2 class="hasAnchor">
 <a href="#test-environments" class="anchor"></a>Test environments</h2>
 <ul>
-<li>local OS X install, R 3.5.1</li>
-<li>ubuntu 12.04 (on travis-ci), R 3.1.2</li>
-<li>win-builder (through devtools)</li>
+<li>local MAC OS X install, R 3.5.1</li>
+<li>ubuntu 12.04 (on travis-ci), R 3.5.0</li>
+<li>win-builder (“R-release”, “R-devel”)</li>
 </ul>
 </div>
 <div id="r-cmd-check-results" class="section level2">
 <h2 class="hasAnchor">
 <a href="#r-cmd-check-results" class="anchor"></a>R CMD check results</h2>
-<p>There were no ERRORs WARNINGs or NOTEs.</p>
+<p>*There were no ERRORs WARNINGs or NOTEs on local MAC OS X and travis.</p>
+<p>*One NOTE on build_win()</p>
+<p>*checking CRAN incoming feasibility … NOTE Maintainer: ‘Mike Johnson <a href="mailto:jmj00@ucsb.edu">jmj00@ucsb.edu</a>’</p>
+<p>This appears to be due to first submission and there is nothing I can do to remove it.</p>
 </div>
 <div id="downstream-dependencies" class="section level2">
 <h2 class="hasAnchor">
 <a href="#downstream-dependencies" class="anchor"></a>Downstream dependencies</h2>
-<p>I have also run R CMD check on downstream dependencies of AOI with devtools::revdep_check_print_problems()</p>
+<p>I have run <code>R CMD check</code> on downstream dependencies with devtools::revdep_check_print_problems()</p>
 <p>‘No ERRORs or WARNINGs found :)’ is returned</p>
 </div>
 

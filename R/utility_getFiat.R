@@ -8,7 +8,7 @@
 #' @export
 #' @seealso \code{\link{getClip}}
 #' @seealso \code{\link{getAOI}}
-#' @noRd
+#' @keywords internal
 #' @examples
 #' \dontrun{
 #' # Get Single State

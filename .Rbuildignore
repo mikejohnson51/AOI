@@ -5,3 +5,4 @@ docs
 tests
 _pkgdown.yml
 vignettes
+cran-checks.md

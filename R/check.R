@@ -1,7 +1,7 @@
 #' @title Generate Leafet map and tool set
 #' @description Generate an interactive \code{leaflet} map for checking, and refining AOI queries. Useful \code{leaflet} tools allow for the marking of points, measuring of distances, and interactive panning and zooming to help define
 #' an approapriate AOI.
-#' @param AOI any spatial, raster or sf object. Can be left \code{NULL}
+#' @param AOI any spatial object (\code{raster}, \code{sf}, \code{sp}). Can be piped (\%>\%) from \code{\link{getAOI}}
 #' @return a \code{leaflet} html object
 #' @examples
 #' \dontrun{

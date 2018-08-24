@@ -6,7 +6,7 @@
 \title{USA States}
 \format{a \code{SpatialPolygonsDataFrame}, 52 observations of 5 variables
 \itemize{
-\item 'statefp':    A \code{character}  State 2-digit FederalInformationProcessingStandards (FIPS) code
+\item 'statefp':    A \code{character}  State 2-digit Federal Information Processing Standards (FIPS) code
 \item 'statens':    A \code{character}  American National Standards Institute (ANSI) code
 \item 'affgeoid': A \code{character}    AFF Summary Level Code
 \item 'state_name':    A \code{character}    State Name
@@ -21,7 +21,7 @@ states
 \description{
 Dataset containing \code{SpatialPolygons} of USA States. Data is initalized from the USAboundaries and USAboundariesData
 package, converted to \code{SpatialPolygons}, re-projected and cleaned-up for this package. The primary reason for doing this is to provide
-a more minmualistic dataset dataset primed for this package and leaflet use.
+a more minimalistic dataset primed for this package and leaflet use.
 }
 \examples{
 \dontrun{

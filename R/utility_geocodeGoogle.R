@@ -7,7 +7,7 @@
 #' @param bb if TRUE the OSM bounding area of the location is appended to returned list
 #' @return at minimum a data.frame of lat, long
 #' @author Mike Johnson
-#' @noRd
+#' @keywords internal
 #' @export
 #' @examples
 #' \dontrun{

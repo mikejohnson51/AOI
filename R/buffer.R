@@ -1,8 +1,8 @@
 #' @title Buffer AOI
 #' @description Add or subtract a uniform distance to/from a spatial obeject in either miles or kilometers.
 #' @param AOI a spatial, raster or simple features object
-#' @param d the distance by which to modify each edge
-#' @param km is the distance in kilometers? Default is FALSE and in miles
+#' @param d \code{numeric}.The distance by which to modify each edge
+#' @param km \code{logical}.Is the distance in kilometers? Default is FALSE and in miles
 #' @return a spatial geometry of the same class as the input AOI (if Raster sp returned)
 #' @export
 #' @author Mike Johnson
@@ -19,7 +19,7 @@
 #' }
 #'
 
-buffer = function(AOI, d, km = FALSE){
+buff = function(AOI, d, km = FALSE){
 
   sf = checkClass(AOI, 'sf')
 
