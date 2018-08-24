@@ -32,7 +32,7 @@
 
 <meta property="og:title" content="Convert bounding box string to geometry — bbox_sp" />
 
-<meta property="og:description" content="Convert a vector, dataframe, or bb object to a SpatialPolygon" />
+<meta property="og:description" content="Convert a vector, dataframe, bb, or raster object to a spatial geometry" />
 
 <meta property="og:image" content="https://github.com/mikejohnson51/AOI/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -75,11 +75,18 @@
      
   </a>
 </li>
+<li>
+  <a href="../reference/index.html">
+    <span class="fa fa-file-code-o"></span>
+     
+    functions
+  </a>
+</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     <span class="fas fa fas fa-book"></span>
      
-    Documentation
+    Vignettes
      
     <span class="caret"></span>
   </a>
@@ -102,17 +109,10 @@
   </ul>
 </li>
 <li>
-  <a href="../reference/index.html">
-    <span class="fa fa-file-code-o"></span>
-     
-    functions
-  </a>
-</li>
-<li>
   <a href="../AOI.pdf">
-    <span class="fa fa-file-code-o"></span>
+    <span class="fa fa-file"></span>
      
-    CRAN Manual
+    Package Manual
   </a>
 </li>
       </ul>
@@ -143,7 +143,7 @@
 
     <div class="ref-description">
     
-    <p>Convert a vector, dataframe, or bb object to a <code>SpatialPolygon</code></p>
+    <p>Convert a vector, dataframe, bb, or raster object to a spatial geometry</p>
     
     </div>
 
@@ -154,11 +154,11 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>bbox_st</th>
-      <td><p>a bounding box string, vector, or data.frame in the order ("xmin","xmax", "ymin", "ymax")</p></td>
+      <td><p>a string, vector, or data.frame in the order ("xmin","xmax", "ymin", "ymax"). Raster objects are also accepted.</p></td>
     </tr>
     <tr>
       <th>sf</th>
-      <td><p>logical. Return simple featrures (sf) object (default = FALSE)</p></td>
+      <td><p>logical. Return simple features (sf) object (default = FALSE)</p></td>
     </tr>
     </table>
     
@@ -172,11 +172,17 @@
 <span class='co'>## SpatialPolygon from vector</span>
    <span class='no'>bbox</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>37</span>,<span class='fl'>38</span>,-<span class='fl'>119</span>,-<span class='fl'>118</span>) <span class='kw'>%&gt;%</span> <span class='fu'>bbox_sp</span>()
 
-<span class='co'>## Simple Feature Polygon from Data Frame</span>
+<span class='co'>## Simple Feature Polygon from data.frame</span>
    <span class='no'>bbox</span> <span class='kw'>=</span> <span class='fu'>data.frame</span>(<span class='kw'>xmin</span> <span class='kw'>=</span> <span class='fl'>37</span>, <span class='kw'>xmax</span> <span class='kw'>=</span> <span class='fl'>38</span>, <span class='kw'>ymin</span> <span class='kw'>=</span> -<span class='fl'>119</span>, <span class='kw'>ymax</span> <span class='kw'>=</span> -<span class='fl'>118</span>) <span class='kw'>%&gt;%</span> <span class='fu'>bbox_sp</span>(<span class='kw'>sf</span> <span class='kw'>=</span> <span class='no'>T</span>)
 
-<span class='co'>## SpatialPolygon from Reverse Geocode results</span>
+<span class='co'>## SpatialPolygon from Reverse Geocoding results</span>
    <span class='no'>bbox</span> <span class='kw'>=</span> <span class='fu'><a href='revgeocode.html'>revgeocode</a></span>(<span class='st'>"Santa Barbara"</span>)$<span class='no'>bb</span> <span class='kw'>%&gt;%</span> <span class='fu'>bbox_sp</span>()
+
+<span class='co'>## String to Geometry to String (full circle)</span>
+    <span class='no'>bbox</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>37</span>,<span class='fl'>38</span>,-<span class='fl'>119</span>,-<span class='fl'>118</span>) <span class='kw'>%&gt;%</span> <span class='fu'>bbox_sp</span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='bbox_st.html'>bbox_st</a></span>()
+
+<span class='co'>## Raster to sf</span>
+   <span class='no'>raster</span> <span class='kw'>%&gt;%</span> <span class='fu'>bbox_sp</span>(<span class='kw'>sf</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

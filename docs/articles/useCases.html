@@ -243,9 +243,10 @@ rasterVis<span class="op">::</span><span class="kw"><a href="http://www.rdocumen
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rosm)
 bb =<span class="st"> </span><span class="kw"><a href="../reference/getAOI.html">getAOI</a></span>(<span class="dt">clip =</span> <span class="kw">list</span>(<span class="st">"Lake Cachuma"</span>, <span class="dv">20</span>,<span class="dv">20</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/rosm/topics/osm.plot">osm.plot</a></span>(<span class="dt">type=</span><span class="st">"stamenbw"</span>)</code></pre></div>
 <p><img src="useCases_files/figure-html/unnamed-chunk-8-1.png" width="576"></p>
-<div id="usgs-r-geoknife" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usgs-r-geoknife" class="anchor"></a>USGS-R Geoknife</h2>
+</div>
+<div id="usgs-r-geoknife" class="section level1">
+<h1 class="hasAnchor">
+<a href="#usgs-r-geoknife" class="anchor"></a>USGS-R Geoknife</h1>
 <p>The USGS geoknife package provides a unique interface to large-scale climate datasets. One example of these is the LOCA Downscaled climate product. Here, we are interested in finding predicted maximum daily temperture values for the Santa Barbara area in October of 2080 under two climate scenarios - RCP 4.5 and 8.5. This example is basic and developed to highlight the use of AOI with the geoknife package. A more in depth example of the geoknife package can be found <a href="https://owi.usgs.gov/blog/LOCAdownscaling/">here</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="kw">library</span>(geoknife)
@@ -253,8 +254,8 @@ bb =<span class="st"> </span><span class="kw"><a href="../reference/getAOI.html"
 AOI =<span class="st"> </span><span class="kw"><a href="../reference/getAOI.html">getAOI</a></span>(<span class="st">"Santa Barbara"</span>)
 
 AOI<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/AOI/topics/check">check</a></span>(AOI)</code></pre></div>
-<div id="htmlwidget-6f048663270b1386690a" style="width:576px;height:384px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6f048663270b1386690a">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.NatGeoWorldMap",null,"Terrain",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["CartoDB.Positron",null,"Grayscale",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"Imagery",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addMiniMap","args":[null,null,"bottomright",150,150,19,19,-5,false,false,false,true,false,true,{"color":"#ff7800","weight":1,"clickable":false},{"color":"#000000","weight":1,"clickable":false,"opacity":0,"fillOpacity":0},{"hideText":"Hide MiniMap","showText":"Show MiniMap"},[]]},{"method":"addMeasure","args":[{"position":"bottomleft","primaryLengthUnit":"feet","primaryAreaUnit":"sqmiles","activeColor":"red","completedColor":"green","popupOptions":{"className":"leaflet-measure-resultpopup","autoPanPadding":[10,10]},"captureZIndex":10000,"localization":"en","decPoint":".","thousandsSep":","}]},{"method":"addLayersControl","args":[["Terrain","Grayscale","Imagery"],[],{"collapsed":true,"autoZIndex":true,"position":"topright"}]},{"method":"addPolygons","args":[[[[{"lng":[-119.859791,-119.6399201,-119.6399201,-119.859791,-119.859791],"lat":[34.4611451,34.4611451,34.336029,34.336029,34.4611451]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"red","weight":5,"opacity":1,"fill":true,"fillColor":"transparent","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[34.336029,34.4611451],"lng":[-119.859791,-119.6399201]}},"evals":[],"jsHooks":[]}</script><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<div id="htmlwidget-8d7421c3ad09169308db" style="width:576px;height:384px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8d7421c3ad09169308db">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.NatGeoWorldMap",null,"Terrain",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["CartoDB.Positron",null,"Grayscale",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"Imagery",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addMiniMap","args":[null,null,"bottomright",150,150,19,19,-5,false,false,false,true,false,true,{"color":"#ff7800","weight":1,"clickable":false},{"color":"#000000","weight":1,"clickable":false,"opacity":0,"fillOpacity":0},{"hideText":"Hide MiniMap","showText":"Show MiniMap"},[]]},{"method":"addMeasure","args":[{"position":"bottomleft","primaryLengthUnit":"feet","primaryAreaUnit":"sqmiles","activeColor":"red","completedColor":"green","popupOptions":{"className":"leaflet-measure-resultpopup","autoPanPadding":[10,10]},"captureZIndex":10000,"localization":"en","decPoint":".","thousandsSep":","}]},{"method":"addLayersControl","args":[["Terrain","Grayscale","Imagery"],[],{"collapsed":true,"autoZIndex":true,"position":"topright"}]},{"method":"addPolygons","args":[[[[{"lng":[-119.859791,-119.6399201,-119.6399201,-119.859791,-119.859791],"lat":[34.4611451,34.4611451,34.336029,34.336029,34.4611451]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"red","weight":5,"opacity":1,"fill":true,"fillColor":"transparent","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[34.336029,34.4611451],"lng":[-119.859791,-119.6399201]}},"evals":[],"jsHooks":[]}</script><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 stencil =<span class="st"> </span>AOI <span class="op">%&gt;%</span><span class="st"> </span>sp<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/sp/topics/spTransform">spTransform</a></span>(<span class="st">"+proj=longlat +datum=WGS84"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/geoknife/topics/simplegeom-methods">simplegeom</a></span>()
 
 fabric &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/geoknife/topics/webdata-methods">webdata</a></span>(<span class="dt">url =</span> <span class="st">'http://cida.usgs.gov/thredds/dodsC/loca_future'</span>,
@@ -276,7 +277,6 @@ xx =<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation
        <span class="dt">color =</span> <span class="st">"RCP Pathway"</span>)</code></pre></div>
 <p><img src="useCases_files/figure-html/unnamed-chunk-9-2.png" width="576"></p>
 </div>
-</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -291,11 +291,8 @@ xx =<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation
       <li><a href="#feddata">FedData</a></li>
       <li><a href="#osmdata">OSMDATA</a></li>
       <li><a href="#worldclim">WorldClim</a></li>
-      <li>
-<a href="#rosm-basemaps">ROSM Basemaps</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#usgs-r-geoknife">USGS-R Geoknife</a></li>
-      </ul>
-</li>
+      <li><a href="#rosm-basemaps">ROSM Basemaps</a></li>
+      <li><a href="#usgs-r-geoknife">USGS-R Geoknife</a></li>
       </ul>
 </div>
       </div>

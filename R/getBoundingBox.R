@@ -1,8 +1,17 @@
-#' @title Get mimimum bounding box of spatial Objects
-#' @description Returns a minimum bounding box for a set or  Spatial*, raster or sf object(s)
-#' @param x a \code{data.frame} with a lat and long column, a Raster, sf, or Spatial Objects
-#' @param sf \code{logical}. If \code{TRUE} object returned is of class sf
-#' default is \code{FALSE} and returns class SpatialPolygon
+#' @title Get mimimum bounding box of spatial features
+#' @description Returns a minimum bounding box for a spatial, raster or sf object(s)
+#' @param x a \code{data.frame} with a lat and long column, a raster, sf, or spatial object
+#' @param sf \code{logical}. If \code{TRUE} object returned is of class sf.
+#' Default is \code{FALSE} and returns class SpatialPolygon
+#' @examples
+#' \dontrun{
+#'   ## Find the 10 closest Airports to UCSB
+#'      ap = geocode("UCSB") %>% HydroData::findNearestAirports(n =10)
+#'      AOI = ap$ap %>% getBoundingBox()
+#'
+#'   ## Get bounding box of raster object
+#'      AOI = getBoundingBox(r)
+#' }
 #' @export
 #' @author Mike Johnson
 

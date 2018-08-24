@@ -8,7 +8,7 @@
 #'   \item{height}{ height in (miles)}
 #'   \item{width}{width in(miles)}
 #'   \item{origin}{AOI origin}
-#'   \item{name}{Most descriptive geocoded name from \code{\link{revgeocode}}
+#'   \item{name}{Most descriptive geocoded name from \code{\link{revgeocode}}}
 #' }
 #' @export
 #' @author Mike Johnson

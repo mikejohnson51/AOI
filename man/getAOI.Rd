@@ -8,33 +8,33 @@ getAOI(clip = NULL, state = NULL, county = NULL, sf = FALSE,
   km = FALSE, bb = FALSE)
 }
 \arguments{
-\item{clip}{\code{Spatial} object, a \code{Raster} object, or a \code{list} (see details and \code{\link{getClip}})}
+\item{clip}{A \code{spatial}, a \code{raster}, \code{sf} or a \code{list}}
 
-\item{state}{\code{character}.  Full name or two character abbriviation. Not case senstive}
+\item{state}{Full name or two character abbriviation. Not case senstive}
 
-\item{county}{\code{character}.  County name(s). Requires \code{state} input. Not case senstive}
+\item{county}{County name(s). Requires \code{state} input. Not case senstive}
 
-\item{sf}{\code{logical}. If \code{TRUE} object returned is of class sf,  default is \code{FALSE} and returns class SpatialPolygons}
+\item{sf}{If \code{TRUE} object returned is of class sf,  default is \code{FALSE} and returns  SpatialPolygons}
 
-\item{km}{\code{logical}. If \code{TRUE} distance are in kilometers,  default is \code{FALSE} and with distances in miles}
+\item{km}{If \code{TRUE} distance are in kilometers,  default is \code{FALSE} and with distances in miles}
 
-\item{bb}{\code{logical}. If \code{TRUE} then the bounding geometry of state/county is returned,  default is \code{FALSE} and returns fiat geometries}
+\item{bb}{If \code{TRUE} the bounding geometry of state/county is returned, default is \code{FALSE} and returns fiat geometries}
 }
 \value{
 a geometry projected to \emph{EPSG:4269}.
 }
 \description{
-Get a Spatial* representation of an AOI defined by:
+Generate a spatial geometry from:
 \enumerate{
-             \item  a US state name(s)
-             \item  a US state, county pair(s)
-             \item  a user Spatial, sf or raster object or
-             \item  a clipping unit (see details)
+             \item  US state name(s)
+             \item  US state, county pair(s)
+             \item  a user spatial, sf or raster object
+             \item  a clip unit (see details)
              }
-\code{getAOI} wraps \code{\link{getFiat}} and \code{\link{getClip}} into a single function.
 }
 \details{
-If \code{clip} is a list, a clip unit requires a minimum of 3 inputs:
+A \code{clip} unit can be describe by just a location (eg 'UCSB'). In doing so the associated boundaries determined by \code{\link{geocode}} will be returned.
+To have greater control over the clip unit it can be defined as a list with a minimum of 3 inputs:
                               \enumerate{
                                      \item  A point: \itemize{
                                             \item  'location name' ex: "UCSB"
@@ -49,7 +49,7 @@ If \code{clip} is a list, a clip unit requires a minimum of 3 inputs:
                                      }
 
                                      The bounding box is always drawn in relation to the location. By default the point is treated
-                                     as the center of the box. To define the realtive location of the point to the bounding box
+                                     as the center of the box. To define the realtive location of the point to the bounding box,
                                      a fourth input can be used:
                                      \enumerate{
                                      \item Origin \itemize{
@@ -60,9 +60,11 @@ If \code{clip} is a list, a clip unit requires a minimum of 3 inputs:
                                         \item 'lowerright'
                                      }
                                  }
-3 to 5 elements can be used to paramaterize the \code{clip} element but \strong{ORDER MATTERS} (point, height, width, origin).
+In total, 1 to 5 elements can be used to define \code{clip} element and \strong{ORDER MATTERS} (point, height, width, origin).
 Acceptable variations include:
 \itemize{
+                                    \item 1 members: (1) location name \itemize{
+                                        \item \emph{"UCSB}}
                                     \item 3 members: (1) location name, (2) height, (3) width \itemize{
                                         \item \emph{list("UCSB", 10, 10) }}
                                     \item 4 members: (1) latitude, (2) longitude, (3) height, (4) width\itemize{
@@ -75,6 +77,9 @@ Acceptable variations include:
 }
 \examples{
 \dontrun{
+# Get AOI for a location
+    getAOI("Sacramento")
+
 # Get AOI defined by a state(s)
     getAOI(state = 'CA')
     getAOI(state = c('CA', 'nevada'))
@@ -84,7 +89,7 @@ Acceptable variations include:
     getAOI(state = 'CA', county = c('Santa Barbara', 'ventura'))
 
 # Get AOI defined by external spatial file:
-    getAOI(clip = rgdal::readOGR('la_metro.shp'))
+    getAOI(clip = sf::read_sf('la_metro.shp'))
     getAOI(clip = raster('AOI.tif'))
 
 # Get AOI defined by 10 mile bounding box using lat/lon

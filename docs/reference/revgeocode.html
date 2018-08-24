@@ -32,7 +32,7 @@
 
 <meta property="og:title" content="Reverse Geocoding — revgeocode" />
 
-<meta property="og:description" content="Describe a location using the ERSI and OSM reverse geocoding web-services." />
+<meta property="og:description" content="Describe a location using the ERSI and OSM reverse geocoding web-services. This service provide tradional reverse geocoding (lat/long to placename) but can also be use to get more information about a place name." />
 
 <meta property="og:image" content="https://github.com/mikejohnson51/AOI/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -75,11 +75,18 @@
      
   </a>
 </li>
+<li>
+  <a href="../reference/index.html">
+    <span class="fa fa-file-code-o"></span>
+     
+    functions
+  </a>
+</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     <span class="fas fa fas fa-book"></span>
      
-    Documentation
+    Vignettes
      
     <span class="caret"></span>
   </a>
@@ -102,17 +109,10 @@
   </ul>
 </li>
 <li>
-  <a href="../reference/index.html">
-    <span class="fa fa-file-code-o"></span>
-     
-    functions
-  </a>
-</li>
-<li>
   <a href="../AOI.pdf">
-    <span class="fa fa-file-code-o"></span>
+    <span class="fa fa-file"></span>
      
-    CRAN Manual
+    Package Manual
   </a>
 </li>
       </ul>
@@ -143,7 +143,7 @@
 
     <div class="ref-description">
     
-    <p>Describe a location using the ERSI and OSM reverse geocoding web-services.</p>
+    <p>Describe a location using the ERSI and OSM reverse geocoding web-services. This service provide tradional reverse geocoding (lat/long to placename) but can also be use to get more information about a place name.</p>
     
     </div>
 
@@ -164,11 +164,50 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>pt1</span> <span class='kw'>=</span> <span class='fu'>revgeocode</span>(<span class='st'>"UCSB"</span>)
+    <pre class="examples"># NOT RUN {
+ revgeocode(c(38,-115))
 
-<span class='no'>pt2</span> <span class='kw'>=</span> <span class='fu'>revgeocode</span>(<span class='fu'>c</span>(<span class='fl'>38</span>,-<span class='fl'>115</span>))
-<span class='co'># }</span></pre>
+ ```
+ county          :	Lincoln Count
+ state           :	Nevada
+ country         :	United States of America
+ place_id        :	198776170
+ osm_type        :	relation
+ osm_id          :	166463
+ lat             :	37.5449476
+ lon             :	-114.8764448
+ bb              :	-115.897545,-114.048473,36.8420756,38.678486
+ match_addr      :	89017, Hiko, Nevada
+ longlabel       :	89017, Hiko, NV, USA
+ shortlabel      :	89017
+ addr_type       :	Postal
+ city            :	Hiko
+ countrycode     :	USA
+ ```
+
+ revgeocode("UCSB")
+
+ ````
+ university      :	UCSB
+ pedestrian      :	Library Plaza
+ county          :	Santa Barbara County
+ state           :	California
+ postcode        :	93106
+ country         :	United States of America
+ place_id        :	187839690
+ osm_type        :	way
+ osm_id          :	542863702
+ lat             :	34.4145937
+ lon             :	-119.84581949869
+ bb              :	-119.8851155,-119.8360437,34.4047282,34.4243918
+ match_addr      :	93106, Santa Barbara, California
+ longlabel       :	93106, Santa Barbara, CA, USA
+ addr_type       :	Postal
+ city            :	Santa Barbara
+ countrycode     :	USA
+ ````
+# }
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

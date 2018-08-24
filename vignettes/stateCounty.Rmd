@@ -30,8 +30,12 @@ The main function in the AOI package is `getAOI`. Three main parameters are used
 AOI offers to in-package datasets represting the spatial boundaries of USA states and counties. The can be accessed via the county and state data object calls. Each dataset contains information relating to the features name, state, FIP code, and other identifiy codes. Help of each dataset can be found using the `?` call. 
 
 ```{r}
-states
-counties
+head(states@data)
+```
+
+
+```{r}
+head(counties@data)
 ```
 
 # Defining an AOI by **state**  

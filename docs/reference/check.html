@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Vizualize AOIs — check • Areas of Interest: AOI   </title>
+<title>Generate Leafet map and tool set — check • Areas of Interest: AOI   </title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,10 +30,9 @@
 
 
 
-<meta property="og:title" content="Vizualize AOIs — check" />
+<meta property="og:title" content="Generate Leafet map and tool set — check" />
 
-<meta property="og:description" content="Generate an interactive leaflet map for defining, checking, and refining AOI queries. Can be chained to getAOI via
-`
+<meta property="og:description" content="Generate an interactive leaflet map for checking, and refining AOI queries. Useful leaflet tools allow for the marking of points, measuring of distances, and interactive panning and zooming to help define
 an approapriate AOI." />
 
 <meta property="og:image" content="https://github.com/mikejohnson51/AOI/logo.png" />
@@ -77,11 +76,18 @@ an approapriate AOI." />
      
   </a>
 </li>
+<li>
+  <a href="../reference/index.html">
+    <span class="fa fa-file-code-o"></span>
+     
+    functions
+  </a>
+</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     <span class="fas fa fas fa-book"></span>
      
-    Documentation
+    Vignettes
      
     <span class="caret"></span>
   </a>
@@ -104,17 +110,10 @@ an approapriate AOI." />
   </ul>
 </li>
 <li>
-  <a href="../reference/index.html">
-    <span class="fa fa-file-code-o"></span>
-     
-    functions
-  </a>
-</li>
-<li>
   <a href="../AOI.pdf">
-    <span class="fa fa-file-code-o"></span>
+    <span class="fa fa-file"></span>
      
-    CRAN Manual
+    Package Manual
   </a>
 </li>
       </ul>
@@ -138,15 +137,14 @@ an approapriate AOI." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Vizualize AOIs</h1>
+    <h1>Generate Leafet map and tool set</h1>
     <small class="dont-index">Source: <a href='https://github.com/mikejohnson51/AOI//blob/master/R/check.R'><code>R/check.R</code></a></small>
     <div class="hidden name"><code>check.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Generate an interactive <code>leaflet</code> map for defining, checking, and refining AOI queries. Can be chained to <a href='getAOI.html'>getAOI</a> via
-`<!-- %&gt;%`. Useful \code{leaflet} tools allow for the marking of points, measuring of distances, and interactive panning and zooming to help define -->
+    <p>Generate an interactive <code>leaflet</code> map for checking, and refining AOI queries. Useful <code>leaflet</code> tools allow for the marking of points, measuring of distances, and interactive panning and zooming to help define
 an approapriate AOI.</p>
     
     </div>
@@ -158,26 +156,37 @@ an approapriate AOI.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>AOI</th>
-      <td><p>an AOI obtained using <a href='getAOI.html'>getAOI</a> or any/sf. Can be left <code>NULL</code></p></td>
+      <td><p>any spatial, raster or sf object. Can be left <code>NULL</code></p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a list of AOI and <code>leaflet</code> html object</p>
+    <p>a <code>leaflet</code> html object</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># Generate an empty map:</span>
-<span class='fu'>check</span>()
+<span class='co'>## Generate an empty map:</span>
+     <span class='fu'>check</span>()
 
-<span class='co'># Check a defined AOI:</span>
-<span class='no'>AOI</span> <span class='kw'>=</span> <span class='fu'><a href='getAOI.html'>getAOI</a></span>(<span class='kw'>clip</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='st'>"UCSB"</span>, <span class='fl'>10</span>, <span class='fl'>10</span>))
-<span class='fu'>check</span>(<span class='no'>AOI</span>)
+<span class='co'>## Check a defined AOI:</span>
+     <span class='no'>AOI</span> <span class='kw'>=</span> <span class='fu'><a href='getAOI.html'>getAOI</a></span>(<span class='kw'>clip</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='st'>"UCSB"</span>, <span class='fl'>10</span>, <span class='fl'>10</span>))
+     <span class='fu'>check</span>(<span class='no'>AOI</span>)
 
-<span class='co'># Chain to AOI calls:</span>
-<span class='fu'><a href='getAOI.html'>getAOI</a></span>(<span class='kw'>clip</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='st'>"UCSB"</span>, <span class='fl'>10</span>, <span class='fl'>10</span>)) <span class='kw'>%&gt;%</span> <span class='fu'>check</span>()
+<span class='co'>## Chain to AOI calls:</span>
+     <span class='fu'><a href='getAOI.html'>getAOI</a></span>(<span class='kw'>clip</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='st'>"UCSB"</span>, <span class='fl'>10</span>, <span class='fl'>10</span>)) <span class='kw'>%&gt;%</span> <span class='fu'>check</span>()
+
+<span class='co'>## Add layers with standard leaflet functions:</span>
+     <span class='no'>r</span> <span class='kw'>=</span> <span class='fu'><a href='getAOI.html'>getAOI</a></span>(<span class='st'>"UCSB"</span>) <span class='kw'>%&gt;%</span>  <span class='co'># get AOI</span>
+     <span class='kw pkg'>HydroData</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/HydroData/topics/findNED'>findNED</a></span>() <span class='kw'>%&gt;%</span>  <span class='co'># get raster of elevation data</span>
+     <span class='kw pkg'>HydroData</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/HydroData/topics/findNWIS'>findNWIS</a></span>() <span class='co'># get SpatialPointsDataframe of local USGS gages</span>
+
+     <span class='fu'>check</span>(<span class='no'>r</span>$<span class='no'>NED</span>) <span class='kw'>%&gt;%</span> <span class='fu'>addMarkers</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>r</span>$<span class='no'>nwis</span>, <span class='kw'>popup</span> <span class='kw'>=</span> <span class='no'>r</span>$<span class='no'>nwis</span>$<span class='no'>site_no</span>)
+
+<span class='co'>## Save map for reference:</span>
+     <span class='no'>m</span> <span class='kw'>=</span> <span class='fu'><a href='getAOI.html'>getAOI</a></span>(<span class='st'>"Kansas City"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check</span>()
+     <span class='kw pkg'>htmlwidgets</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/htmlwidgets/topics/saveWidget'>saveWidget</a></span>(<span class='no'>m</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'>paste0</span>(<span class='fu'>getwd</span>(), <span class='st'>"/myMap.html"</span>))
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

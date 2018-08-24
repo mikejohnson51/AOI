@@ -13,13 +13,51 @@ revgeocode(point)
 a data.frame of descriptive features
 }
 \description{
-Describe a location using the ERSI and OSM reverse geocoding web-services.
+Describe a location using the ERSI and OSM reverse geocoding web-services. This service provide tradional reverse geocoding (lat/long to placename) but can also be use to get more information about a place name.
 }
 \examples{
 \dontrun{
-pt1 = revgeocode("UCSB")
+ revgeocode(c(38,-115))
 
-pt2 = revgeocode(c(38,-115))
+ ```
+ county          :	Lincoln Count
+ state           :	Nevada
+ country         :	United States of America
+ place_id        :	198776170
+ osm_type        :	relation
+ osm_id          :	166463
+ lat             :	37.5449476
+ lon             :	-114.8764448
+ bb              :	-115.897545,-114.048473,36.8420756,38.678486
+ match_addr      :	89017, Hiko, Nevada
+ longlabel       :	89017, Hiko, NV, USA
+ shortlabel      :	89017
+ addr_type       :	Postal
+ city            :	Hiko
+ countrycode     :	USA
+ ```
+
+ revgeocode("UCSB")
+
+ ````
+ university      :	UCSB
+ pedestrian      :	Library Plaza
+ county          :	Santa Barbara County
+ state           :	California
+ postcode        :	93106
+ country         :	United States of America
+ place_id        :	187839690
+ osm_type        :	way
+ osm_id          :	542863702
+ lat             :	34.4145937
+ lon             :	-119.84581949869
+ bb              :	-119.8851155,-119.8360437,34.4047282,34.4243918
+ match_addr      :	93106, Santa Barbara, California
+ longlabel       :	93106, Santa Barbara, CA, USA
+ addr_type       :	Postal
+ city            :	Santa Barbara
+ countrycode     :	USA
+ ````
 }
 }
 \author{

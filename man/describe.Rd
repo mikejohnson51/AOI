@@ -9,6 +9,17 @@ describe(AOI)
 \arguments{
 \item{AOI}{a spatial, raster or sf object}
 }
+\value{
+a data.frame of AOI descriptors including
+\describe{
+  \item{latCent}{the AOI center latitude}
+  \item{lngCent}{the AOI center longitude}
+  \item{height}{ height in (miles)}
+  \item{width}{width in(miles)}
+  \item{origin}{AOI origin}
+  \item{name}{Most descriptive geocoded name from \code{\link{revgeocode}}}
+}
+}
 \description{
 Breaks a Spatial object into the features describing a reporducable clip area.
 }

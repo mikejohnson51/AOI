@@ -163,7 +163,7 @@ bb = getAOI(clip = list("Lake Cachuma", 20,20)) %>% osm.plot(type="stamenbw")
 ```
 
 
-##USGS-R Geoknife
+#USGS-R Geoknife
 
 The USGS geoknife package provides a unique interface to large-scale climate datasets. One example of these is the LOCA Downscaled climate product. Here, we are interested in finding predicted maximum daily temperture values for the Santa Barbara area in October of 2080 under two climate scenarios - RCP 4.5 and 8.5. This example is basic and developed to highlight the use of AOI with the geoknife package. A more in depth example of the geoknife package can be found [here](https://owi.usgs.gov/blog/LOCAdownscaling/).
 

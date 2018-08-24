@@ -32,12 +32,12 @@
 
 <meta property="og:title" content="Get Area of Interest (AOI) geometry — getAOI" />
 
-<meta property="og:description" content="Get a Spatial* representation of an AOI defined by:
-a US state name(s)
-a US state, county pair(s)
-a user Spatial, sf or raster object or
-a clipping unit (see details)
-getAOI wraps getFiat and getClip into a single function." />
+<meta property="og:description" content="Generate a spatial geometry from:
+US state name(s)
+US state, county pair(s)
+a user spatial, sf or raster object
+a clip unit (see details)
+" />
 
 <meta property="og:image" content="https://github.com/mikejohnson51/AOI/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -80,11 +80,18 @@ getAOI wraps getFiat and getClip into a single function." />
      
   </a>
 </li>
+<li>
+  <a href="../reference/index.html">
+    <span class="fa fa-file-code-o"></span>
+     
+    functions
+  </a>
+</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     <span class="fas fa fas fa-book"></span>
      
-    Documentation
+    Vignettes
      
     <span class="caret"></span>
   </a>
@@ -107,17 +114,10 @@ getAOI wraps getFiat and getClip into a single function." />
   </ul>
 </li>
 <li>
-  <a href="../reference/index.html">
-    <span class="fa fa-file-code-o"></span>
-     
-    functions
-  </a>
-</li>
-<li>
   <a href="../AOI.pdf">
-    <span class="fa fa-file-code-o"></span>
+    <span class="fa fa-file"></span>
      
-    CRAN Manual
+    Package Manual
   </a>
 </li>
       </ul>
@@ -148,12 +148,12 @@ getAOI wraps getFiat and getClip into a single function." />
 
     <div class="ref-description">
     
-    <p>Get a Spatial* representation of an AOI defined by:</p><ol>
-<li><p>a US state name(s)</p></li>
-<li><p>a US state, county pair(s)</p></li>
-<li><p>a user Spatial, sf or raster object or</p></li>
-<li><p>a clipping unit (see details)</p></li>
-</ol><p><code>getAOI</code> wraps <code>getFiat</code> and <code>getClip</code> into a single function.</p>
+    <p>Generate a spatial geometry from:</p><ol>
+<li><p>US state name(s)</p></li>
+<li><p>US state, county pair(s)</p></li>
+<li><p>a user spatial, sf or raster object</p></li>
+<li><p>a clip unit (see details)</p></li>
+</ol>
     
     </div>
 
@@ -165,27 +165,27 @@ getAOI wraps getFiat and getClip into a single function." />
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>clip</th>
-      <td><p><code>Spatial</code> object, a <code>Raster</code> object, or a <code>list</code> (see details and <code>getClip</code>)</p></td>
+      <td><p>A <code>spatial</code>, a <code>raster</code>, <code>sf</code> or a <code>list</code></p></td>
     </tr>
     <tr>
       <th>state</th>
-      <td><p><code>character</code>.  Full name or two character abbriviation. Not case senstive</p></td>
+      <td><p>Full name or two character abbriviation. Not case senstive</p></td>
     </tr>
     <tr>
       <th>county</th>
-      <td><p><code>character</code>.  County name(s). Requires <code>state</code> input. Not case senstive</p></td>
+      <td><p>County name(s). Requires <code>state</code> input. Not case senstive</p></td>
     </tr>
     <tr>
       <th>sf</th>
-      <td><p><code>logical</code>. If <code>TRUE</code> object returned is of class sf,  default is <code>FALSE</code> and returns class SpatialPolygons</p></td>
+      <td><p>If <code>TRUE</code> object returned is of class sf,  default is <code>FALSE</code> and returns  SpatialPolygons</p></td>
     </tr>
     <tr>
       <th>km</th>
-      <td><p><code>logical</code>. If <code>TRUE</code> distance are in kilometers,  default is <code>FALSE</code> and with distances in miles</p></td>
+      <td><p>If <code>TRUE</code> distance are in kilometers,  default is <code>FALSE</code> and with distances in miles</p></td>
     </tr>
     <tr>
       <th>bb</th>
-      <td><p><code>logical</code>. If <code>TRUE</code> then the bounding geometry of state/county is returned,  default is <code>FALSE</code> and returns fiat geometries</p></td>
+      <td><p>If <code>TRUE</code> the bounding geometry of state/county is returned, default is <code>FALSE</code> and returns fiat geometries</p></td>
     </tr>
     </table>
     
@@ -195,7 +195,8 @@ getAOI wraps getFiat and getClip into a single function." />
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>If <code>clip</code> is a list, a clip unit requires a minimum of 3 inputs:</p><ol>
+    <p>A <code>clip</code> unit can be describe by just a location (eg 'UCSB'). In doing so the associated boundaries determined by <code><a href='geocode.html'>geocode</a></code> will be returned.
+To have greater control over the clip unit it can be defined as a list with a minimum of 3 inputs:</p><ol>
 <li><p>A point:</p><ul>
 <li><p>'location name' ex: "UCSB"</p></li>
 <li><p>lat/lon pair: ex: '-36, -120'</p></li>
@@ -208,7 +209,7 @@ getAOI wraps getFiat and getClip into a single function." />
 </ul></li>
 </ol>
     <p>The bounding box is always drawn in relation to the location. By default the point is treated
-                                     as the center of the box. To define the realtive location of the point to the bounding box
+                                     as the center of the box. To define the realtive location of the point to the bounding box,
                                      a fourth input can be used:</p><ol>
 <li><p>Origin</p><ul>
 <li><p>'center' (default)</p></li>
@@ -217,8 +218,11 @@ getAOI wraps getFiat and getClip into a single function." />
 <li><p>'lowerleft'</p></li>
 <li><p>'lowerright'</p></li>
 </ul></li>
-</ol><p>3 to 5 elements can be used to paramaterize the <code>clip</code> element but <strong>ORDER MATTERS</strong> (point, height, width, origin).
+</ol><p>In total, 1 to 5 elements can be used to define <code>clip</code> element and <strong>ORDER MATTERS</strong> (point, height, width, origin).
 Acceptable variations include:</p><ul>
+<li><p>1 members: (1) location name</p><ul>
+<li><p><em>"UCSB</em></p></li>
+</ul></li>
 <li><p>3 members: (1) location name, (2) height, (3) width</p><ul>
 <li><p><em>list("UCSB", 10, 10) </em></p></li>
 </ul></li>
@@ -236,6 +240,9 @@ Acceptable variations include:</p><ul>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'># Get AOI for a location</span>
+    <span class='fu'>getAOI</span>(<span class='st'>"Sacramento"</span>)
+
 <span class='co'># Get AOI defined by a state(s)</span>
     <span class='fu'>getAOI</span>(<span class='kw'>state</span> <span class='kw'>=</span> <span class='st'>'CA'</span>)
     <span class='fu'>getAOI</span>(<span class='kw'>state</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>'CA'</span>, <span class='st'>'nevada'</span>))
@@ -245,7 +252,7 @@ Acceptable variations include:</p><ul>
     <span class='fu'>getAOI</span>(<span class='kw'>state</span> <span class='kw'>=</span> <span class='st'>'CA'</span>, <span class='kw'>county</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>'Santa Barbara'</span>, <span class='st'>'ventura'</span>))
 
 <span class='co'># Get AOI defined by external spatial file:</span>
-    <span class='fu'>getAOI</span>(<span class='kw'>clip</span> <span class='kw'>=</span> <span class='kw pkg'>rgdal</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/rgdal/topics/readOGR'>readOGR</a></span>(<span class='st'>'la_metro.shp'</span>))
+    <span class='fu'>getAOI</span>(<span class='kw'>clip</span> <span class='kw'>=</span> <span class='kw pkg'>sf</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/sf/topics/st_read'>read_sf</a></span>(<span class='st'>'la_metro.shp'</span>))
     <span class='fu'>getAOI</span>(<span class='kw'>clip</span> <span class='kw'>=</span> <span class='fu'>raster</span>(<span class='st'>'AOI.tif'</span>))
 
 <span class='co'># Get AOI defined by 10 mile bounding box using lat/lon</span>

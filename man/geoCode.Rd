@@ -19,7 +19,7 @@ geocode(location = NULL, pt = FALSE, bb = FALSE, server = "google")
 at minimum a matrix of lat/long coordinates
 }
 \description{
-A wrapper around the Google and OpenSteetMap geocoding web-services. Users can request a lat/long pair, spatial points, and/or a bounding box geometry.\cr
+A wrapper around the Google and OpenSteetMap geocoding web-services. Users can request a lat/long pair, spatial points, and/or a bounding box geometry.\cr\cr
 One or more locations can be given at a time. If a single point is requested, `geocode` will provide a matix of lat lon vals; a spatial point and the geocode derived bounding box (if requested).
 If multiple points are given the returned objects will be a matrix with columns for input name-lat-lon; a SpatialPoints object; and a minimum bounding box of input locations.
 }

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AOI — AOI • Areas of Interest: AOI   </title>
+<title>AOI Package — AOI • Areas of Interest: AOI   </title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,15 +30,18 @@
 
 
 
-<meta property="og:title" content="AOI — AOI" />
+<meta property="og:title" content="AOI Package — AOI" />
 
-<meta property="og:description" content="AOI package
-The area of interest (AOI) is the geographic extent. It helps confin the unit of work to a geographic area,
-tproritize and define research and subsetting efforts, and to improve reproducabilty across studies.
-This package aims to make finding fiat and geographic AOIs easier,
-through a common query system based on 'state', 'county' and 'clip' parameters.
-AOIs for all queryies are retruned a a SpatialPolygon projeted to EPSG:4269.
-See the README on github" />
+<meta property="og:description" content="An area of interest (AOI) is a geographic extent and the aim of this package is to help users create these. The package is written using the simple features  paradigm, however, by default, objects are returned as SpatialPolygons projected to EPSG:4269.
+For those that have made the jump to sf, all functions include a 'sf' parameter that can be set to TRUE and eventully the default behavior will change." />
+
+<meta property="og:description" content="The primary functions to be aware of are geocode, getAOI, getBoundingBox
+The first returns a set spatial points, the second a single spatial geometry, and the last a geometry encompassing all input features. bbox_st and bbox_sp help convert AOIs between string and geometry  manifestations; check helps users visualize AOIs in a interactive leaflet map; and buffer allows for the modification of AOIs by uniform distances.
+Finally, revgeocode provides a reverse geocoding interface to help understand coordinates as locations, and describe breaks existing spatial features into getAOI parameters to improve the reproducibility of geometry generation.
+
+Two core datasets are served with the package reflecting the spatial geometries of US states and counties
+
+See the README on github, and a webpage of examples here" />
 
 <meta property="og:image" content="https://github.com/mikejohnson51/AOI/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -81,11 +84,18 @@ See the README on github" />
      
   </a>
 </li>
+<li>
+  <a href="../reference/index.html">
+    <span class="fa fa-file-code-o"></span>
+     
+    functions
+  </a>
+</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     <span class="fas fa fas fa-book"></span>
      
-    Documentation
+    Vignettes
      
     <span class="caret"></span>
   </a>
@@ -108,10 +118,10 @@ See the README on github" />
   </ul>
 </li>
 <li>
-  <a href="../reference/index.html">
-    <span class="fa fa-file-code-o"></span>
+  <a href="../AOI.pdf">
+    <span class="fa fa-file"></span>
      
-    functions
+    Package Manual
   </a>
 </li>
       </ul>
@@ -135,20 +145,23 @@ See the README on github" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>AOI</h1>
+    <h1>AOI Package</h1>
     <small class="dont-index">Source: <a href='https://github.com/mikejohnson51/AOI//blob/master/R/package_AOI.R'><code>R/package_AOI.R</code></a></small>
     <div class="hidden name"><code>AOI.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>AOI</code> package
-The area of interest (AOI) is the geographic extent. It helps confin the unit of work to a geographic area,
-tproritize and define research and subsetting efforts, and to improve reproducabilty across studies.
-This package aims to make finding fiat and geographic AOIs easier,
-through a common query system based on 'state', 'county' and 'clip' parameters.
-AOIs for all queryies are retruned a a SpatialPolygon projeted to EPSG:4269.</p>
-<p>See the <a href='https://github.com/mikejohnson51/AOI/blob/master/README.md'>README</a> on github</p>
+    <p>An area of interest (AOI) is a geographic extent and the aim of this package is to help users create these. The package is written using the simple features  paradigm, however, by default, objects are returned as <code>SpatialPolygons</code> projected to EPSG:4269.
+For those that have made the jump to sf, all functions include a 'sf' parameter that can be set to TRUE and eventully the default behavior will change.<br /></p>
+
+    <p>The primary functions to be aware of are <code><a href='geocode.html'>geocode</a></code>, <code><a href='getAOI.html'>getAOI</a></code>, <code><a href='getBoundingBox.html'>getBoundingBox</a></code>
+The first returns a set spatial points, the second a single spatial geometry, and the last a geometry encompassing all input features. <code><a href='bbox_st.html'>bbox_st</a></code> and <code><a href='bbox_sp.html'>bbox_sp</a></code> help convert AOIs between string and geometry  manifestations; <code><a href='check.html'>check</a></code> helps users visualize AOIs in a interactive leaflet map; and <code><a href='buffer.html'>buffer</a></code> allows for the modification of AOIs by uniform distances.
+Finally, <code><a href='revgeocode.html'>revgeocode</a></code> provides a reverse geocoding interface to help understand coordinates as locations, and <code><a href='describe.html'>describe</a></code> breaks existing spatial features into getAOI parameters to improve the reproducibility of geometry generation.
+<br /></p>
+<p>Two core datasets are served with the package reflecting the spatial geometries of US <code><a href='states.html'>states</a></code> and <code><a href='counties.html'>counties</a></code>
+<br /></p>
+<p>See the <a href='https://github.com/mikejohnson51/AOI/blob/master/README.md'>README</a> on github, and a webpage of examples <a href='https://mikejohnson51.github.io/AOI/'>here</a></p>
     
     </div>
 
