@@ -4,10 +4,12 @@
 \alias{describe}
 \title{Describe an AOI}
 \usage{
-describe(AOI)
+describe(AOI, full = FALSE)
 }
 \arguments{
 \item{AOI}{any spatial object (\code{raster}, \code{sf}, \code{sp}). Can be piped (\%>\%) from \code{\link{getAOI}}}
+
+\item{full}{if TRUE reverse geocoding descriptions returned, else just location, width, height, and origin (defualt = FALSE)}
 }
 \value{
 a data.frame of AOI descriptors including:

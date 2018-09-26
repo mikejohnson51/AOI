@@ -22,13 +22,13 @@ Add or subtract a uniform distance to/from a spatial obeject in either miles or 
 \examples{
 \dontrun{
  # get an AOI of 'Garden of the Gods' and add a 2 mile buffer
-    getAOI("Garden of the Gods") \%>\% buffer(10)
+    getAOI("Garden of the Gods") \%>\% buff(10)
 
  # get an AOI of 'Garden of the Gods' and add a 2 kilometer buffer
-    getAOI("Garden of the Gods") \%>\% buffer(10, km = TRUE)
+    getAOI("Garden of the Gods") \%>\% buff(10, km = TRUE)
 
  # get and AOI for Colorado Springs and subtract 3 miles
-    getAOI("Garden of the Gods") \%>\% buffer(-3)
+    getAOI("Garden of the Gods") \%>\% buff(-3)
 }
 
 }

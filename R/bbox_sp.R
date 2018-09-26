@@ -1,6 +1,6 @@
 #' @title Convert bounding box string to geometry
 #' @description Convert a vector, dataframe, bb, or raster object to a spatial geometry
-#' @param bbox_st a \code{character} comma seperated string,\code{numeric} vector, or data.frame in the order ("xmin","xmax", "ymin", "ymax"). \code{Raster} objects are also accepted.
+#' @param bbox_st a comma seperated \code{character}  string, \code{numeric} vector, or data.frame in the order ("xmin","xmax", "ymin", "ymax"). \code{Raster} objects are also accepted.
 #' @param sf \code{logical}. If TRUE object returned is of class \code{sf}, default is FALSE and returns \code{SpatialPolygons}
 #' @return a bounding box geometry
 #' @author Mike Johnson

@@ -4,7 +4,7 @@
 #'
 #'
 #' The primary functions to be aware of are \code{\link{geocode}}, \code{\link{getAOI}}, \code{\link{getBoundingBox}}.
-#' The first returns a set spatial points, the second a single spatial geometry, and the last a geometry encompassing all input features. \code{\link{bbox_st}} and \code{\link{bbox_sp}} help convert AOIs between string and geometry  manifestations; \code{\link{check}} helps users visualize AOIs in a interactive leaflet map; and \code{\link{buffer}} allows for the modification of AOIs by uniform distances.
+#' The first returns a set spatial points, the second a single spatial geometry, and the last a geometry encompassing all input features. \code{\link{bbox_st}} and \code{\link{bbox_sp}} help convert AOIs between string and geometry  manifestations; \code{\link{check}} helps users visualize AOIs in a interactive leaflet map; and \code{\link{buff}} allows for the modification of AOIs by uniform distances.
 #' Finally, \code{\link{revgeocode}} provides a reverse geocoding interface to help understand coordinates as locations, and \code{\link{describe}} breaks existing spatial features into getAOI parameters to improve the reproducibility of geometry generation.
 #' \cr
 #'

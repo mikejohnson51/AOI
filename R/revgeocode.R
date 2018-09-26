@@ -68,6 +68,11 @@ revgeocode = function(point){
   )
 
   ll = readLines(esri.url, warn = F)
+  # code = gsub(" ", "", gsub(".*: \"s*|\"*", "", ll[grepl("\"code\":", ll)]))
+  # code = gsub("code:", "", code)
+  # code = gsub(",", "", code)
+  #
+  # if(code == 200){
 
   x = rbind(
     Match_addr = gsub(" ", " ", gsub(".*: \"s*|\".*", "", ll[grepl("\"Match_addr\":", ll)])),
@@ -78,7 +83,7 @@ revgeocode = function(point){
     PlaceName = gsub(" ", " ", gsub(".*: \"s*|\".*", "", ll[grepl("\"PlaceName\":", ll)])),
     AddNum = gsub(" ", " ", gsub(".*: \"s*|\".*", "", ll[grepl("\"AddNum\":", ll)])),
     Address = gsub(" ", " ", gsub(".*: \"s*|\".*", "", ll[grepl("\"Address\":", ll)])),
-    Block = gsub(" ", "", gsub(".*: \"s*|\".*", "", ll[grepl("\"Block\":", ll)])),
+    Block = gsub(" ", " ", gsub(".*: \"s*|\".*", "", ll[grepl("\"Block\":", ll)])),
     Sector = gsub(" ", " ", gsub(".*: \"s*|\".*", "", ll[grepl("\"Sector\":", ll)])),
     Neighborhood = gsub(" ", " ", gsub(".*: \"s*|\".*", "", ll[grepl("\"Neighborhood\":", ll)])),
     District = gsub(" ", " ", gsub(".*: \"s*|\".*", "", ll[grepl("\"District\":", ll)])),
@@ -97,6 +102,7 @@ revgeocode = function(point){
   esri[['lon']] = as.numeric(pt$lon)
   esri[['lat']]  = as.numeric(pt$lat)
 
+#} else {esri = NULL}
 
 # OSM Rgeocode ------------------------------------------------------------
 

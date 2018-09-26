@@ -21,7 +21,7 @@
 getClip = function(location = NULL, width = NULL, height = NULL, origin = NULL, sf = FALSE){
 
   if(all(is.null(height), is.null(width), is.null(origin))){
-    shp = geocodeGoogle(location = location, bb =TRUE)
+    shp = geocode(location = location, bb =TRUE)
     poly =shp$bb
   } else {
 

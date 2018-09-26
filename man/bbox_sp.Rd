@@ -7,7 +7,7 @@
 bbox_sp(bbox_st, sf = FALSE)
 }
 \arguments{
-\item{bbox_st}{a \code{character} comma seperated string,\code{numeric} vector, or data.frame in the order ("xmin","xmax", "ymin", "ymax"). \code{Raster} objects are also accepted.}
+\item{bbox_st}{a comma seperated \code{character}  string, \code{numeric} vector, or data.frame in the order ("xmin","xmax", "ymin", "ymax"). \code{Raster} objects are also accepted.}
 
 \item{sf}{\code{logical}. If TRUE object returned is of class \code{sf}, default is FALSE and returns \code{SpatialPolygons}}
 }
