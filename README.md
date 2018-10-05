@@ -33,6 +33,8 @@ Current packages/applications using AOI:
 1. [HydroData](https://github.com/mikejohnson51/HydroData)
 2. [NWM](https://github.com/mikejohnson51/NWM)
 3. [FlowFinder](https://github.com/mikejohnson51/FlowFinder)
+4. [climateR]
+5. [FloodMapper]
 
 ### Support:
 
