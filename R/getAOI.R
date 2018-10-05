@@ -106,7 +106,7 @@ getAOI = function(clip = NULL,
       if (!is.character(value)) {
         stop("State must be a character value. Try surrounding in qoutes...")
       }
-      if (!(toupper(value) %in% stateAbb || tolower(value) %in% tolower(stateName))) {
+      if (!(toupper(value) %in% c(stateAbb, 'conus', 'all') || tolower(value) %in% c(tolower(stateName),'conus', 'all'))) {
         stop("State not recongized. Full names or abbreviations can be used. Please check spelling.")
       }
     }

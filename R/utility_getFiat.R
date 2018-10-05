@@ -26,7 +26,6 @@
 #'
 #' @author Mike Johnson
 
-
 getFiat <- function(state = NULL, county = NULL, bb = FALSE) {
 
   states = AOI::states
@@ -35,7 +34,13 @@ getFiat <- function(state = NULL, county = NULL, bb = FALSE) {
     if(nchar(state[i]) == 2){state[i] = states$state_name[which(states$state_abbr == state[i])]}
   }
 
-  state_map = states[tolower(states$state_name) %in% tolower(state),]
+  if(state == 'all'){
+    state_map = states
+  } else if(state == 'conus'){
+    state_map = states[!(tolower(states$state_name) %in% c('alaska', "puerto rico", 'hawaii')),]
+  } else {
+    state_map = states[tolower(states$state_name) %in% tolower(state),]
+  }
 
   if(is.null(county)) {
     map = state_map
