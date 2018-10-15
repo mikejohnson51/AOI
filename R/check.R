@@ -1,6 +1,5 @@
 #' @title Generate Leafet map and tool set
-#' @description Generate an interactive \code{leaflet} map for checking, and refining AOI queries. Useful \code{leaflet} tools allow for the marking of points, measuring of distances, and interactive panning and zooming to help define
-#' an approapriate AOI.
+#' @description Provides a precanned leaflet layout to generate an interactive \code{leaflet} map for checking, and refining AOI queries. Useful \code{leaflet} tools allow for the marking of points, measuring of distances, and  panning and zooming.
 #' @param AOI any spatial object (\code{raster}, \code{sf}, \code{sp}). Can be piped (\%>\%) from \code{\link{getAOI}}
 #' @return a \code{leaflet} html object
 #' @examples
@@ -17,10 +16,10 @@
 #'
 #' ## Add layers with standard leaflet functions:
 #'      r = getAOI("UCSB") %>%  # get AOI
-#'      HydroData::findNED() %>%  # get raster of elevation data
-#'      HydroData::findNWIS() # get SpatialPointsDataframe of local USGS gages
+#'          HydroData::findNWIS() # get SpatialPointsDataframe of local USGS gages
 #'
-#'      check(r$NED) %>% addMarkers(data = r$nwis, popup = r$nwis$site_no)
+#'      check(r$AOI) %>%
+#'         addMarkers(data = r$nwis, popup = r$nwis$site_no)
 #'
 #' ## Save map for reference:
 #'      m = getAOI("Kansas City") %>% check()

@@ -67,7 +67,7 @@ Acceptable variations include:
                                         \item \emph{"UCSB"}}
                                     \item 3 members: (1) location name, (2) height, (3) width \itemize{
                                         \item \emph{list("UCSB", 10, 10) }}
-                                    \item 4 members: (1) latitude, (2) longitude, (3) height, (4) width\itemize{
+                                    \item 4 members: (1) lat, (2) lon, (3) height, (4) width\itemize{
                                         \item \emph{list(36, -120, 10, 10) }}
                                     \item 4 members: (1) location name, (2) height, (3) width, (4) origin\itemize{
                                         \item \emph{list("UCSB", 10, 10, "lowerright) }}

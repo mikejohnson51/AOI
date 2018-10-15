@@ -31,10 +31,10 @@ getFiat <- function(state = NULL, county = NULL, bb = FALSE) {
   states = AOI::states
 
   for(i in 1:length(state)){
-    if(nchar(state[i]) == 2){state[i] = states$state_name[which(states$state_abbr == state[i])]}
+    if(nchar(state[i]) == 2){state[i] = states$state_name[which(tolower(states$state_abbr) == tolower(state[i]))]}
   }
 
-  if(state == 'all'){
+  if(any(state == 'all')){
     state_map = states
   } else if(state == 'conus'){
     state_map = states[!(tolower(states$state_name) %in% c('alaska', "puerto rico", 'hawaii')),]
@@ -56,15 +56,15 @@ getFiat <- function(state = NULL, county = NULL, bb = FALSE) {
       rm(counties)
     } else {
 
-    county = simpleCap(county)
-    check = county %in% county_map$name
+    #county = simpleCap(county)
+    check = tolower(county) %in% tolower(county_map$name)
 
     if(!all(check)) {
       bad_counties  = county[which(!(check))]
       stop(paste(bad_counties, collapse = ", "), " not a valid county in ", state, ".")
     }
 
-    map = county_map[county_map$name %in% county,]
+    map = county_map[tolower(county_map$name) %in% tolower(county),]
     rm(counties)
     }
   }

@@ -2,16 +2,10 @@ Package: AOI
 Type: Package
 Title: Areas of Interest
 Version: 0.1.9000
-Authors@R: person("Mike", "Johnson", role = c("aut", "cre"), email = "jmj00@ucsb.edu")
+Authors@R: person(given = "Mike", family = "Johnson", role = c("aut", "cre"), email = "jmj00@ucsb.edu", comment = c(ORCID = "0000-0002-5288-8350"))
 Maintainer: Mike Johnson <jmj00@ucsb.edu>
 BugReports: https://github.com/mikejohnson51/AOI/issues
-Description: An area of interest (AOI) is a geographic extent. 
-    AOIs help confine and formalize a unit of work to a geographic area and define research and sub setting efforts while improving reproducibility. 
-    They are built around concrete spatial attributes but often are discussed in a more colloquial way.  
-    This package lets users define regions through a common query to achieve spatial geometries. 
-    Tools are provided to help define, describe, and convert points, boundaries, and features to usable forms including strings and political boundaries (for USA states and counties). 
-    In addition, this package provides geocoding and reverse geocoding functions through the Google Maps, OpenStreetMaps and ESRI Webservices. 
-    This package is provided to support the bredth of spatial packages in the R ecosystem.
+Description: A consistent tool kit for geocoding, reverse geocoding, and defining boundaries for spatial analysis.
 Depends:
     R(>= 3.3.0),
     leaflet
@@ -19,8 +13,6 @@ Imports:
     jsonlite,
     magrittr,
     sf(>= 0.6-0),
-    utils,
-    xml2
 Suggests: 
     testthat
 License: MIT + file LICENSE

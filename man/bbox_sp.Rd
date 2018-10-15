@@ -2,20 +2,20 @@
 % Please edit documentation in R/bbox_sp.R
 \name{bbox_sp}
 \alias{bbox_sp}
-\title{Convert bounding box string to geometry}
+\title{Convert bounding box strings to Spatail* geometry}
 \usage{
 bbox_sp(bbox_st, sf = FALSE)
 }
 \arguments{
 \item{bbox_st}{a comma seperated \code{character}  string, \code{numeric} vector, or data.frame in the order ("xmin","xmax", "ymin", "ymax"). \code{Raster} objects are also accepted.}
 
-\item{sf}{\code{logical}. If TRUE object returned is of class \code{sf}, default is FALSE and returns \code{SpatialPolygons}}
+\item{sf}{\code{logical}. If TRUE returned object will be class \code{sf}, default is FALSE and returns \code{SpatialPolygons}}
 }
 \value{
 a bounding box geometry
 }
 \description{
-Convert a vector, dataframe, bb, or raster object to a spatial geometry
+Convert a vector, data.frame, bb object, or raster to a spatial (sp/sf) geometry
 }
 \examples{
 \dontrun{

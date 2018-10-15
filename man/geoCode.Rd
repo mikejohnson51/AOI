@@ -4,27 +4,24 @@
 \alias{geocode}
 \title{Geocoding}
 \usage{
-geocode(location = NULL, pt = FALSE, bb = FALSE, sf = FALSE,
-  server = "google")
+geocode(location = NULL, pt = FALSE, bb = FALSE, sf = FALSE)
 }
 \arguments{
 \item{location}{\code{character}. Place name(s)}
 
-\item{pt}{\code{logical}. If TRUE points geometery is appended to the returned list()}
+\item{pt}{\code{logical}. If TRUE point geometery is appended to the returned list()}
 
 \item{bb}{\code{logical}. If TRUE bounding box geometry is appended to the returned list()}
 
 \item{sf}{\code{logical}. If TRUE object(s) returned are of class \code{sf}, default is FALSE and returns \code{sp}}
-
-\item{server}{\code{character}. What server should be prioritized. Options inlcude 'google' or 'osm' (default = 'google')}
 }
 \value{
-at minimum a matrix of lat/long coordinates. Possible list with appended spatial features of type \code{sf} or \code{sp}
+at minimum a matrix of lat/lon coordinates. Possible list with appended spatial features of type \code{sf} or \code{sp}
 }
 \description{
-A wrapper around the Google and OpenSteetMap geocoding web-services. Users can request a lat/long pair, spatial points, and/or a bounding box geometry.\cr\cr
-One or more locations can be given at a time. If a single point is requested, `geocode` will provide a matix of lat lon vals; a spatial point and the geocode derived bounding box (if requested).
-If multiple points are given the returned objects will be a matrix with columns for input name-lat-lon; a SpatialPoints object; and a minimum bounding box of input locations.
+A wrapper around the OpenSteetMap geocoding web-services. Users can request a lat/lon pair, spatial points, and/or a bounding box geometries.\cr\cr
+One or more locations can be given at a time. If a single point is requested, `geocode` will provide a matix of lat/lon values; a spatial point and the geocode derived bounding box (if requested).
+If multiple points are given the returned objects will be a matrix with columns for input name-lat-lon; a SpatialPoints object; and a minimum bounding box of all input locations.
 }
 \examples{
 \dontrun{

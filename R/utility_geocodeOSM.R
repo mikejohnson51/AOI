@@ -21,37 +21,30 @@ geocodeOSM = function (location, pt = FALSE, bb = FALSE) {
   if(class(location) != 'character'){stop("\nInput location is not a place name. \nYou might be looking for reverse geocodeing.\nTry: AOI::revgeocode")}
 
   URL <- paste0("http://nominatim.openstreetmap.org",
-                 "/search?q=",
-                 gsub(" ", "+", location, fixed = TRUE),
-                 "&format=xml&polygon=0&addressdetails=0")
+                "/search?q=",
+                gsub(" ", "+", location, fixed = TRUE),
+                "&format=json&limit=1")
 
-  xx = xml2::read_xml(file(URL)) # ensure closing of connection
-  xx = xml2::xml_children(xx)
-  xx = xml2::xml_attrs(xx)
+  s = jsonlite::fromJSON(URL)
 
-  if( length(xx) == 0 ){ warning("No location information found for ", location)} else {
+  if( length(s) == 0 ){ warning("No location information found for ", location)} else {
 
-  fin = as.data.frame(t(xx[[1]]), stringsAsFactors = F)
+    loc = data.frame(lat = as.numeric(s$lat), lon = as.numeric(s$lon))
 
-  fin$lat = as.numeric(fin$lat)
-  fin$lon = as.numeric(fin$lon)
-  tmp.bb = unlist(strsplit(fin$boundingbox, ","))
-  fin$boundingbox = paste(tmp.bb[3], tmp.bb[4], tmp.bb[1], tmp.bb[2], sep = ",")
+    if(pt) { point = sf::st_as_sf(x = s, coords = c("lon", "lat"), crs = as.character(AOI::aoiProj)) }
 
-  fin = fin[!duplicated(fin),]
+    if(bb) {
+      tmp.bb = unlist(s$boundingbox)
+      bbox = bbox_sp(paste(tmp.bb[3], tmp.bb[4], tmp.bb[1], tmp.bb[2], sep = ","))
+    }
 
-  if(pt) { point = sf::st_as_sf(x = fin, coords = c("lon", "lat"), crs = as.character(AOI::aoiProj)) }
-
-  if(bb) { bbox = bbox_sp(fin$boundingbox) }
-
-  loc = data.frame(lat = fin$lat, lon = fin$lon)
-
-  if(all(!pt, !bb)) {return(loc)} else {
-    items = list(coords = loc)
-    if(pt){items[["pt"]] = point}
-    if(bb){items[["bb"]] = bbox}
-    return(items)
-  }
+    if(all(!pt, !bb)) {
+      return(loc)
+    } else {
+      items = list(coords = loc)
+      if(pt){items[["pt"]] = point}
+      if(bb){items[["bb"]] = bbox}
+      return(items)
+    }
   }
 }
-

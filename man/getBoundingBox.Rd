@@ -7,7 +7,7 @@
 getBoundingBox(x, sf = FALSE)
 }
 \arguments{
-\item{x}{a \code{data.frame} with a lat and long column, a raster, sf, or spatial object}
+\item{x}{a \code{data.frame} with a lat and lon column, a raster, sf, or spatial object}
 
 \item{sf}{\code{logical}. If TRUE object returned is of class \code{sf}, default is FALSE and returns \code{SpatialPolygons}
 Default is \code{FALSE} and returns class SpatialPolygon}
