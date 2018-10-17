@@ -2,7 +2,7 @@
 % Please edit documentation in R/bbox_sp.R
 \name{bbox_sp}
 \alias{bbox_sp}
-\title{Convert bounding box strings to Spatail* geometry}
+\title{Convert bounding box strings to spatail geometries}
 \usage{
 bbox_sp(bbox_st, sf = FALSE)
 }
@@ -12,7 +12,7 @@ bbox_sp(bbox_st, sf = FALSE)
 \item{sf}{\code{logical}. If TRUE returned object will be class \code{sf}, default is FALSE and returns \code{SpatialPolygons}}
 }
 \value{
-a bounding box geometry
+a spatial (sp/sf) geometry projected to \emph{EPSG:4269}
 }
 \description{
 Convert a vector, data.frame, bb object, or raster to a spatial (sp/sf) geometry
@@ -35,9 +35,12 @@ Convert a vector, data.frame, bb object, or raster to a spatial (sp/sf) geometry
 ## String to Geometry to String (full circle)
     bbox = c(37,38,-119,-118) \%>\% bbox_sp() \%>\% bbox_st()
 
-## Raster to sf
+## Raster to simple features polygon
    raster \%>\% bbox_sp(sf = TRUE)
 }
+}
+\seealso{
+\code{\link{bbox_st}}
 }
 \author{
 Mike Johnson

@@ -8,12 +8,13 @@ print.bb = function(x){
 
 }
 
-#' @title Convert spatial geometry to a data.frame
-#' @description Convert a spatial object to a data.frame of (xmin, xmax, ymin, ymax)
+#' @title Convert spatial geometries to a data.frame of coordinates
+#' @description Convert a spatial (sp/sf) object to a data.frame of ("xmin", "xmax", "ymin", "ymax")
 #' @param AOI any spatial object (\code{raster}, \code{sf}, \code{sp}). Can be piped (\%>\%) from \code{\link{getAOI}}
 #' @return a data.frame containing xmin. xmax, ymin, ymax coordinates
 #' @export
 #' @author Mike Johnson
+#' @seealso \code{\link{bbox_sp}}
 #' @examples
 #' \dontrun{
 #' ## Get a bounding box data.frame for AOI

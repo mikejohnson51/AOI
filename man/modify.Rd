@@ -11,13 +11,13 @@ modify(AOI, d, km = FALSE)
 
 \item{d}{\code{numeric}.The distance by which to modify each edge}
 
-\item{km}{\code{logical}.Is the distance in kilometers? Default is FALSE and in miles}
+\item{km}{\code{logical}. If \code{TRUE} distances are in kilometers, default is \code{FALSE} with distances in miles}
 }
 \value{
 a spatial geometry of the same class as the input AOI (if Raster sp returned)
 }
 \description{
-Add or subtract a uniform distance to/from a spatial obeject in either miles or kilometers.
+Add or subtract a uniform distance to/from a spatial object in either miles or kilometers.
 }
 \examples{
 \dontrun{
@@ -28,7 +28,7 @@ Add or subtract a uniform distance to/from a spatial obeject in either miles or 
     getAOI("Garden of the Gods") \%>\% modify(2, km = TRUE)
 
  # get and AOI for Colorado Springs and subtract 3 miles
-    getAOI("Garden of the Gods") \%>\% modify(-3)
+    getAOI("Colorado Springs") \%>\% modify(-3)
 }
 
 }

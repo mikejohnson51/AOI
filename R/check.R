@@ -1,6 +1,6 @@
 #' @title Generate Leafet map and tool set
-#' @description Provides a precanned leaflet layout to generate an interactive \code{leaflet} map for checking, and refining AOI queries. Useful \code{leaflet} tools allow for the marking of points, measuring of distances, and  panning and zooming.
-#' @param AOI any spatial object (\code{raster}, \code{sf}, \code{sp}). Can be piped (\%>\%) from \code{\link{getAOI}}
+#' @description Provides a precanned leaflet layout  for checking, and refining AOI queries. Useful \code{leaflet} tools allow for the marking of points, measuring of distances, and  panning and zooming.
+#' @param AOI any spatial object (\code{raster}, \code{sf}, \code{sp}). Can be piped (\%>\%) from \code{\link{getAOI}}. If \code{AOI = NULL}, base map of CONUS will be returned.
 #' @return a \code{leaflet} html object
 #' @examples
 #' \dontrun{

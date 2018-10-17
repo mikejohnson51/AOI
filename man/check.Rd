@@ -7,13 +7,13 @@
 check(AOI = NULL)
 }
 \arguments{
-\item{AOI}{any spatial object (\code{raster}, \code{sf}, \code{sp}). Can be piped (\%>\%) from \code{\link{getAOI}}}
+\item{AOI}{any spatial object (\code{raster}, \code{sf}, \code{sp}). Can be piped (\%>\%) from \code{\link{getAOI}}. If \code{AOI = NULL}, base map of CONUS will be returned.}
 }
 \value{
 a \code{leaflet} html object
 }
 \description{
-Provides a precanned leaflet layout to generate an interactive \code{leaflet} map for checking, and refining AOI queries. Useful \code{leaflet} tools allow for the marking of points, measuring of distances, and  panning and zooming.
+Provides a precanned leaflet layout  for checking, and refining AOI queries. Useful \code{leaflet} tools allow for the marking of points, measuring of distances, and  panning and zooming.
 }
 \examples{
 \dontrun{

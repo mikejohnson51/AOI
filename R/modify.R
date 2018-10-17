@@ -1,8 +1,8 @@
 #' @title Modify AOI
-#' @description Add or subtract a uniform distance to/from a spatial obeject in either miles or kilometers.
+#' @description Add or subtract a uniform distance to/from a spatial object in either miles or kilometers.
 #' @param AOI a spatial, raster or simple features object
 #' @param d \code{numeric}.The distance by which to modify each edge
-#' @param km \code{logical}.Is the distance in kilometers? Default is FALSE and in miles
+#' @param km \code{logical}. If \code{TRUE} distances are in kilometers, default is \code{FALSE} with distances in miles
 #' @return a spatial geometry of the same class as the input AOI (if Raster sp returned)
 #' @export
 #' @author Mike Johnson
@@ -15,7 +15,7 @@
 #'     getAOI("Garden of the Gods") %>% modify(2, km = TRUE)
 #'
 #'  # get and AOI for Colorado Springs and subtract 3 miles
-#'     getAOI("Garden of the Gods") %>% modify(-3)
+#'     getAOI("Colorado Springs") %>% modify(-3)
 #' }
 #'
 

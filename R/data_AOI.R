@@ -3,13 +3,13 @@
 #' package, converted to \code{SpatialPolygons}, re-projected and cleaned-up for this package. The primary reason for doing this is to provide
 #' a more minimalistic dataset primed for this package and leaflet use.
 #' @docType data
-#' @format a \code{SpatialPolygonsDataFrame}, 52 observations of 5 variables
+#' @format a \code{SpatialPolygonsDataFrame}, 52 observations of 5 variables:
 #' \itemize{
-#' \item 'statefp'   :  A \code{character}  State 2-digit Federal Information Processing Standards (FIPS) code
-#' \item 'statens'   :  A \code{character}  American National Standards Institute (ANSI) code
-#' \item 'affgeoid'  :  A \code{character}  AFF Summary Level Code
-#' \item 'state_name':  A \code{character}  State Name
-#' \item 'state_abbr':  A \code{character}  State Abbriviation
+#' \item 'statefp'   :  \code{character}  2-digit Federal Information Processing Standards (FIPS) code
+#' \item 'statens'   :  \code{character}  American National Standards Institute (ANSI) code
+#' \item 'affgeoid'  :  \code{character}  American FactFinder (AFF) Summary Level Code
+#' \item 'state_name':  \code{character}  State Name
+#' \item 'state_abbr':  \code{character}  State Abbriviation
 #' }
 #' @examples
 #' \dontrun{
@@ -23,15 +23,15 @@
 #' package, converted to \code{SpatialPolygons}, re=projected and cleaned-up for this package. The primary reason for doing this to provide
 #' a more minimalistic dataset primed for this package and leaflet use.
 #' @docType data
-#' @format a \code{SpatialPolygonsDataFrame}, 3220 observations of 7 variables
+#' @format a \code{SpatialPolygonsDataFrame}, 3220 observations of 7 variables:
 #' \itemize{
-#' \item 'statefp'   : A \code{character} State 2-digit Federal Information Processing Standards (FIPS) code
-#' \item 'countyfp'  : A \code{character} County 3-digit Federal Information Processing Standards (FIPS) code
-#' \item 'affgeoid'  : A \code{character} AFF Summary Level Code
-#' \item 'geoid'     : A \code{character} Concatinates state and county FIP code
-#' \item 'name'      : A \code{character} County name
-#' \item 'state_name': A \code{character} State name
-#' \item 'state_abbr': A \code{character} State Abbriviation
+#' \item 'statefp'   : \code{character} 2-digit Federal Information Processing Standards (FIPS) code
+#' \item 'countyfp'  : \code{character} 3-digit Federal Information Processing Standards (FIPS) code
+#' \item 'affgeoid'  : \code{character} American FactFinder (AFF) Summary Level Code
+#' \item 'geoid'     : \code{character} Concatinates state and county FIP code
+#' \item 'name'      : \code{character} County name
+#' \item 'state_name': \code{character} State name
+#' \item 'state_abbr': \code{character} State Abbriviation
 #' }
 #' @examples
 #' \dontrun{
@@ -40,3 +40,28 @@
 
 "counties"
 
+#' @title Simplified World Boundaries
+#' @description Dataset containing \code{SpatialPolygons} of World Countries and Regions. Data is initalized from \href{http://thematicmapping.org/downloads/world_borders.php}{thematicmapping.org}
+#' package, converted to \code{SpatialPolygons} and reprojected for this package.
+#' @docType data
+#' @format a \code{SpatialPolygonsDataFrame}, 246 observations of 11 variables:
+#' \itemize{
+#' \item 'FIPS'     :  \code{character} FIPS 10-4 Country Code
+#' \item 'ISO2'     :  \code{character} ISO 3166-1 Alpha-2 Country Code
+#' \item 'ISO3'     :  \code{character} ISO 3166-1 Alpha-3 Country Code
+#' \item 'UN'       :  \code{integer}   ISO 3166-1 Numeric-3 Country Code
+#' \item 'NAME'     :  \code{character} Name of country/area
+#' \item 'AREA'     :  \code{integer}   Land area, FAO Statistics (2002)
+#' \item 'POP2005'  :  \code{numeric}   Population, World Population Prospects (2005)
+#' \item 'REGION'   :  \code{integer}   Macro geographical (continental region), UN Statistics
+#' \item 'SUBREGION':  \code{integer}   Geographical sub-region, UN Statistics
+#' \item 'LON'      :  \code{numeric}   Longitude
+#' \item 'LAT'      :  \code{numeric}   Latitude
+#' }
+#' @source \href{http://thematicmapping.org/downloads/world_borders.php}{thematicmapping.org}
+#' @examples
+#' \dontrun{
+#'  AOI::world
+#'}
+
+"world"

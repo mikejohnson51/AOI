@@ -9,8 +9,7 @@ getBoundingBox(x, sf = FALSE)
 \arguments{
 \item{x}{a \code{data.frame} with a lat and lon column, a raster, sf, or spatial object}
 
-\item{sf}{\code{logical}. If TRUE object returned is of class \code{sf}, default is FALSE and returns \code{SpatialPolygons}
-Default is \code{FALSE} and returns class SpatialPolygon}
+\item{sf}{\code{logical}. If TRUE object returned is of class \code{sf}, default is FALSE and returns \code{SpatialPolygons}}
 }
 \description{
 Returns a minimum bounding box for a spatial, raster or sf object(s)
@@ -20,6 +19,9 @@ Returns a minimum bounding box for a spatial, raster or sf object(s)
   ## Find the 10 closest Airports to UCSB
      ap = geocode("UCSB") \%>\% HydroData::findNearestAirports(n =10)
      AOI = ap$ap \%>\% getBoundingBox()
+
+  ## Get bounding box of California
+     AOI = getAOI(state = 'CA') \%>\% getBoundingBox()
 
   ## Get bounding box of raster object
      AOI = getBoundingBox(r)

@@ -5,7 +5,7 @@ Version: 0.1.9000
 Authors@R: person(given = "Mike", family = "Johnson", role = c("aut", "cre"), email = "jmj00@ucsb.edu", comment = c(ORCID = "0000-0002-5288-8350"))
 Maintainer: Mike Johnson <jmj00@ucsb.edu>
 BugReports: https://github.com/mikejohnson51/AOI/issues
-Description: A consistent tool kit for geocoding, reverse geocoding, and defining boundaries for spatial analysis.
+Description: A consistent tool kit for forward and reverse geocoding and defining boundaries for spatial analysis.
 Depends:
     R(>= 3.3.0),
     leaflet

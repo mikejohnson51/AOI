@@ -9,28 +9,28 @@ describe(AOI, full = FALSE)
 \arguments{
 \item{AOI}{any spatial object (\code{raster}, \code{sf}, \code{sp}).}
 
-\item{full}{if TRUE, reverse geocoding descriptions returned, else just location, width, height, and origin (defualt = FALSE)}
+\item{full}{if TRUE, reverse geocoding descriptions returned, else just lat, lon, width, height, and origin (default = FALSE)}
 }
 \value{
 a data.frame of AOI descriptors including (at minimum):
 \describe{
-  \item{latCent}{the AOI center latitude }
-  \item{lngCent}{the AOI center longitude}
+  \item{lat}{the AOI center latitude }
+  \item{lon}{the AOI center longitude}
   \item{height}{ height in (miles)}
   \item{width}{width in(miles)}
   \item{origin}{AOI origin}
 }
 }
 \description{
-Describes a spatial, raster or sf object in terms of a reproducable clip area (e.g. \code{\link{getAOI}} parmaters.
+Describe a spatial, raster or sf object in terms of a reproducable clip area (e.g. \code{\link{getAOI}}) parmaters.
 }
 \examples{
 \dontrun{
  AOI = getAOI("UCSB") \%>\% describe()
 
  ```
- latCent :	34.41456
- lngCent :	-119.8605796
+ lat     :	34.41456
+ lon     :	-119.8605796
  height  :	1
  width   :	3
  origin  :	center
@@ -39,15 +39,14 @@ Describes a spatial, raster or sf object in terms of a reproducable clip area (e
  AOI = getAOI("UCSB") \%>\% describe(full = TRUE)
 
  ```
- latCent :	34.41456
- lngCent :	-119.8605796
+ lat     :	34.41456
+ lon     :	-119.8605796
  height  :	1
  width   :	3
  origin  :	center
  name    :	6650 Abrego Rd, Goleta, California, 93117
  area    :	3 square miles
  ```
-
 }
 }
 \author{

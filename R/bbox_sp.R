@@ -1,9 +1,10 @@
-#' @title Convert bounding box strings to Spatail* geometry
+#' @title Convert bounding box strings to spatail geometries
 #' @description Convert a vector, data.frame, bb object, or raster to a spatial (sp/sf) geometry
 #' @param bbox_st a comma seperated \code{character}  string, \code{numeric} vector, or data.frame in the order ("xmin","xmax", "ymin", "ymax"). \code{Raster} objects are also accepted.
 #' @param sf \code{logical}. If TRUE returned object will be class \code{sf}, default is FALSE and returns \code{SpatialPolygons}
-#' @return a bounding box geometry
+#' @return a spatial (sp/sf) geometry projected to \emph{EPSG:4269}
 #' @author Mike Johnson
+#' @seealso \code{\link{bbox_st}}
 #' @examples
 #' \dontrun{
 #'
@@ -22,7 +23,7 @@
 #' ## String to Geometry to String (full circle)
 #'     bbox = c(37,38,-119,-118) %>% bbox_sp() %>% bbox_st()
 #'
-#' ## Raster to sf
+#' ## Raster to simple features polygon
 #'    raster %>% bbox_sp(sf = TRUE)
 #' }
 #' @export

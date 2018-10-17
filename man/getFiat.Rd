@@ -4,9 +4,11 @@
 \alias{getFiat}
 \title{Get State of County Spatial Boundary}
 \usage{
-getFiat(state = NULL, county = NULL, bb = FALSE)
+getFiat(country = NULL, state = NULL, county = NULL, bb = FALSE)
 }
 \arguments{
+\item{country}{\code{character}. Full name, ISO 3166-1 2 or 3 digit code. Not case senstive}
+
 \item{state}{\code{character}. Full name or two character abbriviation. Not case senstive}
 
 \item{county}{\code{character}. Provide county name(s). Requires 'state' input.}

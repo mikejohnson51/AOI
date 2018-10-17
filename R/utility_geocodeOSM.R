@@ -26,10 +26,15 @@ geocodeOSM = function (location, pt = FALSE, bb = FALSE) {
                 "&format=json&limit=1")
 
   s = jsonlite::fromJSON(URL)
+  s$lat = as.numeric(s$lat)
+  s$lon = as.numeric(s$lon)
+  s$licence = NULL
 
-  if( length(s) == 0 ){ warning("No location information found for ", location)} else {
+  if( length(s) == 0 ){
+    warning("No location information found for ", location)
+  } else {
 
-    loc = data.frame(lat = as.numeric(s$lat), lon = as.numeric(s$lon))
+    loc = data.frame(lat = s$lat, lon = s$lon)
 
     if(pt) { point = sf::st_as_sf(x = s, coords = c("lon", "lat"), crs = as.character(AOI::aoiProj)) }
 

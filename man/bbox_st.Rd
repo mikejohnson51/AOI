@@ -2,7 +2,7 @@
 % Please edit documentation in R/bbox_st.R
 \name{bbox_st}
 \alias{bbox_st}
-\title{Convert spatial geometry to a data.frame}
+\title{Convert spatial geometries to a data.frame of coordinates}
 \usage{
 bbox_st(AOI)
 }
@@ -13,7 +13,7 @@ bbox_st(AOI)
 a data.frame containing xmin. xmax, ymin, ymax coordinates
 }
 \description{
-Convert a spatial object to a data.frame of (xmin, xmax, ymin, ymax)
+Convert a spatial (sp/sf) object to a data.frame of ("xmin", "xmax", "ymin", "ymax")
 }
 \examples{
 \dontrun{
@@ -23,6 +23,9 @@ Convert a spatial object to a data.frame of (xmin, xmax, ymin, ymax)
 >   xmin     xmax    ymin     ymax
 >  -119.9337 -119.758 34.34213 34.48706
 }
+}
+\seealso{
+\code{\link{bbox_sp}}
 }
 \author{
 Mike Johnson

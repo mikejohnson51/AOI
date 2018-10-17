@@ -4,15 +4,15 @@
 \name{counties}
 \alias{counties}
 \title{USA Counites}
-\format{a \code{SpatialPolygonsDataFrame}, 3220 observations of 7 variables
+\format{a \code{SpatialPolygonsDataFrame}, 3220 observations of 7 variables:
 \itemize{
-\item 'statefp'   : A \code{character} State 2-digit Federal Information Processing Standards (FIPS) code
-\item 'countyfp'  : A \code{character} County 3-digit Federal Information Processing Standards (FIPS) code
-\item 'affgeoid'  : A \code{character} AFF Summary Level Code
-\item 'geoid'     : A \code{character} Concatinates state and county FIP code
-\item 'name'      : A \code{character} County name
-\item 'state_name': A \code{character} State name
-\item 'state_abbr': A \code{character} State Abbriviation
+\item 'statefp'   : \code{character} 2-digit Federal Information Processing Standards (FIPS) code
+\item 'countyfp'  : \code{character} 3-digit Federal Information Processing Standards (FIPS) code
+\item 'affgeoid'  : \code{character} American FactFinder (AFF) Summary Level Code
+\item 'geoid'     : \code{character} Concatinates state and county FIP code
+\item 'name'      : \code{character} County name
+\item 'state_name': \code{character} State name
+\item 'state_abbr': \code{character} State Abbriviation
 }}
 \usage{
 counties

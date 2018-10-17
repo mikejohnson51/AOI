@@ -4,40 +4,43 @@
 \alias{getAOI}
 \title{Get Area of Interest (AOI) geometry}
 \usage{
-getAOI(clip = NULL, state = NULL, county = NULL, sf = FALSE,
-  km = FALSE, bb = FALSE)
+getAOI(clip = NULL, country = NULL, state = NULL, county = NULL,
+  sf = FALSE, km = FALSE, bb = FALSE)
 }
 \arguments{
-\item{clip}{A \code{spatial}, \code{raster}, \code{sf} or a \code{list} object (see details for list parameters)}
+\item{clip}{\code{spatial}. \code{raster}, \code{sf} or a \code{list} object (see details for list parameters)}
 
-\item{state}{\code{character}. Full name or two character abbriviation. Not case senstive}
+\item{country}{\code{character}. Full name, ISO 3166-1 2 or 3 digit code. Not case senstive}
+
+\item{state}{\code{character}. Full name or two character abbriviation. Not case senstive. If \code{state = 'conus'}, the lower 48 states will be returned. If \code{state = 'all'}, all states will be returned.}
 
 \item{county}{\code{character}. County name(s). Requires \code{state} input. Not case senstive. If 'all' then all counties in a state are returned}
 
-\item{sf}{\code{logical}. I\code{logical}. If TRUE object returned is of class \code{sf}, default is FALSE and returns \code{SpatialPolygons}}
+\item{sf}{\code{logical}. If TRUE object returned is of class \code{sf}, default is FALSE and returns \code{SpatialPolygons}}
 
 \item{km}{\code{logical}. If \code{TRUE} distances are in kilometers, default is \code{FALSE} with distances in miles}
 
-\item{bb}{\code{logical}.  Only applicable for state and county calls. If \code{TRUE} the bounding geometry of state/county is returned, default is \code{FALSE} and returns fiat geometries}
+\item{bb}{\code{logical}. Only applicable for country, state,  and county calls. If \code{TRUE} the bounding geometry is returned, default is \code{FALSE} and returns fiat geometries}
 }
 \value{
-a geometry projected to \emph{EPSG:4269}.
+a spatial (sp/sf) geometry projected to \emph{EPSG:4269}.
 }
 \description{
 Generate a spatial geometry from:
 \enumerate{
+             \item  Country name, 2-digit or 3-digit ISO abbriviation(s)
              \item  US state name(s)
              \item  US state, county pair(s)
-             \item  a user spatial, sf or raster object
+             \item  a spatial, sf or raster object
              \item  a clip unit (see details)
              }
 }
 \details{
-A \code{clip} unit can be described by just a location (eg 'UCSB'). In doing so the associated boundaries determined by \code{\link{geocode}} will be returned.
+A \code{clip} unit can be described by just a place name (eg 'UCSB'). In doing so the associated boundaries determined by \code{\link{geocode}} will be returned.
 To have greater control over the clip unit it can be defined as a list with a minimum of 3 inputs:
                               \enumerate{
                                      \item  A point: \itemize{
-                                            \item  'location name' (\code{character}) ex: "UCSB"
+                                            \item  'place name' (\code{character}) ex: "UCSB" - or -
                                             \item 'lat/lon' pair: ex: "c(-36, -120)"
                                          }
                                      \item  A bounding box height (\code{numeric}) \itemize{
@@ -48,7 +51,7 @@ To have greater control over the clip unit it can be defined as a list with a mi
                                          }
                                      }
 
-                                     The bounding box is always drawn in relation to the location. By default the point is treated
+                                     The bounding box is always drawn in relation to the point By default the point is treated
                                      as the center of the box. To define the realtive location of the point to the bounding box,
                                      a fourth input can be used:
                                      \enumerate{
@@ -63,20 +66,25 @@ To have greater control over the clip unit it can be defined as a list with a mi
 In total, 1 to 5 elements can be used to define \code{clip} element and \strong{ORDER MATTERS} (point, height, width, origin).
 Acceptable variations include:
 \itemize{
-                                    \item 1 member: (1) location name \itemize{
+                                    \item 1 member: (1) place name \itemize{
                                         \item \emph{"UCSB"}}
+                                    \item 1 member: (1) lat/lon pair \itemize{
+                                        \item \emph{c(36, -119)}}
                                     \item 3 members: (1) location name, (2) height, (3) width \itemize{
                                         \item \emph{list("UCSB", 10, 10) }}
                                     \item 4 members: (1) lat, (2) lon, (3) height, (4) width\itemize{
                                         \item \emph{list(36, -120, 10, 10) }}
-                                    \item 4 members: (1) location name, (2) height, (3) width, (4) origin\itemize{
+                                    \item 4 members: (1) place name, (2) height, (3) width, (4) origin\itemize{
                                         \item \emph{list("UCSB", 10, 10, "lowerright) }}
-                                    \item 5 members: (1) lat, (2) long, (3) height, (4) width, (5) origin\itemize{
+                                    \item 5 members: (1) lat, (2) lon, (3) height, (4) width, (5) origin\itemize{
                                         \item \emph{list(36,-120, 10, 10, "upperright) }}
                                     }
 }
 \examples{
 \dontrun{
+#Get AOI for a country
+    getAOI(country = "Brazil")
+
 # Get AOI for a location
     getAOI("Sacramento")
 
@@ -84,6 +92,10 @@ Acceptable variations include:
     getAOI(state = 'CA')
     getAOI(state = c('CA', 'nevada'))
 
+# Get AOI defined by all states, or the lower 48
+    getAOI(state = 'all')
+    getAOI(state = 'conus')
+
 # Get AOI defined by state & county pair(s)
     getAOI(state = 'California', county = 'Santa Barbara')
     getAOI(state = 'CA', county = c('Santa Barbara', 'ventura'))
@@ -91,10 +103,13 @@ Acceptable variations include:
 # Get AOI defined by state & county pair(s)
     getAOI(state = 'California', county = 'Santa Barbara')
     getAOI(state = 'CA', county = c('Santa Barbara', 'ventura'))
+
+# Get AOI defined by state & all counties
+    getAOI(state = 'California', county = 'all')
 
 # Get AOI defined by external spatial file:
-    getAOI(clip = sf::read_sf('la_metro.shp'))
-    getAOI(clip = raster('AOI.tif'))
+    getAOI(sf::read_sf('./la_metro.shp'))
+    getAOI(raster('./AOI.tif'))
 
 # Get AOI defined by 10 mile bounding box using lat/lon
     getAOI(clip = c(35, -119, 10, 10))
