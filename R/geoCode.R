@@ -35,8 +35,11 @@ geocode = function(location = NULL, pt = FALSE, bb = FALSE, sf = FALSE){
   } else {
 
   latlon = do.call(rbind, lapply(as.list(location), function(p){ geocodeOSM(p, pt= FALSE, bb = FALSE)} ))
+
   locs = data.frame(location = location, lat = as.numeric(latlon$lat), lon = as.numeric(latlon$lon))
-  points = sf::st_as_sf(x = locs, coords = c('lon', 'lat'), crs = 4269) }
+  points = sf::st_as_sf(x = locs, coords = c('lon', 'lat'), crs = 4269)
+  }
+
   if(!sf){ points = sf::as_Spatial(points)
 
   }

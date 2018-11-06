@@ -34,6 +34,11 @@ geocodeOSM = function (location, pt = FALSE, bb = FALSE) {
     warning("No location information found for ", location)
   } else {
 
+    if(length(s$lat) == 0){
+      s$lat = NA
+      s$lon = NA
+    }
+
     loc = data.frame(lat = s$lat, lon = s$lon)
 
     if(pt) { point = sf::st_as_sf(x = s, coords = c("lon", "lat"), crs = as.character(AOI::aoiProj)) }

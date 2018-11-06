@@ -23,6 +23,8 @@
 #' @import      leaflet
 #' @importFrom  jsonlite fromJSON
 #' @importFrom  sf st_as_sf as_Spatial st_bbox st_transform st_sfc st_polygon
+#' @importFrom  rvest html_nodes html_text html_attr html_table
+#' @importFrom  xml2  read_html
 
 NULL
 
