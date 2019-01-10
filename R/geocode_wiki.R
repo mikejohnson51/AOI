@@ -43,7 +43,7 @@ alt_page = function(loc){
 #'      geocode_wiki("NOAA")
 #'
 #'  ## geocode an event
-#'      geocode_wiki(""Parkland Shooting")
+#'      geocode_wiki("Parkland Shooting")
 #'
 #'  ## geocode a n event
 #'      geocode_wiki("Hurricane Harvey")
@@ -113,7 +113,6 @@ geocode_wiki = function(event = NULL){
 
   if(is.null(df)){ message("No data found")} else{ return(df) }
 }
-
 
 
 

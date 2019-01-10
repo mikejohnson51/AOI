@@ -15,6 +15,24 @@ aa data.frame of lat/lon coordinates
 \description{
 A wrapper around the Wikipedia API to return geo-coordinates of requested inputs.
 }
+\examples{
+\dontrun{
+   ## geocode an Agency
+     geocode_wiki("NOAA")
+
+ ## geocode an event
+     geocode_wiki("Parkland Shooting")
+
+ ## geocode a n event
+     geocode_wiki("Hurricane Harvey")
+
+ ## geocode a product
+     geocode_wiki("New York Times")
+
+ ## geocode multiple points and generate a minimum bounding box of all locations and spatial points
+     geocode_wiki(c("UCSB", "Goleta", "Santa Barbara"), bb = T, pt= T)
+}
+}
 \author{
 Mike Johnson
 }

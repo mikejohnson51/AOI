@@ -26,17 +26,9 @@ modify = function(AOI, d, km = FALSE){
   if(checkClass(AOI, 'Raster')){ AOI = AOI::bbox_sp(AOI)
   sf = FALSE}
 
-  if(km){ d = d * 2 * 1.60934} else {  d = 2*d }
+  if(km){ d = (d * 2) * 0.621371} else {  d = 2*d }
 
-  latCent = mean(AOI@bbox[2,])
-
-  df = data.frame(
-    latCent = latCent,
-    lngCent = mean(AOI@bbox[1,]),
-    height  = round(69 * (abs(AOI@bbox[2,1] - AOI@bbox[2,2])), 0),
-    width   = round(69 * cos(latCent * pi/180)*(abs(AOI@bbox[1,1] - AOI@bbox[1,2])), 0),
-    origin  = "center",
-    stringsAsFactors = F)
+  df = suppressMessages( describe(AOI) )
 
   h = df$height + d
   w = df$width  + d
@@ -44,7 +36,7 @@ modify = function(AOI, d, km = FALSE){
   if(all(h < 0, (-h > df$height))){stop("Can't remove more then existing diminisons -- height = ", df$height)}
   if(all(w < 0, (-w > df$width))) {stop("Can't remove more then existing diminisons -- width = ",  df$width) }
 
-  AOI.fin = getAOI(list(df$latCent, df$lngCent, h, w), km = km, sf = checkClass(AOI, 'sf'))
+  AOI.fin = getAOI(list(df$lat, df$lon, h, w), km = FALSE, sf = checkClass(AOI, 'sf'))
 
   return(AOI.fin)
 
