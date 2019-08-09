@@ -31,8 +31,8 @@ Current packages/applications using AOI:
 1. [HydroData][9]
 2. [NWM][10]
 3. [FlowFinder][11]
-4. [climateR]
-5. [FloodMapper]
+4. [climateR][18]
+5. [FloodMapper] [19]
 
 ### Support:
 
@@ -56,6 +56,8 @@ Development is supported with funds from the [UCAR COMET program][15]; the [NOAA
 [15]:	http://www.comet.ucar.edu
 [16]:	http://water.noaa.gov
 [17]:	https://opensource.org/licenses/MIT
+[18]:   https://github.com/mikejohnson51/climateR
+[19]:   https://github.com/mikejohnson51/LivingFlood
 
 [image-1]:	https://travis-ci.org/mikejohnson51/AOI.svg?branch=master
 [image-2]:	https://img.shields.io/coveralls/github/mikejohnson51/AOI.svg
