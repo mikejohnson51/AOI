@@ -14,11 +14,6 @@ matrix:
     - os: linux
       r: release
 
-before_install:
-  - sudo add-apt-repository ppa:ubuntugis/ppa --yes
-  - sudo apt-get --yes --force-yes update -qq
-  - sudo apt-get install --yes libudunits2-dev libproj-dev libgeos-dev libgdal-dev libcurl4-openssl-dev netcdf-bin
-
 env:
    global:
      - R_BUILD_ARGS="--no-vignettes --no-manual"
