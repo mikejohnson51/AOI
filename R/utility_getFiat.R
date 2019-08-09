@@ -45,7 +45,7 @@ getFiat <- function(country = NULL, state = NULL, county = NULL,  bb = FALSE) {
         map = world[tolower(world$NAME) %in% tolower(country),]
       }
 
-      if(length(map) == 0){ stop('no country found')}
+      if(NROW(map) == 0){ stop('no country found')}
 
 
   } else {
