@@ -13,7 +13,6 @@ matrix:
   include:
     - os: linux
       r: release
-      env: R_CODECOV=true
 
 before_install:
   - sudo add-apt-repository ppa:ubuntugis/ppa --yes
@@ -33,7 +32,7 @@ r_github_packages:
   - jimhester/covr
 
 after_success:
-  - if [[ "${R_CODECOV}" ]]; then R -e 'covr::coveralls()'; fi s
+   - Rscript -e 'covr::coveralls()'
 
 notifications:
   email:

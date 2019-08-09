@@ -1,7 +1,7 @@
 # AOI: Areas of Interest <img src="man/figures/logo.png" width=130 height = 150 align="right" />
 
 [![Build Status][image-1]][1] 
-[![Coveralls github][image-2]][2]
+[![Coverage Status](https://img.shields.io/coveralls/mikejohnson51/AOI.svg)](https://coveralls.io/r/mikejohnson51/AOI?branch=master)
 [![DOI][image-3]][3]
 
 
