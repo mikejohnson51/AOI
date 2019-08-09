@@ -32,7 +32,7 @@ Current packages/applications using AOI:
 2. [NWM][10]
 3. [FlowFinder][11]
 4. [climateR][18]
-5. [FloodMapper] [19]
+5. [FloodMapper][19]
 
 ### Support:
 
