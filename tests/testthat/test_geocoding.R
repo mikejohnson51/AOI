@@ -84,25 +84,25 @@ expect_false(is_inside(SB, r))
 
 })
 
-# test_that("modify...", {
-#   CA = getAOI(state="CA")
-#   pure_area = sf::st_area(CA)
-#   grow = sf::st_area(modify(CA, 10))
-#   shrink = sf::st_area(modify(CA, -10))
-#
-#   expect_true(pure_area > shrink)
-#   expect_true(pure_area < grow)
-#
-#   ucsb = getAOI("UCSB")
-#   growUCSB_mile = modify(ucsb, 10)
-#   growUCSB_km   = modify(ucsb, 10, km = TRUE)
-#
-#   do = describe(ucsb)
-#   dm = describe(growUCSB_mile)
-#
-#   expect_true(round(do$height, 0) == (round(dm$height,0) -20))
-#   expect_true(sf::st_area(growUCSB_mile) > sf::st_area(growUCSB_km))
-# })
+test_that("modify...", {
+  CA = getAOI(state="CA")
+  pure_area = sf::st_area(CA)
+  grow = sf::st_area(modify(CA, 10))
+  shrink = sf::st_area(modify(CA, -10))
+
+  expect_true(pure_area > shrink)
+  expect_true(pure_area < grow)
+
+  # ucsb = getAOI("UCSB")
+  # growUCSB_mile = modify(ucsb, 10)
+  # growUCSB_km   = modify(ucsb, 10, km = TRUE)
+  #
+  # do = describe(ucsb)
+  # dm = describe(growUCSB_mile)
+  #
+  # expect_true(round(do$height, 0) == (round(dm$height,0) -20))
+  # expect_true(sf::st_area(growUCSB_mile) > sf::st_area(growUCSB_km))
+})
 
 test_that("getAOI errors...", {
   expect_error(getAOI(state = "CA", clip = "UCSB"),
