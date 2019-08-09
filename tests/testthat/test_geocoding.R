@@ -10,6 +10,7 @@ test_that("check geocoding routines", {
   point3.full = geocode(c("UCSB", "Goleta", "Stearns Wharf"), full = T)
   bb2 = geocode(c("UCSB", "Goleta", "Stearns Wharf"), pt = T, bb = TRUE)
 
+  # Does geocode return a lat / long
   expect_true(length(df) == 2)
   expect_true(is.numeric(df$lat))
   expect_true(is.numeric(df$lon))
@@ -93,15 +94,15 @@ test_that("modify...", {
   expect_true(pure_area > shrink)
   expect_true(pure_area < grow)
 
-  # ucsb = getAOI("UCSB")
-  # growUCSB_mile = modify(ucsb, 10)
-  # growUCSB_km   = modify(ucsb, 10, km = TRUE)
-  #
-  # do = describe(ucsb)
-  # dm = describe(growUCSB_mile)
-  #
-  # expect_true(round(do$height, 0) == (round(dm$height,0) -20))
-  # expect_true(sf::st_area(growUCSB_mile) > sf::st_area(growUCSB_km))
+  ucsb = getAOI("UCSB")
+  growUCSB_mile = modify(ucsb, 10)
+  growUCSB_km   = modify(ucsb, 10, km = TRUE)
+
+  do = describe(ucsb)
+  dm = describe(growUCSB_mile)
+
+  expect_true(round(do$height, 0) == (round(dm$height,0) -20))
+  expect_true(sf::st_area(growUCSB_mile) > sf::st_area(growUCSB_km))
 })
 
 test_that("getAOI errors...", {
