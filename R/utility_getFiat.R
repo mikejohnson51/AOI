@@ -93,8 +93,6 @@ getFiat <- function(country = NULL, state = NULL, county = NULL,  bb = FALSE) {
 
   if(bb){map = getBoundingBox(map)}
 
-  map = sf::st_as_sf(map)
-
   return(map)
 
 }
