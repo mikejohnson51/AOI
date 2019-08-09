@@ -20,6 +20,7 @@ addons:
       - libproj-dev
       - libgeos-dev
       - libgdal-dev
+      - lwgeom-dev
 
 r_build_args: "--no-build-vignettes --no-manual"
 r_check_args: "--no-build-vignettes --no-manual --as-cran"
@@ -33,6 +34,8 @@ env:
 
 r_github_packages:
   - jimhester/covr
+  - r-spatial/lwgeom
+
 
 after_success:
    - Rscript -e 'covr::coveralls()'
