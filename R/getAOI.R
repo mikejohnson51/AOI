@@ -12,8 +12,8 @@
 #' @param county    \code{character}. County name(s). Requires \code{state} input. Not case senstive. If 'all' then all counties in a state are returned
 #' @param clip      \code{spatial}. \code{raster}, \code{sf} or a \code{list} object (see details for list parameters)
 #' @param km        \code{logical}. If \code{TRUE} distances are in kilometers, default is \code{FALSE} with distances in miles
-#' @param sf        \code{logical}. If TRUE object returned is of class \code{sf}, default is FALSE and returns \code{SpatialPolygons}
 #' @param bb        \code{logical}. Only applicable for country, state,  and county calls. If \code{TRUE} the bounding geometry is returned, default is \code{FALSE} and returns fiat geometries
+#' @param union        \code{logical}. If TRUE objects are unioned into a single object
 #' @details A \code{clip} unit can be described by just a place name (eg 'UCSB'). In doing so the associated boundaries determined by \code{\link{geocode}} will be returned.
 #' To have greater control over the clip unit it can be defined as a list with a minimum of 3 inputs:
 #'                               \enumerate{
@@ -102,9 +102,9 @@ getAOI = function(clip = NULL,
                   country = NULL,
                   state = NULL,
                   county = NULL,
-                  sf = FALSE,
                   km = FALSE,
-                  bb = FALSE) {
+                  bb = FALSE,
+                  union =FALSE) {
 
   stateAbb = AOI::states$state_abbr
   stateName = AOI::states$state_name
@@ -133,7 +133,7 @@ getAOI = function(clip = NULL,
       stop("The use of 'county' requires the 'state' parameter be used as well.")
     }
     if (is.null(clip)) {
-      stop("Requires a 'clip' or 'state' parameter to execute")
+      stop("Requires a 'clip' or 'state' parameter to execute.")
     }
   }
   }
@@ -157,7 +157,7 @@ getAOI = function(clip = NULL,
   # AOI by user shapefile
 
   if (checkClass(clip, "Raster")){
-    shp = getBoundingBox(clip, sf = T)
+    shp = getBoundingBox(clip)
     shp = sf::st_transform(shp, aoiProj)
     }
 
@@ -182,7 +182,7 @@ getAOI = function(clip = NULL,
         shp <- getClip(location = fin$location,
                       width =  fin$w,
                       height = fin$h,
-                      origin = fin$o, sf = sf)
+                      origin = fin$o)
 
   }
 
@@ -192,7 +192,7 @@ getAOI = function(clip = NULL,
 
   #message("AOI defined as ", firstLower(nameAOI(state, county, clip, km = km)))
 
-  if(sf){ shp = sf::st_as_sf(shp) }
+  if(union){ shp = sf::st_union(shp)}
 
   return(shp)
 

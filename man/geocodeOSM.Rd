@@ -4,7 +4,7 @@
 \alias{geocodeOSM}
 \title{Geocode via Open Street Maps API}
 \usage{
-geocodeOSM(location, pt = FALSE, bb = FALSE)
+geocodeOSM(location, pt = FALSE, bb = FALSE, full = FALSE)
 }
 \arguments{
 \item{location}{a place name}
@@ -12,6 +12,8 @@ geocodeOSM(location, pt = FALSE, bb = FALSE)
 \item{pt}{if TRUE a simple feature point is appended to returned list}
 
 \item{bb}{if TRUE the OSM bounding area of the location is appended to returned list}
+
+\item{full}{\code{logical}. If TRUE all OSM attributes reuturned with query, else just the lat/long pair.}
 }
 \value{
 at minimum a data.frame of lat, long

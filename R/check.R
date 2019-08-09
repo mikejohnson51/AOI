@@ -1,6 +1,7 @@
 #' @title Generate Leafet map and tool set
 #' @description Provides a precanned leaflet layout  for checking, and refining AOI queries. Useful \code{leaflet} tools allow for the marking of points, measuring of distances, and  panning and zooming.
 #' @param AOI any spatial object (\code{raster}, \code{sf}, \code{sp}). Can be piped (\%>\%) from \code{\link{getAOI}}. If \code{AOI = NULL}, base map of CONUS will be returned.
+#' @param returnMap \code{logical}. If \code{FALSE} (default) the input AOI is returned and the leaflet map printed. If \code{TRUE} the leaflet map is returned and printed.
 #' @return a \code{leaflet} html object
 #' @examples
 #' \dontrun{
@@ -28,17 +29,45 @@
 #' @export
 #' @author Mike Johnson
 
-check = function(AOI = NULL) {
+check = function(AOI = NULL, returnMap = FALSE) {
+
+  m = NULL
+  bb = NULL
+  pts = NULL
 
   if(checkClass(AOI, 'sf')){
     AOI = sf::st_transform(AOI, '+proj=longlat +datum=WGS84')
   }
 
   if(checkClass(AOI, 'raster')){
-    AOI = getBoundingBox(AOI)
+    bb = getBoundingBox(AOI) %>% st_transform('+proj=longlat +datum=WGS84')
   }
 
-  base= leaflet() %>%
+  type = NULL
+
+  for( i in 1:length(AOI)){
+
+  type[i] = tryCatch({
+    as.character(unique(st_geometry_type(AOI[[i]])[1]))
+  }, error = function(e) {
+    NULL
+  })
+  }
+
+  if("POINT" %in% type){
+    pts = AOI[[which(grepl("POINT",type))]]
+  }
+
+  if("POLYGON" %in% type){
+    bb = AOI[[which(grepl("POLYGON",type))]]
+  }
+
+  if("MULTIPOLYGON" %in% type){
+    bb = AOI[[which(grepl("POLYGON",type))]]
+  }
+
+
+  m= leaflet() %>%
     addProviderTiles("Esri.NatGeoWorldMap", group = "Terrain") %>%
     addProviderTiles("CartoDB.Positron",    group = "Grayscale") %>%
     addProviderTiles("Esri.WorldImagery",   group = "Imagery") %>%
@@ -59,20 +88,28 @@ check = function(AOI = NULL) {
     )
 
   if(is.null(AOI)){
-    m = setView(base, lat = 39.311825, lng = -101.275972, zoom = 4)
+    m = setView(m, lat = 39.311825, lng = -101.275972, zoom = 4)
   } else {
-    m = addPolygons(base,
-      data = AOI,
+
+  if (!is.null(pts)) {
+      m = addMarkers(m, data = pts)
+  }
+
+  if (!is.null(bb)) {
+
+    m = addPolygons(m,
+      data = bb,
       stroke = TRUE,
       fillColor = 'transparent',
       color = "red",
       opacity = 1
     )
   }
+  }
 
   print(m)
 
-  return(m)
+  if(returnMap) {return(m)} else {return(AOI)}
 
 }
 

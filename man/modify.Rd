@@ -30,7 +30,6 @@ Add or subtract a uniform distance to/from a spatial object in either miles or k
  # get and AOI for Colorado Springs and subtract 3 miles
     getAOI("Colorado Springs") \%>\% modify(-3)
 }
-
 }
 \author{
 Mike Johnson

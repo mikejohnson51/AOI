@@ -1,7 +1,6 @@
 #' @title Get mimimum bounding box of spatial features
 #' @description Returns a minimum bounding box for a spatial, raster or sf object(s)
 #' @param x a \code{data.frame} with a lat and lon column, a raster, sf, or spatial object
-#' @param sf \code{logical}. If TRUE object returned is of class \code{sf}, default is FALSE and returns \code{SpatialPolygons}
 #' @examples
 #' \dontrun{
 #'   ## Find the 10 closest Airports to UCSB
@@ -17,20 +16,18 @@
 #' @export
 #' @author Mike Johnson
 
-getBoundingBox = function(x, sf = FALSE) {
+getBoundingBox = function(x) {
 
-  if(checkClass(x, "Spatial")) {
-    x = data.frame(t(x@bbox))
-    row.names(x) = NULL
-    colnames(x) = c("long", "lat")
-  }
+  if(checkClass(x, "Spatial")) { x = sf::st_as_sf(x)}
 
   if(checkClass(x, "Raster")) {
+    crs = x@crs
     x = x@extent
     x = data.frame(long = c(x@xmin, x@xmax), lat = c(x@ymin, x@ymax))
   }
 
   if(checkClass(x, "sf")) {
+    crs = sf::st_crs(x)
     x = sf::st_bbox(x)
     x = data.frame(long = c(x[1], x[3]), lat = c(x[2],x[4]))
   }
@@ -43,9 +40,7 @@ getBoundingBox = function(x, sf = FALSE) {
       min(x$long), min(x$lat)
     ), ncol = 2, byrow = TRUE )
 
-  poly = sf::st_sfc(sf::st_polygon(list(coords)), crs = 4269)
-
-  if(!sf){ poly = sf::as_Spatial(poly)}
+  poly = sf::st_sfc(sf::st_polygon(list(coords))) %>% sf::st_set_crs(crs) %>% sf::st_sf()
 
   return(poly)
 }

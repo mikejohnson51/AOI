@@ -4,7 +4,7 @@
 \alias{geocode}
 \title{Geocoding}
 \usage{
-geocode(location = NULL, pt = FALSE, bb = FALSE, sf = FALSE)
+geocode(location = NULL, pt = FALSE, bb = FALSE, full = FALSE)
 }
 \arguments{
 \item{location}{\code{character}. Place name(s)}
@@ -13,7 +13,7 @@ geocode(location = NULL, pt = FALSE, bb = FALSE, sf = FALSE)
 
 \item{bb}{\code{logical}. If TRUE bounding box geometry is appended to the returned list()}
 
-\item{sf}{\code{logical}. If TRUE object(s) returned are of class \code{sf}, default is FALSE and returns \code{SpatailPolygon}}
+\item{full}{\code{logical}. If TRUE all OSM attributes reuturned with query, else just the lat/long pair.}
 }
 \value{
 at minimum a data.frame of lat/lon coordinates. Possible list with appended spatial features of type \code{sf} or \code{sp}

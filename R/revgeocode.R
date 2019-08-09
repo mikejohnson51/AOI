@@ -1,9 +1,9 @@
-print.geoloc <- function(x) {
-  for(i in 1:NROW(x)){
-    cat(paste0("\n", names(x)[i], paste(rep(" ", 16 - nchar(names(x)[i])), collapse = ""), ":\t"))
-    cat(paste(x[i]))
-  }
-}
+# print.geoloc <- function(x) {
+#   for(i in 1:NROW(x)){
+#     cat(paste0("\n", names(x)[i], paste(rep(" ", 16 - nchar(names(x)[i])), collapse = ""), ":\t"))
+#     cat(paste(x[i]))
+#   }
+# }
 
 #' @title Reverse Geocoding
 #' @description Describe a location using the ERSI and OSM reverse geocoding web-services. This service provides tradional reverse geocoding (lat/lon to placename) but can also be use to get more information about a place name.

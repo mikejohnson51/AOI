@@ -14,30 +14,30 @@ defineClip = function(clip = NULL, km = FALSE) {
   # Clip Unit Defintion  (getClipUnit() for 3,4, or 5 inputs)                    #
   #------------------------------------------------------------------------------#
 
-  if (checkClass(clip, 'sf')) {
-    clip = sf::as_Spatial(clip)
-  }
+  # if (checkClass(clip, 'sf')) {
+  #   clip = sf::as_Spatial(clip)
+  # }
+  #
+  # if (checkClass(clip, 'Spatial')) {
+  #   x = mean(clip@bbox[1, ])
+  #   y = mean(clip@bbox[2, ])
+  #
+  #   location <- c(y, x)
+  #   h        <- round(abs(clip@bbox[2, 1] - clip@bbox[2, 2]) * 69, 0)
+  #   w        <- round((abs(clip@bbox[1, 1] - clip@bbox[1, 2]) * 69) * (cos(y * pi / 180)), 0)
+  #   o        <- "center"
+  # }
 
-  if (checkClass(clip, 'Spatial')) {
-    x = mean(clip@bbox[1, ])
-    y = mean(clip@bbox[2, ])
-
-    location <- c(y, x)
-    h        <- round(abs(clip@bbox[2, 1] - clip@bbox[2, 2]) * 69, 0)
-    w        <- round((abs(clip@bbox[1, 1] - clip@bbox[1, 2]) * 69) * (cos(y * pi / 180)), 0)
-    o        <- "center"
-  }
-
-  if (checkClass(clip, 'Raster')){
-    e = clip@extent
-    x = mean(e[1:2])
-    y = mean(e[3:4])
-
-    location <- c(y, x)
-    h        <- round(abs(e[4] - e[3]) * 69, 0)
-    w        <- round((abs(e[2] - e[1]) * 69) * (cos(y * pi / 180)), 0)
-    o        <- 'center'
-  }
+  # if (checkClass(clip, 'Raster')){
+  #   e = clip@extent
+  #   x = mean(e[1:2])
+  #   y = mean(e[3:4])
+  #
+  #   location <- c(y, x)
+  #   h        <- round(abs(e[4] - e[3]) * 69, 0)
+  #   w        <- round((abs(e[2] - e[1]) * 69) * (cos(y * pi / 180)), 0)
+  #   o        <- 'center'
+  # }
 
   # AOI defined by location and bounding box width and height
 
@@ -95,11 +95,11 @@ defineClip = function(clip = NULL, km = FALSE) {
       is.numeric(clip[[3]]),
       is.numeric(clip[[4]])
     )) {
-      if (all(-90  <= clip[[1]], clip[[1]] >= 90)) {
+      if (clip[[1]] <= -90 | clip[[1]] >= 90) {
         stop("Latitude must be vector element 1 and between -90 and 90")
       }
 
-      if (all(-179.229655487 <= clip[[2]], clip[[2]] >= 179.856674735)) {
+      if (clip[[2]] <=-179.229655487 | clip[[2]] >= 179.856674735) {
         stop("Longitude must be vector element 2 and between -180 and 180")
       }
 

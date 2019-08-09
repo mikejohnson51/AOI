@@ -4,10 +4,12 @@
 \alias{geocode_wiki}
 \title{Geocoding Events}
 \usage{
-geocode_wiki(event = NULL)
+geocode_wiki(event = NULL, pts = T)
 }
 \arguments{
 \item{event}{\code{character}. a term to search for on wikipeida}
+
+\item{pts}{\code{logical}. If TRUE point geometery is appended to the returned list()}
 }
 \value{
 aa data.frame of lat/lon coordinates
@@ -21,16 +23,17 @@ A wrapper around the Wikipedia API to return geo-coordinates of requested inputs
      geocode_wiki("NOAA")
 
  ## geocode an event
-     geocode_wiki("Parkland Shooting")
+     geocode_wiki("I have a dream speech")
 
  ## geocode a n event
-     geocode_wiki("Hurricane Harvey")
+     geocode_wiki("D day")
 
  ## geocode a product
      geocode_wiki("New York Times")
 
- ## geocode multiple points and generate a minimum bounding box of all locations and spatial points
-     geocode_wiki(c("UCSB", "Goleta", "Santa Barbara"), bb = T, pt= T)
+ ## geocode an event
+     geocode_wiki("Hurricane Harvey")
+
 }
 }
 \author{

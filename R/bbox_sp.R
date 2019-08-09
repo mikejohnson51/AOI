@@ -1,7 +1,6 @@
 #' @title Convert bounding box strings to spatail geometries
 #' @description Convert a vector, data.frame, bb object, or raster to a spatial (sp/sf) geometry
-#' @param bbox_st a comma seperated \code{character}  string, \code{numeric} vector, or data.frame in the order ("xmin","xmax", "ymin", "ymax"). \code{Raster} objects are also accepted.
-#' @param sf \code{logical}. If TRUE returned object will be class \code{sf}, default is FALSE and returns \code{SpatialPolygons}
+#' @param s a comma seperated \code{character}  string, \code{numeric} vector, or data.frame in the order ("xmin","xmax", "ymin", "ymax"). \code{Raster} objects are also accepted.
 #' @return a spatial (sp/sf) geometry projected to \emph{EPSG:4269}
 #' @author Mike Johnson
 #' @seealso \code{\link{bbox_st}}
@@ -28,24 +27,15 @@
 #' }
 #' @export
 
-bbox_sp = function(bbox_st, sf = FALSE){
+bbox_sp = function(s){
 
-  if(checkClass(bbox_st, "numeric")){
-
-    b = as.data.frame(t(bbox_st), stringsAsFactors = FALSE)
+  if(checkClass(s, "numeric")){
+    b = as.data.frame(t(s), stringsAsFactors = FALSE)
     names(b) = c("xmin","xmax", "ymin", "ymax")
-
-  } else if (checkClass(bbox_st, 'bb')){
-
-    b = bbox_st
-
-  } else if (checkClass(bbox_st, 'Raster')){
-
-    b = getBoundingBox(bbox_st) %>% bbox_st()
-
+  } else if (checkClass(s, 'Raster')){
+    b = getBoundingBox(s) %>% bbox_st()
   } else {
-
-    tmp = as.numeric(unlist(strsplit(bbox_st, ",")))
+    tmp = as.numeric(unlist(strsplit(s, ",")))
     b = as.data.frame(t(tmp), stringsAsFactors = FALSE)
     names(b) = c("xmin","xmax", "ymin", "ymax")
   }
@@ -57,9 +47,7 @@ bbox_sp = function(bbox_st, sf = FALSE){
                     b$xmin, b$ymin),
                     ncol = 2, byrow = TRUE)
 
-  poly = sf::st_sfc(sf::st_polygon(list(coords)), crs = 4269)
-
-  if(!sf){ poly = sf::as_Spatial(poly)}
+  poly = sf::st_sfc(sf::st_polygon(list(coords)), crs = 4269) %>% sf::st_sf()
 
   return(poly)
 

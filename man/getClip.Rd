@@ -5,7 +5,7 @@
 \title{Convert clip unit ot geometry}
 \usage{
 getClip(location = NULL, width = NULL, height = NULL,
-  origin = NULL, sf = FALSE)
+  origin = NULL)
 }
 \arguments{
 \item{location}{Defined by a location or lat, long pair}
@@ -21,8 +21,6 @@ getClip(location = NULL, width = NULL, height = NULL,
    \item{"upperright"}
     \item{"upperleft"}
   }}
-
-\item{sf}{logical. Should returned feature be of class sf (default = FALSE)}
 }
 \value{
 a \code{SpatialPolygons} object projected to \emph{EPSG:4269}.

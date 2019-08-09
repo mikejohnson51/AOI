@@ -4,10 +4,12 @@
 \alias{alt_page}
 \title{Alternate Page Finder}
 \usage{
-alt_page(loc)
+alt_page(loc, pts = FALSE)
 }
 \arguments{
 \item{loc}{a wikipedia structured call}
+
+\item{pts}{\code{logical}. If TRUE point geometery is appended to the returned list()}
 }
 \value{
 at minimum a data.frame of lat, long

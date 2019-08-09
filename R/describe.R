@@ -2,6 +2,7 @@
 #' @description Describe a spatial, raster or sf object in terms of a reproducable clip area (e.g. \code{\link{getAOI}}) parmaters.
 #' @param AOI any spatial object (\code{raster}, \code{sf}, \code{sp}).
 #' @param full if TRUE, reverse geocoding descriptions returned, else just lat, lon, width, height, and origin (default = FALSE)
+#' @param km if TRUE, units are in kilometers, else in miles (default = FALSE)
 #' @return a data.frame of AOI descriptors including (at minimum):
 #' \describe{
 #'   \item{lat}{the AOI center latitude }
@@ -37,56 +38,47 @@
 #'  ```
 #' }
 
-describe = function(AOI, full = FALSE){
+describe = function(AOI, full = FALSE, km = FALSE){
 
-  if(checkClass(AOI, 'sf')){ AOI = sf::as_Spatial(AOI)}
+  #if(checkClass(AOI, 'sf')){ AOI = sf::as_Spatial(AOI)}
   if(checkClass(AOI, 'raster')){ AOI = getBoundingBox(AOI)}
 
-  latCent = mean(AOI@bbox[2,])
+  bb = AOI %>% sf::st_transform(AOI::aoiProj) %>% AOI::bbox_st()
+
+  latCent = (bb$ymin + bb$ymax) / 2
 
   df = data.frame(
     lat = latCent,
-    lon = mean(AOI@bbox[1,]),
-    height  = round(69 * (abs(AOI@bbox[2,1] - AOI@bbox[2,2])), 0),
-    width   = round(69 * cos(latCent * pi/180)*(abs(AOI@bbox[1,1] - AOI@bbox[1,2])), 0),
+    lon = (bb$xmin + bb$xmax) / 2,
+    height  = round(69 * (abs(bb$ymax - bb$ymin)), 2),
+    width   = round(69 * cos(latCent * pi/180) * abs(abs(bb$xmax) - abs(bb$xmin)), 2),
     origin  = "center",
+    units = "miles",
     stringsAsFactors = F
     )
 
+  if(km){
+    df$height = df$height / 1.609
+    df$width = df$width / 1.609
+    df$units = "kilometers"
+  }
+
   if(full) {
-    rc = revgeocode(point = c(df$latCent, df$lngCent))
+    rc = revgeocode(point = c(df$lat, df$lon))
     if (!is.null(rc$match_addr)) {
       df[["name"]]    = rc$match_addr
-    } else if (!is.null(rc$city)) {
-      df[["name"]]   = rc$city
-    } else if (!is.null(rc$county)) {
-      df[["name"]] = rc$county
+    # } else if (!is.null(rc$city)) {
+    #   df[["name"]]   = rc$city
+    # } else if (!is.null(rc$county)) {
+    #   df[["name"]] = rc$county
     } else {
       df[["name"]] = rc[1]
     }
     df[['area']] = df$height * df$width
   }
 
-  cat("AOI Parameters:\n")
+  rownames(df) = NULL
 
-  for (i in 1:NCOL(df)) {
-    if (names(df)[i] %in% c("height", "width")) {
-      ext = "miles"
-    } else {
-      ext = NULL
-    }
-    if (names(df)[i] %in% 'area') {
-      ext = "square miles"
-    } else {
-      ext = NULL
-    }
-    cat(paste0("\n", names(df)[i], paste(rep(
-      " ", 8 - nchar(names(df)[i])
-    ), collapse = ""), ":\t"))
-    cat(paste(df[i], ext))
-  }
-
-  cat("\n\n")
   return(df)
 
 }

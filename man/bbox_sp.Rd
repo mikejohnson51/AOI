@@ -4,12 +4,10 @@
 \alias{bbox_sp}
 \title{Convert bounding box strings to spatail geometries}
 \usage{
-bbox_sp(bbox_st, sf = FALSE)
+bbox_sp(s)
 }
 \arguments{
-\item{bbox_st}{a comma seperated \code{character}  string, \code{numeric} vector, or data.frame in the order ("xmin","xmax", "ymin", "ymax"). \code{Raster} objects are also accepted.}
-
-\item{sf}{\code{logical}. If TRUE returned object will be class \code{sf}, default is FALSE and returns \code{SpatialPolygons}}
+\item{s}{a comma seperated \code{character}  string, \code{numeric} vector, or data.frame in the order ("xmin","xmax", "ymin", "ymax"). \code{Raster} objects are also accepted.}
 }
 \value{
 a spatial (sp/sf) geometry projected to \emph{EPSG:4269}

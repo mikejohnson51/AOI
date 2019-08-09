@@ -1,13 +1,3 @@
-print.bb = function(x){
-  cat("Bounding Box:\n")
-
-  for(i in 1:NCOL(x)){
-    cat(paste0("\n", names(x)[i], paste(rep(" ", 4 - nchar(names(x)[i])), collapse = ""), ":\t"))
-    cat(paste(round(x[i], 4)))
-  }
-
-}
-
 #' @title Convert spatial geometries to a data.frame of coordinates
 #' @description Convert a spatial (sp/sf) object to a data.frame of ("xmin", "xmax", "ymin", "ymax")
 #' @param AOI any spatial object (\code{raster}, \code{sf}, \code{sp}). Can be piped (\%>\%) from \code{\link{getAOI}}
@@ -26,17 +16,8 @@ print.bb = function(x){
 
 
 bbox_st = function(AOI){
-
-  if(any(class(AOI) == 'sf')){AOI = sf::as_Spatial(AOI)}
-  if(checkClass(AOI, 'Raster')){ AOI = getBoundingBox(AOI)}
-
-  bb =  data.frame(xmin = AOI@bbox[1,1],
-                   xmax = AOI@bbox[1,2],
-                   ymin = AOI@bbox[2,1],
-                   ymax = AOI@bbox[2,2])
-
-  class(bb) = c("bb", class(bb))
-
-  return(bb)
+  bb = st_bbox(AOI)
+  df = data.frame(xmin = bb[1], ymin = bb[2], xmax = bb[3], ymax = bb[4], row.names = NULL )
+  return(df)
 
 }

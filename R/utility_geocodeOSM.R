@@ -5,6 +5,7 @@
 #' @param location a place name
 #' @param pt if TRUE a simple feature point is appended to returned list
 #' @param bb if TRUE the OSM bounding area of the location is appended to returned list
+#' @param full \code{logical}. If TRUE all OSM attributes reuturned with query, else just the lat/long pair.
 #' @return at minimum a data.frame of lat, long
 #' @author Mike Johnson
 #' @export
@@ -14,8 +15,7 @@
 #' geocodeOSM("Garden of the Gods", bb = TRUE)
 #' }
 
-
-geocodeOSM = function (location, pt = FALSE, bb = FALSE) {
+geocodeOSM = function (location, pt = FALSE, bb = FALSE, full = FALSE) {
 
   if(class(location) != 'character'){stop("\nInput location is not a place name. \nYou might be looking for reverse geocodeing.\nTry: AOI::revgeocode")}
 
@@ -28,15 +28,12 @@ geocodeOSM = function (location, pt = FALSE, bb = FALSE) {
   s$lat = as.numeric(s$lat)
   s$lon = as.numeric(s$lon)
   s$licence = NULL
+  s$icon = NULL
 
-  if( length(s) == 0 ){
-    warning("No location information found for ", location)
-  } else {
-
-    if(length(s$lat) == 0){
+  if(length(s$lat) == 0){
       s$lat = NA
       s$lon = NA
-    }
+  }
 
     loc = data.frame(lat = s$lat, lon = s$lon)
 
@@ -45,7 +42,11 @@ geocodeOSM = function (location, pt = FALSE, bb = FALSE) {
     if(bb) {
       tmp.bb = unlist(s$boundingbox)
       bbox = bbox_sp(paste(tmp.bb[3], tmp.bb[4], tmp.bb[1], tmp.bb[2], sep = ","))
+      bbox$place_id = s$place_id
+      bbox = merge(bbox, s)
     }
+
+    if(full) { return(s) }
 
     if(all(!pt, !bb)) {
       return(loc)
@@ -56,4 +57,4 @@ geocodeOSM = function (location, pt = FALSE, bb = FALSE) {
       return(items)
     }
   }
-}
+

@@ -51,11 +51,14 @@ The [HydroData](https://github.com/ncss-tech/soilDB) package offers quick access
 
 ```{r, message = FALSE}
 
-AOI = getAOI(list("UCSB", 10, 10)) %>% 
+AOI = getAOI(list("UCSB", 10, 10, "lowerleft")) %>% 
   HydroData::findNHD() %>% 
   HydroData::findWaterbodies() %>% 
-  HydroData::findGHCN() %>% 
-  HydroData::explore()
+  HydroData::findNWIS()
+
+leaflet() %>% addTiles() %>% addPolylines(data = AOI$nhd, weight = AOI$nhd$streamorde) %>% 
+  addMarkers(data = AOI$nwis) %>% 
+  addPolygons(data = AOI$waterbodies, weight = 1) %>% addPolygons(data = AOI$AOI, color = 'red', fillColor = "transparent")
 
 ```
 
@@ -89,11 +92,14 @@ ned %>%
 
 ```{r, message = FALSE}
 
-files = nwm::getFilelist(type = 'land', date = "20180803", t = 0, f = c(3,6,9,12))
+files = nwm::getFilelist(type = 'land', startDate = Sys.Date()-3, t = 0, f = c(3,6,9,12))
 
-AOI = getAOI(clip = list("Devils Tower, WY", 10, 10)) %>% nwm::downloadNWM(files, param = 'accet')
+AOI = getAOI(list("Devils Tower, WY", 10, 10)) 
+  
+nwm::downloadNWM(AOI, files, param = 'accet')
 
-rasterVis::levelplot(AOI$accet, 
+
+GotrasterVis::levelplot(AOI$accet, 
                      main = "National Water Model: Accumulated ET", 
                      names.attr = as.character(nwm::getGridTime(AOI$accet)),
                      col.regions = colorRampPalette(brewer.pal(9,"YlOrRd")))
@@ -106,7 +112,7 @@ rasterVis::levelplot(AOI$accet,
 [FedData](https://github.com/ropensci/FedData) is a useful package for automatically downloading federal datasets. Here we chain chain the `get_ssurgo` function to an AOI call to quickly get a soils map from the SSURGO database for the 100sqmile regions surrounding Boulder, Colorado.
 
 ```{r}
-AOI = getAOI(clip = list("Boulder", 10, 10)) %>% FedData::get_ssurgo(label = "test")
+AOI = getAOI(list("Boulder", 10, 10)) %>% FedData::get_ssurgo(label = "test")
 
 ggplot() + 
   geom_polygon(data = AOI$spatial, aes(x = long, y = lat, group = group, fill = id), color = 'gray') + 
@@ -122,7 +128,7 @@ Open Street Map provides one of the most extensive databases/cartographic repres
 ```{r}
 office = geocode("UCSB")
 
-AOI = getAOI(clip = list(office$lat, office$lon, 2, 2)) %>% bbox_st()
+AOI = getAOI(list(office$lat, office$lon, 2, 2)) %>% bbox_st()
 
 q0 = opq(bbox = c(AOI$xmin, AOI$ymin, AOI$xmax, AOI$ymax)) %>%
      add_osm_feature (key="highway") %>% 
@@ -197,6 +203,7 @@ ggplot(xx) +
        color = "RCP Pathway")
 
 ````
+
 
 
 

@@ -43,7 +43,7 @@ icon.b <- awesomeIcons(
 ```
 
 
-Users often need information regarding a location that they either know the lat/lon or place name of. For these cases `AOI` offers a forward and reverse geocoding interface to the OpenStreetMap and ESRI APIs -neither of which require a registared API key! 
+Users often need information regarding a location that they either know the lat/lon or place name of. For these cases, `AOI` offers a forward and reverse geocoding interface to the OpenStreetMap and ESRI APIs -neither of which require a registared API key! Moreover AOI provides a wikipedia geocoding sevice to try and geo-locate events that are generally not present in a typical gazzetter such as "I have a Dream Speech", "Thomas Fire", or "NOAA".
 
 While other packages offer(ed) geocoding capabilities (dismo, prettymapr, ggmap, opencage) they are generally tied to the google API and/or require a user key. In mid 2018 the google maps API changed to a pay-for-play model meaning calls making those function no longer workable, for example the previously great dismo package:
 
@@ -55,7 +55,7 @@ This page walks through some of the functionalites within the `geocode` and `rev
 
 ##*Geocoding*:
 
-Geocoding converts placenames to latitude and longitude pairs. `AOI` offers a geocoding function wrapping the [OpenStreetMaps Nominatim](https://wiki.openstreetmap.org/wiki/Nominatim) API. Here we use AOI's geocode to find the lat/lon of the Grand Canyon, using both the colloquial name, and the (lat/long) pair retruned from a <a target="_blank"href="http://www.Google.com/search?q=grand+canyon+lat+long">Google search.</a> Notice slightly different locations are generated:
+Geocoding converts placenames to latitude and longitude sets. `AOI` offers a geocoding function wrapping the [OpenStreetMaps Nominatim](https://wiki.openstreetmap.org/wiki/Nominatim) API. Here we use AOI's geocode to find the lat/lon set for the Grand Canyon, using both the colloquial name, and the (lat/long) pair returned from a quick google search <a target="_blank"href="http://www.Google.com/search?q=grand+canyon+lat+long">Google search.</a> Notice slightly different locations are generated:
 
 ```{r, message = F}
 GC_osm = geocode("grand canyon")
@@ -91,7 +91,7 @@ leaflet() %>% addTiles() %>% addMarkers(data = pt$pt)
 
 ```
 
-Geocoding functionality can also be used to derive
+The OSM geocoding functionality can also be used to derive bounding areas describing the entity being queried:
 
 ```{r, message = F}
 GC = geocode("garden of the gods", bb = T)
@@ -104,7 +104,7 @@ leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 12, maxZoom = 15)) %
 
 ##Multiple Points
 
-Geocode can be used to query multiple points
+Geocode can also be used to query multiple points
 
 ```{r}
 geocode(c("UCSB", "Goleta"))
@@ -166,5 +166,32 @@ addPolygons(data = bbox_sp(rc$bb),fillColor = "transparent", color = col, weight
 addPolygons(data = gcUCSB$bb, fillColor = "transparent", color = 'red', weight = 4, label = "geocode")
 
 ```
+
+## Geocoding Events, entities, and ideas:
+
+So far we have explored services that allow for the forward and reverse geocoding of entities that are generally found in gazetters (DEFINE). Many times, espessially in social sciences like history, architecture, or archiology, there is a need to link events with space. For these purposed `AOI` provides a geooding wrapper that capitilizes on the open wikipedia database.
+
+1. Looks for expicit coordinate entries
+2. Looks for locations in the entry info box
+3. Searches for alternative pages (linked entries)
+4. Searches for Locations on the Alternative Pages
+5. Searches for mentions of Headquarters
+6. Fails gracefully
+
+```{r}
+mlk_speech = geocode_wiki("I have a dream speech")
+```
+
+```{r}
+mlk_speech = geocode_wiki("NOAA")
+```
+
+```{r}
+mlk_speech = geocode_wiki("Hurricane Harvey")
+```
+
+
+
+
 
 Here we see that while being able to extarcting bounding box information (eg AOI information) from geocoding processes there is a ceratin level of variability in these returned based on the nature of the call an the service reporting. As such the AOI pakcage offers a number of methods for more explicitly defining an AOI based on state, county and clip boundaries. 

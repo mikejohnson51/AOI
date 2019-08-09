@@ -4,10 +4,12 @@
 \alias{check}
 \title{Generate Leafet map and tool set}
 \usage{
-check(AOI = NULL)
+check(AOI = NULL, returnMap = FALSE)
 }
 \arguments{
 \item{AOI}{any spatial object (\code{raster}, \code{sf}, \code{sp}). Can be piped (\%>\%) from \code{\link{getAOI}}. If \code{AOI = NULL}, base map of CONUS will be returned.}
+
+\item{returnMap}{\code{logical}. If \code{FALSE} (default) the input AOI is returned and the leaflet map printed. If \code{TRUE} the leaflet map is returned and printed.}
 }
 \value{
 a \code{leaflet} html object

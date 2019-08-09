@@ -5,7 +5,7 @@
 \title{Get Area of Interest (AOI) geometry}
 \usage{
 getAOI(clip = NULL, country = NULL, state = NULL, county = NULL,
-  sf = FALSE, km = FALSE, bb = FALSE)
+  km = FALSE, bb = FALSE, union = FALSE)
 }
 \arguments{
 \item{clip}{\code{spatial}. \code{raster}, \code{sf} or a \code{list} object (see details for list parameters)}
@@ -16,11 +16,11 @@ getAOI(clip = NULL, country = NULL, state = NULL, county = NULL,
 
 \item{county}{\code{character}. County name(s). Requires \code{state} input. Not case senstive. If 'all' then all counties in a state are returned}
 
-\item{sf}{\code{logical}. If TRUE object returned is of class \code{sf}, default is FALSE and returns \code{SpatialPolygons}}
-
 \item{km}{\code{logical}. If \code{TRUE} distances are in kilometers, default is \code{FALSE} with distances in miles}
 
 \item{bb}{\code{logical}. Only applicable for country, state,  and county calls. If \code{TRUE} the bounding geometry is returned, default is \code{FALSE} and returns fiat geometries}
+
+\item{union}{\code{logical}. If TRUE objects are unioned into a single object}
 }
 \value{
 a spatial (sp/sf) geometry projected to \emph{EPSG:4269}.

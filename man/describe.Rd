@@ -4,12 +4,14 @@
 \alias{describe}
 \title{Describe an AOI}
 \usage{
-describe(AOI, full = FALSE)
+describe(AOI, full = FALSE, km = FALSE)
 }
 \arguments{
 \item{AOI}{any spatial object (\code{raster}, \code{sf}, \code{sp}).}
 
 \item{full}{if TRUE, reverse geocoding descriptions returned, else just lat, lon, width, height, and origin (default = FALSE)}
+
+\item{km}{if TRUE, units are in kilometers, else in miles (default = FALSE)}
 }
 \value{
 a data.frame of AOI descriptors including (at minimum):

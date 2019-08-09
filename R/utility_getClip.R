@@ -11,25 +11,24 @@
 #'    \item{"upperright"}
 #'     \item{"upperleft"}
 #'   }
-#' @param sf logical. Should returned feature be of class sf (default = FALSE)
 #' @return a \code{SpatialPolygons} object projected to \emph{EPSG:4269}.
 #' @export
 #' @keywords internal
 #' @author Mike Johnson
 
 
-getClip = function(location = NULL, width = NULL, height = NULL, origin = NULL, sf = FALSE){
+getClip = function(location = NULL, width = NULL, height = NULL, origin = NULL){
 
   if(all(is.null(height), is.null(width), is.null(origin))){
-    shp = geocode(location = location, bb =TRUE)
-    poly =shp$bb
+    shp = geocode(location, bb = TRUE, full = F)
+    poly = shp$bb
   } else {
 
     if(class(location) == "numeric"){ location = location }
 
     if(class(location) == "character"){
 
-      location = geocode(location = location)
+      location = geocode(location = location, full = FALSE)
       location = unlist(location)
     }
 
@@ -86,9 +85,9 @@ getClip = function(location = NULL, width = NULL, height = NULL, origin = NULL, 
                       ncol = 2,
                       byrow = TRUE)
 
-    poly = sf::st_sfc(sf::st_polygon(list(coords)), crs = 4269)
-
-    if(!sf){ poly = sf::as_Spatial(poly)}
+    poly = sf::st_sf(sf::st_sfc(sf::st_polygon(list(coords)), crs = 4269))
+    names(poly) = "geometry"
+    sf::st_geometry(poly)  <- "geometry"
   }
 
     return(poly)

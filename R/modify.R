@@ -17,28 +17,21 @@
 #'  # get and AOI for Colorado Springs and subtract 3 miles
 #'     getAOI("Colorado Springs") %>% modify(-3)
 #' }
-#'
 
 modify = function(AOI, d, km = FALSE){
 
-  if(checkClass(AOI, 'sf')){ AOI = sf::as_Spatial(AOI)}
-  if(checkClass(AOI, 'numeric')){ AOI = AOI::bbox_sp(AOI)}
-  if(checkClass(AOI, 'Raster')){ AOI = AOI::bbox_sp(AOI)
-  sf = FALSE}
+  AOI = make_sf(AOI)
 
-  if(km){ d = (d * 2) * 0.621371} else {  d = 2*d }
+  if(km)  { u  = d * 3280.84} # kilometers to feet
+  if(!km) { u  = d * 5280 }   # miles to feet
 
-  df = suppressMessages( describe(AOI) )
+  AOI.m <- sf::st_transform(AOI, 6829)
 
-  h = df$height + d
-  w = df$width  + d
+  buff = st_buffer(AOI.m, u, joinStyle = 'MITRE', endCapStyle = "SQUARE", mitreLimit = 2)
 
-  if(all(h < 0, (-h > df$height))){stop("Can't remove more then existing diminisons -- height = ", df$height)}
-  if(all(w < 0, (-w > df$width))) {stop("Can't remove more then existing diminisons -- width = ",  df$width) }
+  final = st_transform(buff, AOI::aoiProj)
 
-  AOI.fin = getAOI(list(df$lat, df$lon, h, w), km = FALSE, sf = checkClass(AOI, 'sf'))
-
-  return(AOI.fin)
+  return(final)
 
 }
 

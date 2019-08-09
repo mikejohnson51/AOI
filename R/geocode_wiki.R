@@ -1,6 +1,7 @@
 #' @title Alternate Page Finder
 #' @description Find linked pages to a wikipedia call
 #' @param loc a wikipedia structured call
+#' @param pts \code{logical}. If TRUE point geometery is appended to the returned list()
 #' @return at minimum a data.frame of lat, long
 #' @author Mike Johnson
 #' @keywords internal
@@ -10,16 +11,18 @@
 #' alt_page("Twin_towers")
 #' }
 
-alt_page = function(loc){
-  tt = xml2::read_html(paste0('https://en.wikipedia.org/w/index.php?search=', loc, '&title=Special%3ASearch&go=Go') )
+alt_page = function(loc, pts = FALSE){
+  tt = xml2::read_html(paste0('https://en.wikipedia.org/w/index.php?search=',
+                              loc,
+                              '&title=Special%3ASearch&go=Go') )
 
   url_ <- tt %>%
-    rvest::html_nodes("a") %>%
-    rvest::html_attr("href")
+          rvest::html_nodes("a") %>%
+          rvest::html_attr("href")
 
   link_ <- tt %>%
-    rvest::html_nodes("a") %>%
-    rvest::html_text()
+            rvest::html_nodes("a") %>%
+            rvest::html_text()
 
   df.new = data.frame(urls = url_, links = link_)
   df.new = df.new[grepl("/wiki/",df.new$urls),]
@@ -27,6 +30,10 @@ alt_page = function(loc){
   df.new = df.new[!grepl("Main_Page",df.new$urls),]
   df.new = df.new[!grepl("Privacy_Policy",df.new$urls),]
   df.new = df.new[!grepl("Terms_of_use",df.new$urls),]
+  df.new = df.new[1:10,]
+  df.new = df.new[complete.cases(df.new),]
+  if(NROW(df.new) == 0 ){df.new = NULL}
+
   return(df.new)
 }
 
@@ -34,6 +41,7 @@ alt_page = function(loc){
 #' @title Geocoding Events
 #' @description A wrapper around the Wikipedia API to return geo-coordinates of requested inputs.
 #' @param event \code{character}. a term to search for on wikipeida
+#' @param pts \code{logical}. If TRUE point geometery is appended to the returned list()
 #' @return aa data.frame of lat/lon coordinates
 #' @export
 #' @author Mike Johnson
@@ -43,22 +51,26 @@ alt_page = function(loc){
 #'      geocode_wiki("NOAA")
 #'
 #'  ## geocode an event
-#'      geocode_wiki("Parkland Shooting")
+#'      geocode_wiki("I have a dream speech")
 #'
 #'  ## geocode a n event
-#'      geocode_wiki("Hurricane Harvey")
+#'      geocode_wiki("D day")
 #'
 #'  ## geocode a product
 #'      geocode_wiki("New York Times")
 #'
-#'  ## geocode multiple points and generate a minimum bounding box of all locations and spatial points
-#'      geocode_wiki(c("UCSB", "Goleta", "Santa Barbara"), bb = T, pt= T)
+#'  ## geocode an event
+#'      geocode_wiki("Hurricane Harvey")
+#'
 #' }
 
-geocode_wiki = function(event = NULL){
+geocode_wiki = function(event = NULL, pts = T){
 
   loc =  gsub(" ", "+", event)
-  u = paste0('https://en.wikipedia.org/w/api.php?action=opensearch&search=', loc, '&limit=1&format=json&redirects=resolve')
+  u = paste0('https://en.wikipedia.org/w/api.php?action=opensearch&search=',
+             loc,
+             '&limit=1&format=json&redirects=resolve')
+
   url = unlist(jsonlite::fromJSON(u))
   url = url[grepl("http", url)]
   call = gsub("https://en.wikipedia.org/wiki/", "", url)
@@ -66,7 +78,7 @@ geocode_wiki = function(event = NULL){
   if(length(call) == 0){
     df.new = alt_page(loc)
     message("'", event, "' not found...\nTry one of the following?\n\n", paste(df.new$links, collapse = ',\n'))
-
+    return(df.new)
   } else {
 
     coord.url = paste0('https://en.wikipedia.org/w/api.php?action=query&format=json&prop=coordinates&titles=', call)
@@ -82,21 +94,29 @@ geocode_wiki = function(event = NULL){
         rvest::html_nodes(xpath='//table[contains(@class, "infobox")]')
 
       if(length(infobox) == 0){
-        df = alt_page(loc)
+        df.new = alt_page(loc)
         message("'", event, "' not found...\nTry one of the following?\n\n", paste(df$links, collapse = ',\n'))
+        return(df.new)
       } else {
         y = as.data.frame(rvest::html_table(infobox[1], header = F)[[1]], stringsAsFactors = FALSE)
         search = y$X2[which(y$X1 == 'Location')]
       }
 
-      if(length(search) == 0){
-        search = y$X2[which(y$X1 == 'Headquarters')]
-      }
+      if(length(search) == 0){ search = y$X2[which(y$X1 == 'Headquarters')] }
 
       if(length(search) == 0){
         y = y[y$X1 != y$X2,]
         x = y[grepl(tolower(paste0(c( AOI::states$state_name, AOI::world$NAME), collapse = "|")), tolower(y$X2)),]
-        df = AOI::geocode(strsplit(gsub(", ", ",", x[1,2]), ",")[[1]])
+
+        all = strsplit(gsub(", ", ",", x[1,2]), ",")[[1]]
+        df = list()
+        for(i in 1:length(all)){
+          df[[i]] = AOI::geocode(all[i], full = F)
+        }
+
+        df = cbind(all, do.call(rbind, df))
+        df = df[complete.cases(df),]
+
       } else {
         s1 = noquote(unlist(strsplit(search, ", ")))
         df = NULL
@@ -105,14 +125,25 @@ geocode_wiki = function(event = NULL){
         while(NROW(df) == 0){
           i = i + 1
           def = gsub('/"', "", do.call(paste, list(s1[c(1:i)])))
-          df = AOI::geocode(def)
+          df = AOI::geocode(def, full = T)
         }
       }
     }
   }
 
-  if(is.null(df)){ message("No data found")} else{ return(df) }
+
+  # if(is.null(df)){
+  #   message("No data found")
+  # } else{
+    if(pts){
+      points = sf::st_as_sf(x = df, coords = c('lon', 'lat'), crs = 4269)
+      return(points)
+    } else {
+      return(df)
+    }
+  #}
 }
+
 
 
 
