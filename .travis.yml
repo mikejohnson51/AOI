@@ -1,32 +1,35 @@
-# Sample .travis.yml for R projects.
-#
-# See README.md for instructions, or for more configuration options,
-# see the wiki:
-#   https://github.com/craigcitro/r-travis/wiki
-
 language: r
-cache: packages
+
+cache:
+  - packages
+  - ccache
+
 sudo: required
 dist: trusty
+latex: false
 
-matrix:
-  include:
-    - os: linux
-      r: release
+r:
+  - release
 
-env:
-   global:
-     - R_BUILD_ARGS="--no-vignettes --no-manual"
-     - R_CHECK_ARGS="--no-vignettes --no-manual --as-cran"
-     - NOT_CRAN="true"
-     - _R_CHECK_FORCE_SUGGESTS_=false
+addons:
+  apt:
+    sources:
+      - sourceline: 'ppa:ubuntugis/ubuntugis-unstable'
+    packages:
+      - libudunits2-dev
+      - libproj-dev
+      - libgeos-dev
+      - libgdal-dev
+
+r_build_args: "--no-build-vignettes --no-manual"
+r_check_args: "--no-build-vignettes --no-manual --as-cran"
 
 warnings_are_errors: false
 
-before_install:
-  - sudo add-apt-repository ppa:ubuntugis/ppa --yes
-  - sudo apt-get --yes --force-yes update -qq
-  - sudo apt-get install --yes libudunits2-dev libproj-dev libgeos-dev libgdal-dev libcurl4-openssl-dev netcdf-bin
+env:
+   global:
+     - _R_CHECK_FORCE_SUGGESTS_=false
+     - R_CODECOV=true
 
 r_github_packages:
   - jimhester/covr
