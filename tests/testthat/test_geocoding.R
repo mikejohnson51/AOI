@@ -10,29 +10,46 @@ test_that("check geocoding routines", {
   point3.full = geocode(c("UCSB", "Goleta", "Stearns Wharf"), full = T)
   bb2 = geocode(c("UCSB", "Goleta", "Stearns Wharf"), pt = T, bb = TRUE)
 
-  # Does geocode return a lat / long
+  # Does geocode return a lat / long values that are numeric?
   expect_true(length(df) == 2)
   expect_true(is.numeric(df$lat))
   expect_true(is.numeric(df$lon))
+
+  # Does turning on 'full' add details?
   expect_true(length(df.full) > 2)
+
+  # Does tuning on point create a POINT geometry (sf)
   expect_true(sf::st_geometry_type(point$pt) == 'POINT')
+
+  # Does tuning on bb create a POLYGON geometry (sf)
   expect_true(sf::st_geometry_type(bb$bb) == 'POLYGON')
+
+  #Does adding 3 input create three rows of data?
   expect_true(NROW(point3) == 3)
+
+  #Does multiple queries and full=T generate additional data?
   expect_true(NCOL(point3.full) > NCOL(point3))
+
+  # Do multiple queries and pt=T generate points?
   expect_true(all(sf::st_geometry_type(bb2$pt) == 'POINT') )
+
+  # Do multiple queries and bb=T produce a bounding box?
   expect_true(sf::st_geometry_type(bb2$bb) == 'POLYGON')
 
 })
 
 test_that("geocodeOSM throws correct errors", {
+  # Make sure geocode does not process numeric inputs
   expect_error(geocode(37), "\nInput location is not a place name. \nYou might be looking for reverse geocodeing.\nTry: AOI::revgeocode")
-  bad = geocode("TweedleDee_TweedleDumb")
 
+  # Make sure unfindable locations return NA values but dont break the routine
+  bad = geocode("TweedleDee_TweedleDumb")
   expect_true(is.na(bad$lat))
   expect_true(is.na(bad$lon))
 })
 
 test_that("bbox_sp works as expected...", {
+
  yy = bbox_sp(c(37,38,-120,-119))
  expect_true(sf::st_geometry_type(yy) == 'POLYGON')
 

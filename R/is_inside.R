@@ -32,8 +32,7 @@ is_inside = function(AOI, obj, total = T){
     x = suppressWarnings(
       suppressMessages( sf::st_intersection(obj, AOI) ))
 
-    inside = any(identical(x$geometry, AOI$geometry),
-                 identical(x$geometry, obj$geometry))
+    inside = any(x$geometry == AOI$geometry, x$geometry == obj$geometry)
 
     if (total) {
       return(inside)
