@@ -21,8 +21,8 @@
 
 is_inside = function(AOI, obj, total = T){
 
-  AOI = make_sf(AOI) %>% sf::st_transform(AOI::aoiProj)
-  obj = make_sf(obj) %>% sf::st_transform(AOI::aoiProj)
+  AOI = make_sf(AOI)
+  obj = make_sf(obj) %>% sf::st_transform(sf::st_crs(AOI))
 
   int = suppressMessages( sf::st_intersects(obj, AOI) )
 

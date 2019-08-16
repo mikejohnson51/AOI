@@ -3,4 +3,4 @@
 #' @export
 #' @author Mike Johnson
 
-aoiProj = "+init=epsg:4269"
+aoiProj = '+proj=longlat +ellps=GRS80 +datum=NAD83 +no_defs'
