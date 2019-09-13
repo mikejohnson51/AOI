@@ -28,16 +28,22 @@
 #' }
 
 geocode = function(location = NULL,
+                   zipcode = NULL,
                    pt = FALSE,
                    bb = FALSE,
                    full = FALSE) {
 
-  if (length(location) == 1) {
+
+  if(!is.null(zipcode)){
+
+    locs = AOI::zipcodes[match(zipcode, AOI::zipcodes$zip),]
+
+  } else if (length(location) == 1) {
     df = geocodeOSM(location, pt, bb, full)
     return(df)
 
   } else {
-    latlon = do.call(rbind, lapply(as.list(location), function(p) {
+      latlon = do.call(rbind, lapply(as.list(location), function(p) {
       geocodeOSM(p,
                  pt = FALSE,
                  bb = FALSE,
@@ -55,27 +61,28 @@ geocode = function(location = NULL,
         lon = as.numeric(latlon$lon)
       )
     }
+  }
 
-    points = sf::st_as_sf(
+  points = sf::st_as_sf(
       x = locs,
       coords = c('lon', 'lat'),
       crs = AOI::aoiProj)
 
     if (any(bb, pt)) {
-      items = list(coords = locs)
-      if (pt) {
-        items[["pt"]] = points
-      }
-      if (bb) {
-        items[["bb"]] = getBoundingBox(points)
-      }
+
+      items = list()
+
+      if (pt) { items[["pt"]] = points }
+
+      if (bb) { items[["bb"]] = getBoundingBox(points) }
+
       return(items)
 
     } else {
+
       return(locs)
 
     }
-  }
 }
 
 

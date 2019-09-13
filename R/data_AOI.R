@@ -65,3 +65,25 @@
 #'}
 
 "world"
+
+
+#' @title USA Zipcode Database
+#' @description Dataset containing information for USA Zipcodes. Data is initalized from \href{https://www.boutell.com/zipcodes/}{Tom Boutell}
+#' @docType data
+#' @format a \code{csv}, 246 43191 of 7 variables:
+#' \itemize{
+#' \item 'zip'     :  \code{integer} Zipcode
+#' \item 'city'     :  \code{character} City Name
+#' \item 'state'     :  \code{character} State Name
+#' \item 'latitude'       :  \code{numeric}   latitude
+#' \item 'longitude'     :  \code{numeric} longitude
+#' \item 'timezone'     :  \code{integer}  timezone (from UTC)
+#' \item 'dst'  :  \code{integer}   Daylights time saving flag (1 = Observed,  0 = Not Observed)
+#' }
+#' @source \href{https://www.boutell.com/zipcodes/}{Tom Boutell}
+#' @examples
+#' \dontrun{
+#'  AOI::zipcodes
+#'}
+
+"zipcodes"
