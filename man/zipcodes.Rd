@@ -12,7 +12,7 @@
 \item 'latitude'       :  \code{numeric}   latitude
 \item 'longitude'     :  \code{numeric} longitude
 \item 'timezone'     :  \code{integer}  timezone (from UTC)
-\item 'dst'  :  \code{integer}   Daylights saving flag
+\item 'dst'  :  \code{integer}   Daylights time saving flag (1 = Observed,  0 = Not Observed)
 }}
 \source{
 \href{https://www.boutell.com/zipcodes/}{Tom Boutell}

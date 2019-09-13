@@ -297,4 +297,19 @@ test_that("check...", {
 })
 
 
+test_that("zipcodes...", {
+
+  many = geocode(zipcode = c(93106, 80906))
+  single = geocode(zipcode = c(93106))
+  points = geocode(zipcode = 93106, pt = T)
+  bb = geocode(zipcode =  c(93106, 80906), bb = T)
+
+
+  #checkClass(NROW)
+  expect_true(NROW(many) == 2)
+  expect_true(NROW(single) == 1)
+  expect_true(sf::st_geometry_type(points$pt) == 'POINT')
+  expect_true(sf::st_geometry_type(bb$bb) == 'POLYGON')
+
+})
 

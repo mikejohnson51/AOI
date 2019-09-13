@@ -3,6 +3,7 @@
 #' One or more place name can be given at a time. If a single point is requested, `geocode` will provide a data.frame of lat/lon values and, if requested, a spatial point object and the geocode derived bounding box.
 #' If multiple place names are given, the returned objects will be a data.frame with columns for input name-lat-lon; if requested, a SpatialPoints object will be returned; and a minimum bounding box of all place names.
 #' @param location \code{character}. Place name(s)
+#' @param zipcodes \code{numeric}. USA zipcode(s)
 #' @param pt \code{logical}. If TRUE point geometery is appended to the returned list()
 #' @param bb \code{logical}. If TRUE bounding box geometry is appended to the returned list()
 #' @param full \code{logical}. If TRUE all OSM attributes reuturned with query, else just the lat/long pair.
