@@ -3,7 +3,7 @@
 #' One or more place name can be given at a time. If a single point is requested, `geocode` will provide a data.frame of lat/lon values and, if requested, a spatial point object and the geocode derived bounding box.
 #' If multiple place names are given, the returned objects will be a data.frame with columns for input name-lat-lon; if requested, a SpatialPoints object will be returned; and a minimum bounding box of all place names.
 #' @param location \code{character}. Place name(s)
-#' @param zipcodes \code{numeric}. USA zipcode(s)
+#' @param zipcode \code{character}. USA zipcode(s)
 #' @param pt \code{logical}. If TRUE point geometery is appended to the returned list()
 #' @param bb \code{logical}. If TRUE bounding box geometry is appended to the returned list()
 #' @param full \code{logical}. If TRUE all OSM attributes reuturned with query, else just the lat/long pair.
@@ -37,7 +37,25 @@ geocode = function(location = NULL,
 
   if(!is.null(zipcode)){
 
-    locs = AOI::zipcodes[match(zipcode, AOI::zipcodes$zip),]
+    locs = AOI::zipcodes[match(zipcode, as.character(AOI::zipcodes$zip)),]
+    locs = locs[complete.cases(locs),]
+
+    failed = zipcode[!zipcode %in% locs$zip]
+
+    if(length(failed) > 0){
+    xx = geocode(location = as.character(failed), full = T)
+
+    locs = rbind(locs, data.frame(
+      zip = failed,
+      city = strsplit(xx$display_name, ",")[[1]][1],
+      state = strsplit(xx$display_name, ",")[[1]][2],
+      lat = xx$lat,
+      lon = xx$lon,
+      timezone = NA,
+      dst = NA))
+    }
+
+  rownames(locs) = NULL
 
   } else if (length(location) == 1) {
     df = geocodeOSM(location, pt, bb, full)
@@ -68,6 +86,13 @@ geocode = function(location = NULL,
       x = locs,
       coords = c('lon', 'lat'),
       crs = AOI::aoiProj)
+
+  if(!is.null(zipcode)){
+    points = suppressMessages(
+        suppressWarnings(
+      sf::st_intersection(points,getAOI(state='all')))
+    )
+  }
 
     if (any(bb, pt)) {
 

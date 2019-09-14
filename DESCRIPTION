@@ -7,7 +7,7 @@ Maintainer: Mike Johnson <jmj00@ucsb.edu>
 BugReports: https://github.com/mikejohnson51/AOI/issues
 Description: A consistent tool kit for forward and reverse geocoding and defining     boundaries for spatial analysis.
 Depends:
-    R(>= 3.3.0),
+    R(>= 3.5.0),
     leaflet
 Imports:
     jsonlite,

@@ -10,13 +10,13 @@ geocode(location = NULL, zipcode = NULL, pt = FALSE, bb = FALSE,
 \arguments{
 \item{location}{\code{character}. Place name(s)}
 
+\item{zipcode}{\code{character}. USA zipcode(s)}
+
 \item{pt}{\code{logical}. If TRUE point geometery is appended to the returned list()}
 
 \item{bb}{\code{logical}. If TRUE bounding box geometry is appended to the returned list()}
 
 \item{full}{\code{logical}. If TRUE all OSM attributes reuturned with query, else just the lat/long pair.}
-
-\item{zipcodes}{\code{numeric}. USA zipcode(s)}
 }
 \value{
 at minimum a data.frame of lat/lon coordinates. Possible list with appended spatial features of type \code{sf} or \code{sp}
