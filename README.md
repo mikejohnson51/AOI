@@ -2,6 +2,7 @@
 
 [![Build Status][image-1]][1] 
 [![Coverage Status](https://img.shields.io/coveralls/mikejohnson51/AOI.svg)](https://coveralls.io/r/mikejohnson51/AOI?branch=master)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![DOI][image-3]][3]
 
 
