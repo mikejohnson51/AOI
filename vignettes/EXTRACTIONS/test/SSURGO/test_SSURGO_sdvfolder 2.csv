@@ -1,0 +1,55 @@
+foldersequence,foldername,folderdescription,folderkey,parentfolderkey,wlupdated
+1,Building Site Development,"Building site development interpretations are designed to be used as tools for evaluating soil suitability and identifying soil limitations for various construction purposes.  As part of the interpretation process, the rating applies to each soil in its described condition and does not consider present land use.
+
+Example interpretations can include corrosion of concrete and steel, shallow excavations, dwellings with and without basements, small commercial buildings, local roads and streets, and lawns and landscaping.",2,NA,10/25/2006 06:35:41
+2,Construction Materials,"Construction materials interpretations are tools designed to provide guidance to users in selecting a site for potential source of various materials.  Individual soils or groups of soils may be selected as a potential source because they are close at hand, are the only source available, or they meets some or all of the physical or chemical properties required for the intended application.
+
+Example interpretations include roadfill, sand and gravel, topsoil and reclamation material.",3,NA,10/25/2006 06:36:49
+3,Disaster Recovery Planning,"Disaster recovery planning interpretations are tools for evaluating the suitability of soil for various aspects of recovery operations in response to catastrophic events such as hurricanes,  earthquakes, large fires, or terrorist attacks. Example interpretations include burial of large numbers of dead cattle, disposal of large amounts of debris, and composting of vegetative materials.",18,NA,10/25/2006 06:37:44
+4,Land Classifications,"Land Classifications are specified land use and management groupings that are assigned to soil areas because combinations of soil have similar behavior for specified practices.  Most are based on soil properties and other factors that directly influence the specific use of the soil.
+
+Example classifications include ecological site classification, farmland classification, irrigated and nonirrigated land capability classification, and hydric rating.",10,NA,08/04/2006 08:54:59
+5,Land Management,"Land management interpretations are tools designed to guide the user in evaluating existing conditions in planning and predicting the soil response to various land management practices, for a variety of land uses, including cropland, forestland, hayland, pastureland, horticulture, and rangeland.
+
+Example interpretations include suitability for a variety of irrigation practices, log landings, haul roads and major skid trails, equipment operability, site preparation, suitability for hand and mechanical planting, potential erosion hazard associated with various practices, and ratings for fencing and waterline installation.",6,NA,10/25/2006 06:24:35
+6,Military Operations,"Military Operations interpretations are tools for evaluating the suitability of the soil for various aspects of military operations.
+
+Example interpretations include helicopter landing zones, trafficability of various vehicles, and a variety of excavations.",17,NA,01/14/2013 08:43:46
+7,Recreational Development,"Recreational Development interpretations are tools designed to guide the user in identifying and evaluating the suitability of the soil for specific recreational uses.
+
+Example interpretations include camp areas, picnic areas, playgrounds, paths and trails, and off-road motorcycle trails.",4,NA,08/04/2006 08:54:09
+8,Sanitary Facilities,"Sanitary Facilities interpretations are tools designed to guide the user in site selection for the safe disposal of sewage and solid waste.
+
+Example interpretations include septic tank absorption fields, sewage lagoons, and sanitary landfills.",5,NA,08/17/2012 11:06:13
+9,Soil Chemical Properties,"Soil Chemical Properties are measured or inferred from direct observations in the field or laboratory.
+
+Examples of soil chemical properties include pH, cation exchange capacity, calcium carbonate, gypsum, and electrical conductivity.",13,NA,08/04/2006 08:53:41
+10,Soil Erosion Factors,"Soil Erosion Factors are soil properties and interpretations used in evaluating the soil for potential erosion.
+
+Example soil erosion factors can include K factor for the whole soil or on a rock free basis, T factor, wind erodibility group and wind erodibility index.",11,NA,08/04/2006 08:53:27
+11,Soil Health,"Soil health interpretations are designed to be used as tools for evaluating and managing a soil's capacity to function as a vital living ecosystem that sustains plants, animals, and humans.
+
+Example interpretations include compaction, surface sealing, carbon sequestration, resistance and resilience, management systems and practices, and cover crops.",22,NA,08/18/2017 16:47:22
+12,Soil Health Properties,"Soil health is defined as the continued capacity of soil to function as a vital living ecosystem that sustains plants, animals, and humans. This folder contains information on soil properties that are important indicators of soil health.",21,NA,08/17/2017 15:26:22
+13,Soil Physical Properties,"Soil Physical Properties are measured or inferred from direct observations in the field or laboratory.
+
+Examples of soil physical properties include percent clay, organic matter, saturated hydraulic conductivity, available water capacity, and bulk density.",12,NA,08/04/2006 08:53:11
+14,Soil Qualities and Features,"Soil qualities are behavior and performance attributes that are not directly measured, but are inferred from observations of dynamic conditions and from soil properties.  Example soil qualities include natural drainage, and frost action.
+
+Soil features are attributes that are not directly part of the soil.  Example soil features include slope and depth to restrictive layer.  These features can greatly impact the use and management of the soil.",14,NA,08/04/2006 08:52:56
+15,Subaqueous Soils,"Subaqueous Soils interpretations are designed to be used as tools for evaluating and managing the capacity of under water soils to function as a vital living ecosystem that sustains plants, animals, and humans.
+
+Example interpretations include Deadweight Anchors, Hard Clam Substrate, Land Utilization of Dredged Materials, Mushroom Anchors, and Eelgrass Restoration.",23,NA,08/23/2017 15:53:33
+16,Vegetative Productivity,"Vegetative productivity includes estimates of potential vegetative production for a variety of land uses, including cropland, forestland, hayland, pastureland, horticulture and rangeland.  In the underlying database, some states maintain crop yield data by individual map unit component.  Other states maintain the data at the map unit level.  Attributes are included for both, although only one or the other is likely to contain data for any given geographic area.  For other land uses, productivity data is shown only at the map unit component level.
+
+Examples include potential crop yields under irrigated and nonirrigated conditions, forest productivity, forest site index, and total rangeland production under of normal, favorable and unfavorable conditions.",1,NA,10/25/2006 06:10:47
+17,Waste Management,"Waste Management interpretations are tools designed to guide the user in evaluating soils for use of organic wastes and wastewater as productive resources.
+
+Example interpretations include land application of manure, food processing waste, and municipal sewage sludge, and disposal of wastewater by irrigation or overland flow process.",8,NA,08/04/2006 08:52:23
+18,Water Features,"Water Features include ponding frequency, flooding frequency, and depth to water table.",15,NA,08/04/2006 08:52:00
+19,Water Management,"Water Management interpretations are tools for evaluating the potential of the soil in the application of various water management practices.
+
+Example interpretations include pond reservoir area, embankments, dikes, levees, and excavated ponds.",9,NA,08/04/2006 08:51:42
+20,Wildlife Management,"Wildlife Management interpretations are tools for evaluating the suitability of the soil for various components of wildlife habitat, and as habitat of different types or species of wildlife.
+
+Example interpretations include crawfish aquaculture, burrowing animals and reptiles, grasses and legumes for food and cover, and freshwater wetland plants.",16,NA,08/04/2006 08:51:27

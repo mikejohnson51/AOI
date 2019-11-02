@@ -1,0 +1,276 @@
+recdate,mapunittextkind,textcat,textsubcat,text,mukey,mutextkey
+09/06/2013 00:00:00,Correlation notes,minor components,,"Justification for inclusion choice.
+
+Vona, is a coarse-loamy, mixed, mesic Aridic Haplustalf and Olnest, fine-loamy, mixed, superactive, mesic Aridic Haplustalf were used as minor components for this DMU
+and MU.  Fine textured soils were excluded as minor components, we felt that if fine textured soils consistantly showed up MLRA wide this unit should be a 
+complex and not a consociaton.  Vona was chosen because of parent material, landform and argillic.  These landforms have been stable long enough for the 
+development of an argillic horizon.  Two fine-loamy Ustic Haplustalfs, Olnest and Stoneham were prevealent throughout the MLRA and were minor components 
+in several map units.  Olnest was chosen for landform and parent material.  This map unit and components are formed in a plains setting with eolian and alluvial
+material as it's parent material.  From our experiance Stoneham soil is also influenced by slope alluvium and pedisediment with corresponding higher clay and
+more pronounced structual development and is also found on hill and pediment landforms.
+",497551,1499837
+06/13/2013 00:00:00,Miscellaneous notes,SDJR project,DMU,"This datamapunit is being created on 6/12/2013 to be used for the map unit Ascalon sandy loam, 0 to 3 and 1 to 3 percent slopes, as it occurs in nine counties in MLRA 67B.  In those nine counties there are currently ten datamapunits correlated to this map unit.  This datamapunit was created by editing a copy of DMUID 001AsB, RECID 66835,  which had previously been edited and had most properties populated and passed validations.  All data elements including MAP, MAAT, and FFD are being reviewed in the context of using the datamapunit across MLRA 67B.  A major editing emphasis is being placed on the composition of minor components and their percentages.  Minor components are being reviewed and edited and will pass all validations and requirements of National Bulletin 430-5-7. MJM ",497551,1499838
+12/01/2014 00:00:00,Miscellaneous notes,SDJR project,,"Two map units were added to this DMU.  Both from Nebraska, NE135-1520, Perkins County, and NE029-1520, Chase County",497551,1499839
+08/27/2013 00:00:00,Map unit description,map unit concept,,"DUM ID:  MLRA 67B - Ascalon sandy loam, 0 to 3 percent slopes
+NAT SYM:  2swl3
+Ecological site:  Sandy plains
+Soil depth:  very deep
+Drainage:  well
+
+Map unit concept:
+
+ The Ascalon sandy loam, 0 to 3 percent slopes map unit is mapped in nine counties in MLRA 67B.
+They are Adams, Cheyenne, Kit Carson, Lincoln, Logan, Morgan, Washington, Weld South and Elbert East.
+It is mapped on upland hillslopes and tableland plains.  This unit is in the  12 to 16 inch (305-406mm)
+precipitation zone.  Elevation ranges from 1170 to 1850 meters, air temperature ranges from 8 to
+14 degrees C, and frost free days range from 135 to 160 days.
+
+ Also included in this map unit are the Olnest and Vona series.  The Olnest series has a lighter 
+colored surface horizon and makes up about 10 percent of the unit.
+The Vona series also has a lighter surface and has more sand and 
+less clay in the control section. It makes up about 5 percent of the map unit.
+
+",497551,1499840
+12/06/2013 00:00:00,Correlation notes,,,"The following changes were made to the legend during the course of the soil data join and recorrelation project 'SDJR - 67A - Ascalon sandy loams and fine sandy loams, 0-3%':
+
+NATSYM	MUSYM	Mapunit_Name										DMUDesc													DMUID
+2swl3	AcA	MLRA 67B - Ascalon sandy loam, 0 to 3 percent slopes	MLRA 67B - Ascalon sandy loam, 0 to 3 percent slopes	681223",497551,1499841
+01/30/2015 00:00:00,Map unit description,map unit concept,,"DMUID:  MLRA 67B - Ascalon sandy loam, 3 to 5 percent slopes
+NAT SYM:  2tlnt
+Ecological site:  Sandy plains
+Soil depth:  very deep
+Drainage:  well
+
+Map unit concept:
+
+The Ascalon sandy loam, 3 to 5 percent slopes map unit is mapped in nine counties in MLRA 67B. They are Adams, Cheyenne, Kit Carson, Lincoln, Morgan, Phillips, Weld South, Elbert East and Larimer. It is mapped on broad flat interfluves of plains and dissected plains.  This unit is in the  12 to 16 inch (305-406mm) precipitation zone.  Elevation ranges from 1082 to 1850 meters, air temperature ranges from 8 to 14 degrees C, and frost free days range from 135 to 160 days.
+
+Stoneham, Vona and  Platner are also found in this map unit.  Stoneham is also fine-loamy in the control section but does not have a thick dark colored surface horizon. It makes up about 10% of the unit. Vona has more sand and less clay than Ascalon and lacks a dark colored surface horizon.  It makes up about 8 percent of the unit. The Platner soil has more clay and less sand than Ascalon, the Platner soil makes up about 2 percent of the unit.
+
+
+
+
+
+",497553,1499842
+06/13/2013 00:00:00,Miscellaneous notes,SDJR project,DMU,"This datamapunit is being created on 1/29/2015 to be used for the map unit Ascalon sandy loam, 3 to 5 percent slopes, as it occurs in ten counties in MLRA 67B.  In those ten counties there are currently ten datamapunits correlated to this map unit.  This datamapunit was created by editing a copy of DMUID MLRA 67B, Ascalon sandy loam, 0 to 3 percent slopes, RECID 681233,  which had previously been edited and had most properties populated and passed validations.  All data elements including MAP, MAAT, and FFD are being reviewed in the context of using the datamapunit across MLRA 67B and will pass all validations and requirements of National Bulletin 430-5-7. MJM ",497553,1499843
+06/08/2009 00:00:00,Edit notes,minor components,hydric component,The Aquic Haplustolls minor hydric component was removed from the data mapunit to coincide with the original soil survey publication.  Minor hydric components were added into the data mapunits based upon aerial photography and where not verified on the ground in an update process.  Component percentages were adjusted accordingly.,497554,1499844
+06/08/2009 00:00:00,Edit notes,minor components,hydric component,The Aquic Haplustolls minor hydric component was removed from the data mapunit to coincide with the original soil survey publication.  Minor hydric components were added into the data mapunits based upon aerial photography and where not verified on the ground in an update process.  Component percentages were adjusted accordingly.,497556,1499846
+06/08/2009 00:00:00,Edit notes,minor components,hydric component,The Aquic Haplustolls minor hydric component was removed from the data mapunit to coincide with the original soil survey publication.  Minor hydric components were added into the data mapunits based upon aerial photography and where not verified on the ground in an update process.  Component percentages were adjusted accordingly.,497557,1499847
+06/08/2009 00:00:00,Edit notes,minor components,hydric component,The Aquic Haplustolls minor hydric component was removed from the data mapunit to coincide with the original soil survey publication.  Minor hydric components were added into the data mapunits based upon aerial photography and where not verified on the ground in an update process.  Component percentages were adjusted accordingly.,497558,1499848
+06/08/2009 00:00:00,Edit notes,minor components,hydric component,The Aquic Haplustolls minor hydric component was removed from the data mapunit to coincide with the original soil survey publication.  Minor hydric components were added into the data mapunits based upon aerial photography and where not verified on the ground in an update process.  Component percentages were adjusted accordingly.,497563,1499850
+06/08/2009 00:00:00,Edit notes,minor components,hydric component,The Aquic Haplustolls minor hydric component was removed from the data mapunit to coincide with the original soil survey publication.  Minor hydric components were added into the data mapunits based upon aerial photography and where not verified on the ground in an update process.  Component percentages were adjusted accordingly.,497566,1499851
+06/08/2009 00:00:00,Edit notes,minor components,hydric component,The Mollic Haplaquepts minor hydric component was removed from the data mapunit to coincide with the original soil survey publication.  Minor hydric components were added into the data mapunits based upon aerial photography and where not verified on the ground in an update process.  Component percentages were adjusted accordingly.,497573,1499853
+06/08/2009 00:00:00,Edit notes,minor components,hydric component,The Mollic Haplaquepts minor hydric component was removed from the data mapunit to coincide with the original soil survey publication.  Minor hydric components were added into the data mapunits based upon aerial photography and where not verified on the ground in an update process.  Component percentages were adjusted accordingly.,497575,1499854
+06/08/2009 00:00:00,Edit notes,minor components,hydric component,The Mollic Haplaquepts minor hydric component was removed from the data mapunit to coincide with the original soil survey publication.  Minor hydric components were added into the data mapunits based upon aerial photography and where not verified on the ground in an update process.  Component percentages were adjusted accordingly.,497576,1499855
+06/08/2009 00:00:00,Edit notes,minor components,hydric component,The Mollic Haplaquepts minor hydric component was removed from the data mapunit to coincide with the original soil survey publication.  Minor hydric components were added into the data mapunits based upon aerial photography and where not verified on the ground in an update process.  Component percentages were adjusted accordingly.,497578,1499856
+06/08/2009 00:00:00,Edit notes,minor components,hydric component,The Aquic Haplustolls minor hydric component was removed from the data mapunit to coincide with the original soil survey publication.  Minor hydric components were added into the data mapunits based upon aerial photography and where not verified on the ground in an update process.  Component percentages were adjusted accordingly.,497584,1499857
+06/08/2009 00:00:00,Edit notes,minor components,hydric component,The Aquic Haplustolls minor hydric component was removed from the data mapunit to coincide with the original soil survey publication.  Minor hydric components were added into the data mapunits based upon aerial photography and where not verified on the ground in an update process.  Component percentages were adjusted accordingly.,497585,1499858
+06/08/2009 00:00:00,Edit notes,minor components,hydric component,The Mollic Haplaquepts minor hydric component was removed from the data mapunit to coincide with the original soil survey publication.  Minor hydric components were added into the data mapunits based upon aerial photography and where not verified on the ground in an update process.  Component percentages were adjusted accordingly.,497590,1499860
+06/08/2009 00:00:00,Edit notes,minor components,hydric component,The Mollic Haplaquepts minor hydric component was removed from the data mapunit to coincide with the original soil survey publication.  Minor hydric components were added into the data mapunits based upon aerial photography and where not verified on the ground in an update process.  Component percentages were adjusted accordingly.,497591,1499861
+04/14/2014 00:00:00,Correlation notes,minor componants,DMU,"Justification for inclusion choice.
+Haverson, is a fine-loamy, mixed, superactive, calcareous, mesic Aridic Ustifluvent and Heldt, fine, smectitic
+ mesic, Aridic Haplocambid were used as minor components for this DMU and map unit.  Haverson and Heldt
+are prevealent throughout the MLRA and were minor components in several map units and have the
+same parent material and landform.  Both of these or similar soils were documented with 232s and
+field notes within various Nunn map units.  This map unit and components are formed in a terrace on plains
+setting, with eolian and alluvial parent material.
+
+ ",497592,1499862
+04/14/2014 00:00:00,Miscellaneous notes,SDJR,DMU,"The Nunn clay loam,0-1% slopes map units in MLRA 67B  are part of the MLRA map unit consolidation project (SDJR). 
+The map unit concept will be identified from the soil survey manuscripts and the map units 
+consolidated so that data population is consistent wherever they are mapped.   
+ The map units will be reviewed as one physiographic area, and that project is assigned to the
+5-FTM, Fort Morgan, Colorado office for recorrelation. Publication map unit symbols and names
+for this  project will stay the same.  The consolidation project will reduce the number of map units
+and data map units to as few national map unit symbols as possible.  The new data map unit will 
+be created using available data from existing data map units, NASIS pedons, and KSSL  and university
+lab data.  The map units will meet national standards. 
+ The official series descriptions will be reviewed
+and updated during the process, as will all of the KSSL samples.
+
+This datamapunit is being created on 4/1/2014 to be used for the map unit Nunn loam, 0 to 1
+percent slopes, as it occurs in four counties in MLRA 67B.  In those four counties there
+are currently four datamapunits correlated to this map unit.  This datamapunit was created by editing a 
+copy of DMUID Platner loam, 0-3 percent slopes, DMU REC ID:705128 which had previously been edited and had most properties populated
+and passed validations.  All data elements including MAP, MAAT, and FFD are being reviewed in the context
+of using the datamapunit across MLRA 67B.  A major editing emphasis is being placed on the composition
+of minor components and their percentages.  Minor components are being reviewed and edited and will pass
+all validations and requirements of National Bulletin 430-5-7. MJM ",497592,1499863
+07/08/2014 00:00:00,Map unit description,map unit concept,,"DUM ID:  MLRA 67B - Nunn clay loam, 0 to 1 percent slopes
+NAT SYM:  2tlng
+Ecological site:  clayey plains
+Soil depth:  very deep
+Drainage:  well
+
+Map unit concept:
+
+The Nunn clay loam, 0 to 1 percent slopes map unit is mapped in five counties in MLRA 67B. They are Adams, Boulder, Larimer, Morgan, and Weld South Counties. It is mapped on terraces.  This soil is derived from alluvium from igneous, metamorphic and sedimentary rock and eolian deposits.  This unit is in the  12 to 17 inch (305-432mm) precipitation zone.  Elevation ranges from 1249 to 1691 meters, air temperature ranges from 8 to 11 degrees C, and frost free days range from 135 to 160 days.
+
+Also included in this map unit are the Heldt and Wages series.  The Heldt series has a lighter colored surface horizon, is usually calcareous throughout, can have gypsum crystals in the lower part of the solum and makes up about 10 percent of the unit.  This soil is derived from fine textured alluvium.
+
+The Wages series also has a dark colored surface horizon but has less clay in the control section. It makes up about 5 percent of the map unit.  This soil is derived from mixed eolian material and alluvial fan sediments of Tertiary pedisediments.
+
+",497592,1499864
+03/30/2016 00:00:00,Map unit description,map unit concept,,"DUM ID:  MLRA 67B - Nunn clay loam, 1 to 3 percent slopes
+NAT SYM:  2tlpl
+Ecological site:  clayey plains
+Soil depth:  very deep
+Drainage:  well
+
+Map Unit Concept Description: 
+
+Map Unit Concept Description for Nunn clay loam, 1 to 3 percent slopes: 
+Location:  This map unit occurs throughout MLRA 67B mainly in the north and west.
+Elevation: 1190  1780 meters
+MAP: 33-43cm
+MAT: 10-12 degrees C
+Frost Free Period: 135-160 days
+This very deep, well drained soil is on terraces and alluvial fans.  It formed in alluvium and/or eolian deposits. 
+The native vegetation is mainly grasses.  
+Major Uses: Irrigated cropland.
+Minor components: Heldt, about 10% and  Satanta, about 5%.
+Range site: Clayey Plains (R067BY042CO)
+    
+Component concept:
+The Nunn series consists of a very deep, well drained, moderately slow to slow permeable soils on terraces and alluvial fans.  These soils formed in alluvium and or eolian deposits.  Slopes are 1 to 3 percent.  The Nunn series classifies as a fine, smectitic, mesic Aridic Argiustolls.  Thickness of the mollic epipedon ranges from 29 to 46 centimeters.  Depth to the base of the Bt horizon ranges from 58 to 79 centimeters.  Depth to secondary carbonates ranges from 29 to 46 centimeters.
+
+The Heldt series consists of a very deep, moderately well drained, moderately slow to slow permeable soils on terraces and alluvial fans.  These soils formed in wind reworked alluvium. The Heldt series classifies as fine, smectitic, mesic Ustertic Haplocambids. Thickness of the ochric epipedon ranges from 0 to 15cm.  Cambic horizon thickness ranges from 34 to 59cm. Depth to calcareous material ranges from 49 to 64cm.
+
+The Satanta series consists of a very deep, well drained, moderately permeable soils that formed in
+eolian deposits and or alluvium. It is found on stream terraces or alluvial fans.  The Satanta series classifies as a fine-loamy, mixed, superactive, mesic Aridic Argiustolls. Mollic epipedon ranges from 20 to 49cm thick. Depth to base of argillic ranges from 41 to 58cm. Depth to uniformly calcareous material ranges from 41 to 58cm.
+
+",497593,1499865
+03/31/2016 00:00:00,Miscellaneous notes,SDJR,DMU,"The Nunn clay loam,1 to 3% slopes map units in MLRA 67B  are part of the MLRA map unit consolidation project (SDJR). 
+The map unit concept will be identified from the soil survey manuscripts and the map units 
+consolidated so that data population is consistent wherever they are mapped.   
+ The map units will be reviewed as one physiographic area, and that project is assigned to the
+5-FTM, Fort Morgan, Colorado office for recorrelation. Publication map unit symbols and names
+for this  project will stay the same.  The consolidation project will reduce the number of map units
+and data map units to as few national map unit symbols as possible.  The new data map unit will 
+be created using available data from existing data map units, NASIS pedons, and KSSL  and university
+lab data.  The map units will meet national standards. 
+ The official series descriptions will be reviewed
+and updated during the process, as will all of the KSSL samples.
+
+This datamapunit is being created on 3/29/2016 to be used for the map unit Nunn clayloam, 1 to 3
+percent slopes, as it occurs in six counties in MLRA 67B.  In those six counties there
+are currently six datamapunits correlated to this map unit.  This datamapunit was created by editing a 
+copy of DMUID Nunn clay loam, 1-3 percent slopes, DMU REC ID:705146 which had previously been edited and had most properties populated
+and passed validations.  All data elements including MAP, MAAT, and FFD are being reviewed in the context
+of using the datamapunit across MLRA 67B.  A major editing emphasis is being placed on the composition
+of minor components and their percentages.  Minor components are being reviewed and edited and will pass
+all validations and requirements of National Bulletin 430-5-7. MJM ",497593,1499866
+03/31/2016 00:00:00,Correlation notes,minor components,DMU,"Justification for inclusion choice.
+There are eight differant minor soils for the six map units that are being combined in this SDJR project.
+
+Satanta: fine-loamy, mixed, superactive, mesic Aridic Argiustolls
+
+Heldt:  fine, smectitic, mesic Ustertic Haplocambids
+
+Valmont:  clayey over loamy-skeletal, smectitic, mesic Aridic Argiustolls-used only in Boulder county
+
+Kim:  fine-loamy, mixed, active, calcareous, mesic Ustic Torriorthents-this soil is ustic aridic, 
+only soils in MLRA 67B that have sandy particle size or are shallow have that moisture regieme.
+
+Ulm:  fine, smectitic, mesic Ustic Haplargids-ustic aridic, plus not enough differance from Nunn.
+
+Ft. Collins:  fine-loamy, mixed, superactive, mesic Aridic Haplustalfs-only used in two surveys, 
+not enough differance from Satanta.
+
+Manzaanola:  fine, smectitic, mesic Ustic Haplargids-fine and ustic aridic.
+
+Limon:  fine, smectitic, calcareous, mesic Ustertic Torriorthents-fine and ustic aridic.
+
+Satanta,and Heldt were used.  Both of these series have a wide distribution, although Satanta
+is not mapped in Morgan, Weld South and Boulder it is similar to other series mapped in those
+counties.  Heldt is mapped in all six counties and is a minor componant in 4 DMU's.  This soil
+is also fine, ustic aridic and is a vertic intergrade and has an ochric epipedon.  The Heldt
+series is being looked at and possibly a change in classification may be in the future or replaced
+by a new series.
+ ",497593,1499867
+03/31/2016 00:00:00,Miscellaneous notes,SDJR,DMU,"The Nunn clay loam,3 to 5% slopes map units in MLRA 67B and 49  are part of the MLRA map unit consolidation project (SDJR). 
+The map unit concept will be identified from the soil survey manuscripts and the map units 
+consolidated so that data population is consistent wherever they are mapped.   
+ The map units will be reviewed as one physiographic area, and that project is assigned to the
+5-FTM, Fort Morgan, Colorado office for recorrelation. Publication map unit symbols and names
+for this  project will stay the same.  The consolidation project will reduce the number of map units
+and data map units to as few national map unit symbols as possible.  The new data map unit will 
+be created using available data from existing data map units, NASIS pedons, and KSSL  and university
+lab data.  The map units will meet national standards. 
+ The official series descriptions will be reviewed
+and updated during the process, as will all of the KSSL samples.
+
+This datamapunit is being created on 4/13/2016 to be used for the map unit Nunn clayloam, 3 to 5
+percent slopes, as it occurs in four counties in MLRA 67B and 49.  In those four counties there
+are currently four datamapunits correlated to this map unit.  This datamapunit was created by editing a 
+copy of DMUID Nunn clay loam, 1-3 percent slopes, DMU REC ID:705185 which had previously been edited and had most properties populated
+and passed validations.  All data elements including MAP, MAAT, and FFD are being reviewed in the context
+of using the datamapunit across MLRA 67B.  A major editing emphasis is being placed on the composition
+of minor components and their percentages.  Minor components are being reviewed and edited and will pass
+all validations and requirements of National Bulletin 430-5-7. MJM ",497594,1499868
+03/31/2016 00:00:00,Correlation notes,minor components,DMU,"Justification for inclusion choice.
+There are ten differant minor soils for the four map units that are being combined in this SDJR project.
+
+Lincoln County: Ft. Collins-fine-loamy, mixed, superactive, mesic Aridic Haplustalfs
+                Platner-fine, smectitic, mesic Aridic Paleustolls
+				Wages-fine-loamy, mixed, superactive, mesic Aridic Argiustolls 
+                None of these soils were considered, MU 073157 has 275 acres and will probably be recorrelated to another map unit.
+
+Golden Area:  Englewood-fine, smectitic, mesic Torrertic Argiustolls
+			  Denver-fine, smectitic, mesic Torrertic Argiustolls
+			  Standley-fine, smectitic, mesic Aridic Argiustolls
+			  Ulm-fine, smectitic, mesic Ustic Haplargids
+			  None of these soils were considered, MU 641103 land use is now urban, this map unit will be recorrelated to a Nunn-Urban land complex.
+			  
+Boulder County: Renohill-fine, smectitic, mesic Ustic Haplargid
+				Ulm-fine, smectitic, mesic Ustic Haplargids
+				Neither of these soils will be used, Renohill is moderately deep to shale, this is a terrace map unit, this soil is an Aridisol,
+				Aridisol's are not used in MLRA 67B unless they have a sandy family class or are shallow.
+				Ulm will not be used, interpts will be close to the Nunn soil and Ulm is an Aridisol
+				
+      	   		
+Larimer County: Satanta-fine-loamy, mixed, superactive, mesic Aridic Argiustolls
+        		Ulm-fine, smectitic, mesic Ustic Haplargid
+				Satanta will be used, 3 of the map units had a fine-loamy component, Satanta was also used in the Nunn clay loam, 1-3% slopes map unit.
+				Ulm will not be used, interpts will be close to the Nunn soil and Ulm is an Aridisol, Aridisol's are not used in MLRA 67B unless they have a sandy 
+				family class or are shallow.
+
+
+
+
+
+
+
+
+
+
+",497594,1499869
+04/13/2016 00:00:00,Map unit description,map unit concept,,"Map Unit Concept Description for Nunn clay loam, 3 to 5 percent slopes: 
+Location:  This map unit occurs in MLRA 67B and MLRA 49, with a majority of the
+acres laying along the front range in Larimer, Boulder and Jefferson Counties.
+Elevation: 1524  1750 meters
+MAP: 304-430mm
+MAT: 8-12 degrees C
+Frost Free Period: 100-160 days
+This very deep, well drained soil is on terraces and alluvial fans.  It formed in alluvium and/or eolian deposits. 
+The native vegetation is mainly grasses.  
+Major Uses: Urban and rangeland with minor amounts being cultivated.
+Minor components: Satanta about 10%.
+Range site: Clayey Plains (R067BY042CO)
+    
+Component concept:
+The Nunn series consists of a very deep, well drained, moderately slow to slow permeable soils on terraces and
+alluvial fans.  These soils formed in alluvium and or eolian deposits.  Slopes are 3 to 5 percent.  The Nunn
+series classifies as a fine, smectitic, mesic Aridic Argiustolls.  Thickness of the mollic epipedon ranges from
+35 to 48 centimeters.  Depth to the base of the Bt horizon ranges from 74 to 89 centimeters.  Depth to secondary
+carbonates ranges from 35 to 48 centimeters.
+
+The Satanta series consists of a very deep, well drained, moderately permeable soils that formed in
+eolian deposits and or alluvium. It is found on stream terraces or alluvial fans.  The Satanta series classifies
+as a fine-loamy, mixed, superactive, mesic Aridic Argiustolls. Mollic epipedon ranges from 20 to 49cm thick. Depth
+to base of argillic ranges from 41 to 58cm. Depth to uniformly calcareous material ranges from 41 to 58cm.
+
+
+",497594,1499870
+06/08/2009 00:00:00,Edit notes,minor components,hydric component,The Typic Natraquolls minor hydric component was removed from the data mapunit to coincide with the original soil survey publication.  Minor hydric components were added into the data mapunits based upon aerial photography and where not verified on the ground in an update process.  Component percentages were adjusted accordingly.,497600,1499871
+06/08/2009 00:00:00,Edit notes,minor components,hydric component,The Typic Haplaquepts minor hydric component was removed from the data mapunit to coincide with the original soil survey publication.  Minor hydric components were added into the data mapunits based upon aerial photography and where not verified on the ground in an update process.  Component percentages were adjusted accordingly.,497604,1499872

@@ -1,9 +1,7 @@
 #' @title USA States
-#' @description Dataset containing \code{SpatialPolygons} of USA States. Data is initalized from the USAboundaries and USAboundariesData
-#' package, converted to \code{SpatialPolygons}, re-projected and cleaned-up for this package. The primary reason for doing this is to provide
-#' a more minimalistic dataset primed for this package and leaflet use.
+#' @description Dataset containing polygon representations of USA States.
 #' @docType data
-#' @format a \code{SpatialPolygonsDataFrame}, 52 observations of 5 variables:
+#' @format a simple feature polygon set with 52 observations of 5 variables:
 #' \itemize{
 #' \item 'statefp'   :  \code{character}  2-digit Federal Information Processing Standards (FIPS) code
 #' \item 'statens'   :  \code{character}  American National Standards Institute (ANSI) code
@@ -19,9 +17,7 @@
 "states"
 
 #' @title USA Counites
-#' @description Dataset containing \code{SpatialPolygons} of USA Counties. Data is initalized from the USAboundaries and USAboundariesData
-#' package, converted to \code{SpatialPolygons}, re=projected and cleaned-up for this package. The primary reason for doing this to provide
-#' a more minimalistic dataset primed for this package and leaflet use.
+#' @description Dataset containing polygon representations of USA Counties.
 #' @docType data
 #' @format a \code{SpatialPolygonsDataFrame}, 3220 observations of 7 variables:
 #' \itemize{
@@ -41,8 +37,7 @@
 "counties"
 
 #' @title Simplified World Boundaries
-#' @description Dataset containing \code{SpatialPolygons} of World Countries and Regions. Data is initalized from \href{http://thematicmapping.org/downloads/world_borders.php}{thematicmapping.org}
-#' package, converted to \code{SpatialPolygons} and reprojected for this package.
+#' @description Dataset containing simpified polygons of World Countries and Regions. Data is initalized from \href{http://thematicmapping.org/downloads/world_borders.php}{thematicmapping.org}.
 #' @docType data
 #' @format a \code{SpatialPolygonsDataFrame}, 246 observations of 11 variables:
 #' \itemize{
@@ -70,7 +65,7 @@
 #' @title USA Zipcode Database
 #' @description Dataset containing information for USA Zipcodes. Data is initalized from \href{https://www.boutell.com/zipcodes/}{Tom Boutell}
 #' @docType data
-#' @format a \code{csv}, 246 43191 of 7 variables:
+#' @format a \code{data.frame}, 43191 rows of 7 variables:
 #' \itemize{
 #' \item 'zip'     :  \code{integer} Zipcode
 #' \item 'city'     :  \code{character} City Name
@@ -87,3 +82,18 @@
 #'}
 
 "zipcodes"
+
+
+
+#' @title USA Zipcode Database
+#' @description Dataset containing information for USA Zipcodes. Data is initalized from \href{https://www.boutell.com/zipcodes/}{Tom Boutell}
+#' @docType data
+#' @format a \code{data.frame}, 233 rows 149variables:
+#' @source \href{https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/}{Natural Earth}. The data is joined to a working database of the CIA
+#' @source \href{https://www.cia.gov/library/publications/the-world-factbook/}{World Factbook}.
+#' @examples
+#' \dontrun{
+#'  AOI::countries
+#'}
+
+"countries"

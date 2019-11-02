@@ -1,4 +1,4 @@
-#' @title Generate Leafet map and tool set
+ #' @title Generate Leafet map and tool set
 #' @description Provides a precanned leaflet layout  for checking, and refining AOI queries. Useful \code{leaflet} tools allow for the marking of points, measuring of distances, and  panning and zooming.
 #' @param AOI any spatial object (\code{raster}, \code{sf}, \code{sp}). Can be piped (\%>\%) from \code{\link{getAOI}}. If \code{AOI = NULL}, base map of CONUS will be returned.
 #' @param returnMap \code{logical}. If \code{FALSE} (default) the input AOI is returned and the leaflet map printed. If \code{TRUE} the leaflet map is returned and printed.
@@ -35,17 +35,21 @@ check = function(AOI = NULL, returnMap = FALSE) {
   bb = NULL
   pts = NULL
 
-  if(checkClass(AOI, 'sf')){
-    AOI = sf::st_transform(AOI, '+proj=longlat +datum=WGS84')
-  }
+  orig = AOI
 
-  if(checkClass(AOI, 'raster')){
-    bb = getBoundingBox(AOI) %>% st_transform('+proj=longlat +datum=WGS84')
-  }
+  if(!checkClass(AOI, "list")){ AOI = list(AOI = AOI)}
 
   type = NULL
 
   for( i in 1:length(AOI)){
+
+    if(checkClass(AOI[[i]], 'sf')){
+      AOI[[i]] = sf::st_transform(AOI[[i]], '+proj=longlat +datum=WGS84')
+    }
+
+    if(checkClass(AOI[[i]], 'raster')){
+      bb = getBoundingBox(AOI[[i]]) %>% st_transform('+proj=longlat +datum=WGS84')
+    }
 
   type[i] = tryCatch({
     as.character(unique(st_geometry_type(AOI[[i]])[1]))
@@ -63,11 +67,11 @@ check = function(AOI = NULL, returnMap = FALSE) {
   }
 
   if("MULTIPOLYGON" %in% type){
-    bb = AOI[[which(grepl("POLYGON",type))]]
+    bb = AOI[[which(grepl("MULTIPOLYGON",type))]]
   }
 
 
-  m= leaflet() %>%
+  m = leaflet() %>%
     addProviderTiles("Esri.NatGeoWorldMap", group = "Terrain") %>%
     addProviderTiles("CartoDB.Positron",    group = "Grayscale") %>%
     addProviderTiles("Esri.WorldImagery",   group = "Imagery") %>%
@@ -87,7 +91,7 @@ check = function(AOI = NULL, returnMap = FALSE) {
       options = layersControlOptions(collapsed = T)
     )
 
-  if(is.null(AOI)){
+  if(is.null(orig)){
     m = setView(m, lat = 39.311825, lng = -101.275972, zoom = 4)
   } else {
 
@@ -109,7 +113,7 @@ check = function(AOI = NULL, returnMap = FALSE) {
 
   print(m)
 
-  if(returnMap) {return(m)} else {return(AOI)}
+  if(returnMap) {return(m)} else {return(orig)}
 
 }
 

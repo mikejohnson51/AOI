@@ -18,9 +18,7 @@
 counties
 }
 \description{
-Dataset containing \code{SpatialPolygons} of USA Counties. Data is initalized from the USAboundaries and USAboundariesData
-package, converted to \code{SpatialPolygons}, re=projected and cleaned-up for this package. The primary reason for doing this to provide
-a more minimalistic dataset primed for this package and leaflet use.
+Dataset containing polygon representations of USA Counties.
 }
 \examples{
 \dontrun{

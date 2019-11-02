@@ -11,7 +11,7 @@
 #' alt_page("Twin_towers")
 #' }
 
-alt_page = function(loc, pts = FALSE){
+alt_page = function(loc, pt = FALSE){
   tt = xml2::read_html(paste0('https://en.wikipedia.org/w/index.php?search=',
                               loc,
                               '&title=Special%3ASearch&go=Go') )
@@ -41,7 +41,7 @@ alt_page = function(loc, pts = FALSE){
 #' @title Geocoding Events
 #' @description A wrapper around the Wikipedia API to return geo-coordinates of requested inputs.
 #' @param event \code{character}. a term to search for on wikipeida
-#' @param pts \code{logical}. If TRUE point geometery is appended to the returned list()
+#' @param pt \code{logical}. If TRUE point geometery is appended to the returned list()
 #' @return aa data.frame of lat/lon coordinates
 #' @export
 #' @author Mike Johnson
@@ -64,7 +64,7 @@ alt_page = function(loc, pts = FALSE){
 #'
 #' }
 
-geocode_wiki = function(event = NULL, pts = T){
+geocode_wiki = function(event = NULL, pt = FALSE){
 
   loc =  gsub(" ", "+", event)
   u = paste0('https://en.wikipedia.org/w/api.php?action=opensearch&search=',
@@ -135,10 +135,11 @@ geocode_wiki = function(event = NULL, pts = T){
   # if(is.null(df)){
   #   message("No data found")
   # } else{
-    if(pts){
+    if(pt){
       points = sf::st_as_sf(x = df, coords = c('lon', 'lat'), crs = 4269)
       return(points)
     } else {
+      df = cbind(request = loc, df) %>% data.frame()
       return(df)
     }
   #}

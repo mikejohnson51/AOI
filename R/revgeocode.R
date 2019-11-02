@@ -98,6 +98,7 @@ revgeocode = function(point){
 
   tmp = c(osm, esri)
 
+
   tmp = tmp[!duplicated(tmp)]
 
   tmp = tmp[!(names(tmp) %in% c("lat.1", "lon.1", "country_code","Neighborhood", "shorlabel"))]
@@ -105,7 +106,7 @@ revgeocode = function(point){
 
   tmp[tmp == ""] = NULL
 
-  class(tmp) <- c("geoloc", class(tmp))
+  tmp = as.data.frame(tmp)
 
   return(tmp)
 }

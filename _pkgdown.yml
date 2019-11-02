@@ -12,13 +12,15 @@ reference:
       - '`getBoundingBox`'
       - '`geocode`'
       - '`revgeocode`'
+      - '`geocode_wiki`'
   - title: Tools
     desc: ~
-      Tools for exploring, describing and defining AOIs
+      Tools for exploring, describing and refinin AOIs
     contents:
       - '`bbox_sp`'
       - '`bbox_st`'
-      - '`buff`'
+      - '`modify`'
+      - '`is_inside`'
       - '`check`'
       - '`describe`'
   - title: Data and Package Helpers
@@ -27,6 +29,8 @@ reference:
     contents:
       - '`AOI`'
       - '`aoiProj`'
+      - '`world`'
+      - '`countries`'
       - '`counties`'
       - '`states`'
 navbar:
@@ -40,15 +44,13 @@ navbar:
       icon: fas fa-book
       menu:
       -  text: Geocoding
-         href: articles/geocode.html
-      -  text: State & County AOI
+         href: articles/geocoding.html
+      -  text: Fiat-based AOIs
          href: articles/stateCounty.html
-      -  text: Clip based AOI
+      -  text: User Defined AOI
          href: articles/clipAreas.html
       -  text: AOI Tools
          href: articles/tools.html
-      -  text: Use Cases
-         href: articles/useCases.html
     - icon: fa-file
       text: "Package Manual"
       href: AOI.pdf

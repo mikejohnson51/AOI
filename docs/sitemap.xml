@@ -7,6 +7,9 @@
     <loc>https://github.com/mikejohnson51/AOI/reference/AOI.html</loc>
   </url>
   <url>
+    <loc>https://github.com/mikejohnson51/AOI/reference/alt_page.html</loc>
+  </url>
+  <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/aoiProj.html</loc>
   </url>
   <url>
@@ -14,9 +17,6 @@
   </url>
   <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/bbox_st.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/buff.html</loc>
   </url>
   <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/check.html</loc>
@@ -34,10 +34,10 @@
     <loc>https://github.com/mikejohnson51/AOI/reference/geocode.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/geocodeGoogle.html</loc>
+    <loc>https://github.com/mikejohnson51/AOI/reference/geocodeOSM.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/geocodeOSM.html</loc>
+    <loc>https://github.com/mikejohnson51/AOI/reference/geocode_wiki.html</loc>
   </url>
   <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/getAOI.html</loc>
@@ -55,19 +55,31 @@
     <loc>https://github.com/mikejohnson51/AOI/reference/grapes-greater-than-grapes.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/revgeocode.html</loc>
+    <loc>https://github.com/mikejohnson51/AOI/reference/is_inside.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/simpleCap.html</loc>
+    <loc>https://github.com/mikejohnson51/AOI/reference/make_sf.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/mikejohnson51/AOI/reference/modify.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/mikejohnson51/AOI/reference/revgeocode.html</loc>
   </url>
   <url>
     <loc>https://github.com/mikejohnson51/AOI/reference/states.html</loc>
   </url>
   <url>
+    <loc>https://github.com/mikejohnson51/AOI/reference/world.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/mikejohnson51/AOI/reference/zipcodes.html</loc>
+  </url>
+  <url>
     <loc>https://github.com/mikejohnson51/AOI/articles/clipAreas.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/articles/geocode.html</loc>
+    <loc>https://github.com/mikejohnson51/AOI/articles/geocoding.html</loc>
   </url>
   <url>
     <loc>https://github.com/mikejohnson51/AOI/articles/stateCounty.html</loc>

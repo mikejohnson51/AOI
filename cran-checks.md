@@ -15,8 +15,3 @@ This is the first submission of this package, and my first overall to CRAN
            
 This appears to be due to first submission and there is nothing I can do to remove it.
 
-## Downstream dependencies
-I have run `R CMD check` on downstream dependencies with devtools::revdep_check_print_problems() 
-
-'No ERRORs or WARNINGs found :)' is returned
-

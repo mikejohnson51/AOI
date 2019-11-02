@@ -1,0 +1,155 @@
+---
+title: "Geocoding"
+vignette: >
+  %\VignetteIndexEntry{pkgdown}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 6, 
+  fig.height = 4
+)
+
+devtools::load_all()
+library(kableExtra)
+library(leaflet)
+library(sf)
+
+```
+
+The AOI package provides an interface to the Open Street Map [Nominatim API](https://nominatim.org/). This service does not require an API key and can be used for most research grade purposes. This page walks through a few examples of `AOI` geocoding:
+
+# Basic Geocoding {.tabset .tabset-fade}
+
+## By Place Name 
+
+Basic geocoding functionality converts a place name into a lat/long coordinate pair.
+
+```{r, eval = F}
+geocode("UCSB") 
+```
+```{r, echo = FALSE}
+geocode("UCSB") %>% 
+  kable() %>% 
+  kable_styling()
+```
+
+## By zip code (USA)
+
+The AOI package provides basic geocoding by USA zip code by connecting with Tom Boutells archive of [zipcode centroids](https://www.boutell.com/zipcodes/).
+
+```{r, eval = F}
+geocode(zipcode = "80906")
+```
+
+```{r, echo = F}
+geocode(zipcode = "80906") %>%
+  kable() %>% 
+  kable_styling()
+```
+
+## By Event (beta)
+
+Sometimes we want to geocode something that happen but that isn't a set place that would appear in the OSM gazetteer. In these case AOI offers a beta tool to geocode by scrapping Wikipedia.
+
+```{r, eval = F}
+x = lapply(c("Deepwater Horizion", 
+             "JFK Assasination", 
+             "I have a dream speech"),
+           geocode_wiki)
+
+do.call(rbind, x)
+```
+```{r, echo = F}
+x = lapply(c("Deepwater Horizion", 
+             "JFK Assasination", 
+             "I have a dream speech"),
+           geocode_wiki)
+
+do.call(rbind,x) %>% 
+  kable() %>% 
+  kable_styling()
+```
+
+## Reverse Geocoding
+
+The oppisite of forward geocodeing is reverse geocodeing (going from lat/lon to place name). AOI offeres a reverse geocoding service that integrates results from ESRIs and OSMs APIs.
+
+```{r, eval = FALSE}
+revgeocode(c(37, -119))
+```
+
+```{r, echo = F}
+revgeocode(c(37, -119)) %>% 
+  t() %>% 
+  kable() %>% 
+  kable_styling() 
+```
+
+
+# Geocoding Extensions {.tabset .tabset-fade}
+
+As a tool to support spatial research, AOI offers the abilty to `geocode()` multiple entries at a time and return spatial representations of the results:
+
+## Geocode Multiple Entries
+
+```{r, eval = F}
+geocode(c("UCSB", "Goleta", "State Street, Santa Barbara")) 
+```
+
+```{r, echo = F}
+geocode(c("UCSB", "Goleta", "State Street, Santa Barbara")) %>% 
+  kable() %>% 
+  kable_styling()
+```
+
+## Return Points
+
+```{r}
+do.call("rbind",
+        lapply(c("UCSB", "Goleta", "State Street, Santa Barbara"), 
+               function(x) geocode(x, pt= T)) ) %>% check(returnMap = T)
+
+```
+
+## Return Bounding Box
+
+Setting `bb = TRUE` will return the OSM defined bounding box of the queried place name:
+
+```{r}
+
+geocode("Garden of the Gods", bb = T) %>% 
+  check(returnMap = T)
+
+```
+ 
+## Return all
+
+If you want the coordinate, point, and bounding box realizations of a query, set `all=TRUE`
+ 
+```{r}
+
+call = geocode(location = c("Garden of the Gods", "Quail Lake, Colorado"), all = T) 
+
+str(call, max.level = 1)
+
+check(call, returnMap = T)
+
+```
+ 
+## Turn on full return
+
+By default geocoding returns only provides the lat/lon coordinates from the queried location. To recieve all information about a query, set `full = TRUE`
+
+```{r, eval  =F }
+geocode("Goleta", full= TRUE)
+```
+
+```{r, echo = F}
+geocode("Goleta", full= TRUE) %>% t() %>% kable %>% kable_styling()
+```

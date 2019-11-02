@@ -4,7 +4,7 @@
 \alias{alt_page}
 \title{Alternate Page Finder}
 \usage{
-alt_page(loc, pts = FALSE)
+alt_page(loc, pt = FALSE)
 }
 \arguments{
 \item{loc}{a wikipedia structured call}

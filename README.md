@@ -7,19 +7,17 @@
 
 **Welcome to the AOI R homepage!** <br>
 
-If you've ever found yourself needing to geocode or reverse-geocode a location, formalize an area of interest, get bounding geometries, describe a place by lat/long, or better understand spatial locations, this package should be able to help. 
+If you've ever found yourself needing to deal with spatial boundaries in R this package should be able to help. The purpose is to help users reproducibly create programmatic  boundaries to use in analysis and mapping workflows. The package targets five main use cases:
 
-An area of interest (AOI) is a geographic extent. It helps confine and formalize a unit of work to a geographic area, and prioritize and define research and sub setting efforts while improving reproducibility. They are built around concrete spatial attributes but often are discussed in a more colloquial way. The aim of the is package is to help make the colloquial understanding of space more concrete in the R environment.
+1. Perform basic forward and reverse geocoding tasks
+2. Create flexible "Areas of Interest" based on fiat boundaries, place names, and locations. 
+3. Offer a back end to interface with large web-based datasets 
+4. Facilitate iterative analysis in an era of big geospatial data
+5. Enhance reproducible in spatial analysis.
 
-`AOI` lets users define regions through a common query to achieve spatial geometries that can be used in sub setting, clipping, and mapping operations. Tools are provided to help define, describe, and convert points, boundaries, and features to usable forms including strings. In principle, the AOI package helps accomplish five main tasks increasing in order of simply providing convenience to providing new functionality to the deep R spatial ecosystem. These include helping:
+The package also includes functions to faciliate basic tasks in AOI work flows such as unioning, buffering, converting between string and spatial representations, and 
 
-1. Create bounding geometries of existing `sp`, `sf`, and `raster` objects (see [here][4])
-2. Get `sp`, or `sf`, state and county geometries and/or their bounding geometries (see [here][5])
-3. Provide geocoding and reverse geocoding functionalities from OSM and ESRI
-4. Create `sp` or `sf` geometries from a given location and bounding box dimensions. (see [here][6])
-5. Map, describe and communicate AOIs to others. (see [here][7])
-
-All functions are designed to be used with the magrittr pipe operation `%>%` so that they can be easily integrated with other spatial packages in the R ecosystem (see [here][8])
+This package builds on the sf package and in cases of overlap, only offers wrappers of common workflows. By their nature these wrappers save users lines of code and repetition but are less flexible then there base sf functions. 
 
 ### Installation:
 

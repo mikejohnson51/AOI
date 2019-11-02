@@ -25,8 +25,7 @@
 world
 }
 \description{
-Dataset containing \code{SpatialPolygons} of World Countries and Regions. Data is initalized from \href{http://thematicmapping.org/downloads/world_borders.php}{thematicmapping.org}
-package, converted to \code{SpatialPolygons} and reprojected for this package.
+Dataset containing simpified polygons of World Countries and Regions. Data is initalized from \href{http://thematicmapping.org/downloads/world_borders.php}{thematicmapping.org}.
 }
 \examples{
 \dontrun{

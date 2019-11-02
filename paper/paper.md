@@ -19,7 +19,7 @@ bibliography: paper.bib
 ---
 
 # Summary
-The primary functions in this package are `geocode`, `revgeocode`, `getAOI`, and `getBoundingBox`.  The first returns a `data.frame` of coordinates from place names using the Open Street Map API; the second returns a list of descriptive features from a known place name or latitude longitude pair; the third returns a spatial simple features (sf) geometry from a country, state, county, or defined region, and the last an extent encompassing a set of input features. Additional helper functions include `bbox_st` and `bbox_sp` which help convert AOIs between string and geometries;  `check` which helps users visualize AOIs in an interactive leaflet map; `modify` which allows AOIs to be modified by uniform distances; and `is_inside` which check for partial and complete overlap over features.  Finally, `describe`  breaks existing spatial features into `getAOI` parameters to improve the reproducibility of geometry generation. Three core datasets are served with the package. The first contains the spatial geometries and identification attributes of all `world` countries. The second, the spatial geometries for US `states` and the third contains the same for all US `counties`.
+The primary functions in this package are `geocode`, `revgeocode`, `getAOI`, and `getBoundingBox`.  The first returns a `data.frame` of coordinates from place names using the Open Street Map API; the second returns a list of descriptive features from a known place name or latitude longitude pair; the third returns a simple features (sf) geometry from a country, state, county, or defined region, and the last an extent encompassing a set of input features. Additional helper functions include `bbox_st` and `bbox_sp` which help convert AOIs between string and geometries;  `check` which helps users visualize AOIs in an interactive leaflet map; `modify` which allows AOIs to be modified by uniform distances; and `is_inside` which check for partial and complete overlap over features.  Finally, `describe`  breaks existing spatial features into `getAOI` parameters to improve the reproducibility of geometry generation. Three core datasets are served with the package. The first contains the spatial geometries and identification attributes of all `world` countries. The second, the spatial geometries for US `states` and the third contains the same for all US `counties`.
 
 # Introduction
 
@@ -81,10 +81,9 @@ In some cases, particularly in the social sciences,  the interest in geocoding i
 
 ![](./figures/Figure2.png)
 
-*Figure 2: The geocode_wiki function attempts to scape locational information from the associated wikipedia page. Events (A-D) can be queried. It should be noted that the OSM and Wikipedia locations are not exact but are largely the same (E) and when locational information can not be found for a specific query, a list of alternatives derived from linked pages are offered (F). *
+*Figure 2: The `geocode_wiki` function attempts to scape locational information from the associated wikipedia page. Events (A-D) can be queried. It should be noted that the OSM and Wikipedia locations are not exact but are largely the same (E) and when locational information can not be found for a specific query, a list of alternatives derived from linked pages are offered (F). *
 
-In contrast to converting descriptions of space to XY coordinates, reverse geocoding converts XY locations to known address and/or place names. While less useful in the contexts of AOI creation, the aim of providing a complete geocoding service within AOI necessitates the inclusion of a reverse geocoding service.  Moreover, to our knowledge, this is the only reverse geocoding service available in the R ecosystem. AOI provides an interface to the OSM Nominatim API and ESRI API [@ESRI2019] and returned results are the combined returns from these APIs. As an example, we request the attribute data of location c(-37, -120).
-
+In contrast to converting place names to XY coordinates, reverse geocoding converts XY locations to known address and/or place names. While less useful in the contexts of AOI creation, the aim of providing a complete geocoding service within AOI necessitates the inclusion of a reverse geocoding service. AOI provides an interface to the open OSM Nominatim and ESRI APIs [@ESRI2019] and the returned results are the combined returns from these APIs. As an example, we request the attribute data of location c(-37, -120).
 
 ```r
 > str(revgeocode(c(37,-119)))
@@ -113,15 +112,18 @@ List of 19
 
 # 2. Fiat boundary queries
 
-Where geocoding converts point-based description to XY space we also need a method for converting descriptive space to XY area representations. One of the more common area representations used in spatial data science are predefined fiat boundaries. While shapefiles of these features certainly exist across the web, their use is not always streamlined and may require the need to download, unzip, import,  and subset files stored in a myriad of formats. To remove some of these steps, `AOI` delivers a set of lightweight datasets that can be queried with the `getAOI()` function. The USA boundaries provided  are a simplified version of the USABoundaries [@USAboundaries2018] dataset and countries come from [@thematicmapping2019]. Examples of fiat queries, including some of their variations and parameter choices can be seen in figure 3:
+Where geocoding converts point-based description to XY space we also need a method for converting descriptive space to XY area representations. One of the mpost common area representations are offical fiat boundaries. While shapefiles of these features certainly exist across the web, their use is not always streamlined and may require the need to download, unzip, import,  and subset files stored in a myriad of formats. To remove some of these steps, `AOI` delivers a set of lightweight datasets that can be queried with the `getAOI()` function. The USA boundaries provided are a simplified version of the USABoundaries [@USAboundaries2018] dataset and country geometries come from Natural Earth. Country geometries are also merged with the CIA World Factbook database providing a rich collection of country level attributes in a central location.
+
+
+Examples of fiat queries, including some of their variations and parameter choices can be seen in figure 3:
 
 ![](./figures/Figure3.png)
 
 *Figure 3: (A) `getAOI` facilitates queries for (A) countries (B) states (C) and state-county pairs. Variations allow for the extraction of the lower 48 state (D) all counties in a given state set (E) and the option to union all requested objects in to a single unit (F). *
 
-# 3. Flexiable bounding box queries
+# 3. Flexible bounding box queries
 
-In addition to querying fiat boundaries, `getAOI` allows users to generate unique AOIs through a set of parameters describing a location and bounding box dimensions.  At a minimum, `getAOI` requires a place name from which the OSM boundary is defined, the result is analogous to `geocode(XXX, bb = T)`(Figure 4A). To exert more control over the dimensions of the bounding box, users can specify a height and width (in miles). This bounding box is, by default, drawn treating the input location as the centroid (Figure 4B). Alternatively a user can specify the relative location of the point to the queried bounding box by selecting between “upperleft”, “lowerleft”, “upperright”, “lowerright” and “center” (Figure 4C). Iterations on these calls can include providing a latitude/longitude pair instead of a place name, or setting the units of the bounding box dimensions to kilometers via `km = TRUE`.
+In addition to querying fiat boundaries, `getAOI` allows users to generate unique AOIs through a set of parameters describing a location and bounding box dimensions.  At a minimum, `getAOI` requires a place name from which the OSM boundary is defined, with a result analogous to `geocode(XXX, bb = T)`(Figure 4A). To exert more control over the dimensions of the bounding box, users can specify a height and width (in miles). This bounding box is, by default, drawn treating the input location as the centroid (Figure 4B). Alternatively a user can specify the relative location of the location to the queried bounding box by selecting between “upperleft”, “lowerleft”, “upperright”, “lowerright” and “center” (Figure 4C). Iterations on these calls can include providing a latitude/longitude pair instead of a place name, or setting the units of the bounding box dimensions to kilometers via `km = TRUE`.
 
 ![](./figures/Figure4.png)
 
@@ -129,7 +131,7 @@ In addition to querying fiat boundaries, `getAOI` allows users to generate uniqu
 
 # 4. Tools for AOI manipulation
 
-Through our own research and discussions with others using this package we have found a common set of tasks central to AOI workflows. All of these are possible through other packages such as `sf` and `leaflet`[@leaflet2018] but require a few lines of code to execute. Given the pervasive, and repetitive nature of these tasks, `AOI` offers a number of wrappers to speed up AOI manipulation, they are described as follows.
+Through our own research and discussions with other package users we have found a common set of tasks central to AOI workflows. All of these are possible through other packages such as `sf` and `leaflet`[@leaflet2018] but require a few lines of code to execute. Given the pervasive, and repetitive nature of these tasks, `AOI` offers a number of wrappers to speed up AOI manipulation, they are described as follows.
 
 `is_inside`:  checks if one of the input geometries is completely (or partially) contained within the other. There is no preference given to order of inputs and the return is a binary TRUE/FALSE.
 
@@ -139,7 +141,7 @@ Through our own research and discussions with others using this package we have 
 
 Two convenience functions `bbox_st` and `bbox_sp` help convert between `data.frame` and `sf` representations of a bounding area respectively.
 
-`check`: is a leaflet wrapper that generates an interactive map of a queried point or boundary. Embedded in these maps are tools for measuring distance, finding latitude and longitude coordinates, and viewing a variety of base maps. All images in the paper were created by piping the respective getAOI or geocode call to `check()` (e.g. `AOI = getAOI("Denver") %>% check()`).
+`check`: is a leaflet wrapper that generates an interactive map of a queried point or boundary. Embedded in these maps are tools for measuring distance, finding latitude and longitude coordinates, and viewing a variety of base maps. All images in the paper were created by piping the respective getAOI or geocode call to `check()` (e.g. `getAOI("Denver") %>% check()`).
 
 In addition of providing programatic workflows for creating AOIs, one of the principle aims of this package is to enhance reproducibility without needing to read, write, and share files. This is first achieved by allowing AOIs to be generated within scripts. However, there is often a need to verbally describe the AOI used. In cases where the AOI was not created via `getAOI()`, `describe`  converts any spatial object into the AOI parameters needed to replicate the extent.
 
@@ -160,8 +162,8 @@ The initial goal driving this package was the ability to make fast queries to we
 
 The aim of supporting web query package has not died and `AOI` supports a number of in-development packages including NWM, HydroData, climateR. Representative functions and workflows from two of these packages can be seen in figure 5. Figure 5A shows a workflow for reading in National Hydrographic Dataset (NHD) river network information for Colorado Springs while 5B shows a work flow for reading in temperature data for California from October 29th, 2019.
 
-
 ![](./figures/Figure5.png)
+
 *Figure 5: AOI workflows for web-based data retrial packages. (A) HydroData::findNHD() queries all river network data from the USGS National Hydrography Dataset (B) climateR::getPRISM() queries temperature data from the PRISM dataset. Both fuctions require an AOI as input.*
 
 AOI has also proven useful in providing map-based Shiny applications seeking to provide geocoding search functionality, and resulting centering and zoom parameters (Flowfinder). Moreover though, AOI is primed to work with a wide array of existing CRAN packages that require spatial extents as input. These include but are not limited to: *feddata, rosm, elevatr, soilDB, osmdata, raster, geoknife, sharpshooter, ceramic*. Working examples for each of these along with full AOI documentation can be found at [https://mikejohnson51.github.io/AOI].

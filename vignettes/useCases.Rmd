@@ -16,13 +16,16 @@ knitr::opts_chunk$set(
 )
 
 
-devtools::load_all("/Users/mikejohnson/Documents/GitHub/HydroData")
+#devtools::load_all("/Users/mikejohnson/Documents/GitHub/HydroData")
+
+#library(HydroData)
 devtools::load_all()
 library(osmdata)
 library(leaflet)
 library(sp)
 library(ggplot2)
 library(RColorBrewer)
+library(nhdplusTools)
 
 col  = '#1c26a9'
 col1 = '#212f3f'
@@ -31,6 +34,7 @@ icon.b <- makeAwesomeIcon(icon = 'home', iconColor = col,  markerColor = 'gray')
 ```
 
 The AOI package was not developed for isolated use but rather to ease the use of many great spatial packages in the R ecosystem. Here, a few case studies will be demonstrated but it should be emphasized these represent only a small fraction of the packages and services available. If you find a use or a need please file an [issue](https://github.com/mikejohnson51/AOI/issues) to get it included!
+
 
 #soilDB
 
@@ -49,7 +53,7 @@ str(soils, max.level = 2)
 
 The [HydroData](https://github.com/ncss-tech/soilDB) package offers quick access to geospatial earth systems data for an area of interest. In total the packages offers access to 20+ data sources as well as visualization functions. Here we can chain an AOI call for the 100sqmile region surrounding UCSB to a series of HydroData function to the HydroData calls to get NHD flowlines. NHD waterbodies and USGS NWIS stations. 
 
-```{r, message = FALSE}
+```{r, message = FALSE, warning=F, message=F}
 
 AOI = getAOI(list("UCSB", 10, 10, "lowerleft")) %>% 
   HydroData::findNHD() %>% 
@@ -69,37 +73,37 @@ leaflet() %>% addTiles() %>% addPolylines(data = AOI$nhd, weight = AOI$nhd$strea
 ```{r, eval = FALSE}
 library(rayshader)
 
-AOI = getAOI(clip = list("UCSB", 10, 30)) %>% HydroData::findNED()
+AOI = getAOI(clip = list("UCSB", 10, 10)) %>% HydroData::findElev()
 
-ned = matrix(raster::extract(AOI$NED,raster::extent(AOI$NED),buffer=1000),
-               nrow=ncol(AOI$NED),ncol=nrow(AOI$NED))
+ned = matrix(raster::extract(AOI$elev,raster::extent(AOI$elev),buffer=1000),
+               nrow=ncol(AOI$elev),ncol=nrow(AOI$elev))
 
 ned %>%
   sphere_shade(texture = "imhof1") %>%
   add_water(detect_water(ned), color="desert") %>%
   add_shadow(ray_shade(ned)) %>%
   add_shadow(ambient_shade(ned)) %>%
-  write_png(filename = paste0(getwd(), "/rayshade_ex.png"))
+  save_png(filename = paste0(getwd(), "/rayshade_ex.png"))
   
 
 ```
 
 ![](./imgs/rayshade_ex.png)
 
-#NWM
+# NWM
 
 [NWM](https://github.com/mikejohnson51/NWM/) is a new package interfacing with the NOAA National Water Model. Here we use the AOI package to define and the 100sqmile region surrounding Devils Tower, South Dakota and extract the modeled evapotranspiration for four timeslices:
 
 ```{r, message = FALSE}
 
-files = nwm::getFilelist(type = 'land', startDate = Sys.Date()-3, t = 0, f = c(3,6,9,12))
+files = nwm::getFilelist(type = 'land',  startDate = Sys.Date()-3, t = 0, f = c(3,6,9,12))
 
 AOI = getAOI(list("Devils Tower, WY", 10, 10)) 
-  
-nwm::downloadNWM(AOI, files, param = 'accet')
+
+nwm = nwm::downloadNWM(AOI, files, param = 'accet')
 
 
-GotrasterVis::levelplot(AOI$accet, 
+rasterVis::levelplot(AOI$accet, 
                      main = "National Water Model: Accumulated ET", 
                      names.attr = as.character(nwm::getGridTime(AOI$accet)),
                      col.regions = colorRampPalette(brewer.pal(9,"YlOrRd")))
@@ -112,7 +116,7 @@ GotrasterVis::levelplot(AOI$accet,
 [FedData](https://github.com/ropensci/FedData) is a useful package for automatically downloading federal datasets. Here we chain chain the `get_ssurgo` function to an AOI call to quickly get a soils map from the SSURGO database for the 100sqmile regions surrounding Boulder, Colorado.
 
 ```{r}
-AOI = getAOI(list("Boulder", 10, 10)) %>% FedData::get_ssurgo(label = "test")
+AOI = getAOI(list("Boulder", 10, 10)) %>% as_Spatial %>%  FedData::get_ssurgo(label = "test")
 
 ggplot() + 
   geom_polygon(data = AOI$spatial, aes(x = long, y = lat, group = group, fill = id), color = 'gray') + 
@@ -126,9 +130,8 @@ ggplot() +
 Open Street Map provides one of the most extensive databases/cartographic representations of the world and the [osmdata](https://github.com/ropensci/osmdata) packages offers an interface to this resource. Here we look at answering the question "Where are the bike paths near my office in Ellison Hall?". 
 
 ```{r}
-office = geocode("UCSB")
 
-AOI = getAOI(list(office$lat, office$lon, 2, 2)) %>% bbox_st()
+AOI = getAOI(list('UCSB', 2, 2)) %>% bbox_st()
 
 q0 = opq(bbox = c(AOI$xmin, AOI$ymin, AOI$xmax, AOI$ymax)) %>%
      add_osm_feature (key="highway") %>% 
@@ -145,7 +148,7 @@ roads = q0$osm_lines
 
 ```
 
-#WorldClim
+# WorldClim
 
 The WorldClim dataset offers a set of global climate layers and ships with the [raster](https://cran.r-project.org/web/packages/raster/raster.pdf) package. Here we download and sub set the mean temperature data for the state of Colorado.
 
@@ -165,7 +168,8 @@ rasterVis::levelplot(rr/10,
 
 ```{r, message=F}
 library(rosm)
-bb = getAOI(clip = list("Lake Cachuma", 20,20)) %>% osm.plot(type="stamenbw")
+bb = getAOI(clip = list("Lake Cachuma", 20,20)) %>% sf::as_Spatial() %>% 
+  osm.plot(type="stamenbw")
 ```
 
 
@@ -180,7 +184,7 @@ library(geoknife)
 
 AOI = getAOI("Santa Barbara")
 
-AOI::check(AOI)
+AOI::check(AOI, returnMap = TRUE)
 
 stencil = AOI %>% sp::spTransform("+proj=longlat +datum=WGS84") %>% simplegeom()
 

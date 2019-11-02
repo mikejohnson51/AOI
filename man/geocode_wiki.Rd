@@ -4,12 +4,12 @@
 \alias{geocode_wiki}
 \title{Geocoding Events}
 \usage{
-geocode_wiki(event = NULL, pts = T)
+geocode_wiki(event = NULL, pt = FALSE)
 }
 \arguments{
 \item{event}{\code{character}. a term to search for on wikipeida}
 
-\item{pts}{\code{logical}. If TRUE point geometery is appended to the returned list()}
+\item{pt}{\code{logical}. If TRUE point geometery is appended to the returned list()}
 }
 \value{
 aa data.frame of lat/lon coordinates

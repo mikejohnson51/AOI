@@ -1,10 +1,11 @@
 ---
-title: "State & County AOIs: Fiat Boundaries"
+title: "Fiat Boundaries"
 vignette: >
   %\VignetteIndexEntry{pkgdown}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
 
 ```{r setup, include = FALSE}
 
@@ -16,112 +17,122 @@ knitr::opts_chunk$set(
 )
 
 devtools::load_all()
-library(leaflet)
-library(sp)
+library(kableExtra)
+library(dplyr)
+library(ggplot2)
+library(sf)
 
-col  = '#1c26a9'
-col1 = '#212f3f'
+mapTheme <- function() {
+  theme_void() + 
+    theme(
+      text = element_text(size = 7),
+      plot.title = element_text(size = 11, color = "#1c5074", hjust = 0, vjust = 2, face = "bold"), 
+      plot.subtitle = element_text(size = 8, color = "#3474A2", hjust = 0, vjust = 0),
+      axis.ticks = element_blank(), 
+      legend.direction = "vertical", 
+      legend.position = "right",
+      plot.margin = margin(1, 1, 1, 1, 'cm'),
+      legend.key.height = unit(1, "cm"), legend.key.width = unit(0.4, "cm")
+    ) 
+}
 ```
 
-The main function in the AOI package is `getAOI`. Three main parameters are used to define explicit AOI queries:  *state*, *county*, and *clip*. This page illustrates how the state and county parameters can be used define  a query, while the [Clip Areas](./articles/clipAreas.html) page describes the clip parameters.
+Areas of Interest (AOIs) are geographic boundaries describing a finite region. `AOI` offers two ways to define AOIs including (1) existing fiat boundaries and (2) user-defined bounding boxes. This page focuses on the process for querying fiat boundaries with the central function of AOI, `getAOI`.  AOI offers three in-package datasets representing the spatial boundaries of USA states and counties and global countries. The can be accessed via the `state`, `county`, and `world` state data object calls. Help files for each dataset are available via the `?` call (e.g. ?states). 
 
-# Data
+# Quering Fiat Boundaries {.tabset .tabset-fade}
 
-AOI offers to in-package datasets represting the spatial boundaries of USA states and counties. The can be accessed via the county and state data object calls. Each dataset contains information relating to the features name, state, FIP code, and other identifiy codes. Help of each dataset can be found using the `?` call. 
+## AOI by **country**
 
-```{r}
-head(states@data)
+Simplified country boundaries can be queried with `getAOI()` using the `country=` parameter. In total, 246 countries boundaries are available in AOI and are derived from [Natural Earth](https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/). The data is joined to a working database of the CIA \href{https://www.cia.gov/library/publications/the-world-factbook/}{World Factbook}.
+
+### 1.1 Querying Country Boundary Data
+
+```{r, message = FALSE}
+getAOI(country = 'CR') %>% check(returnMap = T)
+
+getAOI(country = c('Brazil', 'Peru', "chili")) %>% check(returnMap = T)
+
 ```
 
-
-```{r}
-head(counties@data)
-```
-
-# Defining an AOI by **state**  
+##  AOI by **state**  
 
 An AOI can be defined by a **state** name or abbreviation:
 
 ```{r, message = FALSE}
-CA = getAOI(state = 'CA')
+getAOI(state = 'CA') %>% check(returnMap = T)
 ```
 
-```{r, echo = FALSE}
-leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 5, maxZoom = 5)) %>% addProviderTiles(providers$CartoDB.Positron) %>% addPolygons(data = CA,fillColor = col, color = col1, weight = 2)
-```
-
-<br>
-<br>
 A query can also be defined using multiple **states** provided as a vector:
 
 ```{r, message = FALSE}
-WestCoast = getAOI(state = c("Oregon", "Washington", "CA"))
+getAOI(state = c("Oregon", "Washington", "CA")) %>% check(returnMap = TRUE)
 ```
 
-```{r, echo = FALSE}
-leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 4, maxZoom = 4)) %>% addProviderTiles(providers$CartoDB.Positron) %>% addPolygons(data = WestCoast,fillColor = col, color = col1, weight = 1)
+If you want the lower 48 USA state you can query `state = 'conus'`. Moreover, 
+calls to `country` can be mixed with calls to `state`.
+
+```{r, message = FALSE}
+getAOI(country = 'Mexico', state = "conus") %>% check(returnMap = TRUE)
 ```
 
-<br>
+## AOI by **county** 
+
+### Defining an AOI by **county** requires a **state** as well:
 
 If you want to get the boundaries of a state with the county features intact, simply call getAOI and set `county = 'all'`
 
 ```{r, message = FALSE}
-AL = getAOI(state = "AL", county = 'all')
+getAOI(state = "AL", county = 'all') %>% check(returnMap = TRUE)
 ```
 
-```{r, echo = FALSE}
-leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 6, maxZoom = 4)) %>% addProviderTiles(providers$CartoDB.Positron) %>% addPolygons(data = AL,fillColor = col, color = col1, weight = 1)
-```
-
-# Defining a **county** AOI 
-
-Defining an AOI by **county** requires a **state** as well:
+Or if you want a single county, in a state:
 
 ```{r, message = FALSE}
-EP = getAOI(state = "CO", county = "El Paso")
+getAOI(state = "CO", county = "El Paso") %>% check(returnMap = TRUE)
 ```
 
-```{r, echo = FALSE}
-leaflet() %>% addProviderTiles(providers$CartoDB.Positron) %>% addPolygons(data = EP,fillColor = col, color = col1, weight = 4)
-```
-
-<br>
-<br>
-Multiple counties can be queried if provided as a vector:
+Or multiple counties in the same state:
 
 ```{r, message = F}
-centralCoast = getAOI(state ="CA", county = c("Santa Barbara", "San Luis Obispo", "Ventura"))
+getAOI(state ="CA", county = c("Santa Barbara", "San Luis Obispo", "Ventura")) %>% check(returnMap = T)
 ```
 
-```{r, echo = FALSE}
-leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 7, maxZoom = 7)) %>% addProviderTiles(providers$CartoDB.Positron) %>% addPolygons(data = centralCoast,fillColor = col, color = col1, weight = 2)
-```
-
-<br>
-<br>
-Cross-state pairs can be called as well if provided as a vector:
+Or counties in different states
 
 ```{r, message = F}
-twoCounty = getAOI(state =c("CA", "CO"), county = c("Santa Barbara", "El Paso"))
-```
-
-```{r, echo = FALSE}
-leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 5, maxZoom = 5)) %>% addProviderTiles(providers$CartoDB.Positron) %>% addPolygons(data = twoCounty, fillColor = col, color = col1, weight = 2)
+getAOI(state =c("CA", "CO"), county = c("Santa Barbara", "El Paso")) %>% check(returnMap = T)
 ```
 <br>
 
-#Additional Calls
-
-###Bounding Box of States / Counties
+## Unioning
 
 ```{r, messages = FALSE}
-AOI = getAOI(state = "WI", bb = TRUE) %>% check()
+getAOI(state = c('CA', 'OR'), union = TRUE) %>% check(returnMap = TRUE)
+
 ```
 
-```{r, echo = F}
-AOI$map
+## CIA World Factbook Data
+
+```{r, message=FALSE, warning=FALSE}
+ca = AOI::countries %>% 
+  filter(subregion =="Central America") %>% 
+  select("birth_rate", "name") %>% 
+  cbind(st_coordinates(st_centroid(.))) 
+
+# Plot
+
+ggplot(ca) +
+  geom_sf(aes(fill = birth_rate ), color = NA) +
+  scale_fill_gradient("Birth Rate\n") +
+  geom_label(aes(X,Y, label = name), alpha = 0.8, size = 2) +
+  labs(
+    title = 'CIA World Factbook',
+    subtitle = "Birth Rate",
+    caption = "Source: CIA World Factbook"
+  ) + mapTheme()
+
 ```
+
 
 
 Now that you have a good understanding of how to call existing fiat boundaries take a look at the [Clip Areas](./articles/clipAreas.html) page to learn how to define your own extents!

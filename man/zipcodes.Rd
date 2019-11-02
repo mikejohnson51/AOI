@@ -4,7 +4,7 @@
 \name{zipcodes}
 \alias{zipcodes}
 \title{USA Zipcode Database}
-\format{a \code{csv}, 246 43191 of 7 variables:
+\format{a \code{data.frame}, 246 43191 of 7 variables:
 \itemize{
 \item 'zip'     :  \code{integer} Zipcode
 \item 'city'     :  \code{character} City Name

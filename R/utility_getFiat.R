@@ -27,55 +27,62 @@
 #'
 #' @author Mike Johnson
 
-getFiat <- function(country = NULL, state = NULL, county = NULL,  bb = FALSE) {
+getFiat <- function(country = NULL, state = NULL, county = NULL) {
+
+  map1 <- map2 <- map3 <- NULL
 
   if(!is.null(country)){
 
-      world = AOI::world
+      world = AOI::countries
 
-      if(nchar(country) == 2){
-        map = world[tolower(world$ISO2) %in% tolower(country),]
+      calls = c()
+
+  for(i in seq_along(country)){
+
+      if(nchar(country[i]) == 2){
+        calls = append(calls, world$name[tolower(world$iso_a2) %in% tolower(country[i])])
       }
 
-      if(nchar(country) == 3){
-        map = world[tolower(world$ISO3) %in% tolower(country),]
+      if(nchar(country[i]) == 3){
+        calls = append(calls, world$name[tolower(world$iso_a3) %in% tolower(country[i])])
       }
 
-      if(nchar(country) > 3){
-        map = world[tolower(world$NAME) %in% tolower(country),]
+      if(nchar(country[i]) > 3){
+        calls = append(calls, world$name[tolower(world$name) %in% tolower(country[i])])
       }
 
-      if(NROW(map) == 0){ stop('no country found')}
+      if(length(calls) == 0){ stop('no country found')}
 
+  }
 
-  } else {
+      map1  = world[tolower(world$name) %in% tolower(calls),]
+  }
+
+  if(!is.null(state)){
 
     states = AOI::states
+    #+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +no_defs
 
     for(i in 1:length(state)){
       if(nchar(state[i]) == 2){state[i] = states$state_name[which(tolower(states$state_abbr) == tolower(state[i]))]}
     }
 
     if(any(tolower(state) == 'all')){
-      state_map = states
+      map2 = states
     } else if(any(tolower(state) == 'conus')){
-      state_map = states[!(tolower(states$state_name) %in% c('alaska', "puerto rico", 'hawaii')),]
+      map2 = states[!(tolower(states$state_name) %in% c('alaska', "puerto rico", 'hawaii')),]
     } else {
-      state_map = states[tolower(states$state_name) %in% tolower(state),]
+      map2 = states[tolower(states$state_name) %in% tolower(state),]
     }
 
-    if(is.null(county)) {
-      map = state_map
-      rm(states)
+    if(!is.null(county)) {
 
-    } else {
-
+      map2 = NULL
       counties = AOI::counties
       county_map = counties[tolower(counties$state_name) %in% tolower(state),]
 
       if(any(county == 'all')) {
-        map = county_map
-        rm(counties)
+        map3 = county_map
       } else {
 
       check = tolower(county) %in% tolower(county_map$name)
@@ -85,13 +92,20 @@ getFiat <- function(country = NULL, state = NULL, county = NULL,  bb = FALSE) {
         stop(paste(bad_counties, collapse = ", "), " not a valid county in ", state, ".")
       }
 
-      map = county_map[tolower(county_map$name) %in% tolower(county),]
-      rm(counties)
+      map3 = county_map[tolower(county_map$name) %in% tolower(county),]
+
       }
     }
   }
 
-  if(bb){map = getBoundingBox(map)}
+  map  = tryCatch({
+    rbind(map1, map2, map3)
+  }, error = function(e) {
+    if(!is.null(map1)){ map1 = dplyr::mutate(map1, 'NAME' = map1$name) %>% dplyr::select('NAME') }
+    if(!is.null(map2)){ map2 = dplyr::mutate(map2, 'NAME' = map2$state_name) %>% dplyr::select('NAME')  }
+    if(!is.null(map3)){ map3 = dplyr::mutate(map3, 'NAME' = map3$name) %>% dplyr::select('NAME')}
+    rbind(map1, map2, map3)
+  })
 
   return(map)
 

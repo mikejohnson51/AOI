@@ -21,60 +21,58 @@ getClip = function(location = NULL, width = NULL, height = NULL, origin = NULL){
 
   if(all(is.null(height), is.null(width), is.null(origin))){
     shp = geocode(location, bb = TRUE, full = F)
-    poly = shp$bb
+    poly = shp
   } else {
 
-    if(class(location) == "numeric"){ location = location }
+    if(class(location) == "numeric"){ location = list(lat = location[1], lon = location[2]) }
 
     if(class(location) == "character"){
-
       location = geocode(location = location, full = FALSE)
-      location = unlist(location)
     }
 
     if(origin == "center"){
       df = (height/2)/69                               # north/south
-      dl = ((width/2)/69) / cos(location[1] * pi/180)  # east/west
-      south = location[1] - df
-      north = location[1] + df
-      west  = location[2] - dl
-      east  = location[2] + dl
+      dl = ((width/2)/69) / cos(location$lat * pi/180)  # east/west
+      south = location$lat - df
+      north = location$lat + df
+      west  = location$lon - dl
+      east  = location$lon + dl
     }
 
     if(origin == "lowerleft"){
       df = (height)/69
-      dl = ((width)/69) / cos(location[1] * pi/180)
-      south = location[1]
-      north = location[1] + df
-      west  = location[2]
-      east  = location[2] + dl
+      dl = ((width)/69) / cos(location$lat * pi/180)
+      south = location$lat
+      north = location$lat + df
+      west  = location$lon
+      east  = location$lon + dl
     }
 
     if(origin == "lowerright"){
         df = (height)/69
-        dl = ((width)/69) / cos(location[1] * pi/180)
-        south = location[1]
-        north = location[1] + df
-        west  = location[2] - dl
-        east  = location[2]
+        dl = ((width)/69) / cos(location$lat * pi/180)
+        south = location$lat
+        north = location$lat + df
+        west  = location$lon - dl
+        east  = location$lon
     }
 
     if(origin == "upperright"){
         df = (height)/69
-        dl = ((width)/69) / cos(location[1] * pi/180)
-        south = location[1] - df
-        north = location[1]
-        west  = location[2] - dl
-        east  = location[2]
+        dl = ((width)/69) / cos(location$lat * pi/180)
+        south = location$lat - df
+        north = location$lat
+        west  = location$lon - dl
+        east  = location$lon
     }
 
     if(origin == "upperleft"){
         df = (height)/69
-        dl = ((width)/69) / cos(location[1] * pi/180)
-        south = location[1] - df
-        north = location[1]
-        west  = location[2]
-        east  = location[2] + dl
+        dl = ((width)/69) / cos(location$lat * pi/180)
+        south = location$lat - df
+        north = location$lat
+        west  = location$lon
+        east  = location$lon + dl
     }
 
     coords = matrix(c(west, south,

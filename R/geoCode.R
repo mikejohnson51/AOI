@@ -32,6 +32,7 @@ geocode = function(location = NULL,
                    zipcode = NULL,
                    pt = FALSE,
                    bb = FALSE,
+                   all = FALSE,
                    full = FALSE) {
 
 
@@ -43,6 +44,7 @@ geocode = function(location = NULL,
     failed = zipcode[!zipcode %in% locs$zip]
 
     if(length(failed) > 0){
+
     xx = geocode(location = as.character(failed), full = T)
 
     locs = rbind(locs, data.frame(
@@ -58,7 +60,7 @@ geocode = function(location = NULL,
   rownames(locs) = NULL
 
   } else if (length(location) == 1) {
-    df = geocodeOSM(location, pt, bb, full)
+    df = geocodeOSM(location, pt, bb, all, full)
     return(df)
 
   } else {
@@ -75,17 +77,14 @@ geocode = function(location = NULL,
       locs$lon = as.numeric(locs$lon)
     } else {
       locs = data.frame(
-        location = location,
+        request = location,
         lat = as.numeric(latlon$lat),
         lon = as.numeric(latlon$lon)
       )
     }
   }
 
-  points = sf::st_as_sf(
-      x = locs,
-      coords = c('lon', 'lat'),
-      crs = AOI::aoiProj)
+  points = sf::st_as_sf( x = locs, coords = c('lon', 'lat'), crs = AOI::aoiProj)
 
   if(!is.null(zipcode)){
     points = suppressMessages(
@@ -94,21 +93,18 @@ geocode = function(location = NULL,
     )
   }
 
-    if (any(bb, pt)) {
+  if(all){
+    return( list(coords = locs, pt = points, bb = getBoundingBox(points)))
+  }else if(pt){
+    return(points)
+  } else if(bb){
+    return(getBoundingBox(points))
+  } else {
+    return(locs)
+  }
 
-      items = list()
-
-      if (pt) { items[["pt"]] = points }
-
-      if (bb) { items[["bb"]] = getBoundingBox(points) }
-
-      return(items)
-
-    } else {
-
-      return(locs)
-
-    }
 }
+
+
 
 

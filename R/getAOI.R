@@ -12,7 +12,6 @@
 #' @param county    \code{character}. County name(s). Requires \code{state} input. Not case senstive. If 'all' then all counties in a state are returned
 #' @param clip      \code{spatial}. \code{raster}, \code{sf} or a \code{list} object (see details for list parameters)
 #' @param km        \code{logical}. If \code{TRUE} distances are in kilometers, default is \code{FALSE} with distances in miles
-#' @param bb        \code{logical}. Only applicable for country, state,  and county calls. If \code{TRUE} the bounding geometry is returned, default is \code{FALSE} and returns fiat geometries
 #' @param union        \code{logical}. If TRUE objects are unioned into a single object
 #' @details A \code{clip} unit can be described by just a place name (eg 'UCSB'). In doing so the associated boundaries determined by \code{\link{geocode}} will be returned.
 #' To have greater control over the clip unit it can be defined as a list with a minimum of 3 inputs:
@@ -97,17 +96,21 @@
 #' # Get AOI defined by 10 mile2 bounding box using the 'KMART near UCSB' as lower left corner
 #'     getAOI(clip = list('KMART near UCSB', 10, 10, 'lowerleft'))
 #'}
+#'
+#'
+clip = list("National Water Center, AL", 30, 10)
 
 getAOI = function(clip = NULL,
                   country = NULL,
                   state = NULL,
                   county = NULL,
                   km = FALSE,
-                  bb = FALSE,
                   union =FALSE) {
 
   stateAbb = AOI::states$state_abbr
+
   stateName = AOI::states$state_name
+
   shp = NULL
 
   #------------------------------------------------------------------------------#
@@ -142,33 +145,24 @@ getAOI = function(clip = NULL,
   # Fiat Boundary Defintion (Exisiting Spatial/Raster Feature or getFiat())   #
   #-----------------------------------------------------------------------------------#
 
-  # AOI by country
+  # AOI by fiat
 
-  if(!is.null(country)){
-    shp <- getFiat(country = country)
-  }
-
-  # AOI by state
-
-  if (all(is.null(clip), !is.null(state))) {
-    shp <- getFiat(state = state, county = county, bb = bb)
+  if (all(is.null(clip), !is.null(state)) | all(is.null(clip), !is.null(country))) {
+    shp <- getFiat(country = country, state = state, county = county)
   }
 
   # AOI by user shapefile
 
   if (checkClass(clip, "Raster")){
-    shp = getBoundingBox(clip)
-    shp = sf::st_transform(shp, aoiProj)
-    }
+    shp = getBoundingBox(clip) %>% sf::st_transform(shp, aoiProj)
+  }
 
   if (checkClass(clip, "Spatial")) {
-    shp = sf::st_transform(sf::st_as_sf(clip), aoiProj)
-    shp = getBoundingBox(shp)
+    shp = sf::st_transform(sf::st_as_sf(clip), aoiProj) %>% getBoundingBox(shp)
   }
 
   if (checkClass(clip, "sf")) {
-    shp = sf::st_transform(clip, aoiProj)
-    shp = getBoundingBox(shp)
+    shp = sf::st_transform(clip, aoiProj) %>% getBoundingBox(shp)
   }
 
   #------------------------------------------------------------------------------#
@@ -177,7 +171,7 @@ getAOI = function(clip = NULL,
 
   if(is.null(shp)){
 
-        fin = defineClip(clip, km = km)
+        fin <- defineClip(clip, km = km)
 
         shp <- getClip(location = fin$location,
                       width =  fin$w,

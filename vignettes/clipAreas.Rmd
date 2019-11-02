@@ -35,88 +35,61 @@ icon.b <- awesomeIcons(
 
 ```
 
-In `AOI` a **clip** is user defined region. Most commonly a bounding box or a supplied spatial object - both of which can be used as input. 
+So far we've seen how `AOI` provides boundaries based on fiat or OSM defined space [here](./docs/articles/stateCounty.html).  This section hightlights the capabilities for generating flexiable boundaries. Boundaries are defined by a list ranging in size from 1 to 5 elements including:
 
-# Clip by list()
+  (1) A location   
+  (2) A bounding box height and width (default is distance in miles) and
+  (3) A location origin (default = 'center')   
 
-To define a bounding box **clip**,  requires one to four, inputs given as a list:
+All inputs must be provided as an ordered list. Examples for each element follows: 
 
-(1) A location   
-(2) A bounding box height
-(3) A bounding box width 
-(4) A location origin (default = 'center')   
+# Building and AOI from Location, Bounding Boxes, and origins {.tabset .tabset-fade}
 
-All **clip** inputs **must** be provided as a list and order **DOES** matter if each parameter is not explicitly assigned (eg `h = 10`). Examples for each input follow: 
+## Location
 
-##1. Location
-
-A Location is the first input in a  **clip** list and can be given as a colloquial name (*character string*) or as a (lat/long) pair (*numeric*). Names are geocoded via the OpenStreet map API as shown [here](articles/geocode.html).
-
-If only a location is provided the OSM derived bounding box is used, this is also the only instance where clip inputs do not have to be in list form: 
+A **location** is the first input in a clip list, and can be given as a place name or numerice (lat/long) pair. Place names can be used on there own to query the OSM derived bounding box (equal to `geocode("XXX", bb = T)`)
 
 ```{r}
-AOI = getAOI(clip = "Sacramento")
+getAOI("Sacramento") %>% check(returnMap = T)
 ```
 
-```{r, echo = FALSE}
-leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 9, maxZoom = 9)) %>% addProviderTiles(providers$CartoDB.Positron) %>% 
-  addPolygons(data = AOI,fillColor = "transparent", color = col, weight = 4, label = "Sacramento")  
-```
+Latitude/Longitude pairs must be called with additional information.
 
+## Bounding Box 
 
-##2. Bounding box height and width
-
-Once a location is specified, the next needed values are a bounding box height and width. The first entry defines height and the second width: 
-  
-##*Bounding box diminsions example*:
-
-```{r, message = FALSE}
-nwc.tall = getAOI(clip = list("National Water Center, AL", 30, 10))
-nwc.wide = getAOI(clip = list("National Water Center, AL", 10, 30))
-```
-
-```{r, echo = FALSE}
-nwc = geocode("National Water Center, AL")
-
-leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 9, maxZoom = 9)) %>% addProviderTiles(providers$CartoDB.Positron) %>% 
-  addPolygons(data = nwc.tall,fillColor = "transparent", color = col, weight = 4, label = "Tall: list('National Water Center, AL', 30, 10)") %>%  
-  addPolygons(data = nwc.wide, fillColor = "transparent", color = col1, weight = 4, label = "Wide: list('National Water Center, AL', 10, 30)") %>% 
-  addAwesomeMarkers(icon = icon.b, lat = nwc$lat, lng = nwc$lon, popup = "National Water Center")
-
-```
-
-Returning to the Grand Caynon example, if the W and H are not specified, getAOI() does its best to generate an AOI from the OSM geocoder. 
-
-```{r}
-
-GC = getAOI(clip = "garden of the gods, colorado springs")
-
-```
-
-```{r}
-leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 13, maxZoom = 13)) %>% addTiles() %>% 
-   addPolygons(data = GC, fillColor = "transparent", color = col, weight = 4)  
-   
-```
-
-
-##3. Origin
-
-With a location, height, and width defined the relationship of the box to the location is needed. By default (and in the previous examples) each bounding box was generated using the location as a centroid. You can change this by adding a final argument to the **clip** list specifying where the location lies in reference to the box. Options include 'center', 'lowerleft', 'lowerright', 'upperleft', 'upperright':
-  
-##*Origin example*:
+Once a location is specified, the next required values are a bounding box height and width. The first entry defines height and the second width, in the default case the provided location is treated as the centroid of the generated area.
   
 ```{r, message = FALSE}
-ucsb.c =  getAOI(clip = list("UCSB", 10, 10, "center"))
-ucsb.ul = getAOI(clip = list("UCSB", 10, 10, "upperleft"))
-ucsb.ur = getAOI(clip = list("UCSB", 10, 10, "upperright"))
-ucsb.ll = getAOI(clip = list("UCSB", 10, 10, "lowerleft"))
-ucsb.lr = getAOI(clip = list("UCSB", 10, 10, "lowerright"))
+# Get the 30 by 10 mile area centered on the National Water Center
+getAOI(list("National Water Center, AL", 30, 10)) %>% check(returnMap = TRUE)
+
+# Get the 10 by 30 mile area centered on (34,-118)
+getAOI(list(34,-118, 10, 30)) %>% check(returnMap = TRUE)
+```
+
+## Origin
+
+With a defined **location**, **height**, and **width**, the relationship of the box to the location is needed. By default bounding boxs are generated using the input location as a centroid. You can change this by adding a final argument to the **clip** list specifying where the location lies in reference to the box. Options include '*center*', '*lowerleft*', '*lowerright*', '*upperleft*', '*upperright*':
+  
+```{r, message = FALSE}
+ucsb.c =  getAOI(list("UCSB", 10, 10, "center"))
+ucsb.ul = getAOI(list("UCSB", 10, 10, "upperleft"))
+ucsb.ur = getAOI(list("UCSB", 10, 10, "upperright"))
+ucsb.ll = getAOI(list("UCSB", 10, 10, "lowerleft"))
+ucsb.lr = getAOI(list("UCSB", 10, 10, "lowerright"))
 ```
 
 ```{r, echo = FALSE}
-leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 10, maxZoom = 10)) %>% addProviderTiles(providers$CartoDB.Positron) %>% 
-  addPolygons(data = ucsb.ul, fillColor = "transparent", color = col1, weight = 4, label = "upperleft") %>% 
+
+ucsb.c  = sf::st_transform(ucsb.c,  '+proj=longlat +datum=WGS84')
+ucsb.ul = sf::st_transform(ucsb.ul, '+proj=longlat +datum=WGS84')
+ucsb.ur = sf::st_transform(ucsb.ur, '+proj=longlat +datum=WGS84')
+ucsb.ll = sf::st_transform(ucsb.ll, '+proj=longlat +datum=WGS84')
+ucsb.lr = sf::st_transform(ucsb.lr, '+proj=longlat +datum=WGS84')
+
+leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 10, maxZoom = 10)) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>% 
+  addPolygons(data = ucsb.ul, fillColor = "transparent", color = col1, weight = 4, label ="upperleft") %>% 
   addPolygons(data = ucsb.ur, fillColor = "transparent", color = col1, weight = 4, label = "upperright") %>% 
   addPolygons(data = ucsb.ll, fillColor = "transparent", color = col1, weight = 4, label = "lowerleft") %>% 
   addPolygons(data = ucsb.lr, fillColor = "transparent", color = col1, weight = 4, label = "lowerright") %>% 
@@ -124,26 +97,45 @@ leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 10, maxZoom = 10)) %
   addAwesomeMarkers(icon = icon.b, lat = 34.41396, lng = -119.8489, popup = 'UCSB')
 ```
 
-#Clip by Spatial*
+## Modifying {.tabset .tabset-fade}
 
-A user supplied shapefile can  be used as input for the clip parameter in lieu of a list() bounding box.
+With the aim of flexible boundaries there is a final function aimed at modifing boudary locations, `modify`. Modify allows users to add a subtract a set distance from a known AOI. It is a convince wrapper around `sf::st_buffer()` that takes care of dealing with units. 
 
-##*Spatial example*:
+## Grow
 
-```{r, message = FALSE}
-#Read in shapefile of all Los Angeles Communities
-LA = rgdal::readOGR("./shp/LA.shp", verbose = FALSE)
-#Subset Santa Monica
-SM = LA[LA$LABEL_CITY == 'Santa Monica',] %>% spTransform(aoiProj)
-#Define AOI
-AOI = getAOI(clip = SM)
-getwd()
+```{r}
+gg  = getAOI("Garden of the Gods")
+gg_grow = getAOI("Garden of the Gods") %>% modify(1)
 ```
 
 ```{r, echo = FALSE}
+
+gg = st_transform(gg,  '+proj=longlat +datum=WGS84')
+ggm = st_transform(gg_grow,  '+proj=longlat +datum=WGS84')
+
 leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 12, maxZoom = 12)) %>% addProviderTiles(providers$CartoDB.Positron) %>% 
-  addPolygons(data = SM, fillColor = 'transparent', color = 'black', weight = 1) %>% 
-  addPolygons(data = AOI,fillColor = col, color = col1, weight = 4, label = "Santa Monica")
+  addPolygons(data = gg_grow, fillColor = 'transparent', color = 'red', weight = 4) %>% 
+  addPolygons(data = gg,fillColor = col, color = col1, weight = 4)
+```
+
+
+## Shrink
+
+```{r}
+la = getAOI("Los Angeles")
+la_shrink = getAOI("Los Angeles") %>% modify(-10) 
+```
+
+
+```{r, echo = FALSE, warning=F}
+la = st_transform(la,  '+proj=longlat +datum=WGS84')
+la_shrink = st_transform(la_shrink,  '+proj=longlat +datum=WGS84')
+
+leaflet(option=leafletOptions(zoomControl= FALSE, minZoom = 2, maxZoom = 12)) %>% addProviderTiles(providers$CartoDB.Positron) %>% 
+  addPolygons(data = la_shrink, fillColor = 'transparent', color = 'red', weight = 4) %>% 
+  addPolygons(data = la,fillColor = col, color = col1, weight = 4)
 ```
 
 Now that you know what it takes to define an AOI covering any region you want, take a look at the [AOI Tools](./docs/articles/tools.html) page to learn how to define, refine, manipulate, and describe your extents! Be sure to also check out the AOI package in action on [use cases](./doc/articles/useCases.html) page. 
+
+
