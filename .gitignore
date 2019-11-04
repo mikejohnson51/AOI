@@ -4,3 +4,5 @@
 .Ruserdata
 .Rd2pdf27338
 ./paper/makefile
+pkgdown
+regress

@@ -5,7 +5,7 @@
 \title{Geocoding}
 \usage{
 geocode(location = NULL, zipcode = NULL, pt = FALSE, bb = FALSE,
-  full = FALSE)
+  all = FALSE, full = FALSE)
 }
 \arguments{
 \item{location}{\code{character}. Place name(s)}
@@ -15,6 +15,8 @@ geocode(location = NULL, zipcode = NULL, pt = FALSE, bb = FALSE,
 \item{pt}{\code{logical}. If TRUE point geometery is appended to the returned list()}
 
 \item{bb}{\code{logical}. If TRUE bounding box geometry is appended to the returned list()}
+
+\item{all}{if TRUE the point and bounding box representations are returned}
 
 \item{full}{\code{logical}. If TRUE all OSM attributes reuturned with query, else just the lat/long pair.}
 }

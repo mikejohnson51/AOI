@@ -7,6 +7,7 @@
 #' @param pt \code{logical}. If TRUE point geometery is appended to the returned list()
 #' @param bb \code{logical}. If TRUE bounding box geometry is appended to the returned list()
 #' @param full \code{logical}. If TRUE all OSM attributes reuturned with query, else just the lat/long pair.
+#' @param all if TRUE the point and bounding box representations are returned
 #' @return at minimum a data.frame of lat/lon coordinates. Possible list with appended spatial features of type \code{sf} or \code{sp}
 #' @export
 #' @author Mike Johnson
@@ -29,17 +30,16 @@
 #' }
 
 geocode = function(location = NULL,
-                   zipcode = NULL,
-                   pt = FALSE,
-                   bb = FALSE,
-                   all = FALSE,
-                   full = FALSE) {
-
+                   zipcode  = NULL,
+                   pt       = FALSE,
+                   bb       = FALSE,
+                   all      = FALSE,
+                   full     = FALSE) {
 
   if(!is.null(zipcode)){
 
-    locs = AOI::zipcodes[match(zipcode, as.character(AOI::zipcodes$zip)),]
-    locs = locs[complete.cases(locs),]
+    locs = zipcodes[match(as.numeric(zipcode), zipcodes$zip),] %>%
+      na.omit()
 
     failed = zipcode[!zipcode %in% locs$zip]
 
@@ -48,28 +48,27 @@ geocode = function(location = NULL,
     xx = geocode(location = as.character(failed), full = T)
 
     locs = rbind(locs, data.frame(
-      zip = failed,
-      city = strsplit(xx$display_name, ",")[[1]][1],
+      zip   = failed,
+      city  = strsplit(xx$display_name, ",")[[1]][1],
       state = strsplit(xx$display_name, ",")[[1]][2],
-      lat = xx$lat,
-      lon = xx$lon,
+      lat   = xx$lat,
+      lon   = xx$lon,
       timezone = NA,
       dst = NA))
     }
 
-  rownames(locs) = NULL
+    rownames(locs) = NULL
 
   } else if (length(location) == 1) {
-    df = geocodeOSM(location, pt, bb, all, full)
-    return(df)
+
+    return(geocodeOSM(location, pt, bb, all, full))
 
   } else {
-      latlon = do.call(rbind, lapply(as.list(location), function(p) {
-      geocodeOSM(p,
-                 pt = FALSE,
-                 bb = FALSE,
-                 full = full)
-    }))
+
+  geoHERE = function(x){ geocodeOSM(x, pt = FALSE, bb = FALSE, full = full) }
+
+  latlon = do.call(cbind, lapply(as.list(location), geoHERE)) %>%
+    data.frame()
 
     if (full) {
       locs = latlon
@@ -84,13 +83,14 @@ geocode = function(location = NULL,
     }
   }
 
-  points = sf::st_as_sf( x = locs, coords = c('lon', 'lat'), crs = AOI::aoiProj)
+  points = st_as_sf(x = locs,
+                    coords = c('lon', 'lat'),
+                    crs = aoiProj)
 
   if(!is.null(zipcode)){
-    points = suppressMessages(
-        suppressWarnings(
-      sf::st_intersection(points,getAOI(state='all')))
-    )
+    points = suppressMessages(suppressWarnings(
+      st_intersection(points,getAOI(state='all'))
+    ))
   }
 
   if(all){
@@ -102,7 +102,6 @@ geocode = function(location = NULL,
   } else {
     return(locs)
   }
-
 }
 
 

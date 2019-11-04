@@ -17,9 +17,9 @@ Addtional helper functions include \code{\link{bbox_st}} and \code{\link{bbox_sp
 Finally, \code{\link{describe}} breaks existing spatial features into \code{\link{getAOI}} parameters to improve the reproducibility of geometry generation.
 \cr
 
-Three core datasets are served with the package. The first contains the spatial geometries and attributes of all \code{\link{world}} countries. The second, the spatial geometries for US \code{\link{states}}
+Three core datasets are served with the package. The first contains the spatial geometries and attributes of all \code{\link{countries}} countries. The second, the spatial geometries for US \code{\link{states}}
 and the third contains the same for all US \code{\link{counties}}.
 \cr
 
-See the \href{https://github.com/mikejohnson51/AOI/blob/master/README.md}{README} on github, and the project webpage for examples \href{https://mikejohnson51.github.io/AOI/}{here}.
+See the \href{https://github.com/mikejohnson51/AOI}{README} on github, and the project webpage for examples \href{https://mikejohnson51.github.io/AOI/}{here}.
 }

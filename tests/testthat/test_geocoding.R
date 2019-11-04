@@ -8,10 +8,10 @@ test_that("check geocoding routines", {
   bb = geocode("UCSB", bb = TRUE)
   point3 = geocode(c("UCSB", "Goleta", "Stearns Wharf"))
   point3.full = geocode(c("UCSB", "Goleta", "Stearns Wharf"), full = T)
-  bb2 = geocode(c("UCSB", "Goleta", "Stearns Wharf"), pt = T, bb = TRUE)
+  bb2 = geocode(c("UCSB", "Goleta", "Stearns Wharf"), all  = TRUE)
 
   # Does geocode return a lat / long values that are numeric?
-  expect_true(length(df) == 2)
+  expect_true(length(df) == 3)
   expect_true(is.numeric(df$lat))
   expect_true(is.numeric(df$lon))
 
@@ -19,10 +19,10 @@ test_that("check geocoding routines", {
   expect_true(length(df.full) > 2)
 
   # Does tuning on point create a POINT geometry (sf)
-  expect_true(sf::st_geometry_type(point$pt) == 'POINT')
+  expect_true(sf::st_geometry_type(point) == 'POINT')
 
   # Does tuning on bb create a POLYGON geometry (sf)
-  expect_true(sf::st_geometry_type(bb$bb) == 'POLYGON')
+  expect_true(sf::st_geometry_type(bb) == 'POLYGON')
 
   #Does adding 3 input create three rows of data?
   expect_true(NROW(point3) == 3)
@@ -127,13 +127,13 @@ test_that("getAOI errors...", {
                "Only 'state' or 'clip' can be used. Set the other to NULL")
 
   expect_error(getAOI(state = 10),
-               "State must be a character value. Try surrounding in qoutes...")
+               "State must be a character value.")
 
   expect_error(getAOI(state = "TweedleDee"),
-               "State not recongized. Full names or abbreviations can be used. Please check spelling.")
+               "State not recongized. Full names or abbreviations can be used.")
 
   expect_error(getAOI(county = "Santa Barbara"),
-               "The use of 'county' requires the 'state' parameter be used as well.")
+               "The use of 'county' requires a 'state' parameter as well.")
 
   expect_error(getAOI(state = NULL, clip = NULL),
                "Requires a 'clip' or 'state' parameter to execute.")
@@ -151,24 +151,19 @@ test_that("getAOI & getFiat & getClip & defineClip", {
   expect_true(NROW(ALL) == 58)
 
   brazil = getAOI(country = "Brazil")
-  expect_true(brazil$NAME == "Brazil")
+  expect_true(brazil$name == "Brazil")
 
   brazil2 = getAOI(country = "BR")
-  expect_true(brazil2$NAME == "Brazil")
+  expect_true(brazil2$name == "Brazil")
 
   brazil3 = getAOI(country = "BRA")
-  expect_true(brazil3$NAME == "Brazil")
+  expect_true(brazil3$name == "Brazil")
 
   expect_error(getAOI(country = "BRAAAAAAA"),
                "no country found")
 
   expect_error(getAOI(state = "CA", county = "Dallas"),
                 "Dallas not a valid county in California.")
-
-  CAbb = getAOI(state = "CA", bb = T)
-  CAbb2 = getAOI(state = "CA") %>% getBoundingBox()
-
-  expect_true(identical(CAbb, CAbb2))
 
   conus = getAOI(state = "conus")
   expect_true(NROW(conus) == 49)
@@ -179,7 +174,8 @@ test_that("getAOI & getFiat & getClip & defineClip", {
   conus_u = getAOI(state = "conus", union = TRUE)
   expect_true(NROW(conus_u) == 1)
 
-  r = raster::raster(system.file("external/test.grd", package="raster"))
+  r = raster::raster(system.file("external/test.grd",
+                                 package="raster"))
   AOIr = getAOI(r) %>% st_transform(r@crs) %>%  bbox_st()
   expect_true(raster::extent(r)[1] == round(AOIr$xmin,0))
   expect_true(raster::extent(r)[2] == round(AOIr$xmax,0))
@@ -195,7 +191,7 @@ test_that("getAOI & getFiat & getClip & defineClip", {
   expect_true(identical(sf_obj, sp_obj))
 
   d1 = getAOI("UCSB")
-  expect_true(d1$place_id == 187839739)
+  expect_true(d1$request == "UCSB")
 
   d2 = getAOI(list("UCSB", 10, 10))
   d3 = getAOI(list("UCSB", 10, 10, center = "center"))
@@ -225,6 +221,16 @@ test_that("getAOI & getFiat & getClip & defineClip", {
 
    expect_error(getAOI(list(39, -190, 10, 10)),
                 'Longitude must be vector element 2 and between -180 and 180')
+
+   cali_mex = getAOI(state = "CA", country = "MX")
+   cali_county_mex = getAOI(state = "CA", county = 'all', country = "MX")
+
+   expect_true(all(cali_mex$NAME %in% c("California", "Mexico")) )
+   expect_true(nrow(cali_county_mex) == 59)
+
+   expect_error(geocode("UCSB", pt = T, bb = T), 'Only pt, bb, or all can be TRUE. Leave others as FALSE')
+
+
 })
 
 test_that("describe", {
@@ -247,8 +253,8 @@ test_that("describe", {
   expect_error(getAOI(list(10,10,10)), NULL)
   expect_error(getAOI(10), NULL)
 
-  CA=getAOI(state = "CA", bb = T)
-  CAsf=getAOI(clip = getAOI(state = "CA"))
+  CA=getAOI(state = "CA") %>% getBoundingBox()
+  CAsf = getAOI(clip = getAOI(state = "CA"))
   CAsp=getAOI(clip = as_Spatial(getAOI(state = "CA")))
 
   expect_true(identical(CA, CAsf))
@@ -257,7 +263,7 @@ test_that("describe", {
 })
 
 test_that("check...", {
-  AOI = geocode("Denver", pt = T, bb = T)
+  AOI = geocode("Denver", all = T)
   A = check(AOI)
   M = check(AOI, returnMap = T)
   Mnull = check()
@@ -278,21 +284,22 @@ test_that("check...", {
 
 test_that("check...", {
 
-  den = geocode_wiki("Denver")
+  den = geocode_wiki("Denver", pt = TRUE)
   brexit = suppressMessages(geocode_wiki("Brexit"))
   harvey = geocode_wiki("Hurricane Harvey")
   force_null = geocode_wiki(event = "XYZmikeZYX")
+
   expect_null(force_null)
-  noaa = geocode_wiki("NOAA")
 
-  expect_true(NROW(harvey) > 1)
+  noaa = geocode_wiki("NOAA", pt = TRUE)
 
+  expect_true(nrow(harvey) > 1)
 
   #checkClass(NROW)
   expect_true(sf::st_geometry_type(den) == 'POINT')
   expect_true(sf::st_geometry_type(noaa) == 'POINT')
   den_f = geocode_wiki("Denver", pt = F)
-  expect_true(length(den_f) == 2)
+  expect_true(length(den_f) == 3)
 
 })
 
@@ -310,9 +317,9 @@ test_that("zipcodes...", {
 
   expect_true(NROW(many) == 2)
   expect_true(NROW(single) == 1)
-  expect_true(sf::st_geometry_type(points$pt) == 'POINT')
-  expect_true(sf::st_geometry_type(bb$bb) == 'POLYGON')
-  expect_true(NROW(r$pt) == 9)
+  expect_true(sf::st_geometry_type(points) == 'POINT')
+  expect_true(sf::st_geometry_type(bb) == 'POLYGON')
+  expect_true(NROW(r) == 10)
 
 })
 

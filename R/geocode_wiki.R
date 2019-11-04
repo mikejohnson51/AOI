@@ -12,6 +12,7 @@
 #' }
 
 alt_page = function(loc, pt = FALSE){
+
   tt = xml2::read_html(paste0('https://en.wikipedia.org/w/index.php?search=',
                               loc,
                               '&title=Special%3ASearch&go=Go') )
@@ -106,7 +107,7 @@ geocode_wiki = function(event = NULL, pt = FALSE){
 
       if(length(search) == 0){
         y = y[y$X1 != y$X2,]
-        x = y[grepl(tolower(paste0(c( AOI::states$state_name, AOI::world$NAME), collapse = "|")), tolower(y$X2)),]
+        x = y[grepl(tolower(paste0(c( AOI::states$state_name, AOI::countries$name), collapse = "|")), tolower(y$X2)),]
 
         all = strsplit(gsub(", ", ",", x[1,2]), ",")[[1]]
         df = list()

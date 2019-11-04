@@ -10,7 +10,7 @@ getAOI(clip = NULL, country = NULL, state = NULL, county = NULL,
 \arguments{
 \item{clip}{\code{spatial}. \code{raster}, \code{sf} or a \code{list} object (see details for list parameters)}
 
-\item{country}{\code{character}. Full name, ISO 3166-1 2 or 3 digit code. Not case senstive}
+\item{country}{\code{character}. Full name, ISO 3166-1 2 or 3 digit code. Not case senstive. Data comes from Natural Earth and CIA Worldfact book.}
 
 \item{state}{\code{character}. Full name or two character abbriviation. Not case senstive. If \code{state = 'conus'}, the lower 48 states will be returned. If \code{state = 'all'}, all states will be returned.}
 
@@ -21,13 +21,13 @@ getAOI(clip = NULL, country = NULL, state = NULL, county = NULL,
 \item{union}{\code{logical}. If TRUE objects are unioned into a single object}
 }
 \value{
-a spatial (sp/sf) geometry projected to \emph{EPSG:4269}.
+a sf geometry projected to \emph{EPSG:4269}.
 }
 \description{
 Generate a spatial geometry from:
 \enumerate{
              \item  Country name, 2-digit or 3-digit ISO abbriviation(s)
-             \item  US state name(s)
+             \item  US state name(s) or abbreviation
              \item  US state, county pair(s)
              \item  a spatial, sf or raster object
              \item  a clip unit (see details)
@@ -39,7 +39,7 @@ To have greater control over the clip unit it can be defined as a list with a mi
                               \enumerate{
                                      \item  A point: \itemize{
                                             \item  'place name' (\code{character}) ex: "UCSB" - or -
-                                            \item 'lat/lon' pair: ex: "c(-36, -120)"
+                                            \item 'lat/lon' pair: ex: "-36, -120"
                                          }
                                      \item  A bounding box height (\code{numeric}) \itemize{
                                              \item{in miles} ex: 10
@@ -49,7 +49,7 @@ To have greater control over the clip unit it can be defined as a list with a mi
                                          }
                                      }
 
-                                     The bounding box is always drawn in relation to the point By default the point is treated
+                                     The bounding box is always drawn in relation to the point. By default the point is treated
                                      as the center of the box. To define the realtive location of the point to the bounding box,
                                      a fourth input can be used:
                                      \enumerate{
@@ -115,6 +115,8 @@ Acceptable variations include:
 # Get AOI defined by 10 mile2 bounding box using the 'KMART near UCSB' as lower left corner
     getAOI(clip = list('KMART near UCSB', 10, 10, 'lowerleft'))
 }
+
+
 }
 \author{
 Mike Johnson

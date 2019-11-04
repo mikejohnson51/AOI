@@ -40,10 +40,9 @@
 
 describe = function(AOI, full = FALSE, km = FALSE){
 
-  #if(checkClass(AOI, 'sf')){ AOI = sf::as_Spatial(AOI)}
   if(checkClass(AOI, 'raster')){ AOI = getBoundingBox(AOI)}
 
-  bb = AOI %>% sf::st_transform(AOI::aoiProj) %>% AOI::bbox_st()
+  bb = st_transform(AOI, aoiProj) %>% bbox_st()
 
   latCent = (bb$ymin + bb$ymax) / 2
 
@@ -67,13 +66,10 @@ describe = function(AOI, full = FALSE, km = FALSE){
     rc = revgeocode(point = c(df$lat, df$lon))
     if (!is.null(rc$match_addr)) {
       df[["name"]]    = rc$match_addr
-    # } else if (!is.null(rc$city)) {
-    #   df[["name"]]   = rc$city
-    # } else if (!is.null(rc$county)) {
-    #   df[["name"]] = rc$county
     } else {
       df[["name"]] = rc[1]
     }
+
     df[['area']] = df$height * df$width
   }
 
