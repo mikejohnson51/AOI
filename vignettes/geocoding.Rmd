@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
   fig.height = 4
 )
 
-devtools::load_all()
+library(AOI)
 library(kableExtra)
 library(leaflet)
 library(sf)
@@ -33,6 +33,7 @@ Basic geocoding functionality converts a place name into a lat/long coordinate p
 ```{r, eval = F}
 geocode("UCSB") 
 ```
+
 ```{r, echo = FALSE}
 geocode("UCSB") %>% 
   kable() %>% 
@@ -58,20 +59,14 @@ geocode(zipcode = "80906") %>%
 Sometimes we want to geocode something that happen but that isn't a set place that would appear in the OSM gazetteer. In these case AOI offers a beta tool to geocode by scrapping Wikipedia.
 
 ```{r, eval = F}
-x = lapply(c("Deepwater Horizion", 
+x = geocode(event = c("Deepwater Horizion", 
              "JFK Assasination", 
-             "I have a dream speech"),
-           geocode_wiki)
-
-do.call(rbind, x)
+             "I have a dream speech"))
 ```
 ```{r, echo = F}
-x = lapply(c("Deepwater Horizion", 
+geocode(event = c("Deepwater Horizion", 
              "JFK Assasination", 
-             "I have a dream speech"),
-           geocode_wiki)
-
-do.call(rbind,x) %>% 
+             "I have a dream speech")) %>% 
   kable() %>% 
   kable_styling()
 ```
@@ -81,11 +76,11 @@ do.call(rbind,x) %>%
 The oppisite of forward geocodeing is reverse geocodeing (going from lat/lon to place name). AOI offeres a reverse geocoding service that integrates results from ESRIs and OSMs APIs.
 
 ```{r, eval = FALSE}
-revgeocode(c(37, -119))
+geocode_rev(c(37, -119))
 ```
 
 ```{r, echo = F}
-revgeocode(c(37, -119)) %>% 
+geocode_rev(c(37, -119)) %>% 
   t() %>% 
   kable() %>% 
   kable_styling() 
@@ -111,9 +106,8 @@ geocode(c("UCSB", "Goleta", "State Street, Santa Barbara")) %>%
 ## Return Points
 
 ```{r}
-do.call("rbind",
-        lapply(c("UCSB", "Goleta", "State Street, Santa Barbara"), 
-               function(x) geocode(x, pt= T)) ) %>% check(returnMap = T)
+geocode(location = c("UCSB", "Goleta", "State Street, Santa Barbara"), pt = TRUE) %>%
+  aoi_map(returnMap = T)
 
 ```
 
@@ -123,8 +117,8 @@ Setting `bb = TRUE` will return the OSM defined bounding box of the queried plac
 
 ```{r}
 
-geocode("Garden of the Gods", bb = T) %>% 
-  check(returnMap = T)
+geocode("Garden of the Gods", bb = TRUE) %>% 
+  aoi_map(returnMap = T)
 
 ```
  
@@ -134,11 +128,8 @@ If you want the coordinate, point, and bounding box realizations of a query, set
  
 ```{r}
 
-call = geocode(location = c("Garden of the Gods", "Quail Lake, Colorado"), all = T) 
-
-str(call, max.level = 1)
-
-check(call, returnMap = T)
+geocode(location = c("Garden of the Gods", "Quail Lake, Colorado"), all = TRUE) %>%
+  aoi_map(returnMap = TRUE)
 
 ```
  
@@ -151,5 +142,8 @@ geocode("Goleta", full= TRUE)
 ```
 
 ```{r, echo = F}
-geocode("Goleta", full= TRUE) %>% t() %>% kable %>% kable_styling()
+geocode("Goleta", full= TRUE) %>% 
+  t() %>% 
+  kable %>% 
+  kable_styling()
 ```

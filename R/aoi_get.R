@@ -99,22 +99,27 @@
 #'
 #'
 
-aoi_get = function(x = NULL, country = NULL, state = NULL, county = NULL,
+aoi_get = function(x= NULL, region = NULL, country = NULL, state = NULL, county = NULL,
                   km = FALSE, union = FALSE) {
 
 # Error Catching
 
   if (is.null(country)) {
 
+    if(is.null(region)){
+
     if (!is.null(state)) {
 
-      if (!is.null(x)) { stop("Only 'state' or 'clip' can be used. Set the other to NULL") }
+      if (!is.null(x)) { stop("Only 'state' or 'x' can be used. Set the other to NULL") }
 
       for (value in state) {
 
         if (!is.character(value)) {stop("State must be a character value.")}
 
-        if (!(toupper(value) %in% c(state.abb, state.name, 'CONUS', 'ALL'))) {
+        if (!(toupper(value) %in% c(toupper(states$state_abbr),
+                                    toupper(states$state_name),
+                                    'CONUS',
+                                    'ALL'))) {
           stop("State not recongized. Full names or abbreviations can be used.")
         }
       }
@@ -123,18 +128,18 @@ aoi_get = function(x = NULL, country = NULL, state = NULL, county = NULL,
       if (!is.null(county)) { stop("The use of 'county' requires a 'state' parameter as well.")}
       if ( is.null(x))   { stop("Requires a 'x' or 'state' parameter to execute.")}
     }
+    }
   }
 
-methods::is(x, 'Raster')
 # Fiat Boundary Defintion (Exisiting Spatial/Raster Feature or getFiat())
 
   shp <- if (is.null(x)) {
-    getFiat(country = country, state = state, county = county)
+    getFiat(country = country, region = region, state = state, county = county)
   } else if (any(
     methods::is(x, 'Raster'),
     methods::is(x, 'Spatial'),
     methods::is(x, 'sf'))) {
-    st_transform(bbox_get(x), aoiProj)
+      st_transform(bbox_get(x), aoiProj)
   } else {
     getClip(x, km)
   }

@@ -40,7 +40,7 @@ test_that("check geocoding routines", {
 
 test_that("geocodeOSM throws correct errors", {
   # Make sure geocode does not process numeric inputs
-  expect_error(geocode(37), "\nInput location is not a place name. \nYou might be looking for reverse geocodeing.\nTry: AOI::revgeocode")
+  expect_error(geocode(37), "\nInput location is not a place name. \nYou might be looking for reverse geocodeing.\nTry: AOI::geocode_rev")
 
   # Make sure unfindable locations return NA values but dont break the routine
   bad = geocode("TweedleDee_TweedleDumb")
@@ -48,35 +48,38 @@ test_that("geocodeOSM throws correct errors", {
   expect_true(is.na(bad$lon))
 })
 
-test_that("bbox_sp works as expected...", {
+test_that("bbox_get works as expected...", {
 
- yy = bbox_sp(c(37,38,-120,-119))
+ yy = bbox_get(c(37,38,-120,-119))
  expect_true(sf::st_geometry_type(yy) == 'POLYGON')
 
- r = raster::raster(system.file("external/test.grd", package="raster"))
- yy2 = bbox_sp(r)
+ yy2 = aoi_get(state = 'CA') %>% bbox_get()
  expect_true(sf::st_geometry_type(yy2) == 'POLYGON')
+
+ r = raster::raster(system.file("external/test.grd", package="raster"))
+ yy3 = bbox_get(r)
+ expect_true(sf::st_geometry_type(yy3) == 'POLYGON')
 
 })
 
 
-test_that("getBoundingBox and bbox_st work as expected...", {
+test_that("bbox_get and bbox_coords work as expected...", {
 
-  A  = getAOI("UCSB")
-  bbsf = getBoundingBox(A)
-  bbsf_vec = bbox_st(A)
+  A  = aoi_get("UCSB")
+  bbsf = bbox_get(A)
+  bbsf_vec = bbox_coords(A)
   expect_true(sf::st_geometry_type(bbsf) == 'POLYGON')
   expect_true(length(bbsf_vec) == 4)
 
-  A  = getAOI("UCSB") %>% sf::as_Spatial()
-  bbsp = getBoundingBox(A)
-  bbsp_vec = bbox_st(A)
+  A  = A %>% sf::as_Spatial()
+  bbsp = bbox_get(A)
+  bbsp_vec = bbox_coords(A)
   expect_true(sf::st_geometry_type(bbsp) == 'POLYGON')
   expect_true(length(bbsp_vec) == 4)
 
-  r = raster::raster(system.file("external/test.grd", package="raster"))
-  bbr = getBoundingBox(r)
-  bbr_vec = bbox_st(A)
+  # r = raster::raster(system.file("external/test.grd", package="raster"))
+  bbr = bbox_get(r)
+  bbr_vec = bbox_coords(r)
   expect_true(sf::st_geometry_type(bbr) == 'POLYGON')
   expect_true(length(bbr_vec) == 4)
 
@@ -84,146 +87,146 @@ test_that("getBoundingBox and bbox_st work as expected...", {
 
 
 test_that("is_inside...", {
-r = raster::raster(system.file("external/test.grd", package="raster"))
-lake_tahoe = getAOI(list("Lake Tahoe", 100, 100))
-CA = getAOI(state="CA")
-SB = getAOI(state = "CA", county = "Santa Barbara")
+#r = raster::raster(system.file("external/test.grd", package="raster"))
+lake_tahoe = aoi_get(list("Lake Tahoe", 100, 100))
+CA = aoi_get(state="CA")
+SB = aoi_get(state = "CA", county = "Santa Barbara")
 
 # Is Lake tahoe completly inside CA?
-expect_false(is_inside(CA, lake_tahoe, total = T))
-expect_true(is_inside(CA, lake_tahoe, total = F))
-expect_true(is_inside(CA, SB, total = F))
+expect_false(aoi_inside(CA, lake_tahoe, total = T))
+expect_true(aoi_inside(CA, lake_tahoe, total = F))
+expect_true(aoi_inside(CA, SB, total = F))
 
-expect_true(is_inside(CA, SB, total = F))
-expect_true(is_inside(sf::as_Spatial(CA), sf::as_Spatial(SB), total = F))
+expect_true(aoi_inside(CA, SB, total = F))
+expect_true(aoi_inside(sf::as_Spatial(CA), sf::as_Spatial(SB), total = F))
 
-expect_false(is_inside(r, SB))
-expect_false(is_inside(SB, r))
+expect_false(aoi_inside(r, SB))
+expect_false(aoi_inside(SB, r))
 
 })
 
-test_that("modify...", {
-  CA = getAOI(state="CA")
+test_that("aoi_buffer", {
+  CA = aoi_get(state="CA")
   pure_area = sf::st_area(CA)
-  grow = sf::st_area(modify(CA, 10))
-  shrink = sf::st_area(modify(CA, -10))
+  grow = sf::st_area(aoi_buffer(CA, 10))
+  shrink = sf::st_area(aoi_buffer(CA, -10))
 
   expect_true(pure_area > shrink)
   expect_true(pure_area < grow)
 
-  ucsb = getAOI("UCSB")
-  growUCSB_mile = modify(ucsb, 10)
-  growUCSB_km   = modify(ucsb, 10, km = TRUE)
+  ucsb = aoi_get("UCSB")
+  growUCSB_mile = aoi_buffer(ucsb, 10)
+  growUCSB_km   = aoi_buffer(ucsb, 10, km = TRUE)
 
-  do = describe(ucsb)
-  dm = describe(growUCSB_mile)
+  do = aoi_describe(ucsb)
+  dm = aoi_describe(growUCSB_mile)
 
   expect_true(round(do$height, 0) == (round(dm$height,0) -20))
   expect_true(sf::st_area(growUCSB_mile) > sf::st_area(growUCSB_km))
 })
 
 test_that("getAOI errors...", {
-  expect_error(getAOI(state = "CA", clip = "UCSB"),
+  expect_error(aoi_get(state = "CA", x = "UCSB"),
                "Only 'state' or 'clip' can be used. Set the other to NULL")
 
-  expect_error(getAOI(state = 10),
+  expect_error(aoi_get(state = 10),
                "State must be a character value.")
 
-  expect_error(getAOI(state = "TweedleDee"),
+  expect_error(aoi_get(state = "TweedleDee"),
                "State not recongized. Full names or abbreviations can be used.")
 
-  expect_error(getAOI(county = "Santa Barbara"),
+  expect_error(aoi_get(county = "Santa Barbara"),
                "The use of 'county' requires a 'state' parameter as well.")
 
-  expect_error(getAOI(state = NULL, clip = NULL),
+  expect_error(aoi_get(state = NULL, clip = NULL),
                "Requires a 'clip' or 'state' parameter to execute.")
 
   })
 
 test_that("getAOI & getFiat & getClip & defineClip", {
-  CA = getAOI(state = "CA")
+  CA = aoi_get(state = "CA")
   expect_true(CA$state_abbr == "CA")
 
-  SB = getAOI(state = "CA", county = "Santa Barbara")
+  SB = aoi_get(state = "CA", county = "Santa Barbara")
   expect_true(SB$name == "Santa Barbara")
 
-  ALL = getAOI(state = "CA", county = "all")
+  ALL = aoi_get(state = "CA", county = "all")
   expect_true(NROW(ALL) == 58)
 
-  brazil = getAOI(country = "Brazil")
+  brazil = aoi_get(country = "Brazil")
   expect_true(brazil$name == "Brazil")
 
-  brazil2 = getAOI(country = "BR")
+  brazil2 = aoi_get(country = "BR")
   expect_true(brazil2$name == "Brazil")
 
-  brazil3 = getAOI(country = "BRA")
+  brazil3 = aoi_get(country = "BRA")
   expect_true(brazil3$name == "Brazil")
 
-  expect_error(getAOI(country = "BRAAAAAAA"),
+  expect_error(aoi_get(country = "BRAAAAAAA"),
                "no country found")
 
-  expect_error(getAOI(state = "CA", county = "Dallas"),
+  expect_error(aoi_get(state = "CA", county = "Dallas"),
                 "Dallas not a valid county in California.")
 
-  conus = getAOI(state = "conus")
+  conus = aoi_get(state = "conus")
   expect_true(NROW(conus) == 49)
 
-  conus_all = getAOI(state = "all")
+  conus_all = aoi_get(state = "all")
   expect_true(NROW(conus_all) == 52)
 
-  conus_u = getAOI(state = "conus", union = TRUE)
+  conus_u = aoi_get(state = "conus", union = TRUE)
   expect_true(NROW(conus_u) == 1)
 
-  r = raster::raster(system.file("external/test.grd",
-                                 package="raster"))
-  AOIr = getAOI(r) %>% st_transform(r@crs) %>%  bbox_st()
+  # r = raster::raster(system.file("external/test.grd",
+  #                                package="raster"))
+  AOIr = aoi_get(r) %>% st_transform(r@crs) %>%  bbox_coords()
   expect_true(raster::extent(r)[1] == round(AOIr$xmin,0))
   expect_true(raster::extent(r)[2] == round(AOIr$xmax,0))
   expect_true(raster::extent(r)[3] == round(AOIr$ymin,0))
   expect_true(raster::extent(r)[4] == round(AOIr$ymax,0))
 
   fname <- system.file("shape/nc.shp", package="sf")
-  nc <- sf::st_read(fname)
+  nc <- sf::read_sf(fname)
 
-  sf_obj = getAOI(nc)
-  sp_obj = getAOI(sf::as_Spatial(nc))
+  sf_obj = aoi_get(nc)
+  sp_obj = aoi_get(sf::as_Spatial(nc))
 
   expect_true(identical(sf_obj, sp_obj))
 
-  d1 = getAOI("UCSB")
+  d1 = aoi_get("UCSB")
   expect_true(d1$request == "UCSB")
 
-  d2 = getAOI(list("UCSB", 10, 10))
-  d3 = getAOI(list("UCSB", 10, 10, center = "center"))
+  d2 = aoi_get(list("UCSB", 10, 10))
+  d3 = aoi_get(list("UCSB", 10, 10, center = "center"))
   expect_true(identical(d2,d3))
 
-   dul = getAOI(list("UCSB", 10, 10, center = "upperleft"))
-   dll = getAOI(list("UCSB", 10, 10, center = "lowerleft"))
-   dur = getAOI(list("UCSB", 10, 10, center = "upperright"))
-   dlr = getAOI(list("UCSB", 10, 10, center = "lowerright"))
+   dul = aoi_get(list("UCSB", 10, 10, center = "upperleft"))
+   dll = aoi_get(list("UCSB", 10, 10, center = "lowerleft"))
+   dur = aoi_get(list("UCSB", 10, 10, center = "upperright"))
+   dlr = aoi_get(list("UCSB", 10, 10, center = "lowerright"))
 
    expect_false(identical(dul, dll))
    expect_false(identical(dul, dur))
    expect_false(identical(dul, dlr))
 
-   num = getAOI(list(37,-119, 10, 10))
-   num2 = getAOI(list(37,-119, 10, 10, "center"))
+   num = aoi_get(list(37,-119, 10, 10))
+   num2 = aoi_get(list(37,-119, 10, 10, "center"))
    expect_true(sf::st_geometry_type(num) == 'POLYGON')
    expect_true(identical(num, num2))
 
-   expect_error(getAOI(list(899,-119, 10, 10)),
+   expect_error(aoi_get(list(899,-119, 10, 10)),
                 'Latitude must be vector element 1 and between -90 and 90')
-   expect_error(getAOI(list(-899,-119, 10, 10)),
+   expect_error(aoi_get(list(-899,-119, 10, 10)),
                 'Latitude must be vector element 1 and between -90 and 90')
 
-   expect_error(getAOI(list(39, 190, 10, 10)),
+   expect_error(aoi_get(list(39, 190, 10, 10)),
                 'Longitude must be vector element 2 and between -180 and 180')
 
-   expect_error(getAOI(list(39, -190, 10, 10)),
+   expect_error(aoi_get(list(39, -190, 10, 10)),
                 'Longitude must be vector element 2 and between -180 and 180')
 
-   cali_mex = getAOI(state = "CA", country = "MX")
-   cali_county_mex = getAOI(state = "CA", county = 'all', country = "MX")
+   cali_mex = aoi_get(state = "CA", country = "MX")
+   cali_county_mex = aoi_get(state = "CA", county = 'all', country = "MX")
 
    expect_true(all(cali_mex$NAME %in% c("California", "Mexico")) )
    expect_true(nrow(cali_county_mex) == 59)
@@ -233,29 +236,27 @@ test_that("getAOI & getFiat & getClip & defineClip", {
 
 })
 
-test_that("describe", {
+test_that("aoi_describe", {
 
-  r = raster::raster(system.file("external/test.grd", package="raster"))
-  xx =describe(getAOI(state= "CA"))
-  xxf = describe(getAOI(state = "CA"), full = T)
-  xxkm = describe(getAOI(state ="CA"), km = T)
+  xx   =  aoi_describe(aoi_get(state= "CA"))
+  xxf  = aoi_describe(aoi_get(state = "CA"), full = T)
+  xxkm = aoi_describe(aoi_get(state ="CA"), km = T)
 
-  yy = describe(getAOI("Fresno"), full =T)
-  describe(getAOI("Denver"), full = T)
-  y1 = describe(r, full = T)
+  yy = aoi_describe(aoi_get("Fresno"), full =T)
+  y1 = aoi_describe(r, full = T)
 
   expect_true(NCOL(xx) < NCOL(xxf))
   expect_true(xxkm$height < xx$height)
 
-  r = revgeocode("UCSB")
+  rev = geocode_rev("UCSB")
 
-  expect_error(getAOI(list(10,10,10, "upperleft")), NULL)
-  expect_error(getAOI(list(10,10,10)), NULL)
-  expect_error(getAOI(10), NULL)
+  expect_error(aoi_get(list(10,10,10, "upperleft")), NULL)
+  expect_error(aoi_get(list(10,10,10)), NULL)
+  expect_error(aoi_get(10), NULL)
 
-  CA=getAOI(state = "CA") %>% getBoundingBox()
-  CAsf = getAOI(clip = getAOI(state = "CA"))
-  CAsp=getAOI(clip = as_Spatial(getAOI(state = "CA")))
+  CA    = aoi_get(state = "CA") %>% bbox_get()
+  CAsf = aoi_get(x = aoi_get(state = "CA"))
+  CAsp=  aoi_get(x = as_Spatial(aoi_get(state = "CA")))
 
   expect_true(identical(CA, CAsf))
   expect_true(identical(CA, CAsp))

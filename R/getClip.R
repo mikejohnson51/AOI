@@ -17,9 +17,9 @@
 #' @author Mike Johnson
 
 
-getClip = function(clip, km = FALSE){
+getClip = function(x, km = FALSE){
 
-   fin      <- defineClip(clip, km = km)
+   fin      <- defineClip(x, km = km)
    location <- fin$location
    origin   <- fin$o
 
@@ -27,11 +27,11 @@ getClip = function(clip, km = FALSE){
     poly <- geocode(location, bb = TRUE, full = F)
   } else {
 
-    if(checkClass(location, "numeric")){
+    if(methods::is(location, "numeric")){
       location <- list(lat = location[1], lon = location[2])
     }
 
-    if(checkClass(location, "character")){
+    if(methods::is(location, "character")){
       location <- geocode(location = location, full = FALSE)
     }
 
@@ -73,7 +73,8 @@ getClip = function(clip, km = FALSE){
         east  <- location$lon + (2*dl)
     }
 
-    poly = make_polygon(north, east, south, west)
+    poly = bbox_get(c(west,east,south,north))
+
   }
     return(poly)
 }

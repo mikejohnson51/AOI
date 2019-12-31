@@ -7,7 +7,7 @@
 aoi_describe(AOI, full = FALSE, km = FALSE)
 }
 \arguments{
-\item{AOI}{any spatial object (\code{raster}, \code{sf}, \code{sp}).}
+\item{AOI}{a spatial object (\code{raster}, \code{sf}, \code{sp}).}
 
 \item{full}{if TRUE, reverse geocoding descriptions returned, else just lat, lon, width, height, and origin (default = FALSE)}
 
@@ -24,33 +24,11 @@ a data.frame of AOI descriptors including (at minimum):
 }
 }
 \description{
-Describe a spatial, raster or sf object in terms of a reproducable clip area (e.g. \code{\link{aoi_get}}) parmaters.
+Describe a spatial (sf/sp/raster) object in terms of a reproducable AOI  (e.g. \code{\link{aoi_get}}) parameters.
 }
 \examples{
-\dontrun{
- AOI = getAOI("UCSB") \%>\% describe()
-
- ```
- lat     :	34.41456
- lon     :	-119.8605796
- height  :	1
- width   :	3
- origin  :	center
- ```
-
- AOI = aoi_get("UCSB") \%>\% describe(full = TRUE)
-
- ```
- lat     :	34.41456
- lon     :	-119.8605796
- height  :	1
- width   :	3
- origin  :	center
- name    :	6650 Abrego Rd, Goleta, California, 93117
- area    :	3 square miles
- ```
-}
-}
-\author{
-Mike Johnson
+ {library(AOI)
+ aoi_get("UCSB") \%>\% aoi_describe()
+ aoi_get("UCSB") \%>\% aoi_describe(full = TRUE)
+ }
 }

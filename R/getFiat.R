@@ -7,8 +7,6 @@
 #' @param bb        \code{logical}. If \code{TRUE} then the bounding geometry of state/county is returned,  default is \code{FALSE} and returns fiat geometries
 #' @return a \code{SpatialPolygons} object projected to \emph{EPSG:4269}.
 #' @export
-#' @seealso \code{\link{getClip}}
-#' @seealso \code{\link{getAOI}}
 #' @keywords internal
 #' @examples
 #' \dontrun{
@@ -27,16 +25,34 @@
 #'
 #' @author Mike Johnson
 
-getFiat <- function(country = NULL, state = NULL, county = NULL) {
+getFiat <- function(region = NULL, country = NULL, state = NULL, county = NULL) {
 
   state.abb  = states$state_abbr
   state.name = states$state_name
 
-  map1 <- map2 <- map3 <- NULL
+  map0 <- map1 <- map2 <- map3 <- NULL
 
   find = function(x, vec, full){
     full[tolower(vec) %in% tolower(x)]
   }
+
+  if(!is.null(region)){
+    region = tolower(region)
+    region = gsub("south", "southern", region)
+    region = gsub("australia", "oceania", region)
+    region = gsub("north", "northern", region)
+    region = gsub("east", "eastern", region)
+    region = gsub("west", "western", region)
+
+
+    country <- unlist(c(
+      sapply(region, find, vec = countries$subregion,   full = countries$name),
+      sapply(region, find, vec = countries$continent,   full = countries$name)
+    ))
+
+    map0 = countries[countries$name %in% country,]
+  }
+
 
   if(!is.null(country)){
 
@@ -86,8 +102,9 @@ getFiat <- function(country = NULL, state = NULL, county = NULL) {
   }
 
   map  = tryCatch({
-    rbind(map1, map2, map3)
+    rbind(map0, map1, map2, map3)
   }, error = function(e) {
+    if(!is.null(map0)){ map0 = mutate(map0, 'NAME' = map0$name) %>% select('NAME')}
     if(!is.null(map1)){ map1 = mutate(map1, 'NAME' = map1$name) %>% select('NAME')}
     if(!is.null(map2)){ map2 = mutate(map2, 'NAME' = map2$state_name) %>% select('NAME')}
     if(!is.null(map3)){ map3 = mutate(map3, 'NAME' = map3$name)  %>% select('NAME')}

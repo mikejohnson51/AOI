@@ -13,14 +13,15 @@
 #' }
 #' @export
 #' @examples
-#'  library(AOI)
+#'  {library(AOI)
 #'  aoi_get("UCSB") %>% aoi_describe()
 #'  aoi_get("UCSB") %>% aoi_describe(full = TRUE)
-#' }
+#'  }
+
 
 aoi_describe = function(AOI, full = FALSE, km = FALSE){
 
-  if(methods::is(AOI, 'raster')){ AOI = bbox_get(AOI)}
+  if(methods::is(AOI, 'Raster')){ AOI = bbox_get(AOI)}
 
   bb = st_transform(AOI, aoiProj) %>% bbox_coords()
 

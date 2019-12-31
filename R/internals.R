@@ -23,7 +23,7 @@ geocodeOSM = function (location, pt = FALSE, bb = FALSE, all = FALSE, full = FAL
   }
 
   if(class(location) != 'character'){
-    stop("\nInput location is not a place name. \nYou might be looking for reverse geocodeing.\nTry: AOI::revgeocode")
+    stop("\nInput location is not a place name. \nYou might be looking for reverse geocodeing.\nTry: AOI::geocode_rev")
   }
 
   URL <- paste0("http://nominatim.openstreetmap.org/search?q=",
@@ -54,7 +54,7 @@ geocodeOSM = function (location, pt = FALSE, bb = FALSE, all = FALSE, full = FAL
 
   point = st_as_sf(x = coords, coords = c("lon", "lat"), crs = aoiProj)
   tmp.bb = unlist(s$boundingbox)
-  bbs = bbox_sp(paste(tmp.bb[3], tmp.bb[4], tmp.bb[1], tmp.bb[2], sep = ","))
+  bbs = bbox_get(paste(tmp.bb[3], tmp.bb[4], tmp.bb[1], tmp.bb[2], sep = ","))
   bbs$request = s$request
   bbs = if(full){merge(bbs, s)}else{bbs}
 
@@ -66,7 +66,6 @@ geocodeOSM = function (location, pt = FALSE, bb = FALSE, all = FALSE, full = FAL
 
 }
 
-
 #' @title Pipe Re-export
 #' @description re-export magrittr pipe operator
 #' @importFrom magrittr %>%
@@ -75,32 +74,6 @@ geocodeOSM = function (location, pt = FALSE, bb = FALSE, all = FALSE, full = FAL
 #' @export
 
 NULL
-
-#' @title checkClass
-#' @description A function to check the class of an object, will return TRUE if `x`` is of class `type``
-#' @param x an object
-#' @param type a \code{character} class to check against
-#' @return logical
-#' @export
-#' @examples
-#' \dontrun{
-#' sf = getAOI(state = "CA", sf = TRUE)
-#' checkClass(sf, "sf")
-#' }
-#' @author Mike Johnson
-
-
-checkClass = function(x, type) {
-
-  fun = function(type, x){
-    grepl(
-      pattern = type, class(x),
-      ignore.case = TRUE,fixed = FALSE
-    )}
-
-  any(sapply(type, fun, x = x ) > 0)
-}
-
 
 #' @title defineClip
 #' @description Parse a clip list from user input. \code{defineClip} parses user supplied lists to a format usable by \code{\link{getClip}}
@@ -112,49 +85,49 @@ checkClass = function(x, type) {
 #' @return a 4-element list of features defining an AOI
 #' @author Mike Johnson
 
-defineClip = function(clip = NULL, km = FALSE) {
+defineClip = function(x = NULL, km = FALSE) {
 
   # AOI defined by location and bounding box width and height
 
-  if (length(clip) == 1) {
-    if(!checkClass(clip, 'character')){
-      stop("If only one item is entered for 'clip' it must be a character place name")
+  if (length(x) == 1) {
+    if(!methods::is(x, 'character')){
+      stop("If only one item is entered for 'x' it must be a character place name")
     } else{
-      location <- clip
+      location <- x
       h        <- NULL
       w        <- NULL
       o        <- NULL
     }
   }
 
-  if (length(clip) == 3) {
-    if (all(is.numeric(unlist(clip)))) {
+  if (length(x) == 3) {
+    if (all(is.numeric(unlist(x)))) {
       stop(
-        paste0("A clip with length 3 must be defined by:\n",
+        paste0("A x with length 3 must be defined by:\n",
                "1. A name (i.e 'UCSB') (character)\n",
                "2. A bound box height (in miles) (numeric)\n",
                "3. A bound box width (in miles) (numeric)"
         ))
     } else {
-      location <- clip[[1]]
-      h        <- clip[[2]]
-      w        <- clip[[3]]
+      location <- x[[1]]
+      h        <- x[[2]]
+      w        <- x[[3]]
       o        <- 'center'
     }
   }
 
   # AOI defined by (centroid lat, long, and bounding box width and height) or (loaction, width, height, origin)
 
-  if (length(clip) == 4) {
+  if (length(x) == 4) {
 
     if (any(
-      !is.numeric(clip[[2]]),
-      !is.numeric(clip[[3]]),
-      all(!is.character(clip[[1]]), is.character(clip[[4]])),
-      all(is.character(clip[[1]]), !is.character(clip[[4]]))
+      !is.numeric(x[[2]]),
+      !is.numeric(x[[3]]),
+      all(!is.character(x[[1]]), is.character(x[[4]])),
+      all(is.character(x[[1]]), !is.character(x[[4]]))
     )) {
       stop(
-        paste0("A clip with length 4 must be defined by:\n",
+        paste0("A x with length 4 must be defined by:\n",
                "1. A latitude (numeric)",
                "2. A longitude (numeric)\n",
                "2. A bounding box height (in miles) (numeric)\n",
@@ -167,52 +140,52 @@ defineClip = function(clip = NULL, km = FALSE) {
         ))
 
     } else if (all(
-      is.numeric(clip[[1]]),
-      is.numeric(clip[[2]]),
-      is.numeric(clip[[3]]),
-      is.numeric(clip[[4]])
+      is.numeric(x[[1]]),
+      is.numeric(x[[2]]),
+      is.numeric(x[[3]]),
+      is.numeric(x[[4]])
     )) {
-      if (clip[[1]] <= -90 | clip[[1]] >= 90) {
+      if (x[[1]] <= -90 | x[[1]] >= 90) {
         stop("Latitude must be vector element 1 and between -90 and 90")
       }
 
-      if (clip[[2]] <=-179.229655487 | clip[[2]] >= 179.856674735) {
+      if (x[[2]] <=-179.229655487 | x[[2]] >= 179.856674735) {
         stop("Longitude must be vector element 2 and between -180 and 180")
       }
 
-      location <- c(clip[[1]], clip[[2]])
-      h        <- clip[[3]]
-      w        <- clip[[4]]
+      location <- c(x[[1]], x[[2]])
+      h        <- x[[3]]
+      w        <- x[[4]]
       o        <- "center"
 
     } else if (all(
-      is.character(clip[[1]]),
-      is.numeric(clip[[2]]),
-      is.numeric(clip[[3]]),
-      is.character(clip[[4]])
+      is.character(x[[1]]),
+      is.numeric(x[[2]]),
+      is.numeric(x[[3]]),
+      is.character(x[[4]])
     )) {
-      location <- clip[[1]]
-      h        <- clip[[2]]
-      w        <- clip[[3]]
-      o        <- clip[[4]]
+      location <- x[[1]]
+      h        <- x[[2]]
+      w        <- x[[3]]
+      o        <- x[[4]]
 
     }
   }
 
   # if AOI defined by lat, long, width, height, origin
 
-  if (length(clip) == 5) {
+  if (length(x) == 5) {
     if (all(
-      is.numeric(clip[[1]]),
-      is.numeric(clip[[2]]),
-      is.numeric(clip[[3]]),
-      is.numeric(clip[[4]]),
-      is.character(clip[[5]])
+      is.numeric(x[[1]]),
+      is.numeric(x[[2]]),
+      is.numeric(x[[3]]),
+      is.numeric(x[[4]]),
+      is.character(x[[5]])
     )) {
-      location <- c(clip[[1]], clip[[2]])
-      h        <- clip[[3]]
-      w        <- clip[[4]]
-      o        <- clip[[5]]
+      location <- c(x[[1]], x[[2]])
+      h        <- x[[3]]
+      w        <- x[[4]]
+      o        <- x[[5]]
     }
   }
 
@@ -225,29 +198,6 @@ defineClip = function(clip = NULL, km = FALSE) {
 }
 
 
-#' @title make polygons
-#' @description turn coordinates into polygon
-#' @param north max latitude
-#' @param east  max longitude
-#' @param south min latitude
-#' @param west  min latitude
-#' @param crs   coordinate reference system (default aoiProj)
-#' @return sf polygon
-#' @export
 
-make_polygon = function(north, east, south, west, crs = aoiProj){
-
-  matrix(c(west, south,
-           east, south,
-           east, north,
-           west, north,
-           west, south),
-         ncol = 2, byrow = TRUE) %>%
-    list() %>%
-    st_polygon() %>%
-    st_sfc() %>%
-    st_sf(crs = crs)
-
-}
 
 

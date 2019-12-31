@@ -4,7 +4,7 @@
 \alias{getFiat}
 \title{Get State of County Spatial Boundary}
 \usage{
-getFiat(country = NULL, state = NULL, county = NULL)
+getFiat(region = NULL, country = NULL, state = NULL, county = NULL)
 }
 \arguments{
 \item{country}{\code{character}. Full name, ISO 3166-1 2 or 3 digit code. Not case senstive}
@@ -40,11 +40,6 @@ Boundaries come from the 2017 US Census TIGER Dataset and are projected to \emph
    getFiat(state = "CA", county = c("San Luis Obispo", "Santa Barbara", "Ventura"))
 }
 
-}
-\seealso{
-\code{\link{getClip}}
-
-\code{\link{getAOI}}
 }
 \author{
 Mike Johnson

@@ -4,8 +4,8 @@
 \alias{aoi_get}
 \title{Get Area of Interest (AOI) geometry}
 \usage{
-aoi_get(x = NULL, country = NULL, state = NULL, county = NULL,
-  km = FALSE, union = FALSE)
+aoi_get(x = NULL, region = NULL, country = NULL, state = NULL,
+  county = NULL, km = FALSE, union = FALSE)
 }
 \arguments{
 \item{x}{\code{spatial}. \code{raster}, \code{sf} or a \code{list} object (see details for list parameters)}

@@ -107,12 +107,12 @@ geocode_wiki = function(event = NULL, pt = FALSE){
 
       if(length(search) == 0){
         y = y[y$X1 != y$X2,]
-        x = y[grepl(tolower(paste0(c( AOI::states$state_name, AOI::countries$name), collapse = "|")), tolower(y$X2)),]
+        x = y[grepl(tolower(paste0(c(states$state_name, countries$name), collapse = "|")), tolower(y$X2)),]
 
         all = strsplit(gsub(", ", ",", x[1,2]), ",")[[1]]
         df = list()
         for(i in 1:length(all)){
-          df[[i]] = AOI::geocode(all[i], full = F)
+          df[[i]] = geocode(all[i], full = F)
         }
 
         df = cbind(all, do.call(rbind, df))
@@ -126,16 +126,12 @@ geocode_wiki = function(event = NULL, pt = FALSE){
         while(NROW(df) == 0){
           i = i + 1
           def = gsub('/"', "", do.call(paste, list(s1[c(1:i)])))
-          df = AOI::geocode(def, full = T)
+          df = geocode(def, full = T)
         }
       }
     }
   }
 
-
-  # if(is.null(df)){
-  #   message("No data found")
-  # } else{
     if(pt){
       points = sf::st_as_sf(x = df, coords = c('lon', 'lat'), crs = 4269)
       return(points)
