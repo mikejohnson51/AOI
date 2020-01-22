@@ -1,0 +1,143 @@
+---
+title: "Use Cases"
+vignette: >
+  %\VignetteIndexEntry{pkgdown}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 6, 
+  fig.height = 4
+)
+
+library(HydroData)
+library(climateR)
+library(nhdplusTools)
+library(AOI)
+library(soilDB)
+library(raster)
+library(nwm)
+library(ggplot2)
+library(dataRetrieval)
+library(osmdata)
+```
+
+AOI is intended as a package to interface with others in the R spatail ecosystem. Here a few examples are outlined showing how AOI can facliate calls to other packages that reuqre a spatial unit or bounding box for spatail extraction or processing:
+
+# HydroData
+
+In this first example HydroData is used to find USGS NWIS gages in an AOI defined by the 10 square mile area around the UCSB campus. The USGS dataRetrival package is then used to extract the historical daily flow series for those stations from 2010 to present.
+
+```{r}
+# library(HydroData)
+
+AOI = aoi_get(list("UCSB", 10, 10)) 
+
+NWIS  = findNWIS(AOI) 
+flows = readNWISdv(siteNumbers = NWIS$nwis$site_no, 
+                   parameterCd = "00060",
+                   startDate = "2010-01-10") %>% 
+  renameNWISColumns()
+
+flows %>% 
+  ggplot(aes(x = Date, y = Flow, col = site_no )) + 
+  geom_line() + 
+  labs(title = "NWIS Streamflow Observations 2010-2019", 
+       y = "Streamflow (Q, cfs)",
+       x = "Date") +
+  #scale_x_datetime(labels = scales::date_format("%D\n %H:%M")) +
+  theme_bw()
+
+
+aoi_map(NWIS, returnMap = TRUE)
+```
+
+HydroData can also be used to find elevation rasters for an AOI.
+
+```{r}
+
+AOI = aoi_get("UCSB") %>% 
+  findElev()
+
+raster::plot(AOI$elev)
+
+
+```
+
+# ClimateR
+
+ClimateR provides access to climate data subsets by AOI. In this example we use climateR to find precipiation and temperture data for the AOI of California on January 1st, 2020.
+
+```{r}
+AOI = aoi_get(state = "CA") %>% 
+  getGridMET(startDate = "2020-01-01", param = c("tmax", "prcp"))
+
+raster::stack(AOI$prcp, AOI$tmax) %>% 
+  plot()
+
+```
+
+# nhdplusTools
+
+The nhdplusTools package provides a toolset for working with the National Hydrographic dataset. Here we use this package to generate a plot of the NHD for the 20 square mile area surrounding Boulder, Colorado. 
+
+```{r}
+# library(nhdplusTools)
+
+AOI = aoi_get(list("Boulder, Colorado", 20, 20)) %>% 
+  sf::st_bbox()
+
+plot_nhdplus(bbox = AOI)
+
+```
+
+## SoilDB
+
+The soilDB R package provides a collection of functions for reading data from USDA-NCSS soil databases. Here we look at getting the spatial and tabular soil data for the Lake Tahoe region.
+
+```{r}
+# library(soilDB)
+
+bb = aoi_get("Lake Tahoe")
+  
+x = bbox_coords(bb) %>% 
+  mapunit_geom_by_ll_bbox() %>% 
+  sf::st_as_sf()
+
+plot(x['mukey'])
+
+# get map unit data for matching map unit keys
+in.statement <- format_SQL_in_statement(unique(x$mukey))
+q <- paste("SELECT mukey, muname FROM mapunit WHERE mukey IN ", in.statement, sep="")
+res <- SDA_query(q)
+
+head(res)
+
+```
+
+
+```{r}
+# library(nwm)
+# library(ggplot2)
+
+AOI = aoi_get(list("National Water Center", 10, 10)) %>% 
+  downloadNWM(filelist = getFilelist(n = 10), 
+              param = 'streamflow')
+
+AOI$streamflow %>% 
+  ggplot(aes(x = DateTime, y = streamflow, group = COMIDS )) + 
+  geom_line() + 
+  labs(title = "NWM Streamflow Forecasts", 
+       y = "Streamflow (Q)",
+       x = "DateTime (UTC)") +
+  scale_x_datetime(labels = scales::date_format("%D\n %H:%M")) +
+  theme_bw()
+
+```
+
+

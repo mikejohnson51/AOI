@@ -21,9 +21,9 @@
 
 aoi_describe = function(AOI, full = FALSE, km = FALSE){
 
-  if(methods::is(AOI, 'Raster')){ AOI = bbox_get(AOI)}
+  AOI = make_sf(AOI)
 
-  bb = st_transform(AOI, aoiProj) %>% bbox_coords()
+  bb = st_transform(AOI, 4269) %>% bbox_coords()
 
   latCent = (bb$ymin + bb$ymax) / 2
 
@@ -45,16 +45,11 @@ aoi_describe = function(AOI, full = FALSE, km = FALSE){
 
   if(full) {
     rc = geocode_rev(x = c(df$lat, df$lon))
-    if (!is.null(rc$match_addr)) {
-      df[["name"]]    = rc$match_addr
-    } else {
-      df[["name"]] = rc[1]
-    }
+
+    df = cbind(df, rc)
 
     df[['area']] = df$height * df$width
   }
-
-  rownames(df) = NULL
 
   return(df)
 

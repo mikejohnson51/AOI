@@ -3,7 +3,9 @@ pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
   aoi_fiat: aoi_fiat.html
+  bbox_functions: bbox_functions.html
   geocoding: geocoding.html
+  use_cases: use_cases.html
 urls:
   reference: https://github.com/mikejohnson51/AOI/reference
   article: https://github.com/mikejohnson51/AOI/articles

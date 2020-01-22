@@ -44,7 +44,9 @@
                                                         <meta property="og:title" content="Get Area of Interest (AOI) geometry — aoi_get" />
                                                               <meta property="og:description" content="Generate a spatial geometry from:
 Country name, 2-digit or 3-digit ISO abbriviation(s)
+Country Region (Asia, Africa, Europe, South America, Antarctica, Seven seas (open ocean), Oceania (Australia), North America,
 US state name(s) or abbreviation
+US region (Northeast, South, North Central, West)
 US state, county pair(s)
 a spatial, sf or raster object
 a clip unit (see details)
@@ -123,7 +125,10 @@ a clip unit (see details)
       <a href="../articles/aoi_generic.html">Generating AOIs</a>
     </li>
     <li>
-      <a href="../articles/bbox.html">Bounding Boxes</a>
+      <a href="../articles/bbox_functions.html">Bounding Boxes</a>
+    </li>
+    <li>
+      <a href="../articles/bbox.html">Use Cases</a>
     </li>
   </ul>
 </li>
@@ -163,7 +168,9 @@ a clip unit (see details)
     <div class="ref-description">
     <p>Generate a spatial geometry from:</p><ol>
 <li><p>Country name, 2-digit or 3-digit ISO abbriviation(s)</p></li>
+<li><p>Country Region (Asia, Africa, Europe, South America, Antarctica, Seven seas (open ocean), Oceania (Australia), North America,</p></li>
 <li><p>US state name(s) or abbreviation</p></li>
+<li><p>US region (Northeast, South, North Central, West)</p></li>
 <li><p>US state, county pair(s)</p></li>
 <li><p>a spatial, sf or raster object</p></li>
 <li><p>a clip unit (see details)</p></li>
@@ -171,8 +178,8 @@ a clip unit (see details)
 
     </div>
 
-    <pre class="usage"><span class='fu'>aoi_get</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>country</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>state</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>county</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>km</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>union</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>aoi_get</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>region</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>country</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>state</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>county</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>km</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>union</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

@@ -25,66 +25,66 @@
 #'
 #' @author Mike Johnson
 
-getFiat <- function(region = NULL, country = NULL, state = NULL, county = NULL) {
-
-  state.abb  = states$state_abbr
-  state.name = states$state_name
+getFiat <- function(country = NULL, state = NULL, county = NULL) {
 
   map0 <- map1 <- map2 <- map3 <- NULL
 
-  find = function(x, vec, full){
-    full[tolower(vec) %in% tolower(x)]
-  }
+  find = function(x, vec, full){ full[tolower(vec) %in% tolower(x)] }
 
-  if(!is.null(region)){
-    region = tolower(region)
+  if(!is.null(country)){
+
+    region = tolower(country)
     region = gsub("south", "southern", region)
     region = gsub("australia", "oceania", region)
     region = gsub("north", "northern", region)
     region = gsub("east", "eastern", region)
     region = gsub("west", "western", region)
 
-
-    country <- unlist(c(
+    region <- unlist(c(
       sapply(region, find, vec = countries$subregion,   full = countries$name),
       sapply(region, find, vec = countries$continent,   full = countries$name)
     ))
 
-    map0 = countries[countries$name %in% country,]
-  }
+    map0 = countries[countries$name %in% region,]
 
-
-  if(!is.null(country)){
-
-      country <- unlist(c(
+    country <- unlist(c(
         sapply(country, find, vec = countries$name,   full = countries$name),
         sapply(country, find, vec = countries$iso_a2, full = countries$name),
         sapply(country, find, vec = countries$iso_a3, full = countries$name)
       ))
 
-      if(length(country) == 0){ stop('no country found')}
-
-      map1  <- countries[countries$name %in% country,]
+    map1  <- countries[countries$name %in% country,]
+    if(all(nrow(map0) == 0, nrow(map1) == 0)){ stop("No country found.") }
   }
 
   if(!is.null(state)){
 
-    if(any(tolower(state) == 'conus')) {
-      state = states$state_name[!states$state_name %in% c("Alaska", "Puerto Rico", "Hawaii")]
+    state1 <- state2 <- state3 <- NULL
+
+    if(any(tolower(state) %in% tolower(states$region))){
+      state1 = states$state_name[tolower(states$region) %in% tolower(state)]
     }
 
-    if(any(tolower(state) == 'all')) { state = states$state_name }
+    if(any(tolower(state) == 'conus')) {
+      state2 = states$state_name[!states$state_name %in% c("Alaska", "Puerto Rico", "Hawaii")]
+    }
+
+    if(any(tolower(state) == 'all')) { state3 = states$state_name }
+
+    state = c(state, state1, state2, state3)
 
     state = unlist(c(
       sapply(state, find, vec = states$state_abbr, full = states$state_name),
       sapply(state, find, vec = states$state_name, full = states$state_name)
     ))
 
-    map2 <- states[states$state_name %in% state,]
+    map2 <- states[states$state_name %in% unique(state),]
   }
 
     if(!is.null(county)) {
+
       map2 <- NULL
+
       county_map <- counties[tolower(counties$state_name) %in% tolower(state),]
 
       if(any(county == 'all')) {

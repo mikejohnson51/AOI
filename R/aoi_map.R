@@ -31,43 +31,36 @@
 
 aoi_map = function(AOI = NULL, returnMap = FALSE) {
 
+  p = '+proj=longlat +datum=WGS84'
   m = NULL
   bb = NULL
   pts = NULL
-
+  type = NULL
+  out  = NULL
   orig = AOI
 
   if(!methods::is(AOI, "list")){ AOI = list(AOI = AOI)}
 
-  type = NULL
-
   for( i in 1:length(AOI)){
+    tmp = make_sf(AOI[[i]])
 
-    if(methods::is(AOI[[i]], 'sf')){
-      AOI[[i]] = sf::st_transform(AOI[[i]], '+proj=longlat +datum=WGS84')
+    if( !is.null(tmp) ){
+      out[[length(out) + 1]] = tmp %>% st_transform(p)
+      type[length(type) + 1] = as.character(unique(st_geometry_type(tmp)[1]))
     }
-
-    if(methods::is(AOI[[i]], 'raster')){
-      bb = bbox_get(AOI[[i]]) %>% st_transform('+proj=longlat +datum=WGS84')
-    }
-
-  type[i] = tryCatch({
-    as.character(unique(st_geometry_type(AOI[[i]])[1]))
-  }, error = function(e) {
-    NULL
-  })
   }
 
+
   if("POINT" %in% type){
-    pts = AOI[[which(grepl("POINT",type))]]
+    pts = out[[which(grepl("POINT",type))]]
   }
 
   if("POLYGON" %in% type){
-    bb = AOI[[which(grepl("POLYGON",type))]]
+    bb = out[[which(grepl("POLYGON",type))]]
   }
 
   if("MULTIPOLYGON" %in% type){
-    bb = AOI[[which(grepl("MULTIPOLYGON",type))]]
+    bb = out[[which(grepl("MULTIPOLYGON",type))]]
   }
 
 
@@ -88,7 +81,7 @@ aoi_map = function(AOI = NULL, returnMap = FALSE) {
     ) %>%
     addLayersControl(
       baseGroups = c("Terrain", "Grayscale", "Imagery"),
-      options = layersControlOptions(collapsed = T)
+      options = layersControlOptions(collapsed = TRUE)
     )
 
   if(is.null(orig)){

@@ -50,22 +50,23 @@ geocode = function(location = NULL,
       na.omit()
 
     failed = zipcode[!zipcode %in% locs$zip]
-
     if(length(failed) > 0){
-
-      xx = geocode(location = as.character(failed), full = T)
-
-      locs = rbind(locs, data.frame(
-        zip   = failed,
-        city  = strsplit(xx$display_name, ",")[[1]][1],
-        state = strsplit(xx$display_name, ",")[[1]][2],
-        lat   = xx$lat,
-        lon   = xx$lon,
-        timezone = NA,
-        dst = NA))
+      warning("Zipcodes ", paste(failed, collapse =", "), " not found.")
     }
+    # if(length(failed) > 0){
+    #
+    #   xx = geocode(location = as.character(failed), full = T)
+    #
+    #   locs = rbind(locs, data.frame(
+    #     zip   = failed,
+    #     city  = strsplit(xx$display_name, ",")[[1]][1],
+    #     state = strsplit(xx$display_name, ",")[[1]][2],
+    #     lat   = xx$lat,
+    #     lon   = xx$lon,
+    #     timezone = NA,
+    #     dst = NA))
+    # }
 
-    rownames(locs) = NULL
 
   }
 
@@ -77,7 +78,7 @@ geocode = function(location = NULL,
 
     geoHERE = function(x){ geocodeOSM(x, pt = FALSE, bb = FALSE, full = full) }
 
-    latlon =lapply(location, geoHERE) %>% bind_rows()
+    latlon = lapply(location, geoHERE) %>% bind_rows()
 
     if (full) {
       locs = latlon
@@ -95,11 +96,11 @@ geocode = function(location = NULL,
 
   points = st_as_sf(x = locs,
                     coords = c('lon', 'lat'),
-                    crs = aoiProj)
+                    crs = 4269)
 
   if(!is.null(zipcode)){
     points = suppressMessages(suppressWarnings(
-      st_intersection(points,aoi_get(state='all'))
+      st_intersection(points, aoi_get(state='all'))
     ))
   }
 

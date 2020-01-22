@@ -30,16 +30,20 @@ geocodeOSM = function (location, pt = FALSE, bb = FALSE, all = FALSE, full = FAL
                 gsub(" ", "+", location, fixed = TRUE),
                 "&format=json&limit=1")
 
-  ret = jsonlite::fromJSON(URL)
+  ret = jsonlite::fromJSON(URL[1])
+  rownames(ret) = NULL
 
   if(length(ret) != 0){
-    s = data.frame(request = location, ret)
+    s = data.frame(request = location, ret, stringsAsFactors = FALSE)
     s$lat = as.numeric(s$lat)
     s$lon = as.numeric(s$lon)
     s$licence = NULL
     s$icon = NULL
   }else{
-    s = data.frame(request = location, lat = NA, lon = NA)
+    s = data.frame(request = location,
+                   lat = NA,
+                   lon = NA,
+                   stringsAsFactors = FALSE)
   }
 
   sub = data.frame(
@@ -50,7 +54,7 @@ geocodeOSM = function (location, pt = FALSE, bb = FALSE, all = FALSE, full = FAL
 
   coords = if(full){s}else{sub}
 
-  if(is.na(coords$lat)){ return(coords)}
+  if(is.na(coords$lat)){ return(coords) }
 
   point = st_as_sf(x = coords, coords = c("lon", "lat"), crs = aoiProj)
   tmp.bb = unlist(s$boundingbox)

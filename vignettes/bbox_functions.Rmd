@@ -1,0 +1,84 @@
+---
+title: "Bounding Boxes"
+vignette: >
+  %\VignetteIndexEntry{pkgdown}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  #comment = "#>",
+  fig.width = 6, 
+  fig.height = 4
+)
+
+library(AOI)
+library(leaflet)
+```
+
+## BB coords - BB geom
+
+When working with AOIs many operations can be simplified to working with bounding boxes. As such AOI offers expediate functions to get bounding boxes as geometries or coordinates. 
+
+Here we run through the steps of finding a spatial geometry for the state of Virgina using `aoi_get` and then determine the resulting bounding box in both spatial and coordinate representations.
+
+```{r}
+# Get geometry for the state of Virgina
+VA = aoi_get(state = "VA")
+# Get the spatial bounding box
+(bb = bbox_get(VA))
+
+# Identify the bounding box coordinates from either object
+(bb1 = bbox_coords(bb))
+(bb2 = bbox_coords(VA))
+(identical(bb1, bb2))
+```
+
+Often when working with AOIs there is a desire to modify the boundaries  for specific task. The AOI package offers a buffering function which simplifies the sf::st_buffer() function for this task While less flexable then st_buffer, it handles unit and projection defintions within the function and adds (or subtracts) a consistent disntace from all edges in either kilomters or miles (default). 
+
+```{r}
+AOI = list()
+AOI[['normal']] = aoi_get("UCSB") 
+AOI[['big']] = AOI$normal %>% aoi_buffer(1) 
+AOI[['small']] = AOI$normal %>% aoi_buffer(-1, km = TRUE) 
+```
+
+```{r, echo=FALSE}
+
+leaflet() %>% addTiles() %>% 
+  addPolygons(data = AOI$big, 
+              fillColor = "transparent", color = 'green',
+              label = " AOI + 1 mile") %>% 
+  addPolygons(data = AOI$normal, 
+              fillColor = "transparent", color = 'blue',
+              label = "AOI") %>% 
+  addPolygons(data = AOI$small,
+              fillColor = "transparent", color = 'red',
+              label = "AOI - 1 KM")
+```
+
+## Is inside
+
+Lastly, there 
+
+```{r}
+
+ca = aoi_get(state = "CA")
+sb = aoi_get(state = "CA", county = "Santa Barbara")
+(aoi_inside(ca, sb))
+
+el_paso = aoi_get(state = "CO", county = "El Paso")
+(aoi_inside(ca, el_paso))
+
+```
+
+```{r}
+
+tahoe = aoi_get("lake tahoe")
+aoi_inside(ca, tahoe, total = FALSE)
+aoi_inside(ca, tahoe, total = TRUE)
+```
+

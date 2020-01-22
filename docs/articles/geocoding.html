@@ -80,7 +80,10 @@
       <a href="../articles/aoi_generic.html">Generating AOIs</a>
     </li>
     <li>
-      <a href="../articles/bbox.html">Bounding Boxes</a>
+      <a href="../articles/bbox_functions.html">Bounding Boxes</a>
+    </li>
+    <li>
+      <a href="../articles/bbox.html">Use Cases</a>
     </li>
   </ul>
 </li>
@@ -112,7 +115,7 @@
       </header><script src="geocoding_files/kePrint-0.0.1/kePrint.js"></script><script src="geocoding_files/htmlwidgets-1.5.1/htmlwidgets.js"></script><script src="geocoding_files/jquery-1.12.4/jquery.min.js"></script><link href="geocoding_files/leaflet-1.3.1/leaflet.css" rel="stylesheet">
 <script src="geocoding_files/leaflet-1.3.1/leaflet.js"></script><link href="geocoding_files/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
 <script src="geocoding_files/Proj4Leaflet-1.0.1/proj4-compressed.js"></script><script src="geocoding_files/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="geocoding_files/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
-<script src="geocoding_files/leaflet-binding-2.0.2/leaflet.js"></script><script src="geocoding_files/leaflet-providers-1.1.17/leaflet-providers.js"></script><script src="geocoding_files/leaflet-providers-plugin-2.0.2/leaflet-providers-plugin.js"></script><link href="geocoding_files/leaflet-minimap-3.3.1/Control.MiniMap.min.css" rel="stylesheet">
+<script src="geocoding_files/leaflet-binding-2.0.3/leaflet.js"></script><script src="geocoding_files/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script><script src="geocoding_files/leaflet-providers-plugin-2.0.3/leaflet-providers-plugin.js"></script><link href="geocoding_files/leaflet-minimap-3.3.1/Control.MiniMap.min.css" rel="stylesheet">
 <script src="geocoding_files/leaflet-minimap-3.3.1/Control.MiniMap.min.js"></script><script src="geocoding_files/leaflet-minimap-3.3.1/Minimap-binding.js"></script><link href="geocoding_files/leaflet-measure-2.1.7/leaflet-measure.css" rel="stylesheet">
 <script src="geocoding_files/leaflet-measure-2.1.7/leaflet-measure.min.js"></script><div class="row">
   <div class="col-md-9 contents">
@@ -282,7 +285,7 @@ I+have+a+dream+speech
 place_id
 </td>
 <td style="text-align:left;">
-352144
+235215098
 </td>
 </tr>
 <tr>
@@ -290,7 +293,7 @@ place_id
 osm_type
 </td>
 <td style="text-align:left;">
-node
+relation
 </td>
 </tr>
 <tr>
@@ -298,15 +301,7 @@ node
 osm_id
 </td>
 <td style="text-align:left;">
-150949694
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hamlet
-</td>
-<td style="text-align:left;">
-Sawmill Flat
+396492
 </td>
 </tr>
 <tr>
@@ -338,7 +333,7 @@ United States of America
 bb
 </td>
 <td style="text-align:left;">
--119.0573346,-118.9773346,36.9293904,37.0093904
+-120.9192485,-118.3612791,35.9066756,37.586101
 </td>
 </tr>
 <tr>
@@ -494,8 +489,8 @@ State Street, Santa Barbara
 <a href="#return-points" class="anchor"></a>Return Points</h2>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw"><a href="../reference/geocode.html">geocode</a></span>(<span class="dt">location =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"UCSB"</span>, <span class="st">"Goleta"</span>, <span class="st">"State Street, Santa Barbara"</span>), <span class="dt">pt =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="st">  </span><span class="kw"><a href="../reference/aoi_map.html">aoi_map</a></span>(<span class="dt">returnMap =</span> T)</span></code></pre></div>
-<div id="htmlwidget-77185ea29ab114f267cf" style="width:576px;height:384px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-77185ea29ab114f267cf">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.NatGeoWorldMap",null,"Terrain",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["CartoDB.Positron",null,"Grayscale",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"Imagery",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addMiniMap","args":[null,null,"bottomright",150,150,19,19,-5,false,false,false,true,false,true,{"color":"#ff7800","weight":1,"clickable":false},{"color":"#000000","weight":1,"clickable":false,"opacity":0,"fillOpacity":0},{"hideText":"Hide MiniMap","showText":"Show MiniMap"},[]]},{"method":"addMeasure","args":[{"position":"bottomleft","primaryLengthUnit":"feet","primaryAreaUnit":"sqmiles","activeColor":"red","completedColor":"green","popupOptions":{"className":"leaflet-measure-resultpopup","autoPanPadding":[10,10]},"captureZIndex":10000,"localization":"en","decPoint":".","thousandsSep":","}]},{"method":"addLayersControl","args":[["Terrain","Grayscale","Imagery"],[],{"collapsed":true,"autoZIndex":true,"position":"topright"}]},{"method":"addMarkers","args":[[34.4145936991199,34.4358294991196,34.4136366991199],[-119.84581949869,-119.8276389,-119.6928441],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[34.4136366991199,34.4358294991196],"lng":[-119.84581949869,-119.6928441]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-0b3ac1b9190b2525cc16" style="width:576px;height:384px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0b3ac1b9190b2525cc16">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.NatGeoWorldMap",null,"Terrain",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["CartoDB.Positron",null,"Grayscale",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"Imagery",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addMiniMap","args":[null,null,"bottomright",150,150,19,19,-5,false,false,false,true,false,true,{"color":"#ff7800","weight":1,"clickable":false},{"color":"#000000","weight":1,"clickable":false,"opacity":0,"fillOpacity":0},{"hideText":"Hide MiniMap","showText":"Show MiniMap"},[]]},{"method":"addMeasure","args":[{"position":"bottomleft","primaryLengthUnit":"feet","primaryAreaUnit":"sqmiles","activeColor":"red","completedColor":"green","popupOptions":{"className":"leaflet-measure-resultpopup","autoPanPadding":[10,10]},"captureZIndex":10000,"localization":"en","decPoint":".","thousandsSep":","}]},{"method":"addLayersControl","args":[["Terrain","Grayscale","Imagery"],[],{"collapsed":true,"autoZIndex":true,"position":"topright"}]},{"method":"addMarkers","args":[[34.4145936991199,34.4358294991196,34.4136366991199],[-119.84581949869,-119.8276389,-119.6928441],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[34.4136366991199,34.4358294991196],"lng":[-119.84581949869,-119.6928441]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="return-bounding-box" class="section level2">
 <h2 class="hasAnchor">
@@ -504,8 +499,8 @@ State Street, Santa Barbara
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="kw"><a href="../reference/geocode.html">geocode</a></span>(<span class="st">"Garden of the Gods"</span>, <span class="dt">bb =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="st">  </span><span class="kw"><a href="../reference/aoi_map.html">aoi_map</a></span>(<span class="dt">returnMap =</span> T)</span></code></pre></div>
-<div id="htmlwidget-34e509e9649eaad9bcbd" style="width:576px;height:384px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-34e509e9649eaad9bcbd">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.NatGeoWorldMap",null,"Terrain",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["CartoDB.Positron",null,"Grayscale",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"Imagery",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addMiniMap","args":[null,null,"bottomright",150,150,19,19,-5,false,false,false,true,false,true,{"color":"#ff7800","weight":1,"clickable":false},{"color":"#000000","weight":1,"clickable":false,"opacity":0,"fillOpacity":0},{"hideText":"Hide MiniMap","showText":"Show MiniMap"},[]]},{"method":"addMeasure","args":[{"position":"bottomleft","primaryLengthUnit":"feet","primaryAreaUnit":"sqmiles","activeColor":"red","completedColor":"green","popupOptions":{"className":"leaflet-measure-resultpopup","autoPanPadding":[10,10]},"captureZIndex":10000,"localization":"en","decPoint":".","thousandsSep":","}]},{"method":"addLayersControl","args":[["Terrain","Grayscale","Imagery"],[],{"collapsed":true,"autoZIndex":true,"position":"topright"}]},{"method":"addPolygons","args":[[[[{"lng":[-104.9010877,-104.8810877,-104.8810877,-104.9010877,-104.9010877],"lat":[38.857769,38.857769,38.877769,38.877769,38.857769]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"red","weight":5,"opacity":1,"fill":true,"fillColor":"transparent","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[38.857769,38.877769],"lng":[-104.9010877,-104.8810877]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-75d2303b6fa2f3492b8d" style="width:576px;height:384px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-75d2303b6fa2f3492b8d">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.NatGeoWorldMap",null,"Terrain",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["CartoDB.Positron",null,"Grayscale",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"Imagery",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addMiniMap","args":[null,null,"bottomright",150,150,19,19,-5,false,false,false,true,false,true,{"color":"#ff7800","weight":1,"clickable":false},{"color":"#000000","weight":1,"clickable":false,"opacity":0,"fillOpacity":0},{"hideText":"Hide MiniMap","showText":"Show MiniMap"},[]]},{"method":"addMeasure","args":[{"position":"bottomleft","primaryLengthUnit":"feet","primaryAreaUnit":"sqmiles","activeColor":"red","completedColor":"green","popupOptions":{"className":"leaflet-measure-resultpopup","autoPanPadding":[10,10]},"captureZIndex":10000,"localization":"en","decPoint":".","thousandsSep":","}]},{"method":"addLayersControl","args":[["Terrain","Grayscale","Imagery"],[],{"collapsed":true,"autoZIndex":true,"position":"topright"}]},{"method":"addPolygons","args":[[[[{"lng":[-104.9010877,-104.8810877,-104.8810877,-104.9010877,-104.9010877],"lat":[38.857769,38.857769,38.877769,38.877769,38.857769]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"red","weight":5,"opacity":1,"fill":true,"fillColor":"transparent","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[38.857769,38.877769],"lng":[-104.9010877,-104.8810877]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="return-all" class="section level2">
 <h2 class="hasAnchor">
@@ -514,8 +509,8 @@ State Street, Santa Barbara
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a></span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="kw"><a href="../reference/geocode.html">geocode</a></span>(<span class="dt">location =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Garden of the Gods"</span>, <span class="st">"Quail Lake, Colorado"</span>), <span class="dt">all =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></span>
 <span id="cb8-3"><a href="#cb8-3"></a><span class="st">  </span><span class="kw"><a href="../reference/aoi_map.html">aoi_map</a></span>(<span class="dt">returnMap =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
-<div id="htmlwidget-7877f32107df0b779cb5" style="width:576px;height:384px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7877f32107df0b779cb5">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.NatGeoWorldMap",null,"Terrain",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["CartoDB.Positron",null,"Grayscale",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"Imagery",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addMiniMap","args":[null,null,"bottomright",150,150,19,19,-5,false,false,false,true,false,true,{"color":"#ff7800","weight":1,"clickable":false},{"color":"#000000","weight":1,"clickable":false,"opacity":0,"fillOpacity":0},{"hideText":"Hide MiniMap","showText":"Show MiniMap"},[]]},{"method":"addMeasure","args":[{"position":"bottomleft","primaryLengthUnit":"feet","primaryAreaUnit":"sqmiles","activeColor":"red","completedColor":"green","popupOptions":{"className":"leaflet-measure-resultpopup","autoPanPadding":[10,10]},"captureZIndex":10000,"localization":"en","decPoint":".","thousandsSep":","}]},{"method":"addLayersControl","args":[["Terrain","Grayscale","Imagery"],[],{"collapsed":true,"autoZIndex":true,"position":"topright"}]},{"method":"addMarkers","args":[[38.867768999078,38.7853800490785],[-104.8910877,-104.808175592861],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addPolygons","args":[[[[{"lng":[-104.8910877,-104.808175592861,-104.808175592861,-104.8910877,-104.8910877],"lat":[38.7853800490785,38.7853800490785,38.867768999078,38.867768999078,38.7853800490785]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"red","weight":5,"opacity":1,"fill":true,"fillColor":"transparent","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[38.7853800490785,38.867768999078],"lng":[-104.8910877,-104.808175592861]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-9198b5f721acbb78791f" style="width:576px;height:384px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9198b5f721acbb78791f">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.NatGeoWorldMap",null,"Terrain",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["CartoDB.Positron",null,"Grayscale",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"Imagery",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addMiniMap","args":[null,null,"bottomright",150,150,19,19,-5,false,false,false,true,false,true,{"color":"#ff7800","weight":1,"clickable":false},{"color":"#000000","weight":1,"clickable":false,"opacity":0,"fillOpacity":0},{"hideText":"Hide MiniMap","showText":"Show MiniMap"},[]]},{"method":"addMeasure","args":[{"position":"bottomleft","primaryLengthUnit":"feet","primaryAreaUnit":"sqmiles","activeColor":"red","completedColor":"green","popupOptions":{"className":"leaflet-measure-resultpopup","autoPanPadding":[10,10]},"captureZIndex":10000,"localization":"en","decPoint":".","thousandsSep":","}]},{"method":"addLayersControl","args":[["Terrain","Grayscale","Imagery"],[],{"collapsed":true,"autoZIndex":true,"position":"topright"}]},{"method":"addMarkers","args":[[38.867768999078,38.7853800490785],[-104.8910877,-104.808175592861],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addPolygons","args":[[[[{"lng":[-104.8910877,-104.808175592861,-104.808175592861,-104.8910877,-104.8910877],"lat":[38.7853800490785,38.7853800490785,38.867768999078,38.867768999078,38.7853800490785]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"red","weight":5,"opacity":1,"fill":true,"fillColor":"transparent","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[38.7853800490785,38.867768999078],"lng":[-104.8910877,-104.808175592861]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="turn-on-full-return" class="section level2">
 <h2 class="hasAnchor">
@@ -544,7 +539,7 @@ Goleta
 place_id
 </td>
 <td style="text-align:left;">
-199031272
+236150028
 </td>
 </tr>
 <tr>
@@ -592,7 +587,7 @@ lon
 display_name
 </td>
 <td style="text-align:left;">
-Goleta, Santa Barbara County, California, United States
+Goleta, Santa Barbara County, California, United States of America
 </td>
 </tr>
 <tr>

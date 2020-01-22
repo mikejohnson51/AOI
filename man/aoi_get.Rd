@@ -4,8 +4,8 @@
 \alias{aoi_get}
 \title{Get Area of Interest (AOI) geometry}
 \usage{
-aoi_get(x = NULL, region = NULL, country = NULL, state = NULL,
-  county = NULL, km = FALSE, union = FALSE)
+aoi_get(x = NULL, country = NULL, state = NULL, county = NULL,
+  km = FALSE, union = FALSE)
 }
 \arguments{
 \item{x}{\code{spatial}. \code{raster}, \code{sf} or a \code{list} object (see details for list parameters)}
@@ -27,7 +27,9 @@ a sf geometry projected to \emph{EPSG:4269}.
 Generate a spatial geometry from:
 \enumerate{
              \item  Country name, 2-digit or 3-digit ISO abbriviation(s)
+             \item  Country Region (Asia, Africa, Europe, South America, Antarctica, Seven seas (open ocean), Oceania (Australia), North America,
              \item  US state name(s) or abbreviation
+             \item  US region (Northeast, South, North Central, West)
              \item  US state, county pair(s)
              \item  a spatial, sf or raster object
              \item  a clip unit (see details)
@@ -117,7 +119,4 @@ Acceptable variations include:
 }
 
 
-}
-\author{
-Mike Johnson
 }

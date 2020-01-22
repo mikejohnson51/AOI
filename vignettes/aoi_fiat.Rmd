@@ -18,13 +18,17 @@ knitr::opts_chunk$set(
 library(AOI)
 ```
 
-The `AOI` package provides a bridge between the spatial data stored in `rnaturalearth` and `USAboundaries` to provide consisent programatic access to fiat (non-physical boundaries that exclusively depend on acts of human decision) boudaries. Using the `aoi_get` query users can query country, USA state, and USA county data from a single programatic interface. Examples of these querys can be seen below. In all example the `AOI` function `aoi_map` is used to generate quick `leaflet` views of the requested AOI(s)
+The `AOI` package provides a bridge between the spatial data stored in `rnaturalearth` and `USAboundaries` to provide consisent programatic access to fiat (non-physical boundaries that exclusively depend on acts of human decision) boudaries. 
+
+Using the `aoi_get` query users can query country, USA state, and USA county data from a single programatic interface. Examples of these querys can be seen below. In all examples the `AOI` function `aoi_map` is used to generate quick `leaflet` views of the requested AOI(s)
 
 # AOI by **country**
 
-An AOI can be defined by a **country** name, abbrivaiation, or code:
+An AOI can be defined by a **country** name, abbrivaiation, or ISO code:
 
 ## Single
+
+Contry data can be queried individually,
 
 ```{r, message = FALSE}
 aoi_get(country = 'CR') %>% 
@@ -33,27 +37,29 @@ aoi_get(country = 'CR') %>%
 
 ## Multiple
 
+As a set,
+
 ```{r}
-aoi_get(country = c('Brazil', 'Peru', "chili")) %>% 
+aoi_get(country = c('Brazil', 'PERU', "chile")) %>% 
   aoi_map(returnMap = TRUE)
 ```
 
 ## Regional
 
-The `region` parameter allows users to call a continenet(s) and/or regions of interest from the global dataset. 
+Or by regions...
 
 ```{r}
-aoi_get(region = c("south asia", "africa")) %>% 
+aoi_get(country = c("south asia", "africa")) %>% 
   aoi_map(returnMap = TRUE)
 ```
 
-
-
 #  AOI by **state**  
 
-An AOI can be defined by a United States **state** name or abbreviation.
+An AOI in the United States,can be defined by **state** name or abbreviation.
 
 ## Single
+
+Again single states,
 
 ```{r, message = FALSE}
 aoi_get(state = 'CA') %>% aoi_map(returnMap = T)
@@ -69,6 +75,12 @@ If you want the lower 48 USA state you can query `state = 'conus'`.
 
 ```{r, message = FALSE}
 aoi_get(state = "conus") %>% aoi_map(returnMap = TRUE)
+```
+
+## Region 
+
+```{r, message = FALSE}
+aoi_get(state = "south") %>% aoi_map(returnMap = TRUE)
 ```
 
 ## Combined calls
@@ -108,7 +120,14 @@ aoi_get(state ="CA", county = c("Santa Barbara", "San Luis Obispo", "Ventura")) 
 aoi_get(state =c("CA", "CO"), county = c("Santa Barbara", "El Paso")) %>% aoi_map(returnMap = T)
 ```
 
+```{r, message = F}
+aoi_get(state ='northeast', county = 'all') %>% 
+  aoi_map(returnMap = T)
+```
+
 # Unioning
+
+The union parameter automatically submits a call to st_union joining all returned features as a single geometry.
 
 ```{r, messages = FALSE}
 aoi_get(state = c('CA', 'OR', 'WA'), union = TRUE) %>% 
@@ -118,6 +137,12 @@ aoi_get(state = c('CA', 'OR', 'WA'), union = TRUE) %>%
 
 ```{r, messages = FALSE}
 aoi_get(state = 'conus', union = TRUE) %>% 
+  aoi_map(returnMap = TRUE)
+```
+
+
+```{r, messages = FALSE}
+aoi_get(state = 'south', union = TRUE) %>% 
   aoi_map(returnMap = TRUE)
 ```
 

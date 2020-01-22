@@ -24,7 +24,7 @@ getClip = function(x, km = FALSE){
    origin   <- fin$o
 
   if(all(is.null(fin$h), is.null(fin$w), is.null(origin))){
-    poly <- geocode(location, bb = TRUE, full = F)
+    poly <- geocode(location, bb = TRUE, full = FALSE)
   } else {
 
     if(methods::is(location, "numeric")){

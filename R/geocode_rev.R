@@ -13,7 +13,7 @@
 #' @author Mike Johnson
 #' @examples
 #' \dontrun{
-#'  geocode_rev(c(38,-115)) %>% t()
+#'  geocode_rev(x = c(38,-115)) %>% t()
 #'
 #'  ```
 #'  county          :	Lincoln County
@@ -64,22 +64,22 @@ geocode_rev = function(x){
 
 # ESRI Rgeocode -----------------------------------------------------------
 
-  esri.url <-paste0("http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode",
-                      "?f=pjson&featureTypes=&location=",
-                      paste(pt$lon, pt$lat, sep = ","))
-
-  ll   = jsonlite::fromJSON(esri.url)
-  xr = unlist(ll)
-  esri = data.frame(t(xr), stringsAsFactors = F) %>%
-    setNames(gsub("address\\.|location\\.|spatialReference\\.", "", names(xr)))
-  names(esri)[which(names(esri) == 'x')] = 'lon'
-  names(esri)[which(names(esri) == 'y')] = 'lat'
-
-  names(esri)[which(names(esri) == 'boundingbox3')] = 'xmin'
-  names(esri)[which(names(esri) == 'boundingbox4')] = 'xmax'
-  names(esri)[which(names(esri) == 'boundingbox1')] = 'ymin'
-  names(esri)[which(names(esri) == 'boundingbox2')] = 'ymax'
-  esri[grepl('latest', names(esri))] = NULL
+  # esri.url <-paste0("http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode",
+  #                     "?f=pjson&featureTypes=&location=",
+  #                     paste(pt$lon, pt$lat, sep = ","))
+  #
+  # ll   = jsonlite::fromJSON(esri.url)
+  # xr = unlist(ll)
+  # esri = data.frame(t(xr), stringsAsFactors = F) %>%
+  #   setNames(gsub("address\\.|location\\.|spatialReference\\.", "", names(xr)))
+  # names(esri)[which(names(esri) == 'x')] = 'lon'
+  # names(esri)[which(names(esri) == 'y')] = 'lat'
+  #
+  # names(esri)[which(names(esri) == 'boundingbox3')] = 'xmin'
+  # names(esri)[which(names(esri) == 'boundingbox4')] = 'xmax'
+  # names(esri)[which(names(esri) == 'boundingbox1')] = 'ymin'
+  # names(esri)[which(names(esri) == 'boundingbox2')] = 'ymax'
+  # esri[grepl('latest', names(esri))] = NULL
 
 
 # OSM Rgeocode ------------------------------------------------------------
@@ -92,7 +92,7 @@ geocode_rev = function(x){
 
   ll  = jsonlite::fromJSON(osm.url)
   xr = unlist(ll)
-  osm = data.frame(t(xr), stringsAsFactors = F) %>%
+  osm = data.frame(t(xr), stringsAsFactors = FALSE) %>%
     setNames(gsub("address\\.|location\\.|spatialReference\\.", "", names(xr)))
   osm$licence = NULL
   osm$bb = paste(osm$boundingbox3, osm$boundingbox4, osm$boundingbox1, osm$boundingbox2, sep = ",")
@@ -103,9 +103,9 @@ geocode_rev = function(x){
 
 # Merge -------------------------------------------------------------------
 
-  tmp = cbind(osm, esri)
+  tmp = osm#cbind(osm, esri)
   tmp = tmp[,tmp != ""]
-  tmp = tmp %>% select(-display_name, -LongLabel, - ShortLabel, -country_code)
+  #tmp = tmp %>% select(-display_name, -LongLabel, - ShortLabel, -country_code)
 
   return(tmp)
 }

@@ -42,6 +42,8 @@ navbar:
       -  text: Generating AOIs
          href: articles/aoi_generic.html
       -  text: Bounding Boxes
+         href: articles/bbox_functions.html
+      -  text: Use Cases
          href: articles/bbox.html
     - icon: fa-file
       text: "Package Manual"

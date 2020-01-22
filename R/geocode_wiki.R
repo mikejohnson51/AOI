@@ -112,7 +112,7 @@ geocode_wiki = function(event = NULL, pt = FALSE){
         all = strsplit(gsub(", ", ",", x[1,2]), ",")[[1]]
         df = list()
         for(i in 1:length(all)){
-          df[[i]] = geocode(all[i], full = F)
+          df[[i]] = geocode(all[i], full = FALSE)
         }
 
         df = cbind(all, do.call(rbind, df))
@@ -126,7 +126,7 @@ geocode_wiki = function(event = NULL, pt = FALSE){
         while(NROW(df) == 0){
           i = i + 1
           def = gsub('/"', "", do.call(paste, list(s1[c(1:i)])))
-          df = geocode(def, full = T)
+          df = geocode(def, full = TRUE)
         }
       }
     }

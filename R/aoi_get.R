@@ -2,7 +2,9 @@
 #' @description Generate a spatial geometry from:
 #' \enumerate{
 #'              \item  Country name, 2-digit or 3-digit ISO abbriviation(s)
+#'              \item  Country Region (Asia, Africa, Europe, South America, Antarctica, Seven seas (open ocean), Oceania (Australia), North America,
 #'              \item  US state name(s) or abbreviation
+#'              \item  US region (Northeast, South, North Central, West)
 #'              \item  US state, county pair(s)
 #'              \item  a spatial, sf or raster object
 #'              \item  a clip unit (see details)
@@ -58,7 +60,6 @@
 #'                                     }
 #' @return a sf geometry projected to \emph{EPSG:4269}.
 #' @export
-#' @author Mike Johnson
 #' @examples
 #' \dontrun{
 #' #Get AOI for a country
@@ -99,14 +100,11 @@
 #'
 #'
 
-aoi_get = function(x= NULL, region = NULL, country = NULL, state = NULL, county = NULL,
-                  km = FALSE, union = FALSE) {
+aoi_get = function(x = NULL, country = NULL, state = NULL, county = NULL, km = FALSE, union = FALSE) {
 
 # Error Catching
 
   if (is.null(country)) {
-
-    if(is.null(region)){
 
     if (!is.null(state)) {
 
@@ -118,23 +116,23 @@ aoi_get = function(x= NULL, region = NULL, country = NULL, state = NULL, county 
 
         if (!(toupper(value) %in% c(toupper(states$state_abbr),
                                     toupper(states$state_name),
+                                    toupper(states$region),
                                     'CONUS',
                                     'ALL'))) {
-          stop("State not recongized. Full names or abbreviations can be used.")
+          stop("State not recongized. Full names, regions, or abbreviations can be used.")
         }
       }
 
     } else {
-      if (!is.null(county)) { stop("The use of 'county' requires a 'state' parameter as well.")}
+      if (!is.null(county)) { stop("The use of 'county' requires a 'state' parameter.")}
       if ( is.null(x))   { stop("Requires a 'x' or 'state' parameter to execute.")}
     }
     }
-  }
 
 # Fiat Boundary Defintion (Exisiting Spatial/Raster Feature or getFiat())
 
   shp <- if (is.null(x)) {
-    getFiat(country = country, region = region, state = state, county = county)
+    getFiat(country = country, state = state, county = county)
   } else if (any(
     methods::is(x, 'Raster'),
     methods::is(x, 'Spatial'),
@@ -149,3 +147,15 @@ aoi_get = function(x= NULL, region = NULL, country = NULL, state = NULL, county 
   if (union) { sf::st_union(shp) } else { shp }
 
 }
+
+
+
+#
+# Southern Asia, Middle Africa,
+# Southern Europe, Western Asia,
+# South America, Australia and New Zealand,
+# Western Europe, Eastern Africa, Western Africa, Eastern Europe           Caribbean, Central America,
+#  South-Eastern Asia, Southern Africa
+#  Northern America, Eastern Asia
+#  Northern Europe, Northern Africa
+#  Melanesia ,Central Asia

@@ -17,7 +17,7 @@ Describe a location using the ERSI and OSM reverse geocoding web-services. This 
 }
 \examples{
 \dontrun{
- geocode_rev(c(38,-115)) \%>\% t()
+ geocode_rev(x = c(38,-115)) \%>\% t()
 
  ```
  county          :	Lincoln County
