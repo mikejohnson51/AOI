@@ -143,7 +143,8 @@ documentation.
 
 ### Support:
 
-The “AOI” R package is supported with funds from the [UCAR COMET
-program](http://www.comet.ucar.edu); the [NOAA National Water
-Center](http://water.noaa.gov); and the NSF Convergence Accelerator
-Project.
+AOI has been supported with funds from the [UCAR COMET
+program](http://www.comet.ucar.edu) (2018-2019) and the [NSF Convergence
+Accelerator
+Project](https://nsf.gov/awardsearch/showAward?AWD_ID=1937099&HistoricalAwards=false)
+(2020).
