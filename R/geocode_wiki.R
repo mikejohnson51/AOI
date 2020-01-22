@@ -106,8 +106,10 @@ geocode_wiki = function(event = NULL, pt = FALSE){
       if(length(search) == 0){ search = y$X2[which(y$X1 == 'Headquarters')] }
 
       if(length(search) == 0){
+        meta = list_states()
+        countries = rnaturalearth::ne_countries(returnclass = "sf")
         y = y[y$X1 != y$X2,]
-        x = y[grepl(tolower(paste0(c(states$state_name, countries$name), collapse = "|")), tolower(y$X2)),]
+        x = y[grepl(tolower(paste0(c(meta$name, countries$name), collapse = "|")), tolower(y$X2)),]
 
         all = strsplit(gsub(", ", ",", x[1,2]), ",")[[1]]
         df = list()

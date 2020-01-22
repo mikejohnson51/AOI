@@ -2,7 +2,7 @@
 % Please edit documentation in R/bbox_functions.R
 \name{bbox_coords}
 \alias{bbox_coords}
-\title{Return bounding coordinates of a spatial (sp/sf/raster) object}
+\title{Return bounding box coordinates of a spatial (sp/sf/raster) object}
 \usage{
 bbox_coords(x)
 }
@@ -13,6 +13,5 @@ bbox_coords(x)
 a data.frame
 }
 \description{
-This function provides a wrapper around sf::st_bbox that instead returns a named
-data.frame containing (xmin, ymin, xmax, ymax)
+This function provides a simple wrapper around sf::st_bbox that instead returns a named data.frame containing (xmin, ymin, xmax, ymax)
 }

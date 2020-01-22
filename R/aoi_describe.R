@@ -13,10 +13,11 @@
 #' }
 #' @export
 #' @examples
-#'  {library(AOI)
-#'  aoi_get("UCSB") %>% aoi_describe()
-#'  aoi_get("UCSB") %>% aoi_describe(full = TRUE)
-#'  }
+#'{
+#' fname <- system.file("shape/nc.shp", package="sf")
+#' nc <- sf::read_sf(fname)
+#' aoi_describe(nc[1,])
+#'}
 
 
 aoi_describe = function(AOI, full = FALSE, km = FALSE){

@@ -56,7 +56,7 @@ geocodeOSM = function (location, pt = FALSE, bb = FALSE, all = FALSE, full = FAL
 
   if(is.na(coords$lat)){ return(coords) }
 
-  point = st_as_sf(x = coords, coords = c("lon", "lat"), crs = aoiProj)
+  point = st_as_sf(x = coords, coords = c("lon", "lat"), crs = 4269)
   tmp.bb = unlist(s$boundingbox)
   bbs = bbox_get(paste(tmp.bb[3], tmp.bb[4], tmp.bb[1], tmp.bb[2], sep = ","))
   bbs$request = s$request
@@ -81,13 +81,12 @@ NULL
 
 #' @title defineClip
 #' @description Parse a clip list from user input. \code{defineClip} parses user supplied lists to a format usable by \code{\link{getClip}}
-#' @param clip a user supplied list (see \code{\link{getAOI}})
+#' @param x a user supplied list (see \code{\link{aoi_get}})
 #' @param km  \code{logical}. If \code{TRUE} distance are in kilometers,
 #' default is \code{FALSE} with distances in miles
 #' @noRd
 #' @keywords internal
-#' @return a 4-element list of features defining an AOI
-#' @author Mike Johnson
+#' @return a 4-element list of features defining an AO
 
 defineClip = function(x = NULL, km = FALSE) {
 

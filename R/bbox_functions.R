@@ -1,7 +1,6 @@
-#' @title Get Bounding Box
+#' @title Get Spatial Bounding Box
 #' @description Get spatial (sf) representation of bounding box of an input
-#' feature type. Input can be either df, numeric, character, or spatial (sp/sf/raster).
-#' If numeric or character order of inputs should be (xmin, xmax, ymin, ymax)
+#' feature type. Input can be data.frame, numeric, character, or spatial (sp/sf/raster). If numeric or character order of inputs should be (xmin, xmax, ymin, ymax)
 #' @param x input feature
 #' @return a sf polygon
 #' @export
@@ -32,9 +31,8 @@ bbox_get = function(x) {
 
 }
 
-#' @title Return bounding coordinates of a spatial (sp/sf/raster) object
-#' @description This function provides a wrapper around sf::st_bbox that instead returns a named
-#' data.frame containing (xmin, ymin, xmax, ymax)
+#' @title Return bounding box coordinates of a spatial (sp/sf/raster) object
+#' @description This function provides a simple wrapper around sf::st_bbox that instead returns a named data.frame containing (xmin, ymin, xmax, ymax)
 #' @param x a spatial object (sp/sf/raster)
 #' @return a data.frame
 #' @export

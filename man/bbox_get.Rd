@@ -2,7 +2,7 @@
 % Please edit documentation in R/bbox_functions.R
 \name{bbox_get}
 \alias{bbox_get}
-\title{Get Bounding Box}
+\title{Get Spatial Bounding Box}
 \usage{
 bbox_get(x)
 }
@@ -14,6 +14,5 @@ a sf polygon
 }
 \description{
 Get spatial (sf) representation of bounding box of an input
-feature type. Input can be either df, numeric, character, or spatial (sp/sf/raster).
-If numeric or character order of inputs should be (xmin, xmax, ymin, ymax)
+feature type. Input can be data.frame, numeric, character, or spatial (sp/sf/raster). If numeric or character order of inputs should be (xmin, xmax, ymin, ymax)
 }

@@ -27,8 +27,9 @@ a data.frame of AOI descriptors including (at minimum):
 Describe a spatial (sf/sp/raster) object in terms of a reproducable AOI  (e.g. \code{\link{aoi_get}}) parameters.
 }
 \examples{
- {library(AOI)
- aoi_get("UCSB") \%>\% aoi_describe()
- aoi_get("UCSB") \%>\% aoi_describe(full = TRUE)
- }
+{
+fname <- system.file("shape/nc.shp", package="sf")
+nc <- sf::read_sf(fname)
+aoi_describe(nc[1,])
+}
 }

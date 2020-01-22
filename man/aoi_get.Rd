@@ -83,40 +83,38 @@ Acceptable variations include:
 \examples{
 \dontrun{
 #Get AOI for a country
-    getAOI(country = "Brazil")
+    aoi_get(country = "Brazil")
 
 # Get AOI for a location
-    getAOI("Sacramento")
+    aoi_get("Sacramento")
 
 # Get AOI defined by a state(s)
-    getAOI(state = 'CA')
-    getAOI(state = c('CA', 'nevada'))
+    aoi_get(state = 'CA')
+    aoi_get(state = c('CA', 'nevada'))
 
 # Get AOI defined by all states, or the lower 48
-    getAOI(state = 'all')
-    getAOI(state = 'conus')
+    aoi_get(state = 'all')
+    aoi_get(state = 'conus')
 
 # Get AOI defined by state & county pair(s)
-    getAOI(state = 'California', county = 'Santa Barbara')
-    getAOI(state = 'CA', county = c('Santa Barbara', 'ventura'))
+    aoi_get(state = 'California', county = 'Santa Barbara')
+    aoi_get(state = 'CA', county = c('Santa Barbara', 'ventura'))
 
 # Get AOI defined by state & county pair(s)
-    getAOI(state = 'California', county = 'Santa Barbara')
-    getAOI(state = 'CA', county = c('Santa Barbara', 'ventura'))
+    aoi_get(state = 'California', county = 'Santa Barbara')
+    aoi_get(state = 'CA', county = c('Santa Barbara', 'ventura'))
 
 # Get AOI defined by state & all counties
-    getAOI(state = 'California', county = 'all')
+    aoi_get(state = 'California', county = 'all')
 
 # Get AOI defined by external spatial file:
-    getAOI(sf::read_sf('./la_metro.shp'))
-    getAOI(raster('./AOI.tif'))
+    aoi_get(sf::read_sf('./la_metro.shp'))
+    aoi_get(raster('./AOI.tif'))
 
 # Get AOI defined by 10 mile bounding box using lat/lon
-    getAOI(clip = c(35, -119, 10, 10))
+    aoi_get(clip = c(35, -119, 10, 10))
 
 # Get AOI defined by 10 mile2 bounding box using the 'KMART near UCSB' as lower left corner
-    getAOI(clip = list('KMART near UCSB', 10, 10, 'lowerleft'))
+    aoi_get(clip = list('KMART near UCSB', 10, 10, 'lowerleft'))
 }
-
-
 }

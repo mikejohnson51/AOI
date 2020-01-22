@@ -13,7 +13,6 @@
 #'
 #' @docType package
 #' @name AOI
-#'
 #' @import      leaflet
 #' @importFrom  dplyr select mutate bind_rows
 #' @importFrom  jsonlite fromJSON
@@ -26,7 +25,6 @@
 #' @importFrom  USAboundaries us_boundaries us_counties us_zipcodes
 #' @importFrom  methods is
 
-
 NULL
 
 utils::globalVariables(
@@ -34,25 +32,22 @@ utils::globalVariables(
 )
 
 
-states    = USAboundaries::us_states() %>%
-  merge(data.frame(
-      state_abbr = state.abb,
-      region = as.character(state.region),
-      stringsAsFactors = F),
-    all.x = TRUE
-  ) %>%
-  st_transform(4269)
-
-counties  = USAboundaries::us_counties() %>% st_transform(4269)
-zipcodes  = USAboundaries::us_zipcodes() %>% st_transform(4269)
-countries = rnaturalearth::ne_countries(returnclass = "sf") %>% st_transform(4269)
-
-#' @title AOI Projection
-#' @description  Projection used for all AOI objects: \emph{EPSG:4269}. `aoiProj = "+init=epsg:4269"`
+#' Returns a data.frame of valid states with abbreviations and regions
+#'
+#' @return data.frame of states with abbreviation and region
 #' @export
-#' @author Mike Johnson
-
-aoiProj = 4269
+#' @examples
+#' \dontrun{
+#'   list_states()
+#' }
+#'
+list_states <- function() {
+  return(data.frame(
+    abbr = datasets::state.abb,
+    name = datasets::state.name,
+    region = datasets::state.region
+  ))
+}
 
 
 

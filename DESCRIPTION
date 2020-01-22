@@ -9,7 +9,6 @@ Description: A consistent tool kit for forward and reverse geocoding and definin
 Depends:
     R(>= 3.5.0)
 Imports:
-    datasets,
     dplyr,
     jsonlite,
     magrittr,

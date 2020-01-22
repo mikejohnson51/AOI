@@ -1,21 +1,21 @@
 #' @title Get Area of Interest (AOI) geometry
 #' @description Generate a spatial geometry from:
 #' \enumerate{
-#'              \item  Country name, 2-digit or 3-digit ISO abbriviation(s)
-#'              \item  Country Region (Asia, Africa, Europe, South America, Antarctica, Seven seas (open ocean), Oceania (Australia), North America,
-#'              \item  US state name(s) or abbreviation
-#'              \item  US region (Northeast, South, North Central, West)
+#'              \item  Country name, 2-digit or 3-digit ISO abbreviation(s)
+#'              \item  Country Region or Continent (e.g. South Asia, Africa)
+#'              \item  US state name(s) or abbreviation(s)
+#'              \item  US region (e.g. Northeast, South, North Central, West)
 #'              \item  US state, county pair(s)
 #'              \item  a spatial, sf or raster object
 #'              \item  a clip unit (see details)
 #'              }
-#' @param country   \code{character}. Full name, ISO 3166-1 2 or 3 digit code. Not case senstive. Data comes from Natural Earth and CIA Worldfact book.
-#' @param state     \code{character}. Full name or two character abbriviation. Not case senstive. If \code{state = 'conus'}, the lower 48 states will be returned. If \code{state = 'all'}, all states will be returned.
-#' @param county    \code{character}. County name(s). Requires \code{state} input. Not case senstive. If 'all' then all counties in a state are returned
+#' @param country   \code{character}. Full name, ISO 3166-1 2 or 3 digit code. Not case senstive. Data comes from Natural Earth.
+#' @param state     \code{character}. Full name or two character abbreviation Not case sensitive If \code{state = 'conus'}, the lower 48 states will be returned. If \code{state = 'all'}, all states will be returned.
+#' @param county    \code{character}. County name(s). Requires \code{state} input. Not case sensitive If 'all' then all counties in a state are returned
 #' @param x      \code{spatial}. \code{raster}, \code{sf} or a \code{list} object (see details for list parameters)
 #' @param km        \code{logical}. If \code{TRUE} distances are in kilometers, default is \code{FALSE} with distances in miles
 #' @param union        \code{logical}. If TRUE objects are unioned into a single object
-#' @details A \code{clip} unit can be described by just a place name (eg 'UCSB'). In doing so the associated boundaries determined by \code{\link{geocode}} will be returned.
+#' @details A \code{x} unit can be described by just a place name (e.g. 'UCSB'). In doing so the associated boundaries determined by \code{\link{geocode}} will be returned.
 #' To have greater control over the clip unit it can be defined as a list with a minimum of 3 inputs:
 #'                               \enumerate{
 #'                                      \item  A point: \itemize{
@@ -30,8 +30,8 @@
 #'                                          }
 #'                                      }
 #'
-#'                                      The bounding box is always drawn in relation to the point. By default the point is treated
-#'                                      as the center of the box. To define the realtive location of the point to the bounding box,
+#'                                      The bounding box is always drawn in relation to the point. By default, the point is treated
+#'                                      as the center of the box. To define the relative location of the point to the bounding box,
 #'                                      a fourth input can be used:
 #'                                      \enumerate{
 #'                                      \item Origin \itemize{
@@ -63,42 +63,37 @@
 #' @examples
 #' \dontrun{
 #' #Get AOI for a country
-#'     getAOI(country = "Brazil")
+#'     aoi_get(country = "Brazil")
 #'
 #' # Get AOI for a location
-#'     getAOI("Sacramento")
+#'     aoi_get("Sacramento")
 #'
 #' # Get AOI defined by a state(s)
-#'     getAOI(state = 'CA')
-#'     getAOI(state = c('CA', 'nevada'))
+#'     aoi_get(state = 'CA')
+#'     aoi_get(state = c('CA', 'nevada'))
 #'
 #' # Get AOI defined by all states, or the lower 48
-#'     getAOI(state = 'all')
-#'     getAOI(state = 'conus')
+#'     aoi_get(state = 'all')
+#'     aoi_get(state = 'conus')
 #'
 #' # Get AOI defined by state & county pair(s)
-#'     getAOI(state = 'California', county = 'Santa Barbara')
-#'     getAOI(state = 'CA', county = c('Santa Barbara', 'ventura'))
+#'     aoi_get(state = 'California', county = 'Santa Barbara')
+#'     aoi_get(state = 'CA', county = c('Santa Barbara', 'ventura'))
 #'
 #' # Get AOI defined by state & county pair(s)
-#'     getAOI(state = 'California', county = 'Santa Barbara')
-#'     getAOI(state = 'CA', county = c('Santa Barbara', 'ventura'))
+#'     aoi_get(state = 'California', county = 'Santa Barbara')
+#'     aoi_get(state = 'CA', county = c('Santa Barbara', 'ventura'))
 #'
 #' # Get AOI defined by state & all counties
-#'     getAOI(state = 'California', county = 'all')
-#'
-#' # Get AOI defined by external spatial file:
-#'     getAOI(sf::read_sf('./la_metro.shp'))
-#'     getAOI(raster('./AOI.tif'))
+#'     aoi_get(state = 'California', county = 'all')
 #'
 #' # Get AOI defined by 10 mile bounding box using lat/lon
-#'     getAOI(clip = c(35, -119, 10, 10))
+#'     aoi_get(c(35, -119, 10, 10))
 #'
 #' # Get AOI defined by 10 mile2 bounding box using the 'KMART near UCSB' as lower left corner
-#'     getAOI(clip = list('KMART near UCSB', 10, 10, 'lowerleft'))
+#'     aoi_get(list('KMART near UCSB', 10, 10, 'lowerleft'))
 #'}
-#'
-#'
+
 
 aoi_get = function(x = NULL, country = NULL, state = NULL, county = NULL, km = FALSE, union = FALSE) {
 
@@ -114,9 +109,11 @@ aoi_get = function(x = NULL, country = NULL, state = NULL, county = NULL, km = F
 
         if (!is.character(value)) {stop("State must be a character value.")}
 
-        if (!(toupper(value) %in% c(toupper(states$state_abbr),
-                                    toupper(states$state_name),
-                                    toupper(states$region),
+        meta = list_states()
+
+        if (!(toupper(value) %in% c(toupper(meta$abbr),
+                                    toupper(meta$name),
+                                    toupper(meta$region),
                                     'CONUS',
                                     'ALL'))) {
           stop("State not recongized. Full names, regions, or abbreviations can be used.")
@@ -137,7 +134,7 @@ aoi_get = function(x = NULL, country = NULL, state = NULL, county = NULL, km = F
     methods::is(x, 'Raster'),
     methods::is(x, 'Spatial'),
     methods::is(x, 'sf'))) {
-      st_transform(bbox_get(x), aoiProj)
+      st_transform(bbox_get(x), 4269)
   } else {
     getClip(x, km)
   }
@@ -148,14 +145,3 @@ aoi_get = function(x = NULL, country = NULL, state = NULL, county = NULL, km = F
 
 }
 
-
-
-#
-# Southern Asia, Middle Africa,
-# Southern Europe, Western Asia,
-# South America, Australia and New Zealand,
-# Western Europe, Eastern Africa, Western Africa, Eastern Europe           Caribbean, Central America,
-#  South-Eastern Asia, Southern Africa
-#  Northern America, Eastern Asia
-#  Northern Europe, Northern Africa
-#  Melanesia ,Central Asia

@@ -35,22 +35,10 @@ aoi_buffer = function(AOI, d, km = FALSE){
 #' @description A check to see if one object is inside another
 #' @param obj object 1
 #' @param AOI object 2
-#' @param total boolean. If \code{TRUE} then check if obj is competely inside the AOI.
+#' @param total boolean. If \code{TRUE} then check if obj is competely inside the AOI (and vice versa: order doesn't matter)
 #' If \code{FALSE}, then check if at least part of obj is in the AOI.
 #' @return boolean value
 #' @export
-#' @author Mike Johnson
-#' @examples
-#' \dontrun{
-#'   AOI = getAOI(state = "CA")
-#'   obj = getAOI(state = "CA", county = "Santa Barbara")
-#'   is_inside(AOI, obj)
-#'
-#'   AOI = getAOI(state = "CA")
-#'   obj = getAOI(state = "CO", county = "El Paso")
-#'   is_inside(AOI, obj)
-#' }
-
 
 aoi_inside = function(AOI, obj, total = TRUE){
 
@@ -96,4 +84,5 @@ make_sf = function(x){
 
   return(x)
 }
+
 

@@ -4,14 +4,14 @@
 \alias{aoi_inside}
 \title{Is Inside}
 \usage{
-aoi_inside(AOI, obj, total = T)
+aoi_inside(AOI, obj, total = TRUE)
 }
 \arguments{
 \item{AOI}{object 2}
 
 \item{obj}{object 1}
 
-\item{total}{boolean. If \code{TRUE} then check if obj is competely inside the AOI.
+\item{total}{boolean. If \code{TRUE} then check if obj is competely inside the AOI (and vice versa: order doesn't matter)
 If \code{FALSE}, then check if at least part of obj is in the AOI.}
 }
 \value{
@@ -19,18 +19,4 @@ boolean value
 }
 \description{
 A check to see if one object is inside another
-}
-\examples{
-\dontrun{
-  AOI = getAOI(state = "CA")
-  obj = getAOI(state = "CA", county = "Santa Barbara")
-  is_inside(AOI, obj)
-
-  AOI = getAOI(state = "CA")
-  obj = getAOI(state = "CO", county = "El Paso")
-  is_inside(AOI, obj)
-}
-}
-\author{
-Mike Johnson
 }

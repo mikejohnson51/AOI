@@ -33,6 +33,9 @@ getFiat <- function(country = NULL, state = NULL, county = NULL) {
 
   if(!is.null(country)){
 
+    countries = rnaturalearth::ne_countries(returnclass = "sf") %>%
+      st_transform(4269)
+
     region = tolower(country)
     region = gsub("south", "southern", region)
     region = gsub("australia", "oceania", region)
@@ -59,6 +62,17 @@ getFiat <- function(country = NULL, state = NULL, county = NULL) {
 
   if(!is.null(state)){
 
+    meta = list_states()
+
+    states    = USAboundaries::us_states() %>%
+      merge(data.frame(
+        state_abbr = meta$abb,
+        region = as.character(meta$region),
+        stringsAsFactors = F),
+        all.x = TRUE
+      ) %>%
+      st_transform(4269)
+
     state1 <- state2 <- state3 <- NULL
 
     if(any(tolower(state) %in% tolower(states$region))){
@@ -82,6 +96,8 @@ getFiat <- function(country = NULL, state = NULL, county = NULL) {
   }
 
     if(!is.null(county)) {
+
+      counties  = USAboundaries::us_counties() %>% st_transform(4269)
 
       map2 <- NULL
 
