@@ -2,11 +2,10 @@ pandoc: 2.7.3
 pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
-  clipAreas: clipAreas.html
+  aoi_fiat: aoi_fiat.html
+  bbox_functions: bbox_functions.html
   geocoding: geocoding.html
-  stateCounty: stateCounty.html
-  tools: tools.html
-  useCases: useCases.html
+  use_cases: use_cases.html
 urls:
   reference: https://github.com/mikejohnson51/AOI/reference
   article: https://github.com/mikejohnson51/AOI/articles

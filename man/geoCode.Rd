@@ -4,13 +4,15 @@
 \alias{geocode}
 \title{Geocoding}
 \usage{
-geocode(location = NULL, zipcode = NULL, pt = FALSE, bb = FALSE,
-  all = FALSE, full = FALSE)
+geocode(location = NULL, zipcode = NULL, event = NULL, pt = FALSE,
+  bb = FALSE, all = FALSE, full = FALSE)
 }
 \arguments{
 \item{location}{\code{character}. Place name(s)}
 
 \item{zipcode}{\code{character}. USA zipcode(s)}
+
+\item{event}{\code{character}. a term to search for on wikipeida}
 
 \item{pt}{\code{logical}. If TRUE point geometery is appended to the returned list()}
 

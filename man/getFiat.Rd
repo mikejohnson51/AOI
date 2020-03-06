@@ -41,11 +41,6 @@ Boundaries come from the 2017 US Census TIGER Dataset and are projected to \emph
 }
 
 }
-\seealso{
-\code{\link{getClip}}
-
-\code{\link{getAOI}}
-}
 \author{
 Mike Johnson
 }

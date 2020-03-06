@@ -7,8 +7,6 @@
 #' @param bb        \code{logical}. If \code{TRUE} then the bounding geometry of state/county is returned,  default is \code{FALSE} and returns fiat geometries
 #' @return a \code{SpatialPolygons} object projected to \emph{EPSG:4269}.
 #' @export
-#' @seealso \code{\link{getClip}}
-#' @seealso \code{\link{getAOI}}
 #' @keywords internal
 #' @examples
 #' \dontrun{
@@ -29,46 +27,80 @@
 
 getFiat <- function(country = NULL, state = NULL, county = NULL) {
 
-  state.abb  = states$state_abbr
-  state.name = states$state_name
+  map0 <- map1 <- map2 <- map3 <- NULL
 
-  map1 <- map2 <- map3 <- NULL
-
-  find = function(x, vec, full){
-    full[tolower(vec) %in% tolower(x)]
-  }
+  find = function(x, vec, full){ full[tolower(vec) %in% tolower(x)] }
 
   if(!is.null(country)){
 
-      country <- unlist(c(
+    countries = rnaturalearth::ne_countries(returnclass = "sf") %>%
+      st_transform(4269)
+
+    region = tolower(country)
+    region = gsub("south", "southern", region)
+    region = gsub("australia", "oceania", region)
+    region = gsub("north", "northern", region)
+    region = gsub("east", "eastern", region)
+    region = gsub("west", "western", region)
+
+    region <- unlist(c(
+      sapply(region, find, vec = countries$subregion,   full = countries$name),
+      sapply(region, find, vec = countries$continent,   full = countries$name)
+    ))
+
+    map0 = countries[countries$name %in% region,]
+
+    country <- unlist(c(
         sapply(country, find, vec = countries$name,   full = countries$name),
         sapply(country, find, vec = countries$iso_a2, full = countries$name),
         sapply(country, find, vec = countries$iso_a3, full = countries$name)
       ))
 
-      if(length(country) == 0){ stop('no country found')}
-
-      map1  <- countries[countries$name %in% country,]
+    map1  <- countries[countries$name %in% country,]
+    if(all(nrow(map0) == 0, nrow(map1) == 0)){ stop("No country found.") }
   }
 
   if(!is.null(state)){
 
-    if(any(tolower(state) == 'conus')) {
-      state = states$state_name[!states$state_name %in% c("Alaska", "Puerto Rico", "Hawaii")]
+    meta = list_states()
+
+    states    = USAboundaries::us_states() %>%
+      merge(data.frame(
+        state_abbr = meta$abb,
+        region = as.character(meta$region),
+        stringsAsFactors = F),
+        all.x = TRUE
+      ) %>%
+      st_transform(4269)
+
+    state1 <- state2 <- state3 <- NULL
+
+    if(any(tolower(state) %in% tolower(states$region))){
+      state1 = states$state_name[tolower(states$region) %in% tolower(state)]
     }
 
-    if(any(tolower(state) == 'all')) { state = states$state_name }
+    if(any(tolower(state) == 'conus')) {
+      state2 = states$state_name[!states$state_name %in% c("Alaska", "Puerto Rico", "Hawaii")]
+    }
+
+    if(any(tolower(state) == 'all')) { state3 = states$state_name }
+
+    state = c(state, state1, state2, state3)
 
     state = unlist(c(
       sapply(state, find, vec = states$state_abbr, full = states$state_name),
       sapply(state, find, vec = states$state_name, full = states$state_name)
     ))
 
-    map2 <- states[states$state_name %in% state,]
+    map2 <- states[states$state_name %in% unique(state),]
   }
 
     if(!is.null(county)) {
+
+      counties  = USAboundaries::us_counties() %>% st_transform(4269)
+
       map2 <- NULL
+
       county_map <- counties[tolower(counties$state_name) %in% tolower(state),]
 
       if(any(county == 'all')) {
@@ -86,8 +118,9 @@ getFiat <- function(country = NULL, state = NULL, county = NULL) {
   }
 
   map  = tryCatch({
-    rbind(map1, map2, map3)
+    rbind(map0, map1, map2, map3)
   }, error = function(e) {
+    if(!is.null(map0)){ map0 = mutate(map0, 'NAME' = map0$name) %>% select('NAME')}
     if(!is.null(map1)){ map1 = mutate(map1, 'NAME' = map1$name) %>% select('NAME')}
     if(!is.null(map2)){ map2 = mutate(map2, 'NAME' = map2$state_name) %>% select('NAME')}
     if(!is.null(map3)){ map3 = mutate(map3, 'NAME' = map3$name)  %>% select('NAME')}

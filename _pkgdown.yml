@@ -1,56 +1,50 @@
-title: "Areas of Interest: AOI   "
+title: "AOI: Areas of Interest:"
 url: https://github.com/mikejohnson51/AOI
 template:
-  params:
-    bootswatch: flatly
+  package: miketheme
 reference:
-  - title: Core Functionalites
+  - title: Geocoding Functionalites
     desc: ~
-      Functions for finding points, AOIs, and bounding regions
+      Functions for forward and reverse geocoding
     contents:
-      - '`getAOI`'
-      - '`getBoundingBox`'
       - '`geocode`'
-      - '`revgeocode`'
-      - '`geocode_wiki`'
-  - title: Tools
+      - '`geocode_rev`'
+  - title: AOI Functionalities
     desc: ~
-      Tools for exploring, describing and refinin AOIs
+      Tools for exploring, describing and refining AOIs
     contents:
-      - '`bbox_sp`'
-      - '`bbox_st`'
-      - '`modify`'
-      - '`is_inside`'
-      - '`check`'
-      - '`describe`'
-  - title: Data and Package Helpers
+      - '`aoi_get`'
+      - '`aoi_describe`'
+      - '`aoi_map`'
+      - '`aoi_buffer`'
+      - '`aoi_inside`'
+  - title: Bounding Box Helpers
     desc: ~
-      Data and function that make the package useable
+      Tools for generating and describing bounding boxes
     contents:
-      - '`AOI`'
-      - '`aoiProj`'
-      - '`world`'
-      - '`countries`'
-      - '`counties`'
-      - '`states`'
+      - '`bbox_get`'
+      - '`bbox_coords`'
+
 navbar:
   left:
     - icon: fa-home
       href: index.html
     - icon:  fa-file-code-o
-      text: "functions"
+      text: "Reference"
       href: reference/index.html
-    - text: "Vignettes"
+    - text: "Articles"
       icon: fas fa-book
       menu:
       -  text: Geocoding
          href: articles/geocoding.html
-      -  text: Fiat-based AOIs
-         href: articles/stateCounty.html
-      -  text: User Defined AOI
-         href: articles/clipAreas.html
-      -  text: AOI Tools
-         href: articles/tools.html
+      -  text: Querying AOIs
+         href: articles/aoi_fiat.html
+      -  text: Generating AOIs
+         href: articles/aoi_generic.html
+      -  text: Bounding Boxes
+         href: articles/bbox_functions.html
+      -  text: Use Cases
+         href: articles/bbox.html
     - icon: fa-file
       text: "Package Manual"
       href: AOI.pdf

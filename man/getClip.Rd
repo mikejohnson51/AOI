@@ -4,7 +4,7 @@
 \alias{getClip}
 \title{Convert clip unit ot geometry}
 \usage{
-getClip(clip, km = FALSE)
+getClip(x, km = FALSE)
 }
 \arguments{
 \item{location}{Defined by a location or lat, long pair}

@@ -1,0 +1,86 @@
+#tocnav > ul > li.active > a {
+    background: #037b91;
+}
+
+.nav-pills > li.active > a, 
+.nav-pills > li.active > a:hover, 
+.nav-pills > li.active > a:focus {
+    color: #FFF;
+    background-color: #9cbebe;
+}
+
+
+#tocnav .nav li ul li a:before {
+    content: "\2022   " !important;
+}
+
+#tocnav .nav li ul li a {
+  padding-left: 45px
+}
+
+#tocnav ul li a:before {
+    content: "" !important;
+}
+
+
+body {font-size: 16px;}
+h1 {font-size: 40px;}
+h2 {font-size: 30px;}
+h3 {font-size: 23px;}
+
+.contents .page-header {
+  margin-top: 10px;
+}
+
+/* reduce h3 margin for proper nesting under h2 */
+.contents h3 {margin-top: -60px}
+
+.ref-arguments th {vertical-align: top;}
+
+/* navbar ----------------------------------------------- */
+
+.navbar .info {
+  float: left;
+  height: 50px;
+  width: 140px;
+  font-size: 80%;
+  position: relative;
+  margin-left: 5px;
+}
+.navbar .info .partof {
+  position: absolute;
+  top: 0;
+}
+.navbar .info .version {
+  position: absolute;
+  bottom: 0;
+}
+.navbar .info .version-danger {
+  font-weight: bold;
+  color: orange;
+}
+
+.navbar-form {
+  margin-top: 3px;
+  margin-bottom: 0;
+}
+
+.navbar-toggle {
+  margin-top: 8px;
+  margin-bottom: 5px;
+}
+
+.navbar-nav li a {
+  padding-bottom: 10px;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  border-radius: 3px;
+}
+
+/* Override leaflet.css */
+.navbar-brand-container .info {
+    background: transparent;
+    box-shadow: none;
+}

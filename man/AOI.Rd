@@ -6,19 +6,14 @@
 \alias{AOI-package}
 \title{AOI Package}
 \description{
-An area of interest (AOI) is a geographic extent. The aim of this package is to help users create these - essentailly turning locations, place names, and political boundaries
+An area of interest (AOI) is a geographic extent. The aim of this package is to help users create these -  turning locations, place names, and political boundaries
 into servicable geometries for spatial analysis. The package is written using the simple features paradigm, projected to EPSG:4269.\cr
 
-The primary functions in this package are are \code{\link{geocode}}, \code{\link{revgeocode}}, \code{\link{getAOI}}, and \code{\link{getBoundingBox}}.
+The primary functions are \code{\link{geocode}}, \code{\link{geocode_rev}}, \code{\link{aoi_get}}, and \code{\link{bbox_get}}.
 The first returns a data.frame of corrdinates from place names using the OSM API; the second returns a list of descriptive features from a known place name or lat/lon pair;
 the third returns a spatial (sf) geometry from a country, state, county, or defined region, and the last an extent encompassing a set of input features.
-Addtional helper functions include \code{\link{bbox_st}} and \code{\link{bbox_sp}} which help convert AOIs between string and geometries;
-\code{\link{check}} which helps users visualize AOIs in a interactive leaflet map; and \code{\link{modify}} which allows AOIs to be midified by uniform distances.
-Finally, \code{\link{describe}} breaks existing spatial features into \code{\link{getAOI}} parameters to improve the reproducibility of geometry generation.
-\cr
-
-Three core datasets are served with the package. The first contains the spatial geometries and attributes of all \code{\link{countries}} countries. The second, the spatial geometries for US \code{\link{states}}
-and the third contains the same for all US \code{\link{counties}}.
+\code{\link{aoi_map}} helps users visualize AOIs in a interactive map; and \code{\link{aoi_buffer}} which allows AOIs to be modified by uniform distances.
+Finally, \code{\link{aoi_describe}} breaks existing spatial features into \code{\link{aoi_get}} parameters to improve the reproducibility of geometry generation.
 \cr
 
 See the \href{https://github.com/mikejohnson51/AOI}{README} on github, and the project webpage for examples \href{https://mikejohnson51.github.io/AOI/}{here}.

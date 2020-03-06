@@ -16,7 +16,10 @@ Imports:
     xml2,
     sf(>= 0.6-0),
     leaflet,
-    utils
+    utils,
+    rnaturalearth,
+    USAboundaries,
+    methods
 Suggests:
     testthat,
     covr
