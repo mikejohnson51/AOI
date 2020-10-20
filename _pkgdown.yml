@@ -3,7 +3,7 @@ url: https://github.com/mikejohnson51/AOI
 template:
   package: miketheme
 reference:
-  - title: Geocoding Functionalites
+  - title: Geocoding Functionality
     desc: ~
       Functions for forward and reverse geocoding
     contents:
