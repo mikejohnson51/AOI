@@ -14,31 +14,30 @@
 #' @author Mike Johnson
 #' @examples
 #' \dontrun{
-#'  ## geocode a single location
-#'      geocode("UCSB")
+#' ## geocode a single location
+#' geocode("UCSB")
 #'
-#'  ## geocode a single location and return a SpatialPoints object
-#'      geocode("UCSB", pt = TRUE)
+#' ## geocode a single location and return a SpatialPoints object
+#' geocode("UCSB", pt = TRUE)
 #'
-#'  ## geocode a single location and derived bounding box of location
-#'      geocode("UCSB", bb = TRUE)
+#' ## geocode a single location and derived bounding box of location
+#' geocode("UCSB", bb = TRUE)
 #'
-#'  ## geocode multiple locations
-#'      geocode(c("UCSB", "Goleta", "Santa Barbara"))
+#' ## geocode multiple locations
+#' geocode(c("UCSB", "Goleta", "Santa Barbara"))
 #'
-#'  ## geocode multiple points and generate a minimum bounding box of all locations and spatial points
-#'      geocode(c("UCSB", "Goleta", "Santa Barbara"), bb = T, pt= T)
+#' ## geocode multiple points and generate a minimum bounding box of all locations and spatial points
+#' geocode(c("UCSB", "Goleta", "Santa Barbara"), bb = T, pt = T)
 #' }
-
-geocode = function(location = NULL,
-                   zipcode  = NULL,
-                   event    = NULL,
-                   pt       = FALSE,
-                   bb       = FALSE,
-                   all      = FALSE,
-                   full     = FALSE) {
-
-  if(!is.null(event)){
+#'
+geocode <- function(location = NULL,
+                    zipcode = NULL,
+                    event = NULL,
+                    pt = FALSE,
+                    bb = FALSE,
+                    all = FALSE,
+                    full = FALSE) {
+  if (!is.null(event)) {
     suppressWarnings({
       locs = lapply(event, geocode_wiki) %>%
         bind_rows()
@@ -50,12 +49,12 @@ geocode = function(location = NULL,
     zipcodes  = USAboundaries::us_zipcodes() %>%
       st_transform(4269)
 
-    locs = zipcodes[match(as.numeric(zipcode), zipcodes$zip),] %>%
+    locs <- zipcodes[match(as.numeric(zipcode), zipcodes$zip), ] %>%
       na.omit()
 
-    failed = zipcode[!zipcode %in% locs$zip]
-    if(length(failed) > 0){
-      warning("Zipcodes ", paste(failed, collapse =", "), " not found.")
+    failed <- zipcode[!zipcode %in% locs$zip]
+    if (length(failed) > 0) {
+      warning("Zipcodes ", paste(failed, collapse = ", "), " not found.")
     }
     # if(length(failed) > 0){
     #
@@ -70,54 +69,51 @@ geocode = function(location = NULL,
     #     timezone = NA,
     #     dst = NA))
     # }
-
-
   }
 
-  if(!is.null(location)){
-
-  if (length(location) == 1) {
-    return(geocodeOSM(location, pt, bb, all, full))
-  } else {
-
-    geoHERE = function(x){ geocodeOSM(x, pt = FALSE, bb = FALSE, full = full) }
-
-    latlon = lapply(location, geoHERE) %>% bind_rows()
-
-    if (full) {
-      locs = latlon
-      locs$lat = as.numeric(locs$lat)
-      locs$lon = as.numeric(locs$lon)
+  if (!is.null(location)) {
+    if (length(location) == 1) {
+      return(geocodeOSM(location, pt, bb, all, full))
     } else {
-      locs = data.frame(
-        request = location,
-        lat = as.numeric(latlon$lat),
-        lon = as.numeric(latlon$lon)
-      )
+      geoHERE <- function(x) {
+        geocodeOSM(x, pt = FALSE, bb = FALSE, full = full)
+      }
+
+      latlon <- lapply(location, geoHERE) %>% bind_rows()
+
+      if (full) {
+        locs <- latlon
+        locs$lat <- as.numeric(locs$lat)
+        locs$lon <- as.numeric(locs$lon)
+      } else {
+        locs <- data.frame(
+          request = location,
+          lat = as.numeric(latlon$lat),
+          lon = as.numeric(latlon$lon)
+        )
+      }
     }
   }
-  }
 
-  points = st_as_sf(x = locs,
-                    coords = c('lon', 'lat'),
-                    crs = 4269)
+  points <- st_as_sf(
+    x = locs,
+    coords = c("lon", "lat"),
+    crs = 4269
+  )
 
-  if(!is.null(zipcode)){
-    points = suppressMessages(suppressWarnings(
-      st_intersection(points, aoi_get(state='all'))
+  if (!is.null(zipcode)) {
+    points <- suppressMessages(suppressWarnings(
+      st_intersection(points, aoi_get(state = "all"))
     ))
   }
 
-  if(all){
-    return( list(coords = locs, pt = points, bb = bbox_get(points)))
-  }else if(pt){
+  if (all) {
+    return(list(coords = locs, pt = points, bb = bbox_get(points)))
+  } else if (pt) {
     return(points)
-  } else if(bb){
+  } else if (bb) {
     return(bbox_get(points))
   } else {
     return(locs)
   }
 }
-
-
-

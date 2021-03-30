@@ -38,7 +38,7 @@ utils::globalVariables(
 #' @export
 #' @examples
 #' \dontrun{
-#'   list_states()
+#' list_states()
 #' }
 #'
 list_states <- function() {
@@ -48,13 +48,3 @@ list_states <- function() {
     region = datasets::state.region
   ))
 }
-
-
-
-
-
-
-
-
-
-
