@@ -4,8 +4,15 @@
 \alias{geocode}
 \title{Geocoding}
 \usage{
-geocode(location = NULL, zipcode = NULL, event = NULL, pt = FALSE,
-  bb = FALSE, all = FALSE, full = FALSE)
+geocode(
+  location = NULL,
+  zipcode = NULL,
+  event = NULL,
+  pt = FALSE,
+  bb = FALSE,
+  all = FALSE,
+  full = FALSE
+)
 }
 \arguments{
 \item{location}{\code{character}. Place name(s)}

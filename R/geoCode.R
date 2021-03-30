@@ -40,13 +40,15 @@ geocode = function(location = NULL,
 
   if(!is.null(event)){
     suppressWarnings({
-      locs = lapply(event, geocode_wiki) %>% bind_rows()
+      locs = lapply(event, geocode_wiki) %>%
+        bind_rows()
     })
   }
 
   if(!is.null(zipcode)){
 
-    zipcodes  = USAboundaries::us_zipcodes() %>% st_transform(4269)
+    zipcodes  = USAboundaries::us_zipcodes() %>%
+      st_transform(4269)
 
     locs = zipcodes[match(as.numeric(zipcode), zipcodes$zip),] %>%
       na.omit()

@@ -28,7 +28,7 @@
 NULL
 
 utils::globalVariables(
-  c('LongLabel', 'ShortLabel', 'country_code', 'display_name')
+  c('LongLabel', 'ShortLabel', 'country_code', 'display_name', 'tags', 'aoi')
 )
 
 

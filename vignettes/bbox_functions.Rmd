@@ -21,12 +21,12 @@ library(leaflet)
 
 ## BB coords - BB geom
 
-When working with AOIs many operations can be simplified to working with bounding boxes. As such AOI offers expediate functions to get bounding boxes as geometries or coordinates. 
+When working with AOIs many operations can be simplified to working with bounding boxes. As such AOI offers expediant functions to get bounding boxes as geometries or coordinates. 
 
-Here we run through the steps of finding a spatial geometry for the state of Virgina using `aoi_get` and then determine the resulting bounding box in both spatial and coordinate representations.
+Here we run through the steps of finding a spatial geometry for the state of Virginia and then determining the resulting bounding box in both spatial and coordinate representations.
 
 ```{r}
-# Get geometry for the state of Virgina
+# Get geometry for the state of Virginia
 VA = aoi_get(state = "VA")
 # Get the spatial bounding box
 (bb = bbox_get(VA))
@@ -37,17 +37,16 @@ VA = aoi_get(state = "VA")
 (identical(bb1, bb2))
 ```
 
-Often when working with AOIs there is a desire to modify the boundaries  for specific task. The AOI package offers a buffering function which simplifies the sf::st_buffer() function for this task While less flexable then st_buffer, it handles unit and projection defintions within the function and adds (or subtracts) a consistent disntace from all edges in either kilomters or miles (default). 
+Often when working with AOIs there is a desire to modify the boundaries for specific task. The AOI package offers a buffering function which simplifies the `sf::st_buffer()` function for this task. While less flexible then `st_buffer`, it handles unit and projection definitions within the function and adds (or subtracts) a consistent distance from all edges in either kilometers or miles (default). 
 
 ```{r}
 AOI = list()
-AOI[['normal']] = aoi_get("UCSB") 
-AOI[['big']] = AOI$normal %>% aoi_buffer(1) 
-AOI[['small']] = AOI$normal %>% aoi_buffer(-1, km = TRUE) 
+AOI$normal = aoi_get("UCSB") 
+AOI$big = aoi_buffer(AOI$normal, 1) 
+AOI$small = AOI$normal %>% aoi_buffer(-1, km = TRUE) 
 ```
 
 ```{r, echo=FALSE}
-
 leaflet() %>% addTiles() %>% 
   addPolygons(data = AOI$big, 
               fillColor = "transparent", color = 'green',
@@ -62,21 +61,27 @@ leaflet() %>% addTiles() %>%
 
 ## Is inside
 
-Lastly, there 
+Lastly, there often a desire to test if one boundary is within another as a test. This can often be done using sf::st_within or sf::st_intersects but requires carefull attention to paramter order and then a conversion of a sparse matrix to a boolean condition. Instead, `aoi_inside` checks if either of the two inputs are within
 
 ```{r}
 
 ca = aoi_get(state = "CA")
 sb = aoi_get(state = "CA", county = "Santa Barbara")
+
+sf::st_within(sb, ca)
 (aoi_inside(ca, sb))
 
 el_paso = aoi_get(state = "CO", county = "El Paso")
 (aoi_inside(ca, el_paso))
 
+?aoi_inside
+
 ```
 
-```{r}
 
+Comlpete or partical containment?
+
+```{r}
 tahoe = aoi_get("lake tahoe")
 aoi_inside(ca, tahoe, total = FALSE)
 aoi_inside(ca, tahoe, total = TRUE)

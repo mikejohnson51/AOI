@@ -88,7 +88,7 @@ geocode_wiki = function(event = NULL, pt = FALSE){
 
     df = data.frame(lat = unlist(fin$query$pages[[1]]$coordinates$lat), lon = unlist(fin$query$pages[[1]]$coordinates$lon))
 
-    if(NROW(df) == 0){
+    if(nrow(df) == 0){
 
       infobox <- url %>%
         xml2::read_html(header = FALSE) %>%

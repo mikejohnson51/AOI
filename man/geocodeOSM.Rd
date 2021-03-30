@@ -4,8 +4,7 @@
 \alias{geocodeOSM}
 \title{geocodeOSM}
 \usage{
-geocodeOSM(location, pt = FALSE, bb = FALSE, all = FALSE,
-  full = FALSE)
+geocodeOSM(location, pt = FALSE, bb = FALSE, all = FALSE, full = FALSE)
 }
 \arguments{
 \item{location}{a place name}

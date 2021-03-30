@@ -3,7 +3,6 @@
 \docType{package}
 \name{AOI}
 \alias{AOI}
-\alias{AOI-package}
 \title{AOI Package}
 \description{
 An area of interest (AOI) is a geographic extent. The aim of this package is to help users create these -  turning locations, place names, and political boundaries

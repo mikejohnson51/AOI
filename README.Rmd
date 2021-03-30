@@ -24,42 +24,38 @@ library(AOI)
 
 The purpose of AOI is to help people create reproducible, programmatic, boundaries for analysis and mapping workflows. The package targets five main use cases:
 
-### 1. Basic forward (place name to lat/long) and reverse (lat/long to place name) geocoding tasks
+### 1. Basic forward and reverse geocoding tasks
 
-#### > Foward (from name/description to location)
+#### Foward (from name/description to location)
 
 ```{r}
 geocode('UCSB', pt = TRUE) %>% aoi_map(returnMap = TRUE)
 geocode(event = 'I have a dream speech', pt = T) %>% aoi_map(returnMap = TRUE)
+
+geocode(event = 'Inauguration of Joe Biden', pt = T) %>% 
+  aoi_map(returnMap = TRUE)
 ```
 
-#### > Reverse (from location to name/description)
+#### Reverse (from location to name/description)
 
 ```{r}
 geocode_rev(c(37,-119))
 ```
 
-### 2. Consistent query calls for world (rnatural earth) and USA (USAboundaries) boundaries:
+### 2. Consistent queries for world (`rnaturalearth`) and USA (`USAboundaries`) boundaries:
 
-#### > Working with USA state and county information:
+#### Working with USA state and county information:
 
 ```{r}
 aoi_get(state = "CA") %>% aoi_map(returnMap = T)
 aoi_get(state = "TX", county = "Harris") %>% aoi_map(returnMap = T)
-```
-
-#### > Working with world boundary data to call country and regional information:
-
-```{r}
 aoi_get(country = "Sri Lanka") %>% aoi_map(returnMap = T)
-
-aoi_get(country = "South Asia") %>% aoi_map(returnMap = T)
 ```
 
 
 ### 3. Creating flexible AOIs from place names and bounding box dimensions. 
 
-#### > Create your own bounding areas from a list of inputs:
+#### Create your own bounding areas from a list of inputs:
 
 ```{r}
 # 100 square mile region around UCSB
@@ -70,15 +66,24 @@ aoi_get(list(37,-119, 20, 10)) %>% aoi_map(returnMap = T)
 
 ```
 
-### 4. Offer a programmatic way to interface with large web-based datasets (e.g TREDDS/OPeNDAP)
+### 4. Offer a programmatic way to interface with other R packages that require user defined AOIs or bounding boxes
 
-See [climateR](https://github.com/mikejohnson51/climateR) for example
+- ggmap
+- nhdplusTools
+- elevatr
+- terrainr
+- climateR
+- dataRetrivial
+- soilDB
+- nwmTools
+- osmdata
+- FedData
+- hereR
+- Please add more!
 
-### 5. Facilitate iterative analysis in an era of big geospatial data 
+### 5. Enhance reproducible in spatial analysis.
 
-### 6. Enhance reproducible in spatial analysis.
-
-The package also includes functions to faciliate basic tasks in AOI work flows such as unioning, buffering, and converting between numeric and spatial representations. The package builds on the sf package and in cases of overlap, only offers wrappers for common workflows. By  nature these wrappers save users lines of code and repetition but are less flexible then there base sf functions. 
+The package also includes functions to faciliate basic tasks in AOI work flows such as unioning, buffering, and converting between coordinate and spatial representations. The package builds on the sf package and in cases of overlap, only offers wrappers for common workflows. By  nature these wrappers save users lines of code and repetition but are less flexible then there base sf functions. 
 
 ### Installation:
 
@@ -88,8 +93,7 @@ remotes::install_github("mikejohnson51/AOI")
 
 
 ### Resources
-See the package [website](https://mikejohnson51.github.io/AOI/) vignettes showing the general workflow and functionality of AOI  
-
+See the package [website](https://mikejohnson51.github.io/AOI/) vignettes showing the general workflow and functionality 
 
 ### Contributing:
 
@@ -110,20 +114,11 @@ Other notes:
 
 AOI has been supported with funds from the [UCAR COMET program][15] (2018-2019) and the [NSF Convergence Accelerator Project][16] (2020).
 
+
 [1]:	https://travis-ci.org/mikejohnson51/AOI
 [2]:	https://coveralls.io/github/mikejohnson51/AOI?branch=master
 [3]:	https://zenodo.org/badge/latestdoi/139353238
-[4]:	./articles/clipAreas.html
-[5]:	./articles/stateCounty.html
-[6]:	./articles/clipAreas.html
-[7]:	./articles/tools.html
-[8]:	./articles/useCases.html
-[9]:	https://github.com/mikejohnson51/HydroData
-[10]:	https://github.com/mikejohnson51/NWM
-[11]:	https://github.com/mikejohnson51/FlowFinder
 [12]:	https://mikejohnson51.github.io
-[13]:	https://geog.ucsb.edu
-[14]:	http://www.geog.ucsb.edu/~kclarke/
 [15]:	http://www.comet.ucar.edu
 [16]:	https://nsf.gov/awardsearch/showAward?AWD_ID=1937099&HistoricalAwards=false
 

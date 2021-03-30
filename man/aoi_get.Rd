@@ -4,17 +4,23 @@
 \alias{aoi_get}
 \title{Get Area of Interest (AOI) geometry}
 \usage{
-aoi_get(x = NULL, country = NULL, state = NULL, county = NULL,
-  km = FALSE, union = FALSE)
+aoi_get(
+  x = NULL,
+  country = NULL,
+  state = NULL,
+  county = NULL,
+  km = FALSE,
+  union = FALSE
+)
 }
 \arguments{
 \item{x}{\code{spatial}. \code{raster}, \code{sf} or a \code{list} object (see details for list parameters)}
 
-\item{country}{\code{character}. Full name, ISO 3166-1 2 or 3 digit code. Not case senstive. Data comes from Natural Earth and CIA Worldfact book.}
+\item{country}{\code{character}. Full name, ISO 3166-1 2 or 3 digit code. Not case senstive. Data comes from Natural Earth.}
 
-\item{state}{\code{character}. Full name or two character abbriviation. Not case senstive. If \code{state = 'conus'}, the lower 48 states will be returned. If \code{state = 'all'}, all states will be returned.}
+\item{state}{\code{character}. Full name or two character abbreviation Not case sensitive If \code{state = 'conus'}, the lower 48 states will be returned. If \code{state = 'all'}, all states will be returned.}
 
-\item{county}{\code{character}. County name(s). Requires \code{state} input. Not case senstive. If 'all' then all counties in a state are returned}
+\item{county}{\code{character}. County name(s). Requires \code{state} input. Not case sensitive If 'all' then all counties in a state are returned}
 
 \item{km}{\code{logical}. If \code{TRUE} distances are in kilometers, default is \code{FALSE} with distances in miles}
 
@@ -26,17 +32,17 @@ a sf geometry projected to \emph{EPSG:4269}.
 \description{
 Generate a spatial geometry from:
 \enumerate{
-             \item  Country name, 2-digit or 3-digit ISO abbriviation(s)
-             \item  Country Region (Asia, Africa, Europe, South America, Antarctica, Seven seas (open ocean), Oceania (Australia), North America,
-             \item  US state name(s) or abbreviation
-             \item  US region (Northeast, South, North Central, West)
+             \item  Country name, 2-digit or 3-digit ISO abbreviation(s)
+             \item  Country Region or Continent (e.g. South Asia, Africa)
+             \item  US state name(s) or abbreviation(s)
+             \item  US region (e.g. Northeast, South, North Central, West)
              \item  US state, county pair(s)
              \item  a spatial, sf or raster object
              \item  a clip unit (see details)
              }
 }
 \details{
-A \code{clip} unit can be described by just a place name (eg 'UCSB'). In doing so the associated boundaries determined by \code{\link{geocode}} will be returned.
+A \code{x} unit can be described by just a place name (e.g. 'UCSB'). In doing so the associated boundaries determined by \code{\link{geocode}} will be returned.
 To have greater control over the clip unit it can be defined as a list with a minimum of 3 inputs:
                               \enumerate{
                                      \item  A point: \itemize{
@@ -51,8 +57,8 @@ To have greater control over the clip unit it can be defined as a list with a mi
                                          }
                                      }
 
-                                     The bounding box is always drawn in relation to the point. By default the point is treated
-                                     as the center of the box. To define the realtive location of the point to the bounding box,
+                                     The bounding box is always drawn in relation to the point. By default, the point is treated
+                                     as the center of the box. To define the relative location of the point to the bounding box,
                                      a fourth input can be used:
                                      \enumerate{
                                      \item Origin \itemize{
@@ -107,14 +113,10 @@ Acceptable variations include:
 # Get AOI defined by state & all counties
     aoi_get(state = 'California', county = 'all')
 
-# Get AOI defined by external spatial file:
-    aoi_get(sf::read_sf('./la_metro.shp'))
-    aoi_get(raster('./AOI.tif'))
-
 # Get AOI defined by 10 mile bounding box using lat/lon
-    aoi_get(clip = c(35, -119, 10, 10))
+    aoi_get(c(35, -119, 10, 10))
 
 # Get AOI defined by 10 mile2 bounding box using the 'KMART near UCSB' as lower left corner
-    aoi_get(clip = list('KMART near UCSB', 10, 10, 'lowerleft'))
+    aoi_get(list('KMART near UCSB', 10, 10, 'lowerleft'))
 }
 }
