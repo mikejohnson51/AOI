@@ -1,10 +1,18 @@
 #' @title Get State of County Spatial Boundary
-#' @details \code{getFiat} returns a \code{SpatialPolygons} object for a defiend state and/or county.
-#' Boundaries come from the 2017 US Census TIGER Dataset and are projected to \emph{EPSG:4269}.
-#' @param country   \code{character}. Full name, ISO 3166-1 2 or 3 digit code. Not case senstive
-#' @param state     \code{character}. Full name or two character abbriviation. Not case senstive
-#' @param county    \code{character}. Provide county name(s). Requires 'state' input.
-#' @param bb        \code{logical}. If \code{TRUE} then the bounding geometry of state/county is returned,  default is \code{FALSE} and returns fiat geometries
+#' @details
+#' \code{getFiat} returns a \code{SpatialPolygons} object
+#' for a defiend state and/or county. Boundaries come from
+#' the 2017 US Census TIGER Dataset and are projected to
+#' \emph{EPSG:4269}.
+#' @param country \code{character}. Full name, ISO 3166-1 2 or 3 digit code.
+#'                Not case senstive
+#' @param state \code{character}. Full name or two character abbriviation.
+#'              Not case senstive
+#' @param county \code{character}. Provide county name(s).
+#'               Requires 'state' input.
+#' @param bb \code{logical}. If \code{TRUE} then the bounding geometry of
+#'           state/county is returned,  default is \code{FALSE} and returns
+#'           fiat geometries
 #' @return a \code{SpatialPolygons} object projected to \emph{EPSG:4269}.
 #' @export
 #' @keywords internal
@@ -100,7 +108,8 @@ getFiat <- function(country = NULL, state = NULL, county = NULL) {
   }
 
   if (!is.null(county)) {
-    counties <- USAboundaries::us_counties() %>% st_transform(4269)
+    counties <- USAboundaries::us_counties() %>%
+                sf::st_transform(4269)
 
     map2 <- NULL
 
@@ -128,16 +137,20 @@ getFiat <- function(country = NULL, state = NULL, county = NULL) {
     },
     error = function(e) {
       if (!is.null(map0)) {
-        map0 <- mutate(map0, "NAME" = map0$name) %>% select("NAME")
+        map0 <- dplyr::mutate(map0, "NAME" = map0$name) %>%
+                dplyr::select("NAME")
       }
       if (!is.null(map1)) {
-        map1 <- mutate(map1, "NAME" = map1$name) %>% select("NAME")
+        map1 <- dplyr::mutate(map1, "NAME" = map1$name) %>%
+                dplyr::select("NAME")
       }
       if (!is.null(map2)) {
-        map2 <- mutate(map2, "NAME" = map2$state_name) %>% select("NAME")
+        map2 <- dplyr::mutate(map2, "NAME" = map2$state_name) %>%
+                dplyr::select("NAME")
       }
       if (!is.null(map3)) {
-        map3 <- mutate(map3, "NAME" = map3$name) %>% select("NAME")
+        map3 <- dplyr::mutate(map3, "NAME" = map3$name) %>%
+                dplyr::select("NAME")
       }
       rbind(map1, map2, map3)
     }

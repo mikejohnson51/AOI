@@ -9,32 +9,34 @@ geocode_wiki(event = NULL, pt = FALSE)
 \arguments{
 \item{event}{\code{character}. a term to search for on wikipeida}
 
-\item{pt}{\code{logical}. If TRUE point geometery is appended to the returned list()}
+\item{pt}{\code{logical}. If TRUE point geometery is appended
+to the returned list()}
 }
 \value{
 aa data.frame of lat/lon coordinates
 }
 \description{
-A wrapper around the Wikipedia API to return geo-coordinates of requested inputs.
+A wrapper around the Wikipedia API to return
+             geo-coordinates of requested inputs.
 }
 \examples{
 \dontrun{
-   ## geocode an Agency
-     geocode_wiki("NOAA")
+## geocode an Agency
+geocode_wiki("NOAA")
 
- ## geocode an event
-     geocode_wiki("I have a dream speech")
+## geocode an event
+geocode_wiki("I have a dream speech")
 
- ## geocode a n event
-     geocode_wiki("D day")
+## geocode a n event
+geocode_wiki("D day")
 
- ## geocode a product
-     geocode_wiki("New York Times")
+## geocode a product
+geocode_wiki("New York Times")
 
- ## geocode an event
-     geocode_wiki("Hurricane Harvey")
-
+## geocode an event
+geocode_wiki("Hurricane Harvey")
 }
+
 }
 \author{
 Mike Johnson

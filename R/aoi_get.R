@@ -147,9 +147,9 @@ aoi_get <- function(x = NULL, country = NULL, state = NULL,
           "CONUS",
           "ALL"
         ))) {
-          stop(paste0(
-              "State not recongized.",
-              "Full names, regions, or abbreviations can be used."
+          stop(paste(
+            "State not recongized.",
+            "Full names, regions, or abbreviations can be used."
           ))
         }
       }
@@ -165,16 +165,16 @@ aoi_get <- function(x = NULL, country = NULL, state = NULL,
 
   # Fiat Boundary Defintion (Exisiting Spatial/Raster Feature or getFiat())
   shp <- if (is.null(x)) {
-           getFiat(country = country, state = state, county = county)
-         } else if (any(
-           methods::is(x, "Raster"),
-           methods::is(x, "Spatial"),
-           methods::is(x, "sf")
-         )) {
-           sf::st_transform(bbox_get(x), 4269)
-         } else {
-           getClip(x, km)
-         }
+    getFiat(country = country, state = state, county = county)
+  } else if (any(
+    methods::is(x, "Raster"),
+    methods::is(x, "Spatial"),
+    methods::is(x, "sf")
+  )) {
+    sf::st_transform(bbox_get(x), 4269)
+  } else {
+    getClip(x, km)
+  }
 
   # Return AOI
   if (union) {

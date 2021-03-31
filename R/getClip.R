@@ -1,16 +1,19 @@
 #' @title Convert clip unit ot geometry
 #' @description
-#' \code{getClip} generates a Spatial object based on a point; bounding box dimisions; and their relation to the point.
+#' \code{getClip} generates a Spatial object based on a point;
+#' bounding box dimisions; and their relation to the point.
 #' @param location Defined by a location or lat, long pair
-#' @param height   define the height of the desired bounding box in miles
-#' @param width    define the width of the desired bounding box in miles
-#' @param origin   define the position of the point with respect to the bounding box. Default is set to center. Options include \itemize{
-#' \item{"center"}
-#'  \item{"lowerleft"}
-#'   \item{"lowerright"}
-#'    \item{"upperright"}
-#'     \item{"upperleft"}
-#'   }
+#' @param height   Define the height of the desired bounding box in miles
+#' @param width    Define the width of the desired bounding box in miles
+#' @param origin   Define the position of the point with respect to the
+#'                 bounding box. Default is set to center. Options include:
+#'                 \itemize{
+#'                   \item{"center"}
+#'                   \item{"lowerleft"}
+#'                   \item{"lowerright"}
+#'                   \item{"upperright"}
+#'                   \item{"upperleft"}
+#'                 }
 #' @return a \code{SpatialPolygons} object projected to \emph{EPSG:4269}.
 #' @export
 #' @keywords internal

@@ -9,7 +9,8 @@ aoi_describe(AOI, full = FALSE, km = FALSE)
 \arguments{
 \item{AOI}{a spatial object (\code{raster}, \code{sf}, \code{sp}).}
 
-\item{full}{if TRUE, reverse geocoding descriptions returned, else just lat, lon, width, height, and origin (default = FALSE)}
+\item{full}{if TRUE, reverse geocoding descriptions returned, else just
+lat, lon, width, height, and origin (default = FALSE)}
 
 \item{km}{if TRUE, units are in kilometers, else in miles (default = FALSE)}
 }
@@ -24,12 +25,13 @@ a data.frame of AOI descriptors including (at minimum):
 }
 }
 \description{
-Describe a spatial (sf/sp/raster) object in terms of a reproducable AOI  (e.g. \code{\link{aoi_get}}) parameters.
+Describe a spatial (sf/sp/raster) object in terms of a
+             reproducable AOI  (e.g. \code{\link{aoi_get}}) parameters.
 }
 \examples{
 {
-fname <- system.file("shape/nc.shp", package="sf")
-nc <- sf::read_sf(fname)
-aoi_describe(nc[1,])
+  fname <- system.file("shape/nc.shp", package = "sf")
+  nc <- sf::read_sf(fname)
+  aoi_describe(nc[1, ])
 }
 }

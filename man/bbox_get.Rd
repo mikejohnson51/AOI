@@ -13,6 +13,7 @@ bbox_get(x)
 a sf polygon
 }
 \description{
-Get spatial (sf) representation of bounding box of an input
-feature type. Input can be data.frame, numeric, character, or spatial (sp/sf/raster). If numeric or character order of inputs should be (xmin, xmax, ymin, ymax)
+Get spatial (sf) representation of bounding box of an input feature type.
+Input can be data.frame, numeric, character, or spatial (sp/sf/raster).
+If numeric or character order of inputs should be (xmin, xmax, ymin, ymax)
 }

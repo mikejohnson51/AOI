@@ -22,31 +22,31 @@
 #' }
 aoi_describe <- function(AOI, full = FALSE, km = FALSE) {
   AOI <- make_sf(AOI)
-  bb  <- sf::st_transform(AOI, 4269) %>%
-         bbox_coords()
+  bb <- sf::st_transform(AOI, 4269) %>%
+    bbox_coords()
 
   lat_cent <- (bb$ymin + bb$ymax) / 2
 
   df <- data.frame(
-    lat    = lat_cent,
-    lon    = (bb$xmin + bb$xmax) / 2,
+    lat = lat_cent,
+    lon = (bb$xmin + bb$xmax) / 2,
     height = round(
       69 * (abs(bb$ymax - bb$ymin)),
       digits = 2
     ),
-    width  = round(
+    width = round(
       69 * cos(lat_cent * pi / 180) * abs(abs(bb$xmax) - abs(bb$xmin)),
       digits = 2
     ),
     origin = "center",
-    units  = "miles",
+    units = "miles",
     stringsAsFactors = FALSE
   )
 
   if (km) {
     df$height <- df$height / 1.609
-    df$width  <- df$width / 1.609
-    df$units  <- "kilometers"
+    df$width <- df$width / 1.609
+    df$units <- "kilometers"
   }
 
   if (full) {

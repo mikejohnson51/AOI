@@ -10,7 +10,7 @@
 bbox_get <- function(x) {
   if (methods::is(x, "character")) {
     x <- strsplit(x, ",")[[1]] %>%
-         as.numeric()
+      as.numeric()
     x <- sf::st_bbox(
       c(xmin = x[1], xmax = x[2], ymin = x[3], ymax = x[4]),
       crs = sf::st_crs(4326)

@@ -37,6 +37,11 @@ jobs:
           remotes::install_deps(dependencies = TRUE)
           install.packages("pkgdown", type = "binary")
         shell: Rscript {0}
+      
+      - name: Install custome pkgdown theme
+        run: |
+          remotes::install_github("mikejohnson51/miketheme")
+        shell: Rscript {0}
 
       - name: Install package
         run: R CMD INSTALL .

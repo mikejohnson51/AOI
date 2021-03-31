@@ -10,13 +10,13 @@ aoi_draw()
 An sf object called 'aoi'.
 }
 \description{
-Interactivly draw an Area of Interest (AOI) using a shiny app. Once an object is drawn and the "Save AOI" button pressed,
+Interactivly draw an Area of Interest (AOI) using a shiny app.
+Once an object is drawn and the "Save AOI" button pressed,
 a new sf object called 'aoi' will appear in you environment.
 }
 \examples{
 \dontrun{
 aoi_draw()
 }
-
 
 }

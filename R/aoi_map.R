@@ -36,12 +36,12 @@
 #' @export
 
 aoi_map <- function(AOI = NULL, returnMap = FALSE) {
-  p    <- "+proj=longlat +datum=WGS84"
-  m    <- NULL
-  bb   <- NULL
-  pts  <- NULL
+  p <- "+proj=longlat +datum=WGS84"
+  m <- NULL
+  bb <- NULL
+  pts <- NULL
   type <- NULL
-  out  <- NULL
+  out <- NULL
   orig <- AOI
 
   if (!methods::is(AOI, "list")) {

@@ -56,7 +56,7 @@ aoi_buffer <- function(AOI, d, km = FALSE) {
 aoi_inside <- function(AOI, obj, total = TRUE) {
   AOI <- make_sf(AOI)
   obj <- make_sf(obj) %>%
-         sf::st_transform(sf::st_crs(AOI))
+    sf::st_transform(sf::st_crs(AOI))
 
   int <- suppressMessages(sf::st_intersects(obj, AOI))
 

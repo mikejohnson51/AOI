@@ -44,9 +44,11 @@ alt_page <- function(loc, pt = FALSE) {
 
 
 #' @title Geocoding Events
-#' @description A wrapper around the Wikipedia API to return geo-coordinates of requested inputs.
+#' @description A wrapper around the Wikipedia API to return
+#'              geo-coordinates of requested inputs.
 #' @param event \code{character}. a term to search for on wikipeida
-#' @param pt \code{logical}. If TRUE point geometery is appended to the returned list()
+#' @param pt \code{logical}. If TRUE point geometery is appended
+#'           to the returned list()
 #' @return aa data.frame of lat/lon coordinates
 #' @export
 #' @author Mike Johnson
@@ -82,14 +84,26 @@ geocode_wiki <- function(event = NULL, pt = FALSE) {
 
   if (length(call) == 0) {
     df_new <- alt_page(loc)
-    message("'", event, "' not found...\nTry one of the following?\n\n", paste(df_new$links, collapse = ",\n"))
+    message(
+      "'",
+      event,
+      "' not found...\nTry one of the following?\n\n",
+      paste(df_new$links, collapse = ",\n")
+    )
     return(df_new)
   } else {
-    coord.url <- paste0("https://en.wikipedia.org/w/api.php?action=query&format=json&prop=coordinates&titles=", call)
+    coord_url <- paste0(
+      "https://en.wikipedia.org/w/api.php",
+      "?action=query&format=json&prop=coordinates&titles=",
+      call
+    )
 
-    fin <- jsonlite::fromJSON(coord.url)
+    fin <- jsonlite::fromJSON(coord_url)
 
-    df = data.frame(lat = unlist(fin$query$pages[[1]]$coordinates$lat), lon = unlist(fin$query$pages[[1]]$coordinates$lon))
+    df <- data.frame(
+        lat = unlist(fin$query$pages[[1]]$coordinates$lat),
+        lon = unlist(fin$query$pages[[1]]$coordinates$lon)
+    )
 
     if (nrow(df) == 0) {
       infobox <- url %>%
@@ -98,10 +112,18 @@ geocode_wiki <- function(event = NULL, pt = FALSE) {
 
       if (length(infobox) == 0) {
         df_new <- alt_page(loc)
-        message("'", event, "' not found...\nTry one of the following?\n\n", paste(df$links, collapse = ",\n"))
+        message(
+          "'",
+          event,
+          "' not found...\nTry one of the following?\n\n",
+          paste(df$links, collapse = ",\n")
+        )
         return(df_new)
       } else {
-        y <- as.data.frame(rvest::html_table(infobox[1], header = F)[[1]], stringsAsFactors = FALSE)
+        y <- as.data.frame(
+          rvest::html_table(infobox[1], header = F)[[1]],
+          stringsAsFactors = FALSE
+        )
         search <- y$X2[which(y$X1 == "Location")]
       }
 
@@ -117,7 +139,7 @@ geocode_wiki <- function(event = NULL, pt = FALSE) {
 
         all <- strsplit(gsub(", ", ",", x[1, 2]), ",")[[1]]
         df <- list()
-        for (i in 1:length(all)) {
+        for (i in seq_len(length(all))) {
           df[[i]] <- geocode(all[i], full = FALSE)
         }
 
@@ -141,7 +163,8 @@ geocode_wiki <- function(event = NULL, pt = FALSE) {
     points <- sf::st_as_sf(x = df, coords = c("lon", "lat"), crs = 4269)
     return(points)
   } else {
-    df <- cbind(request = loc, df) %>% data.frame()
+    df <- cbind(request = loc, df) %>%
+          data.frame()
     return(df)
   }
   # }

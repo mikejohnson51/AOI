@@ -1,12 +1,17 @@
 #' @title geocodeOSM
-#' @description Geocode via Open Street Maps API. \code{geocodeOSM} takes an input string and converts it to a geolocation.
-#' Addtionally it can return the location as a simple features point and the minimun bounding area
+#' @description
+#' Geocode via Open Street Maps API. \code{geocodeOSM}
+#' takes an input string and converts it to a geolocation.
+#' Addtionally it can return the location as a simple
+#' features point and the minimun bounding area
 #' of the location extent.
 #' @param location a place name
 #' @param pt if TRUE a simple feature point is appended to returned list
-#' @param bb if TRUE the OSM bounding area of the location is appended to returned list
+#' @param bb if TRUE the OSM bounding area of the location is appended
+#'           to returned list
 #' @param all if TRUE the point and bounding box representations are returned
-#' @param full \code{logical}. If TRUE all OSM attributes reuturned with query, else just the lat/long pair.
+#' @param full \code{logical}. If TRUE all OSM attributes reuturned with query,
+#'             else just the lat/long pair.
 #' @return at minimum a data.frame of lat, long
 #' @author Mike Johnson
 #' @export
@@ -16,13 +21,20 @@
 #' geocodeOSM("Garden of the Gods", bb = TRUE)
 #' }
 #'
-geocodeOSM <- function(location, pt = FALSE, bb = FALSE, all = FALSE, full = FALSE) {
+geocodeOSM <- function(location, pt = FALSE, bb = FALSE,
+                       all = FALSE, full = FALSE) {
   if (sum(pt, bb, all) > 1) {
     stop("Only pt, bb, or all can be TRUE. Leave others as FALSE")
   }
 
   if (class(location) != "character") {
-    stop("\nInput location is not a place name. \nYou might be looking for reverse geocodeing.\nTry: AOI::geocode_rev")
+    stop(paste(
+      "",
+      "Input location is not a place name. ",
+      "You might be looking for reverse geocodeing.",
+      "Try: AOI::geocode_rev()",
+      sep = "\n"
+    ))
   }
 
   URL <- paste0(
@@ -66,15 +78,15 @@ geocodeOSM <- function(location, pt = FALSE, bb = FALSE, all = FALSE, full = FAL
     return(coords)
   }
 
-  point <- st_as_sf(x = coords, coords = c("lon", "lat"), crs = 4269)
+  point <- sf::st_as_sf(x = coords, coords = c("lon", "lat"), crs = 4269)
   tmp.bb <- unlist(s$boundingbox)
   bbs <- bbox_get(paste(tmp.bb[3], tmp.bb[4], tmp.bb[1], tmp.bb[2], sep = ","))
   bbs$request <- s$request
   bbs <- if (full) {
-    merge(bbs, s)
-  } else {
-    bbs
-  }
+           merge(bbs, s)
+         } else {
+           bbs
+         }
 
   if (pt) {
     return(point)
@@ -99,7 +111,9 @@ geocodeOSM <- function(location, pt = FALSE, bb = FALSE, all = FALSE, full = FAL
 NULL
 
 #' @title defineClip
-#' @description Parse a clip list from user input. \code{defineClip} parses user supplied lists to a format usable by \code{\link{getClip}}
+#' @description
+#' Parse a clip list from user input. \code{defineClip} parses
+#' user supplied lists to a format usable by \code{\link{getClip}}
 #' @param x a user supplied list (see \code{\link{aoi_get}})
 #' @param km  \code{logical}. If \code{TRUE} distance are in kilometers,
 #' default is \code{FALSE} with distances in miles
@@ -113,7 +127,9 @@ defineClip <- function(x = NULL, km = FALSE) {
 
   if (length(x) == 1) {
     if (!methods::is(x, "character")) {
-      stop("If only one item is entered for 'x' it must be a character place name")
+      stop(
+        "If only one item is entered for 'x' it must be a character place name"
+      )
     } else {
       location <- x
       h <- NULL
@@ -125,11 +141,12 @@ defineClip <- function(x = NULL, km = FALSE) {
   if (length(x) == 3) {
     if (all(is.numeric(unlist(x)))) {
       stop(
-        paste0(
-          "A x with length 3 must be defined by:\n",
-          "1. A name (i.e 'UCSB') (character)\n",
-          "2. A bound box height (in miles) (numeric)\n",
-          "3. A bound box width (in miles) (numeric)"
+        paste(
+          "A x with length 3 must be defined by:",
+          "1. A name (i.e 'UCSB') (character)",
+          "2. A bound box height (in miles) (numeric)",
+          "3. A bound box width (in miles) (numeric)",
+          sep = "\n"
         )
       )
     } else {
@@ -140,7 +157,8 @@ defineClip <- function(x = NULL, km = FALSE) {
     }
   }
 
-  # AOI defined by (centroid lat, long, and bounding box width and height) or (loaction, width, height, origin)
+  # AOI defined by (centroid lat, long, and bounding box width and height)
+  # or (loaction, width, height, origin)
 
   if (length(x) == 4) {
     if (any(

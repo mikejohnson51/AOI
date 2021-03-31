@@ -11,3 +11,5 @@ Documentation.pdf
 paper
 pkgdown
 ^README.Rmd
+.github
+^codemeta\.json$
