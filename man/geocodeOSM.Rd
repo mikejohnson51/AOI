@@ -11,18 +11,22 @@ geocodeOSM(location, pt = FALSE, bb = FALSE, all = FALSE, full = FALSE)
 
 \item{pt}{if TRUE a simple feature point is appended to returned list}
 
-\item{bb}{if TRUE the OSM bounding area of the location is appended to returned list}
+\item{bb}{if TRUE the OSM bounding area of the location is appended
+to returned list}
 
 \item{all}{if TRUE the point and bounding box representations are returned}
 
-\item{full}{\code{logical}. If TRUE all OSM attributes reuturned with query, else just the lat/long pair.}
+\item{full}{\code{logical}. If TRUE all OSM attributes reuturned with query,
+else just the lat/long pair.}
 }
 \value{
 at minimum a data.frame of lat, long
 }
 \description{
-Geocode via Open Street Maps API. \code{geocodeOSM} takes an input string and converts it to a geolocation.
-Addtionally it can return the location as a simple features point and the minimun bounding area
+Geocode via Open Street Maps API. \code{geocodeOSM}
+takes an input string and converts it to a geolocation.
+Addtionally it can return the location as a simple
+features point and the minimun bounding area
 of the location extent.
 }
 \examples{
@@ -30,6 +34,7 @@ of the location extent.
 geocodeOSM("UCSB")
 geocodeOSM("Garden of the Gods", bb = TRUE)
 }
+
 }
 \author{
 Mike Johnson

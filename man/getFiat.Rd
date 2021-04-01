@@ -7,13 +7,18 @@
 getFiat(country = NULL, state = NULL, county = NULL)
 }
 \arguments{
-\item{country}{\code{character}. Full name, ISO 3166-1 2 or 3 digit code. Not case senstive}
+\item{country}{\code{character}. Full name, ISO 3166-1 2 or 3 digit code.
+Not case senstive}
 
-\item{state}{\code{character}. Full name or two character abbriviation. Not case senstive}
+\item{state}{\code{character}. Full name or two character abbriviation.
+Not case senstive}
 
-\item{county}{\code{character}. Provide county name(s). Requires 'state' input.}
+\item{county}{\code{character}. Provide county name(s).
+Requires 'state' input.}
 
-\item{bb}{\code{logical}. If \code{TRUE} then the bounding geometry of state/county is returned,  default is \code{FALSE} and returns fiat geometries}
+\item{bb}{\code{logical}. If \code{TRUE} then the bounding geometry of
+state/county is returned,  default is \code{FALSE} and returns
+fiat geometries}
 }
 \value{
 a \code{SpatialPolygons} object projected to \emph{EPSG:4269}.
@@ -22,22 +27,24 @@ a \code{SpatialPolygons} object projected to \emph{EPSG:4269}.
 Get State of County Spatial Boundary
 }
 \details{
-\code{getFiat} returns a \code{SpatialPolygons} object for a defiend state and/or county.
-Boundaries come from the 2017 US Census TIGER Dataset and are projected to \emph{EPSG:4269}.
+\code{getFiat} returns a \code{SpatialPolygons} object
+for a defiend state and/or county. Boundaries come from
+the 2017 US Census TIGER Dataset and are projected to
+\emph{EPSG:4269}.
 }
 \examples{
 \dontrun{
 # Get Single State
-    getFiat(state = "CA")
+getFiat(state = "CA")
 
 # Get Multi-state
-    getFiat(state = c("CA","Utah","Nevada"))
+getFiat(state = c("CA", "Utah", "Nevada"))
 
 # Get County
-    getFiat(state = "CA", county = "San Luis Obispo")
+getFiat(state = "CA", county = "San Luis Obispo")
 
 # Get Muli-county
-   getFiat(state = "CA", county = c("San Luis Obispo", "Santa Barbara", "Ventura"))
+getFiat(state = "CA", county = c("San Luis Obispo", "Santa Barbara", "Ventura"))
 }
 
 }

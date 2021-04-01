@@ -9,7 +9,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "40%"
+  out.width = "40%",
+  eval = FALSE
 )
 
 library(AOI)
@@ -17,9 +18,10 @@ library(AOI)
 
 # AOI <img src="man/figures/logo.png" width=130 height = 150 align="right" />
 
-[![Build Status][image-1]][1] 
-[![Coverage Status](https://img.shields.io/coveralls/mikejohnson51/AOI.svg)](https://coveralls.io/r/mikejohnson51/AOI?branch=master)
-[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Build Status][image-1]][1]
+[![R-CMD-check][image-4]][4]
+[![Coverage Status][image-2]][2]
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.][image-5]][5]
 [![DOI][image-3]][3]
 
 The purpose of AOI is to help people create reproducible, programmatic, boundaries for analysis and mapping workflows. The package targets five main use cases:
@@ -30,16 +32,27 @@ The purpose of AOI is to help people create reproducible, programmatic, boundari
 
 ```{r}
 geocode('UCSB', pt = TRUE) %>% aoi_map(returnMap = TRUE)
-geocode(event = 'I have a dream speech', pt = T) %>% aoi_map(returnMap = TRUE)
+```
 
-geocode(event = 'Inauguration of Joe Biden', pt = T) %>% 
+<img src="man/figures/README-unnamed-chunk-2-1.png" width="40%" />
+
+```{r}
+geocode(event = 'I have a dream speech', pt = T) %>% aoi_map(returnMap = TRUE)
+```
+
+<img src="man/figures/README-unnamed-chunk-2-2.png" width="40%" />
+
+```{r}
+geocode(event = 'Inauguration of Joe Biden', pt = T) %>%
   aoi_map(returnMap = TRUE)
 ```
+
+<img src="man/figures/README-unnamed-chunk-2-3.png" width="40%" />
 
 #### Reverse (from location to name/description)
 
 ```{r}
-geocode_rev(c(37,-119))
+geocode_rev(c(37, -119))
 ```
 
 ### 2. Consistent queries for world (`rnaturalearth`) and USA (`USAboundaries`) boundaries:
@@ -48,10 +61,21 @@ geocode_rev(c(37,-119))
 
 ```{r}
 aoi_get(state = "CA") %>% aoi_map(returnMap = T)
+```
+
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="40%" />
+
+```{r}
 aoi_get(state = "TX", county = "Harris") %>% aoi_map(returnMap = T)
+```
+
+<img src="man/figures/README-unnamed-chunk-4-2.png" width="40%" />
+
+```{r}
 aoi_get(country = "Sri Lanka") %>% aoi_map(returnMap = T)
 ```
 
+<img src="man/figures/README-unnamed-chunk-4-3.png" width="40%" />
 
 ### 3. Creating flexible AOIs from place names and bounding box dimensions. 
 
@@ -60,11 +84,16 @@ aoi_get(country = "Sri Lanka") %>% aoi_map(returnMap = T)
 ```{r}
 # 100 square mile region around UCSB
 aoi_get(list("UCSB", 10, 10)) %>% aoi_map(returnMap = T)
-
-# 200 square mile region around 37,-119
-aoi_get(list(37,-119, 20, 10)) %>% aoi_map(returnMap = T)
-
 ```
+
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="40%" />
+
+```{r}
+# 200 square mile region around 37,-119
+aoi_get(list(37, -119, 20, 10)) %>% aoi_map(returnMap = T)
+```
+
+<img src="man/figures/README-unnamed-chunk-5-2.png" width="40%" />
 
 ### 4. Offer a programmatic way to interface with other R packages that require user defined AOIs or bounding boxes
 
@@ -93,7 +122,7 @@ remotes::install_github("mikejohnson51/AOI")
 
 
 ### Resources
-See the package [website](https://mikejohnson51.github.io/AOI/) vignettes showing the general workflow and functionality 
+See the package [website](https://mikejohnson51.github.io/AOI/) vignettes showing the general workflow and functionality.
 
 ### Contributing:
 
@@ -116,8 +145,10 @@ AOI has been supported with funds from the [UCAR COMET program][15] (2018-2019) 
 
 
 [1]:	https://travis-ci.org/mikejohnson51/AOI
-[2]:	https://coveralls.io/github/mikejohnson51/AOI?branch=master
+[2]:	https://coveralls.io/r/mikejohnson51/AOI?branch=master
 [3]:	https://zenodo.org/badge/latestdoi/139353238
+[4]:    https://github.com/mikejohnson51/AOI/actions
+[5]:    https://www.repostatus.org/#active
 [12]:	https://mikejohnson51.github.io
 [15]:	http://www.comet.ucar.edu
 [16]:	https://nsf.gov/awardsearch/showAward?AWD_ID=1937099&HistoricalAwards=false
@@ -126,4 +157,5 @@ AOI has been supported with funds from the [UCAR COMET program][15] (2018-2019) 
 [image-1]:	https://travis-ci.org/mikejohnson51/AOI.svg?branch=master
 [image-2]:	https://img.shields.io/coveralls/github/mikejohnson51/AOI.svg
 [image-3]:	https://zenodo.org/badge/139353238.svg
-
+[image-4]:  https://github.com/mikejohnson51/AOI/workflows/R-CMD-check/badge.svg
+[image-5]:  https://www.repostatus.org/badges/latest/active.svg

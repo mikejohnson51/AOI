@@ -5,8 +5,9 @@
 
 [![Build
 Status](https://travis-ci.org/mikejohnson51/AOI.svg?branch=master)](https://travis-ci.org/mikejohnson51/AOI)
+[![R-CMD-check](https://github.com/mikejohnson51/AOI/workflows/R-CMD-check/badge.svg)](https://github.com/mikejohnson51/AOI/actions)
 [![Coverage
-Status](https://img.shields.io/coveralls/mikejohnson51/AOI.svg)](https://coveralls.io/r/mikejohnson51/AOI?branch=master)
+Status](https://img.shields.io/coveralls/github/mikejohnson51/AOI.svg)](https://coveralls.io/r/mikejohnson51/AOI?branch=master)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
@@ -33,7 +34,7 @@ geocode(event = 'I have a dream speech', pt = T) %>% aoi_map(returnMap = TRUE)
 <img src="man/figures/README-unnamed-chunk-2-2.png" width="40%" />
 
 ``` r
-geocode(event = 'Inauguration of Joe Biden', pt = T) %>% 
+geocode(event = 'Inauguration of Joe Biden', pt = T) %>%
   aoi_map(returnMap = TRUE)
 ```
 
@@ -42,13 +43,7 @@ geocode(event = 'Inauguration of Joe Biden', pt = T) %>%
 #### Reverse (from location to name/description)
 
 ``` r
-geocode_rev(c(37,-119))
-#>    place_id osm_type osm_id                             display_name
-#> 1 257632665 relation 396492 Fresno County, California, United States
-#>          county      state       country country_code
-#> 1 Fresno County California United States           us
-#>                                               bb
-#> 1 -120.9192485,-118.3612791,35.9066756,37.586101
+geocode_rev(c(37, -119))
 ```
 
 ### 2. Consistent queries for world (`rnaturalearth`) and USA (`USAboundaries`) boundaries:
@@ -86,7 +81,7 @@ aoi_get(list("UCSB", 10, 10)) %>% aoi_map(returnMap = T)
 
 ``` r
 # 200 square mile region around 37,-119
-aoi_get(list(37,-119, 20, 10)) %>% aoi_map(returnMap = T)
+aoi_get(list(37, -119, 20, 10)) %>% aoi_map(returnMap = T)
 ```
 
 <img src="man/figures/README-unnamed-chunk-5-2.png" width="40%" />
@@ -124,7 +119,7 @@ remotes::install_github("mikejohnson51/AOI")
 ### Resources
 
 See the package [website](https://mikejohnson51.github.io/AOI/)
-vignettes showing the general workflow and functionality
+vignettes showing the general workflow and functionality.
 
 ### Contributing:
 

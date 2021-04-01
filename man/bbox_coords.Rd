@@ -13,5 +13,7 @@ bbox_coords(x)
 a data.frame
 }
 \description{
-This function provides a simple wrapper around sf::st_bbox that instead returns a named data.frame containing (xmin, ymin, xmax, ymax)
+This function provides a simple wrapper around sf::st_bbox
+             that instead returns a named data.frame containing
+             (xmin, ymin, xmax, ymax)
 }

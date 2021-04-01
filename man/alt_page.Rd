@@ -9,7 +9,8 @@ alt_page(loc, pt = FALSE)
 \arguments{
 \item{loc}{a wikipedia structured call}
 
-\item{pts}{\code{logical}. If TRUE point geometery is appended to the returned list()}
+\item{pts}{\code{logical}. If TRUE point geometery
+is appended to the returned list()}
 }
 \value{
 at minimum a data.frame of lat, long
@@ -21,6 +22,7 @@ Find linked pages to a wikipedia call
 \dontrun{
 alt_page("Twin_towers")
 }
+
 }
 \author{
 Mike Johnson

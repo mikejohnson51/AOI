@@ -14,7 +14,7 @@ Returns a data.frame of valid states with abbreviations and regions
 }
 \examples{
 \dontrun{
-  list_states()
+list_states()
 }
 
 }

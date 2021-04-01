@@ -9,23 +9,26 @@ getClip(x, km = FALSE)
 \arguments{
 \item{location}{Defined by a location or lat, long pair}
 
-\item{height}{define the height of the desired bounding box in miles}
+\item{height}{Define the height of the desired bounding box in miles}
 
-\item{width}{define the width of the desired bounding box in miles}
+\item{width}{Define the width of the desired bounding box in miles}
 
-\item{origin}{define the position of the point with respect to the bounding box. Default is set to center. Options include \itemize{
-\item{"center"}
- \item{"lowerleft"}
+\item{origin}{Define the position of the point with respect to the
+bounding box. Default is set to center. Options include:
+\itemize{
+  \item{"center"}
+  \item{"lowerleft"}
   \item{"lowerright"}
-   \item{"upperright"}
-    \item{"upperleft"}
-  }}
+  \item{"upperright"}
+  \item{"upperleft"}
+}}
 }
 \value{
 a \code{SpatialPolygons} object projected to \emph{EPSG:4269}.
 }
 \description{
-\code{getClip} generates a Spatial object based on a point; bounding box dimisions; and their relation to the point.
+\code{getClip} generates a Spatial object based on a point;
+bounding box dimisions; and their relation to the point.
 }
 \author{
 Mike Johnson
