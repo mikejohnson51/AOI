@@ -148,7 +148,7 @@ aoi_get <- function(x = NULL, country = NULL, state = NULL,
           "ALL"
         ))) {
           stop(paste(
-            "State not recongized.",
+            "State not recognized.",
             "Full names, regions, or abbreviations can be used."
           ))
         }
