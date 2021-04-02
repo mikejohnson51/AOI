@@ -19,7 +19,7 @@ main use cases:
 
 ### 1. Basic forward and reverse geocoding tasks
 
-#### Foward (from name/description to location)
+#### Foward (from name to location)
 
 ``` r
 geocode('UCSB', pt = TRUE) %>% aoi_map(returnMap = TRUE)

@@ -28,7 +28,7 @@ The purpose of AOI is to help people create reproducible, programmatic, boundari
 
 ### 1. Basic forward and reverse geocoding tasks
 
-#### Foward (from name/description to location)
+#### Foward (from name to location)
 
 ```{r}
 geocode('UCSB', pt = TRUE) %>% aoi_map(returnMap = TRUE)
