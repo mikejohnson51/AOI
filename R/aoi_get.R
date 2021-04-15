@@ -123,7 +123,8 @@
 #' }
 #'
 aoi_get <- function(x = NULL, country = NULL, state = NULL,
-                    county = NULL, km = FALSE, union = FALSE) {
+                    county = NULL, fip = NULL,
+                    km = FALSE, union = FALSE) {
 
   # Error Catching
 
@@ -157,15 +158,15 @@ aoi_get <- function(x = NULL, country = NULL, state = NULL,
       if (!is.null(county)) {
         stop("The use of 'county' requires a 'state' parameter.")
       }
-      if (is.null(x)) {
-        stop("Requires a 'x' or 'state' parameter to execute.")
+      if (is.null(x) & is.null(fip)) {
+        stop("Requires an 'x' or 'state' parameter to execute.")
       }
     }
   }
 
   # Fiat Boundary Defintion (Exisiting Spatial/Raster Feature or getFiat())
   shp <- if (is.null(x)) {
-    getFiat(country = country, state = state, county = county)
+    getFiat(country = country, state = state, county = county, fip = fip)
   } else if (any(
     methods::is(x, "Raster"),
     methods::is(x, "Spatial"),
