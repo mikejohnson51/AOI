@@ -135,13 +135,13 @@ getFiat <- function(country = NULL, state = NULL, county = NULL, fip = NULL) {
     }
 
     if(nchar(fip) == 2){
-      map4 <- USAboundaries::us_states() %>%
-        filter(statefp == fip) %>%
-        st_transform(4326)
+      map4 <- USAboundaries::us_states()
+      map4 <- map4[map4$statefp == fip,] %>%
+        sf::st_transform(4269)
     } else {
-      map4 <- USAboundaries::us_counties() %>%
-        filter(geoid == fip) %>%
-        st_transform(4326)
+      map4 <- USAboundaries::us_counties()
+      map4 <- map4[map4$geoid == fip,] %>%
+        sf::st_transform(4269)
     }
 
 
