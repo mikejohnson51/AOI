@@ -33,12 +33,10 @@
 #'
 #' @author Mike Johnson
 
-getFiat <- function(country = NULL, state = NULL, county = NULL) {
-  map0 <- map1 <- map2 <- map3 <- NULL
+getFiat <- function(country = NULL, state = NULL, county = NULL, fip = NULL) {
+  map0 <- map1 <- map2 <- map3 <- map4 <- NULL
 
-  find <- function(x, vec, full) {
-    full[tolower(vec) %in% tolower(x)]
-  }
+  find <- function(x, vec, full) { full[tolower(vec) %in% tolower(x)] }
 
   if (!is.null(country)) {
     countries <- rnaturalearth::ne_countries(returnclass = "sf") %>%
@@ -131,28 +129,47 @@ getFiat <- function(country = NULL, state = NULL, county = NULL) {
     }
   }
 
+  if(!is.null(fip)){
+    if(!nchar(fip) %in% c(2,5)){
+      stop("FIP codes must be of length 2,3 or 5")
+    }
+
+    if(nchar(fip) == 2){
+      map4 <- USAboundaries::us_states()
+      map4 <- map4[map4$statefp == fip,] %>%
+        sf::st_transform(4269)
+    } else {
+      map4 <- USAboundaries::us_counties()
+      map4 <- map4[map4$geoid == fip,] %>%
+        sf::st_transform(4269)
+    }
+
+
+  }
+
+
+
   map <- tryCatch(
     {
-      rbind(map0, map1, map2, map3)
+      rbind(map0, map1, map2, map3, map4)
     },
     error = function(e) {
       if (!is.null(map0)) {
-        map0 <- dplyr::mutate(map0, "NAME" = map0$name) %>%
-                dplyr::select("NAME")
+        map0 <- dplyr::select(map0, "NAME" = map0$name)
       }
       if (!is.null(map1)) {
-        map1 <- dplyr::mutate(map1, "NAME" = map1$name) %>%
-                dplyr::select("NAME")
+        map1 <- dplyr::select(map1, "NAME" = map1$name)
       }
       if (!is.null(map2)) {
-        map2 <- dplyr::mutate(map2, "NAME" = map2$state_name) %>%
-                dplyr::select("NAME")
+        map2 <- dplyr::select(map2, "NAME" = map2$state_name)
       }
       if (!is.null(map3)) {
-        map3 <- dplyr::mutate(map3, "NAME" = map3$name) %>%
-                dplyr::select("NAME")
+        map3 <- dplyr::select(map3, "NAME" = map3$name)
       }
-      rbind(map1, map2, map3)
+      if (!is.null(map3)) {
+        map3 <- dplyr::select(map3, "NAME" = map4$name)
+      }
+      rbind(map1, map2, map3, map4)
     }
   )
 

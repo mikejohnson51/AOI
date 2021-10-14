@@ -13,7 +13,7 @@ test_that("aoi_get errors...", {
 
   expect_error(
     aoi_get(state = "TweedleDee"),
-    "State not recongized. Full names, regions, or abbreviations can be used."
+    "State not recognized. Full names, regions, or abbreviations can be used."
   )
 
   expect_error(
