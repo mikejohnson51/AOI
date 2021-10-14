@@ -9,6 +9,7 @@ aoi_get(
   country = NULL,
   state = NULL,
   county = NULL,
+  fip = NULL,
   km = FALSE,
   union = FALSE
 )
@@ -28,6 +29,8 @@ will be returned.}
 \item{county}{\code{character}. County name(s). Requires \code{state} input.
 Not case sensitive If 'all' then all counties in a state
 are returned}
+
+\item{fip}{a 2 or 3 digit US fip code}
 
 \item{km}{\code{logical}. If \code{TRUE} distances are in kilometers,
 default is \code{FALSE} with distances in miles}

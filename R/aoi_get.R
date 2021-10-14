@@ -20,6 +20,7 @@
 #'               are returned
 #' @param x \code{spatial}, \code{raster}, \code{sf} or a \code{list} object
 #'          (see details for list parameters)
+#' @param fip a 2 or 3 digit US fip code
 #' @param km \code{logical}. If \code{TRUE} distances are in kilometers,
 #'           default is \code{FALSE} with distances in miles
 #' @param union \code{logical}. If TRUE objects are unioned into a single object

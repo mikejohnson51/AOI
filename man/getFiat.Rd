@@ -4,7 +4,7 @@
 \alias{getFiat}
 \title{Get State of County Spatial Boundary}
 \usage{
-getFiat(country = NULL, state = NULL, county = NULL)
+getFiat(country = NULL, state = NULL, county = NULL, fip = NULL)
 }
 \arguments{
 \item{country}{\code{character}. Full name, ISO 3166-1 2 or 3 digit code.

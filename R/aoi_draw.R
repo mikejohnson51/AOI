@@ -115,7 +115,7 @@ aoi_draw <- function() {
           shiny::validate(
             shiny::need(input$aoi_name, message = "AOI name is required")
           )
-          assign(input$aoi_name, values$sf, envir = globalenv())
+          assign(input$aoi_name, values$sf, envir = parent.frame())
           shiny::showNotification(
             paste0("Object saved as `", input$aoi_name, "`"),
             duration = NULL,
