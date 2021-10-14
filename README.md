@@ -3,15 +3,18 @@
 
 # AOI <img src="man/figures/logo.png" width=130 height = 150 align="right" />
 
-[![Build
-Status](https://travis-ci.org/mikejohnson51/AOI.svg?branch=master)](https://travis-ci.org/mikejohnson51/AOI)
-[![R-CMD-check](https://github.com/mikejohnson51/AOI/workflows/R-CMD-check/badge.svg)](https://github.com/mikejohnson51/AOI/actions)
-[![Coverage
-Status](https://img.shields.io/coveralls/github/mikejohnson51/AOI.svg)](https://coveralls.io/r/mikejohnson51/AOI?branch=master)
-[![Project Status: Active – The project has reached a stable, usable
-state and is being actively
-developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![DOI](https://zenodo.org/badge/139353238.svg)](https://zenodo.org/badge/latestdoi/139353238)
+<!-- badges: start -->
+
+[![DOI](https://zenodo.org/badge/158620263.svg)](https://zenodo.org/badge/latestdoi/158620263)
+[![R CMD
+Check](https://github.com/mikejohnson51/AOI/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mikejohnson51/AOI/actions/workflows/R-CMD-check.yaml)
+[![Dependencies](https://img.shields.io/badge/dependencies-8/18-orange?style=flat)](#)
+[![License:
+MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://choosealicense.com/licenses/mit/)
+[![Project Status:
+Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![LifeCycle](man/figures/lifecycle/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+<!-- badges: end -->
 
 The purpose of AOI is to help people create reproducible, programmatic,
 boundaries for analysis and mapping workflows. The package targets five

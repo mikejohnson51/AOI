@@ -25,8 +25,8 @@ at minimum a data.frame of lat, long
 \description{
 Geocode via Open Street Maps API. \code{geocodeOSM}
 takes an input string and converts it to a geolocation.
-Addtionally it can return the location as a simple
-features point and the minimun bounding area
+Additionally it can return the location as a simple
+features point and the minimum bounding area
 of the location extent.
 }
 \examples{

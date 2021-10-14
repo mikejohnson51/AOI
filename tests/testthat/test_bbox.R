@@ -20,9 +20,9 @@ test_that("bbox_get and bbox_coords work as expected...", {
   expect_true(sf::st_geometry_type(bbsf) == "POLYGON")
   expect_true(length(bbsf_vec) == 4)
 
-  A <- A %>% sf::as_Spatial()
+  A <- sf::as_Spatial(A)
   bbsp <- bbox_get(A)
-  bbsp_vec <- bbox_coords(A)
+  bbsp_vec <- bbox_coords(x = A)
   expect_true(sf::st_geometry_type(bbsp) == "POLYGON")
   expect_true(length(bbsp_vec) == 4)
 

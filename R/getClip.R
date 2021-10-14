@@ -23,7 +23,7 @@
 getClip <- function(x, km = FALSE) {
   fin <- defineClip(x, km = km)
   location <- fin$location
-  origin <- fin$o
+  origin   <- fin$o
 
   if (all(is.null(fin$h), is.null(fin$w), is.null(origin))) {
     poly <- geocode(location, bb = TRUE, full = FALSE)

@@ -85,7 +85,7 @@ test_that("aoi_get & getFiat & getClip & defineClip", {
   nc <- sf::read_sf(fname)
 
   sf_obj <- aoi_get(nc)
-  sp_obj <- aoi_get(sf::as_Spatial(nc))
+  sp_obj <- aoi_get(x= sf::as_Spatial(nc))
 
   expect_true(identical(sf_obj, sp_obj))
 

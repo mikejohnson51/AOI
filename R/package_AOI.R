@@ -32,13 +32,13 @@
 #' @import      leaflet
 #' @importFrom  dplyr select mutate bind_rows
 #' @importFrom  jsonlite fromJSON
-#' @importFrom  sf st_as_sf st_sf as_Spatial st_bbox st_transform st_sfc st_polygon st_crs st_geometry_type st_buffer st_intersection
+#' @importFrom  sf st_as_sf st_sf as_Spatial st_bbox st_transform st_sfc st_polygon st_crs st_geometry_type st_buffer st_intersection st_coordinates
 #' @importFrom  rvest html_nodes html_text html_attr html_table
 #' @importFrom  xml2  read_html
 #' @importFrom  stats complete.cases na.omit setNames
 #' @importFrom  utils globalVariables
 #' @importFrom  rnaturalearth ne_countries
-#' @importFrom  USAboundaries us_boundaries us_counties us_zipcodes
+#' @importFrom  USAboundaries us_states us_counties us_zipcodes
 #' @importFrom  methods is
 
 NULL

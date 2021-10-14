@@ -2,8 +2,8 @@
 #' @description
 #' Geocode via Open Street Maps API. \code{geocodeOSM}
 #' takes an input string and converts it to a geolocation.
-#' Addtionally it can return the location as a simple
-#' features point and the minimun bounding area
+#' Additionally it can return the location as a simple
+#' features point and the minimum bounding area
 #' of the location extent.
 #' @param location a place name
 #' @param pt if TRUE a simple feature point is appended to returned list
@@ -23,6 +23,7 @@
 #'
 geocodeOSM <- function(location, pt = FALSE, bb = FALSE,
                        all = FALSE, full = FALSE) {
+
   if (sum(pt, bb, all) > 1) {
     stop("Only pt, bb, or all can be TRUE. Leave others as FALSE")
   }
@@ -44,6 +45,7 @@ geocodeOSM <- function(location, pt = FALSE, bb = FALSE,
   )
 
   ret <- jsonlite::fromJSON(URL[1])
+
   rownames(ret) <- NULL
 
   if (length(ret) != 0) {
@@ -80,7 +82,7 @@ geocodeOSM <- function(location, pt = FALSE, bb = FALSE,
 
   point <- sf::st_as_sf(x = coords, coords = c("lon", "lat"), crs = 4269)
   tmp.bb <- unlist(s$boundingbox)
-  bbs <- bbox_get(paste(tmp.bb[3], tmp.bb[4], tmp.bb[1], tmp.bb[2], sep = ","))
+  bbs <- bbox_get(x = paste(tmp.bb[3], tmp.bb[4], tmp.bb[1], tmp.bb[2], sep = ","))
   bbs$request <- s$request
   bbs <- if (full) {
            merge(bbs, s)

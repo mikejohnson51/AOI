@@ -15,24 +15,15 @@ bbox_get <- function(x) {
       c(xmin = x[1], xmax = x[2], ymin = x[3], ymax = x[4]),
       crs = sf::st_crs(4326)
     )
-  }
-
-  if (methods::is(x, "numeric")) {
+  } else if (methods::is(x, "numeric")) {
     x <- sf::st_bbox(
       c(xmin = x[1], xmax = x[2], ymin = x[3], ymax = x[4]),
       crs = sf::st_crs(4326)
     )
-  }
-
-  if (methods::is(x, "Spatial")) {
-    x <- sf::st_bbox(x, crs = x@crs)
-  }
-
-  if (methods::is(x, "Raster")) {
-    x <- sf::st_bbox(x, crs = x@crs)
-  }
-  if (methods::is(x, "sf")) {
-    x <- sf::st_bbox(x, crs = sf::st_crs(x))
+  } else {
+    x <- suppressWarnings({
+      sf::st_bbox(x, crs = sf::st_crs(x))
+    })
   }
 
   sf::st_sf(sf::st_as_sfc(x))
@@ -47,11 +38,11 @@ bbox_get <- function(x) {
 #' @export
 
 bbox_coords <- function(x) {
-  bb <- sf::st_bbox(x)
-  df <- data.frame(
-    xmin = bb[1], ymin = bb[2],
-    xmax = bb[3], ymax = bb[4],
-    row.names = NULL
-  )
-  return(df)
+  bb <- suppressWarnings({ sf::st_bbox(x) })
+  # df <- data.frame(
+  #   xmin = bb[1], ymin = bb[2],
+  #   xmax = bb[3], ymax = bb[4],
+  #   row.names = NULL
+  # )
+  return(bb)
 }
