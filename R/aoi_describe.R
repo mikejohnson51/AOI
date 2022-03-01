@@ -18,12 +18,15 @@
 #' {
 #'   fname <- system.file("shape/nc.shp", package = "sf")
 #'   nc <- sf::read_sf(fname)
-#'   aoi_describe(nc[1, ])
+#'   aoi_describe(AOI = nc[1, ])
 #' }
+#' @importFrom sf st_transform st_bbox
+
 aoi_describe <- function(AOI, full = FALSE, km = FALSE) {
+
   AOI <- make_sf(AOI)
-  bb <- sf::st_transform(AOI, 4269) %>%
-    bbox_coords()
+  AOI <- sf::st_transform(AOI, 4326)
+  bb <- sf::st_bbox(AOI)
 
   lat_cent <- (bb$ymin + bb$ymax) / 2
 

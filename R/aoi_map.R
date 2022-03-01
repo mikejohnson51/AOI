@@ -34,8 +34,12 @@
 #' htmlwidgets::saveWidget(m, file = paste0(getwd(), "/myMap.html"))
 #' }
 #' @export
+#' @importFrom sf st_geometry_type
 
 aoi_map <- function(AOI = NULL, returnMap = FALSE) {
+
+  check_pkg('leaflet')
+
   p <- "+proj=longlat +datum=WGS84"
   m <- NULL
   bb <- NULL
@@ -44,7 +48,7 @@ aoi_map <- function(AOI = NULL, returnMap = FALSE) {
   out <- NULL
   orig <- AOI
 
-  if (!methods::is(AOI, "list")) {
+  if (!inherits(AOI, "list")) {
     AOI <- list(AOI = AOI)
   }
 
@@ -52,7 +56,7 @@ aoi_map <- function(AOI = NULL, returnMap = FALSE) {
     tmp <- make_sf(AOI[[i]])
 
     if (!is.null(tmp)) {
-      out[[length(out) + 1]] <- tmp %>% st_transform(p)
+      out[[length(out) + 1]] <- st_transform(tmp, p)
       type[length(type) + 1] <- as.character(unique(st_geometry_type(tmp)[1]))
     }
   }
@@ -71,36 +75,36 @@ aoi_map <- function(AOI = NULL, returnMap = FALSE) {
   }
 
 
-  m <- leaflet() %>%
-    addProviderTiles("Esri.NatGeoWorldMap", group = "Terrain") %>%
-    addProviderTiles("CartoDB.Positron", group = "Grayscale") %>%
-    addProviderTiles("Esri.WorldImagery", group = "Imagery") %>%
-    addScaleBar("bottomleft") %>%
-    addMiniMap(
+  m <- leaflet::leaflet()  |>
+    leaflet::addProviderTiles("Esri.NatGeoWorldMap", group = "Terrain")  |>
+    leaflet::addProviderTiles("CartoDB.Positron", group = "Grayscale")  |>
+    leaflet::addProviderTiles("Esri.WorldImagery", group = "Imagery")  |>
+    leaflet::addScaleBar("bottomleft")  |>
+    leaflet::addMiniMap(
       toggleDisplay = TRUE,
       minimized = TRUE
-    ) %>%
-    addMeasure(
+    )  |>
+    leaflet::addMeasure(
       position = "bottomleft",
       primaryLengthUnit = "feet",
       primaryAreaUnit = "sqmiles",
       activeColor = "red",
       completedColor = "green"
-    ) %>%
-    addLayersControl(
+    )  |>
+    leaflet::addLayersControl(
       baseGroups = c("Terrain", "Grayscale", "Imagery"),
-      options = layersControlOptions(collapsed = TRUE)
+      options = leaflet::layersControlOptions(collapsed = TRUE)
     )
 
   if (is.null(orig)) {
-    m <- setView(m, lat = 39.311825, lng = -101.275972, zoom = 4)
+    m <- leaflet::setView(m, lat = 39.311825, lng = -101.275972, zoom = 4)
   } else {
     if (!is.null(pts)) {
-      m <- addMarkers(m, data = pts)
+      m <- leaflet::addMarkers(m, data = pts)
     }
 
     if (!is.null(bb)) {
-      m <- addPolygons(m,
+      m <- leaflet::addPolygons(m,
         data = bb,
         stroke = TRUE,
         fillColor = "transparent",

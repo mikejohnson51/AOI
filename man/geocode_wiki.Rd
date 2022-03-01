@@ -36,7 +36,6 @@ geocode_wiki("New York Times")
 ## geocode an event
 geocode_wiki("Hurricane Harvey")
 }
-
 }
 \author{
 Mike Johnson

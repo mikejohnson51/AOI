@@ -54,10 +54,11 @@
 #'  bb              :	-119.8458708,-119.8450475,34.4128884,34.414646
 #'  ````
 #' }
+#' @importFrom jsonlite fromJSON
 
 geocode_rev <- function(x) {
 
-  if (class(x) == "character") {
+  if (inherits(x, "character")) {
     pt <- geocode(x)
   } else {
     pt <- data.frame(
@@ -105,15 +106,11 @@ geocode_rev <- function(x) {
 
   ll  <- jsonlite::fromJSON(osm_url)
   xr  <- unlist(ll)
-  osm <- data.frame(t(xr), stringsAsFactors = FALSE) %>%
-         setNames(
-           gsub(
-             "address\\.|location\\.|spatialReference\\.",
-             "",
-             names(xr)
-           )
-         )
+  osm <- data.frame(t(xr), stringsAsFactors = FALSE)
+  names(osm) <- gsub("address\\.|location\\.|spatialReference\\.", "", names(xr))
+
   osm$licence <- NULL
+
   osm$bb <- paste(
     osm$boundingbox3,
     osm$boundingbox4,

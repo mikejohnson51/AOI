@@ -6,16 +6,17 @@
 #' @param x input feature
 #' @return a sf polygon
 #' @export
+#' @importFrom sf st_bbox st_crs st_as_sfc st_sf
 
 bbox_get <- function(x) {
-  if (methods::is(x, "character")) {
-    x <- strsplit(x, ",")[[1]] %>%
-      as.numeric()
+  if (inherits(x, "character")) {
+    x <- as.numeric(strsplit(x, ",")[[1]])
+
     x <- sf::st_bbox(
       c(xmin = x[1], xmax = x[2], ymin = x[3], ymax = x[4]),
       crs = sf::st_crs(4326)
     )
-  } else if (methods::is(x, "numeric")) {
+  } else if (inherits(x, "numeric")) {
     x <- sf::st_bbox(
       c(xmin = x[1], xmax = x[2], ymin = x[3], ymax = x[4]),
       crs = sf::st_crs(4326)
@@ -26,7 +27,8 @@ bbox_get <- function(x) {
     })
   }
 
-  sf::st_sf(sf::st_as_sfc(x))
+  sf::st_as_sf(sf::st_as_sfc(x)) |>
+    rename_geometry("geometry")
 }
 
 #' @title Return bounding box coordinates of a spatial (sp/sf/raster) object

@@ -95,7 +95,7 @@
 #' aoi_get(country = "Brazil")
 #'
 #' # Get AOI for a location
-#' aoi_get("Sacramento")
+#' aoi_get(x = "Sacramento")
 #'
 #' # Get AOI defined by a state(s)
 #' aoi_get(state = "CA")
@@ -109,9 +109,6 @@
 #' aoi_get(state = "California", county = "Santa Barbara")
 #' aoi_get(state = "CA", county = c("Santa Barbara", "ventura"))
 #'
-#' # Get AOI defined by state & county pair(s)
-#' aoi_get(state = "California", county = "Santa Barbara")
-#' aoi_get(state = "CA", county = c("Santa Barbara", "ventura"))
 #'
 #' # Get AOI defined by state & all counties
 #' aoi_get(state = "California", county = "all")
@@ -120,15 +117,21 @@
 #' aoi_get(c(35, -119, 10, 10))
 #'
 #' # Get AOI defined by 10 mile2 bounding box using the 'KMART near UCSB' as lower left corner
-#' aoi_get(list("KMART near UCSB", 10, 10, "lowerleft"))
+#' aoi_get(x = list("UCSB", 10, 10, "lowerleft"))
 #' }
-#'
-aoi_get <- function(x = NULL, country = NULL, state = NULL,
-                    county = NULL, fip = NULL,
-                    km = FALSE, union = FALSE) {
+#' @importFrom sf st_union st_transform
+
+aoi_get <- function(x = NULL,
+                    country = NULL,
+                    state = NULL,
+                    county = NULL,
+                    fip = NULL,
+                    km = FALSE,
+                    union = FALSE) {
+
+  meta <- list_states()
 
   # Error Catching
-
   if (is.null(country)) {
     if (!is.null(state)) {
       if (!is.null(x)) {
@@ -136,14 +139,10 @@ aoi_get <- function(x = NULL, country = NULL, state = NULL,
       }
 
       for (value in state) {
-        if (!is.character(value)) {
-          stop("State must be a character value.")
-        }
-
-        meta <- list_states()
+        if (!is.character(value)) { stop("State must be a character value.") }
 
         if (!(toupper(value) %in% c(
-          toupper(meta$abbr),
+          toupper(meta$state_abbr),
           toupper(meta$name),
           toupper(meta$region),
           "CONUS",
@@ -165,22 +164,28 @@ aoi_get <- function(x = NULL, country = NULL, state = NULL,
     }
   }
 
-  # Fiat Boundary Defintion (Exisiting Spatial/Raster Feature or getFiat())
+  # Fiat Boundary Definition (Existing Spatial/Raster Feature or getFiat())
   shp <- if (is.null(x)) {
     getFiat(country = country, state = state, county = county, fip = fip)
   } else if (any(
-    methods::is(x, "Raster"),
-    methods::is(x, "Spatial"),
-    methods::is(x, "sf")
+    inherits(x, "Raster"),
+    inherits(x, "Spatial"),
+    inherits(x, "sf")
   )) {
-    sf::st_transform(bbox_get(x), 4269)
+    st_bbox(x) |>
+      sf::st_as_sfc() |>
+      st_as_sf() |>
+      st_transform(4326) |>
+      rename_geometry("geometry")
   } else {
     getClip(x, km)
   }
 
   # Return AOI
   if (union) {
-    sf::st_union(shp)
+    sf::st_union(shp) |>
+      st_as_sf() |>
+      rename_geometry("geometry")
   } else {
     shp
   }

@@ -12,7 +12,7 @@ aoi_inside(AOI, obj, total = TRUE)
 \item{obj}{object 1}
 
 \item{total}{boolean.
-If \code{TRUE} then check if obj is competely
+If \code{TRUE} then check if obj is completely
 inside the AOI (and vice versa: order doesn't matter).
 If \code{FALSE}, then check if at least part
 of obj is in the AOI.}

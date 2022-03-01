@@ -58,7 +58,7 @@ geocode("UCSB")
 geocode("UCSB", pt = TRUE)
 
 ## geocode a single location and derived bounding box of location
-geocode("UCSB", bb = TRUE)
+geocode(location = "UCSB", bb = TRUE)
 
 ## geocode multiple locations
 geocode(c("UCSB", "Goleta", "Santa Barbara"))

@@ -25,7 +25,7 @@ Add or subtract a uniform distance to/from a
 \examples{
 \dontrun{
 # get an AOI of 'Garden of the Gods' and add a 2 mile buffer
-AOI <- aoi_get("Garden of the Gods") \%>\% modify(2)
+AOI <- aoi_get(x = "Garden of the Gods") \%>\% modify(2)
 
 # get an AOI of 'Garden of the Gods' and add a 2 kilometer buffer
 getAOI("Garden of the Gods") \%>\% modify(2, km = TRUE)

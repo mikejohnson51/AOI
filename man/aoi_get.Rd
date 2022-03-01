@@ -122,7 +122,7 @@ Acceptable variations include:
 aoi_get(country = "Brazil")
 
 # Get AOI for a location
-aoi_get("Sacramento")
+aoi_get(x = "Sacramento")
 
 # Get AOI defined by a state(s)
 aoi_get(state = "CA")
@@ -136,9 +136,6 @@ aoi_get(state = "conus")
 aoi_get(state = "California", county = "Santa Barbara")
 aoi_get(state = "CA", county = c("Santa Barbara", "ventura"))
 
-# Get AOI defined by state & county pair(s)
-aoi_get(state = "California", county = "Santa Barbara")
-aoi_get(state = "CA", county = c("Santa Barbara", "ventura"))
 
 # Get AOI defined by state & all counties
 aoi_get(state = "California", county = "all")
@@ -147,7 +144,6 @@ aoi_get(state = "California", county = "all")
 aoi_get(c(35, -119, 10, 10))
 
 # Get AOI defined by 10 mile2 bounding box using the 'KMART near UCSB' as lower left corner
-aoi_get(list("KMART near UCSB", 10, 10, "lowerleft"))
+aoi_get(x = list("UCSB", 10, 10, "lowerleft"))
 }
-
 }

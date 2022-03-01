@@ -11,7 +11,7 @@
 #' @examples
 #' \dontrun{
 #' # get an AOI of 'Garden of the Gods' and add a 2 mile buffer
-#' AOI <- aoi_get("Garden of the Gods") %>% modify(2)
+#' AOI <- aoi_get(x = "Garden of the Gods") %>% modify(2)
 #'
 #' # get an AOI of 'Garden of the Gods' and add a 2 kilometer buffer
 #' getAOI("Garden of the Gods") %>% modify(2, km = TRUE)
@@ -19,6 +19,8 @@
 #' # get and AOI for Colorado Springs and subtract 3 miles
 #' getAOI("Colorado Springs") %>% modify(-3)
 #' }
+#' @importFrom sf st_crs st_transform st_buffer
+
 aoi_buffer <- function(AOI, d, km = FALSE) {
   AOI <- make_sf(AOI)
 
@@ -31,13 +33,13 @@ aoi_buffer <- function(AOI, d, km = FALSE) {
     u <- d * 5280
   } # miles to feet
 
-  sf::st_transform(AOI, 6829) %>%
+  sf::st_transform(AOI, 6829)  |>
     sf::st_buffer(
       dist = u,
       joinStyle = "MITRE",
       endCapStyle = "SQUARE",
       mitreLimit = 2
-    ) %>%
+    )  |>
     sf::st_transform(crs)
 }
 
@@ -46,19 +48,21 @@ aoi_buffer <- function(AOI, d, km = FALSE) {
 #' @param obj object 1
 #' @param AOI object 2
 #' @param total boolean.
-#'              If \code{TRUE} then check if obj is competely
+#'              If \code{TRUE} then check if obj is completely
 #'              inside the AOI (and vice versa: order doesn't matter).
 #'              If \code{FALSE}, then check if at least part
 #'              of obj is in the AOI.
 #' @return boolean value
 #' @export
+#' @importFrom sf st_intersects st_intersection st_transform st_crs
 
 aoi_inside <- function(AOI, obj, total = TRUE) {
-  AOI <- make_sf(AOI)
-  obj <- make_sf(obj) %>%
-    sf::st_transform(sf::st_crs(AOI))
 
-  int <- suppressMessages(sf::st_intersects(obj, AOI))
+  AOI <- make_sf(AOI)
+
+  obj <- st_transform(make_sf(obj), st_crs(AOI))
+
+  int <- suppressMessages(st_intersects(obj, AOI))
 
   if (!apply(int, 1, any)) {
     return(FALSE)
@@ -82,13 +86,14 @@ aoi_inside <- function(AOI, obj, total = TRUE) {
 #' @param x any spatial object
 #' @return an sf object
 #' @keywords internal
-#' @author Mike Johnson
+#' @importFrom sf st_as_sf
+
 make_sf <- function(x) {
-  if (grepl("Raster", class(x)[1])) {
+  if (inherits(x, "Raster")) {
     x <- bbox_get(x)
-  } else if (grepl("Spatial", class(x)[1])) {
+  } else if (inherits(x, "Spatial")) {
     x <- sf::st_as_sf(x)
-  } else if (methods::is(x, "sf")) {
+  } else if (inherits(x, "data.frame")) {
     x <- sf::st_as_sf(x)
   } else {
     x <- NULL

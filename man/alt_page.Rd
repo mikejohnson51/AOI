@@ -22,7 +22,6 @@ Find linked pages to a wikipedia call
 \dontrun{
 alt_page("Twin_towers")
 }
-
 }
 \author{
 Mike Johnson

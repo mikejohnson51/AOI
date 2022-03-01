@@ -34,7 +34,6 @@ of the location extent.
 geocodeOSM("UCSB")
 geocodeOSM("Garden of the Gods", bb = TRUE)
 }
-
 }
 \author{
 Mike Johnson

@@ -1,34 +1,45 @@
+#' Check for a package
+#' @param pkg package name
+
+check_pkg <- function(pkg) {
+  if (!requireNamespace(pkg, quietly = TRUE))
+    stop("Package '",
+         pkg,
+         "' is required for this functionality, but is not installed. \nTry `install.packages('",
+         pkg,
+         "')`", call. = FALSE)
+}
+
+
 #' @title AOI Draw
 #' @description
-#' Interactivly draw an Area of Interest (AOI) using a shiny app.
+#' Interactively draw an Area of Interest (AOI) using a shiny app.
 #' Once an object is drawn and the "Save AOI" button pressed,
-#' a new sf object called 'aoi' will appear in you environment.
+#' a new sf object called 'aoi' will appear in your environment.
 #' @return An sf object called 'aoi'.
 #' @export
-#' @importFrom shiny shinyApp bootstrapPage absolutePanel actionButton
-#'             reactiveValues observeEvent isolate stopApp tags
-#'             validate need showNotification
-#' @importFrom leaflet.extras addDrawToolbar drawRectangleOptions
-#'             drawMarkerOptions drawPolygonOptions editToolbarOptions
-#' @importFrom leaflet leafletOutput leaflet addProviderTiles setView
 #' @importFrom sf st_sf st_sfc st_as_sf st_polygon st_cast
-#'
 #'
 #' @examples \dontrun{
 #' aoi_draw()
 #' }
-#'
+
 aoi_draw <- function() {
+
+  check_pkg("shiny")
+  check_pkg("leaflet")
+  check_pkg("leaflet.extras")
+
   tags <- NULL
   shiny::shinyApp(
 
-    ui <- bootstrapPage(
+    ui <- shiny::bootstrapPage(
       shiny::tags$style(
         type = "text/css",
         "html, body {width:100%;height:100%}"
       ),
       leaflet::leafletOutput("aoi", width = "100%", height = "100%"),
-      absolutePanel(
+      shiny::absolutePanel(
           bottom = 35, left = 10,
           shiny::textInput(
               "aoi_name",
@@ -37,7 +48,7 @@ aoi_draw <- function() {
               width = "100%"
           )
       ),
-      absolutePanel(
+      shiny::absolutePanel(
         bottom = 10, left = 10,
         shiny::actionButton(
           "save_to_object",
@@ -55,9 +66,9 @@ aoi_draw <- function() {
     # server
     server = function(input, output, session) {
       output$aoi <- leaflet::renderLeaflet({
-        leaflet() %>%
-          addProviderTiles(providers$CartoDB.Positron) %>%
-          setView(lat = 35, lng = -100, zoom = 4) %>%
+        leaflet::leaflet()  |>
+          leaflet::addProviderTiles('CartoDB.Positron') |>
+          leaflet::setView(lat = 35, lng = -100, zoom = 4) |>
           leaflet.extras::addDrawToolbar(
             polylineOptions = FALSE,
             circleOptions = FALSE,
@@ -81,7 +92,7 @@ aoi_draw <- function() {
       })
 
       # store the sf in a reactiveValues
-      values <- shiny::reactiveValues()
+      values    <- shiny::reactiveValues()
       values$sf <- sf::st_sf(sf::st_sfc(crs = 4326))
 
       # update map with user input
@@ -111,11 +122,13 @@ aoi_draw <- function() {
         shiny::isolate(values$sf <- rbind(values$sf, new_sf))
 
         # save aoi to a global object
-        observeEvent(input$save_to_object, {
+        shiny::observeEvent(input$save_to_object, {
           shiny::validate(
             shiny::need(input$aoi_name, message = "AOI name is required")
           )
+
           assign(input$aoi_name, values$sf, envir = parent.frame())
+
           shiny::showNotification(
             paste0("Object saved as `", input$aoi_name, "`"),
             duration = NULL,
@@ -127,7 +140,7 @@ aoi_draw <- function() {
         })
 
         # save aoi to a shapefile
-        observeEvent(input$save_to_file, {
+        shiny::observeEvent(input$save_to_file, {
           shiny::validate(
             shiny::need(input$aoi_name, message = "AOI name is required")
           )

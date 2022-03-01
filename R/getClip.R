@@ -21,19 +21,23 @@
 
 
 getClip <- function(x, km = FALSE) {
+
   fin <- defineClip(x, km = km)
+
   location <- fin$location
+
   origin   <- fin$o
 
   if (all(is.null(fin$h), is.null(fin$w), is.null(origin))) {
     poly <- geocode(location, bb = TRUE, full = FALSE)
   } else {
-    if (methods::is(location, "numeric")) {
+    if (inherits(location, "numeric")) {
       location <- list(lat = location[1], lon = location[2])
     }
 
-    if (methods::is(location, "character")) {
+    if (inherits(location, "character")) {
       location <- geocode(location = location, full = FALSE)
+      if(is.na(location$lat)){stop("location not found in OSM", call. = FALSE)}
     }
 
     df <- (fin$h / 2) / 69 # north/south
@@ -74,7 +78,13 @@ getClip <- function(x, km = FALSE) {
       east <- location$lon + (2 * dl)
     }
 
-    poly <- bbox_get(c(west, east, south, north))
-  }
+    poly <- st_bbox(c(xmin = west,
+                      xmax = east,
+                      ymin = south,
+                      ymax = north), crs = 4326) |>
+      sf::st_as_sfc() |>
+      sf::st_as_sf() |>
+      rename_geometry("geometry")
+}
   return(poly)
 }

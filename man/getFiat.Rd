@@ -10,8 +10,8 @@ getFiat(country = NULL, state = NULL, county = NULL, fip = NULL)
 \item{country}{\code{character}. Full name, ISO 3166-1 2 or 3 digit code.
 Not case senstive}
 
-\item{state}{\code{character}. Full name or two character abbriviation.
-Not case senstive}
+\item{state}{\code{character}. Full name or two character abbreviation.
+Not case sensitive}
 
 \item{county}{\code{character}. Provide county name(s).
 Requires 'state' input.}
@@ -46,9 +46,5 @@ getFiat(state = "CA", county = "San Luis Obispo")
 # Get Muli-county
 getFiat(state = "CA", county = c("San Luis Obispo", "Santa Barbara", "Ventura"))
 }
-
-}
-\author{
-Mike Johnson
 }
 \keyword{internal}

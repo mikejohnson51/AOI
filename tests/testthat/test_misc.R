@@ -1,14 +1,13 @@
 context("utility functions")
 
-
 test_that("aoi_inside...", {
   # r = raster::raster(system.file("external/test.grd", package="raster"))
   lake_tahoe <- aoi_get(list("Lake Tahoe", 100, 100))
   CA <- aoi_get(state = "CA")
   SB <- aoi_get(state = "CA", county = "Santa Barbara")
 
-  # Is Lake tahoe completly inside CA?
-  expect_false(aoi_inside(CA, lake_tahoe, total = T))
+  # Is Lake Tahoe completely inside CA?
+  expect_false(aoi_inside(AOI = CA, obj = lake_tahoe, total = T))
   expect_true(aoi_inside(CA, lake_tahoe, total = F))
   expect_true(aoi_inside(CA, SB, total = F))
 
@@ -61,27 +60,8 @@ test_that("aoi_describe", {
   sfCA <- aoi_get(state = "CA")
   CA <- bbox_get(sfCA)
   CAsf <- aoi_get(x = sfCA)
-  CAsp <- aoi_get(x = as_Spatial(sfCA))
+  CAsp <- aoi_get(x = sf::as_Spatial(sfCA))
 
-  expect_true(identical(round(st_coordinates(CA), 4), round(st_coordinates(CAsf), 4)))
-  expect_true(identical(round(st_coordinates(CA), 4), round(st_coordinates(CAsp), 4)))
-})
-
-test_that("check...", {
-  AOI <- geocode("Denver", all = T)
-  A <- aoi_map(AOI)
-  R <- aoi_map(r)
-  M <- aoi_map(AOI, returnMap = T)
-  Mnull <- aoi_map()
-  br <- aoi_get(country = "BR")
-  Map_br <- aoi_map(br)
-
-  Mr <- aoi_map(r)
-
-  expect_null(Mnull$AOI)
-  expect_true(length(AOI) == 3)
-  expect_true(identical(AOI, A))
-  expect_true(methods::is(M, "leaflet"))
-  expect_true(identical(r, Mr))
-  expect_true(identical(br$NAME, Map_br$NAME))
+  expect_true(identical(round(sf::st_coordinates(CA), 4), round(sf::st_coordinates(CAsf), 4)))
+  expect_true(identical(round(sf::st_coordinates(CA), 4), round(sf::st_coordinates(CAsp), 4)))
 })

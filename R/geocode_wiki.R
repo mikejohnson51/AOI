@@ -11,33 +11,32 @@
 #' \dontrun{
 #' alt_page("Twin_towers")
 #' }
-#'
+#' @importFrom rvest read_html html_nodes html_attr html_text
+
 alt_page <- function(loc, pt = FALSE) {
-  tt <- xml2::read_html(paste0(
+
+  tt <- rvest::read_html(paste0(
     "https://en.wikipedia.org/w/index.php?search=",
     loc,
     "&title=Special%3ASearch&go=Go"
   ))
 
-  url_ <- tt %>%
-    rvest::html_nodes("a") %>%
-    rvest::html_attr("href")
+  a <- rvest::html_nodes(tt, "a")
 
-  link_ <- tt %>%
-    rvest::html_nodes("a") %>%
-    rvest::html_text()
+  url_ <- rvest::html_attr(a, "href")
+
+  link_ <- rvest::html_text(a)
 
   df_new <- data.frame(urls = url_, links = link_)
+  df_new <- df_new[!is.na(df_new$urls), ]
+  df_new <- df_new[!is.na(df_new$links), ]
   df_new <- df_new[grepl("/wiki/", df_new$urls), ]
   df_new <- df_new[!grepl(":", df_new$urls), ]
   df_new <- df_new[!grepl("Main_Page", df_new$urls), ]
   df_new <- df_new[!grepl("Privacy_Policy", df_new$urls), ]
   df_new <- df_new[!grepl("Terms_of_use", df_new$urls), ]
-  df_new <- df_new[1:10, ]
-  df_new <- df_new[complete.cases(df_new), ]
-  if (NROW(df_new) == 0) {
-    df_new <- NULL
-  }
+
+  if(nrow(df_new) == 0) { df_new <- NULL }
 
   return(df_new)
 }
@@ -69,9 +68,15 @@ alt_page <- function(loc, pt = FALSE) {
 #' ## geocode an event
 #' geocode_wiki("Hurricane Harvey")
 #' }
-#'
+#' @importFrom jsonlite fromJSON
+#' @importFrom rvest read_html html_nodes html_table
+#' @importFrom rnaturalearth ne_countries
+#' @importFrom sf st_as_sf
+
 geocode_wiki <- function(event = NULL, pt = FALSE) {
+
   loc <- gsub(" ", "+", event)
+
   u <- paste0(
     "https://en.wikipedia.org/w/api.php?action=opensearch&search=",
     loc,
@@ -90,24 +95,31 @@ geocode_wiki <- function(event = NULL, pt = FALSE) {
       "' not found...\nTry one of the following?\n\n",
       paste(df_new$links, collapse = ",\n")
     )
+
     return(df_new)
+
   } else {
-    coord_url <- paste0(
-      "https://en.wikipedia.org/w/api.php",
-      "?action=query&format=json&prop=coordinates&titles=",
-      call
-    )
+
+    coord_url <- paste0('https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&titles=',
+                         paste(call, collapse = "|"),
+                         '&format=json')
+
 
     fin <- jsonlite::fromJSON(coord_url)
 
-    df <- data.frame(
-        lat = unlist(fin$query$pages[[1]]$coordinates$lat),
-        lon = unlist(fin$query$pages[[1]]$coordinates$lon)
-    )
+    extract = function(x){
+      if(!is.null(x$coordinates)){
+        data.frame(title = x$title, lat = x$coordinates$lat, lon = x$coordinates$lon)
+      } else {
+        NULL
+      }
+    }
 
-    if (nrow(df) == 0) {
-      infobox <- url %>%
-        xml2::read_html(header = FALSE) %>%
+    df = do.call(rbind, lapply(fin$query$pages, extract))
+
+    if (is.null(df)) {
+      infobox <-
+        rvest::read_html(url, header = FALSE) |>
         rvest::html_nodes(xpath = '//table[contains(@class, "infobox")]')
 
       if (length(infobox) == 0) {
@@ -144,7 +156,7 @@ geocode_wiki <- function(event = NULL, pt = FALSE) {
         }
 
         df <- cbind(all, do.call(rbind, df))
-        df <- df[complete.cases(df), ]
+
       } else {
         s1 <- noquote(unlist(strsplit(search, ", ")))
         df <- NULL
@@ -160,12 +172,10 @@ geocode_wiki <- function(event = NULL, pt = FALSE) {
   }
 
   if (pt) {
-    points <- sf::st_as_sf(x = df, coords = c("lon", "lat"), crs = 4269)
-    return(points)
+    sf::st_as_sf(x = df, coords = c("lon", "lat"), crs = 4269)
   } else {
-    df <- cbind(request = loc, df) %>%
-          data.frame()
-    return(df)
+    data.frame(cbind(request = loc, df))
   }
-  # }
+
 }
+

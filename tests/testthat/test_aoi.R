@@ -23,7 +23,7 @@ test_that("aoi_get errors...", {
 
   expect_error(
     aoi_get(state = NULL, x = NULL),
-    "Requires a 'x' or 'state' parameter to execute."
+    "Requires an 'x' or 'state' parameter to execute."
   )
 })
 
@@ -58,24 +58,24 @@ test_that("aoi_get & getFiat & getClip & defineClip", {
   )
 
   expect_error(
-    aoi_get(state = "CA", county = "Dallas"),
-    "Dallas not a valid county in California."
+    aoi_get(state = "CA", county = "Dallas")
   )
 
   conus <- aoi_get(state = "conus")
-  expect_true(NROW(conus) == 49)
+  expect_true(nrow(conus) == 49)
 
   conus_all <- aoi_get(state = "all")
-  expect_true(NROW(conus_all) == 52)
+  expect_true(nrow(conus_all) == 51)
 
   conus_u <- aoi_get(state = "conus", union = TRUE)
-  expect_true(NROW(conus_u) == 1)
+  expect_true(nrow(conus_u) == 1)
 
-  # r = raster::raster(system.file("external/test.grd",
-  #                                package="raster"))
-  AOIr <- aoi_get(r) %>%
+   r = raster::raster(system.file("external/test.grd", package="raster"))
+
+   AOIr <- aoi_get(r) %>%
     st_transform(r@crs) %>%
     bbox_coords()
+
   expect_true(raster::extent(r)[1] == round(AOIr$xmin, 0))
   expect_true(raster::extent(r)[2] == round(AOIr$xmax, 0))
   expect_true(raster::extent(r)[3] == round(AOIr$ymin, 0))

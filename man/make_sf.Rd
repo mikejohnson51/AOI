@@ -15,7 +15,4 @@ an sf object
 \description{
 Convert raster and sp objects to sf
 }
-\author{
-Mike Johnson
-}
 \keyword{internal}

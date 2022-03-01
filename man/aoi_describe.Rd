@@ -32,6 +32,6 @@ Describe a spatial (sf/sp/raster) object in terms of a
 {
   fname <- system.file("shape/nc.shp", package = "sf")
   nc <- sf::read_sf(fname)
-  aoi_describe(nc[1, ])
+  aoi_describe(AOI = nc[1, ])
 }
 }
