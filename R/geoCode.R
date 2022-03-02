@@ -415,6 +415,7 @@ geocode_wiki <- function(event = NULL, pt = FALSE) {
 #' but can also be use to get more information about a place name.
 #' @param x a point provided by \code{numeric} lat/lon pair or
 #'          \code{character} place name
+#' @param method "osm" (deafalt) or "ersi"
 #' @return a data.frame of descriptive features
 #' @export
 #' @author Mike Johnson
@@ -425,7 +426,7 @@ geocode_wiki <- function(event = NULL, pt = FALSE) {
 #' }
 #' @importFrom jsonlite fromJSON
 
-geocode_rev <- function(x) {
+geocode_rev <- function(x, method = "osm") {
 
   if (inherits(x, "character")) {
     pt <- geocode(x)
@@ -443,34 +444,36 @@ geocode_rev <- function(x) {
   }
 
   # ESRI Rgeocode -----------------------------------------------------------
-  # Archived for potentially later support
-  #> esri_url <- paste0(
-  #>   "http://geocode.arcgis.com/",
-  #>   "arcgis/rest/services/World/GeocodeServer/reverseGeocode",
-  #>   "?f=pjson&featureTypes=&location=",
-  #>   paste(pt$lon, pt$lat, sep = ",")
-  #> )
-  #> ll   <- jsonlite::fromJSON(esri_url)
-  #> xr   <- unlist(ll)
-  #> esri <- data.frame(t(xr), stringsAsFactors = F) %>%
-  #>         setNames(
-  #>           gsub(
-  #>             "address\\.|location\\.|spatialReference\\.",
-  #>             "",
-  #>             names(xr)
-  #>           )
-  #>         )
-  #> names(esri)[which(names(esri) == "x")] <- "lon"
-  #> names(esri)[which(names(esri) == "y")] <- "lat"
-  #> names(esri)[which(names(esri) == "boundingbox3")] <- "xmin"
-  #> names(esri)[which(names(esri) == "boundingbox4")] <- "xmax"
-  #> names(esri)[which(names(esri) == "boundingbox1")] <- "ymin"
-  #> names(esri)[which(names(esri) == "boundingbox2")] <- "ymax"
-  #> esri[grepl("latest", names(esri))] <- NULL
 
+  if(method == "esri"){
+   esri_url <- paste0(
+     "https://geocode.arcgis.com/",
+     "arcgis/rest/services/World/GeocodeServer/reverseGeocode",
+     "?f=pjson&featureTypes=&location=",
+     paste(pt$lon, pt$lat, sep = ",")
+   )
+
+    ll   <- jsonlite::fromJSON(esri_url)
+    xr   <- unlist(ll)
+    esri <- data.frame(t(xr), stringsAsFactors = F)
+    names(esri) <- gsub(
+               "address\\.|location\\.|spatialReference\\.",
+               "",
+               names(xr)
+             )
+
+   names(esri)[which(names(esri) == "x")] <- "lon"
+   names(esri)[which(names(esri) == "y")] <- "lat"
+   names(esri)[which(names(esri) == "boundingbox3")] <- "xmin"
+   names(esri)[which(names(esri) == "boundingbox4")] <- "xmax"
+   names(esri)[which(names(esri) == "boundingbox1")] <- "ymin"
+   names(esri)[which(names(esri) == "boundingbox2")] <- "ymax"
+   esri[grepl("latest", names(esri))] <- NULL
+   tmp = esri
+  }
 
   # OSM Rgeocode ------------------------------------------------------------
-
+ if(method == "osm"){
   osm_url <- paste0(
     "https://nominatim.openstreetmap.org/reverse?format=json&lat=",
     pt$lat,
@@ -497,18 +500,8 @@ geocode_rev <- function(x) {
   osm[grepl("boundingbox", names(osm))] <- NULL
   osm[grepl("lat", names(osm))]         <- NULL
   osm[grepl("lon", names(osm))]         <- NULL
-
-  # Merge -------------------------------------------------------------------
-
-  tmp <- osm #> cbind(osm, esri)
-  tmp <- tmp[, tmp != ""]
-  #> tmp = tmp %>%
-  #>       select(
-  #>         -display_name,
-  #>         -LongLabel,
-  #>         -ShortLabel,
-  #>         -country_code
-  #>       )
+  tmp = osm
+ }
 
   tmp
 }
