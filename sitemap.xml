@@ -1,72 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/index.html</loc>
+    <loc>/404.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/AOI.html</loc>
+    <loc>/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/alt_page.html</loc>
+    <loc>/authors.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/aoi_buffer.html</loc>
+    <loc>/cran-checks.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/aoi_describe.html</loc>
+    <loc>/index.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/aoi_draw.html</loc>
+    <loc>/news/index.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/aoi_get.html</loc>
+    <loc>/reference/alt_page.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/aoi_inside.html</loc>
+    <loc>/reference/aoi_buffer.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/aoi_map.html</loc>
+    <loc>/reference/aoi_describe.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/bbox_coords.html</loc>
+    <loc>/reference/aoi_draw.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/bbox_get.html</loc>
+    <loc>/reference/aoi_get.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/geoCode.html</loc>
+    <loc>/reference/aoi_inside.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/geocodeOSM.html</loc>
+    <loc>/reference/aoi_map.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/geocode_rev.html</loc>
+    <loc>/reference/bbox_coords.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/geocode_wiki.html</loc>
+    <loc>/reference/bbox_get.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/getClip.html</loc>
+    <loc>/reference/check_pkg.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/getFiat.html</loc>
+    <loc>/reference/fip_meta.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/grapes-greater-than-grapes.html</loc>
+    <loc>/reference/geoCode.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/list_states.html</loc>
+    <loc>/reference/geocodeOSM.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/reference/make_sf.html</loc>
+    <loc>/reference/geocode_rev.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/articles/aoi_fiat.html</loc>
+    <loc>/reference/geocode_wiki.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/articles/bbox_functions.html</loc>
+    <loc>/reference/getClip.html</loc>
   </url>
   <url>
-    <loc>https://github.com/mikejohnson51/AOI/articles/geocoding.html</loc>
+    <loc>/reference/getFiat.html</loc>
+  </url>
+  <url>
+    <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/list_states.html</loc>
+  </url>
+  <url>
+    <loc>/reference/make_sf.html</loc>
+  </url>
+  <url>
+    <loc>/reference/zipcodes.html</loc>
   </url>
 </urlset>
