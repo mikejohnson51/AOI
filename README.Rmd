@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "40%",
-  eval = FALSE
+  eval = TRUE
 )
 
 library(AOI)
@@ -21,86 +21,134 @@ library(AOI)
 <!-- badges: start -->
 [![DOI](https://zenodo.org/badge/158620263.svg)](https://zenodo.org/badge/latestdoi/158620263)
 [![R CMD Check](https://github.com/mikejohnson51/AOI/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mikejohnson51/AOI/actions/workflows/R-CMD-check.yaml)
-[![Dependencies](https://img.shields.io/badge/dependencies-8/18-orange?style=flat)](#)
+[![Dependencies](https://img.shields.io/badge/dependencies-6/33-orange?style=flat)](#)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://choosealicense.com/licenses/mit/)
 [![Project Status: Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![LifeCycle](man/figures/lifecycle/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
-The purpose of AOI is to help people create reproducible, programmatic, boundaries for analysis and mapping workflows. The package targets five main use cases:
+The purpose of AOI is to help create reproducible, programmatic boundaries for analysis and mapping workflows. The package targets five main use cases:
 
-### 1. Basic forward and reverse geocoding tasks
+## 1. Flexable, term based geocoding
 
-#### Foward (from name to location)
+The aim of the AOI geooding service is to provide flexible, term-based geocoding via the OSM Notimun and Wikipedia APIs and the Wikipedia. If you have more ridgid addresses `tidygeocoder` is great!
 
+### Foward (from name to location)
+
+#### Places
 ```{r}
-geocode('UCSB', pt = TRUE) %>% aoi_map(returnMap = TRUE)
+geocode(c('Colorado State University', "University of Colorado", 'NOAA'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-1.png" width="40%" />
-
+#### Addresses
 ```{r}
-geocode(event = 'I have a dream speech', pt = T) %>% aoi_map(returnMap = TRUE)
+# Address with POINT representation
+geocode('500 Linden St, Fort Collins, CO 80524', pt = TRUE) 
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-2.png" width="40%" />
+####  Events
 
 ```{r}
-geocode(event = 'Inauguration of Joe Biden', pt = T) %>%
-  aoi_map(returnMap = TRUE)
+# Single events
+geocode(event = 'D-day')
+
+# Multi-location events
+geocode(event = 'Hurricane Harvey')
+
+# Multi-location events with BBOX
+geocode(event = 'Hurricane Harvey', bb = TRUE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-3.png" width="40%" />
-
-#### Reverse (from location to name/description)
+### Reverse (from location to term)
 
 ```{r}
 geocode_rev(c(37, -119))
 ```
 
-### 2. Consistent queries for world (`rnaturalearth`) and USA (`USAboundaries`) boundaries:
+### 2. Consistent queries for domestic (USA) and international boundaries: 
 
-#### Working with USA state and county information:
-
-```{r}
-aoi_get(state = "CA") %>% aoi_map(returnMap = T)
-```
-
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="40%" />
+#### State / Multi-state
 
 ```{r}
-aoi_get(state = "TX", county = "Harris") %>% aoi_map(returnMap = T)
+aoi_get(state = c("CO", "UT"))
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-2.png" width="40%" />
+#### USA Counties
 
 ```{r}
-aoi_get(country = "Sri Lanka") %>% aoi_map(returnMap = T)
+aoi_get(state = "TX", county = "Harris")
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-3.png" width="40%" />
-
-### 3. Creating flexible AOIs from place names and bounding box dimensions. 
-
-#### Create your own bounding areas from a list of inputs:
+#### World Countries
 
 ```{r}
-# 100 square mile region around UCSB
-aoi_get(list("UCSB", 10, 10)) %>% aoi_map(returnMap = T)
+aoi_get(country = "Ukraine")
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="40%" />
+#### USA and World Regions 
+
+```{r}
+World_asia = aoi_get(country = "Asia")
+aoi_describe(World_asia)
+
+
+USA_south = aoi_get(state = "south")
+aoi_describe(USA_south)
+```
+
+### 3. Creating flexible AOIs from locations and bounding dimensions. 
+
+#### Place Name and diminsions
+
+```{r}
+# 100 square mile region around Longs Peaks
+aoi_get(list("Long Peaks", 10, 10))
+```
+
+#### Location and Diminsions
 
 ```{r}
 # 200 square mile region around 37,-119
-aoi_get(list(37, -119, 20, 10)) %>% aoi_map(returnMap = T)
+aoi_get(list(37, -119, 20, 10))
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-2.png" width="40%" />
+#### Event and Diminsions
 
-### 4. Offer a programmatic way to interface with other R packages that require user defined AOIs or bounding boxes
+```{r}
+# 10,000 square mile region around Normandy Landings
+aoi_get(list("D-day", 100, 100))
+```
+
+### 4. View and Draw
+
+**NOTE**: The following functions require leaflet, shiny and leaflelt.extras. Since these are Suggested Dependencies you will need to install them yourself in warnings appear.
+
+Sometimes it is useful to view the created AOIs. `aoi_map` offers a quickly formatted `leaflet` map (not all that dissimilar from `mapview` so this may retire).
+
+```{r}
+AOI = geocode(location = c("Paris", "Amsterdam", "Prague", "England"), pt = TRUE) 
+aoi_map(AOI, returnMap = TRUE)
+
+```
+
+Alternatively sometimes users need very specific AOIs that are not POINTs,  bounding boxes, or fiat boundaries. For this AOI provides `aoi_draw()` which allows users to interactively draw an Area of Interest (AOI) using a shiny app.
+Once an object is drawn and the "Save AOI" button pressed, a new `sf` object called 'aoi' will appear in your environment.
+
+```{r, eval = FALSE, out.width="100%"}
+aoi_draw()
+```
+
+```{r, echo = FALSE, out.width="75%", fig.cap="Using the aoi_draw() interface"}
+knitr::include_graphics('man/figures/shiny-app.png')
+```
+
+### 5. Programmatic way to interface with other R packages that require user defined AOIs or bounding boxes
+
+The need for AOI's is rampant in the r-spatial community. AOI plays nicely with the following non-exhaustive list helping users be to the meat of their utilities without getting hung up on boundary definition.
+
 
 - ggmap
+- opendap.catalog
 - nhdplusTools
 - elevatr
 - terrainr
@@ -113,16 +161,11 @@ aoi_get(list(37, -119, 20, 10)) %>% aoi_map(returnMap = T)
 - hereR
 - Please add more!
 
-### 5. Enhance reproducible in spatial analysis.
-
-The package also includes functions to faciliate basic tasks in AOI work flows such as unioning, buffering, and converting between coordinate and spatial representations. The package builds on the sf package and in cases of overlap, only offers wrappers for common workflows. By  nature these wrappers save users lines of code and repetition but are less flexible then there base sf functions. 
-
 ### Installation:
 
 ```{r, eval = FALSE }
 remotes::install_github("mikejohnson51/AOI")
 ```
-
 
 ### Resources
 See the package [website](https://mikejohnson51.github.io/AOI/) vignettes showing the general workflow and functionality.

@@ -72,10 +72,11 @@ test_that("zipcodes...", {
   points <- geocode(zipcode = 93117, pt = T)
   bb <- geocode(zipcode = c(93117, 80906), bb = T)
 
-  expect_warning(geocode(zipcode = c("93016"), pt = T))
+  expect_error(geocode(zipcode = c("93016"), pt = T))
+  expect_warning(geocode(zipcode = c("93016", "93117"), pt = T))
 
-  expect_true(NROW(many) == 2)
-  expect_true(NROW(single) == 1)
+  expect_true(nrow(many) == 2)
+  expect_true(nrow(single) == 1)
   expect_true(sf::st_geometry_type(points) == "POINT")
   expect_true(sf::st_geometry_type(bb) == "POLYGON")
 })

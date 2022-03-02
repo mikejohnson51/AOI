@@ -1,18 +1,8 @@
 #' @title Describe an AOI
 #' @description Describe a spatial (sf/sp/raster) object in terms of a
-#'              reproducable AOI  (e.g. \code{\link{aoi_get}}) parameters.
+#'              reproducible AOI  (e.g. \code{\link{aoi_get}}) parameters.
 #' @param AOI a spatial object (\code{raster}, \code{sf}, \code{sp}).
-#' @param full if TRUE, reverse geocoding descriptions returned, else just
-#'             lat, lon, width, height, and origin (default = FALSE)
-#' @param km if TRUE, units are in kilometers, else in miles (default = FALSE)
-#' @return a data.frame of AOI descriptors including (at minimum):
-#' \describe{
-#'   \item{lat}{the AOI center latitude }
-#'   \item{lon}{the AOI center longitude}
-#'   \item{height}{ height in (miles)}
-#'   \item{width}{width in(miles)}
-#'   \item{origin}{AOI origin}
-#' }
+#' @return a data.frame of AOI descriptors
 #' @export
 #' @examples
 #' {
@@ -21,43 +11,42 @@
 #'   aoi_describe(AOI = nc[1, ])
 #' }
 #' @importFrom sf st_transform st_bbox
+#'
 
-aoi_describe <- function(AOI, full = FALSE, km = FALSE) {
+aoi_describe = function(AOI){
 
-  AOI <- make_sf(AOI)
-  AOI <- sf::st_transform(AOI, 4326)
-  bb <- sf::st_bbox(AOI)
+  if(any(sf::st_is(AOI, "POLYGON") | sf::st_is(AOI, "MULTIPOLYGON"))){
+    tot_area  = sum(sf::st_area(AOI)) / 1e6
+    bb            = sf::st_bbox(AOI)
+    bb_area       = sf::st_area(sf::st_as_sfc(bb)) / 1e6
+    coverage_per  = 100 * (tot_area / bb_area)
+    tot_units = nrow(AOI)
+    geom = "POLYGON"
+  } else {
+    tot_area      = NULL
+    bb            = sf::st_bbox(AOI)
+    bb_area       = sf::st_area(sf::st_as_sfc(bb)) / 1e6
+    coverage_per  = NULL
+    tot_units     = nrow(AOI)
+    geom = "POINT"
+  }
 
-  lat_cent <- (bb$ymin + bb$ymax) / 2
-
-  df <- data.frame(
-    lat = lat_cent,
-    lon = (bb$xmin + bb$xmax) / 2,
-    height = round(
-      69 * (abs(bb$ymax - bb$ymin)),
-      digits = 2
-    ),
-    width = round(
+  lat_cent = (bb$ymin + bb$ymax) / 2
+  lon_cent = (bb$xmin + bb$xmax) / 2
+  height = round(69 * (abs(bb$ymax - bb$ymin)), digits = 4)
+  width = round(
       69 * cos(lat_cent * pi / 180) * abs(abs(bb$xmax) - abs(bb$xmin)),
-      digits = 2
-    ),
-    origin = "center",
-    units = "miles",
-    stringsAsFactors = FALSE
-  )
+      digits = 4)
 
-  if (km) {
-    df$height <- df$height / 1.609
-    df$width <- df$width / 1.609
-    df$units <- "kilometers"
+  {
+    cat("type:\t\t",  geom  , paste0("(", tot_units, ")\n"))
+    cat("BBox Area:\t",  bb_area  , "[km^2]\n")
+    cat("Centroid:\t",  lon_cent, lat_cent  , "[x,y]\n")
+    cat("Diminsions:\t",  width, height  , "[width, height, in miles]\n")
+    if(geom != "POINT"){
+      cat("area:\t\t",  tot_area  , "[km^2]\n")
+      cat("Area/BBox Area:\t",  coverage_per  , "[%]\n")
+    }
   }
-
-  if (full) {
-    rc <- geocode_rev(x = c(df$lat, df$lon))
-    df <- cbind(df, rc)
-
-    df[["area"]] <- df$height * df$width
-  }
-
-  df
 }
+

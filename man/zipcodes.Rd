@@ -5,7 +5,7 @@
 \alias{zipcodes}
 \title{USA Zipcode Centroids}
 \format{
-An object of class \code{sf} (inherits from \code{data.frame}) with 33144 rows and 7 columns.
+An object of class \code{data.frame} with 33144 rows and 3 columns.
 }
 \source{
 \url{USABoundaries Data Package}

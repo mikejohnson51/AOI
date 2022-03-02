@@ -4,29 +4,17 @@
 \alias{aoi_describe}
 \title{Describe an AOI}
 \usage{
-aoi_describe(AOI, full = FALSE, km = FALSE)
+aoi_describe(AOI)
 }
 \arguments{
 \item{AOI}{a spatial object (\code{raster}, \code{sf}, \code{sp}).}
-
-\item{full}{if TRUE, reverse geocoding descriptions returned, else just
-lat, lon, width, height, and origin (default = FALSE)}
-
-\item{km}{if TRUE, units are in kilometers, else in miles (default = FALSE)}
 }
 \value{
-a data.frame of AOI descriptors including (at minimum):
-\describe{
-  \item{lat}{the AOI center latitude }
-  \item{lon}{the AOI center longitude}
-  \item{height}{ height in (miles)}
-  \item{width}{width in(miles)}
-  \item{origin}{AOI origin}
-}
+a data.frame of AOI descriptors
 }
 \description{
 Describe a spatial (sf/sp/raster) object in terms of a
-             reproducable AOI  (e.g. \code{\link{aoi_get}}) parameters.
+             reproducible AOI  (e.g. \code{\link{aoi_get}}) parameters.
 }
 \examples{
 {

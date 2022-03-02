@@ -114,7 +114,7 @@ aoi_map <- function(AOI = NULL, returnMap = FALSE) {
     }
   }
 
-  message(m)
+  #message(m)
 
   if (returnMap) {
     m
