@@ -120,6 +120,7 @@
 #' aoi_get(x = list("UCSB", 10, 10, "lowerleft"))
 #' }
 #' @importFrom sf st_union st_transform
+#' @importFrom magrittr %>%
 
 aoi_get <- function(x = NULL,
                     country = NULL,
@@ -172,10 +173,10 @@ aoi_get <- function(x = NULL,
     inherits(x, "Spatial"),
     inherits(x, "sf")
   )) {
-    st_bbox(x) |>
-      sf::st_as_sfc() |>
-      st_as_sf() |>
-      st_transform(4326) |>
+    st_bbox(x) %>%
+      sf::st_as_sfc() %>%
+      st_as_sf() %>%
+      st_transform(4326) %>%
       rename_geometry("geometry")
   } else {
     getClip(x, km)
@@ -183,8 +184,8 @@ aoi_get <- function(x = NULL,
 
   # Return AOI
   if (union) {
-    sf::st_union(shp) |>
-      st_as_sf() |>
+    sf::st_union(shp) %>%
+      st_as_sf() %>%
       rename_geometry("geometry")
   } else {
     shp

@@ -37,6 +37,3 @@ geocode_wiki("New York Times")
 geocode_wiki("Hurricane Harvey")
 }
 }
-\author{
-Mike Johnson
-}

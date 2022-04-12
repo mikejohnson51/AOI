@@ -33,13 +33,13 @@ aoi_buffer <- function(AOI, d, km = FALSE) {
     u <- d * 5280
   } # miles to feet
 
-  sf::st_transform(AOI, 6829)  |>
+  sf::st_transform(AOI, 6829)  %>%
     sf::st_buffer(
       dist = u,
       joinStyle = "MITRE",
       endCapStyle = "SQUARE",
       mitreLimit = 2
-    )  |>
+    )  %>%
     sf::st_transform(crs)
 }
 
@@ -138,11 +138,12 @@ list_states <- function() {
 #' }
 #' @importFrom sf st_as_sf
 #' @importFrom fipio as_fips fips_metadata
+#' @importFrom magrittr %>%
 
 fip_meta <- function(state, county = NULL) {
 
-  fipio::as_fips(county = county, state = state) |>
-    fipio::fips_metadata(geometry = TRUE) |>
+  fipio::as_fips(county = county, state = state) %>%
+    fipio::fips_metadata(geometry = TRUE) %>%
     st_as_sf()
 }
 

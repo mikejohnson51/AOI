@@ -7,6 +7,7 @@
 #' @return a sf polygon
 #' @export
 #' @importFrom sf st_bbox st_crs st_as_sfc st_sf
+#' @importFrom magrittr %>%
 
 bbox_get <- function(x) {
   if (inherits(x, "character")) {
@@ -27,7 +28,7 @@ bbox_get <- function(x) {
     })
   }
 
-  sf::st_as_sf(sf::st_as_sfc(x)) |>
+  sf::st_as_sf(sf::st_as_sfc(x)) %>%
     rename_geometry("geometry")
 }
 
@@ -38,13 +39,9 @@ bbox_get <- function(x) {
 #' @param x a spatial object (sp/sf/raster)
 #' @return a data.frame
 #' @export
+#' @importFrom sf st_bbox
 
 bbox_coords <- function(x) {
-  bb <- suppressWarnings({ sf::st_bbox(x) })
-  # df <- data.frame(
-  #   xmin = bb[1], ymin = bb[2],
-  #   xmax = bb[3], ymax = bb[4],
-  #   row.names = NULL
-  # )
-  return(bb)
+
+  return(suppressWarnings({ st_bbox(x) }))
 }

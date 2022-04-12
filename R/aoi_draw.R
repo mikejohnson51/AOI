@@ -19,6 +19,7 @@ check_pkg <- function(pkg) {
 #' @return An sf object called 'aoi'.
 #' @export
 #' @importFrom sf st_sf st_sfc st_as_sf st_polygon st_cast
+#' @importFrom magrittr %>%
 #'
 #' @examples \dontrun{
 #' aoi_draw()
@@ -66,9 +67,9 @@ aoi_draw <- function() {
     # server
     server = function(input, output, session) {
       output$aoi <- leaflet::renderLeaflet({
-        leaflet::leaflet()  |>
-          leaflet::addProviderTiles('CartoDB.Positron') |>
-          leaflet::setView(lat = 35, lng = -100, zoom = 4) |>
+        leaflet::leaflet()  %>%
+          leaflet::addProviderTiles('CartoDB.Positron')  %>%
+          leaflet::setView(lat = 35, lng = -100, zoom = 4)  %>%
           leaflet.extras::addDrawToolbar(
             polylineOptions = FALSE,
             circleOptions = FALSE,

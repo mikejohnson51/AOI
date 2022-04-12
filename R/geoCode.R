@@ -90,9 +90,9 @@ geocodeOSM <- function(location, pt = FALSE, bb = FALSE,
   bbs <- st_bbox(c(xmin = tmp.bb[3],
                    xmax = tmp.bb[4],
                    ymin = tmp.bb[1],
-                   ymax = tmp.bb[2]), crs = 4326) |>
-    sf::st_as_sfc() |>
-    sf::st_as_sf() |>
+                   ymax = tmp.bb[2]), crs = 4326) %>%
+    sf::st_as_sfc() %>%
+    sf::st_as_sf() %>%
     rename_geometry("geometry")
 
   bbs$request <- s$request
@@ -241,6 +241,7 @@ geocode <- function(location = NULL,
 #' alt_page("Twin_towers")
 #' }
 #' @importFrom rvest read_html html_nodes html_attr html_text
+#' @importFrom magrittr %>%
 
 alt_page <- function(loc, pt = FALSE) {
 
@@ -279,7 +280,6 @@ alt_page <- function(loc, pt = FALSE) {
 #'           to the returned list()
 #' @return aa data.frame of lat/lon coordinates
 #' @export
-#' @author Mike Johnson
 #' @examples
 #' \dontrun{
 #' ## geocode an Agency
@@ -301,6 +301,7 @@ alt_page <- function(loc, pt = FALSE) {
 #' @importFrom rvest read_html html_nodes html_table
 #' @importFrom rnaturalearth ne_countries
 #' @importFrom sf st_as_sf
+#' @importFrom magrittr %>%
 
 geocode_wiki <- function(event = NULL, pt = FALSE) {
 
@@ -348,7 +349,7 @@ geocode_wiki <- function(event = NULL, pt = FALSE) {
 
     if (is.null(df)) {
       infobox <-
-        rvest::read_html(url, header = FALSE) |>
+        rvest::read_html(url, header = FALSE) %>%
         rvest::html_nodes(xpath = '//table[contains(@class, "infobox")]')
 
       if (length(infobox) == 0) {

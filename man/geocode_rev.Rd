@@ -4,11 +4,13 @@
 \alias{geocode_rev}
 \title{Reverse Geocoding}
 \usage{
-geocode_rev(x)
+geocode_rev(x, method = "osm")
 }
 \arguments{
 \item{x}{a point provided by \code{numeric} lat/lon pair or
 \code{character} place name}
+
+\item{method}{"osm" (deafalt) or "ersi"}
 }
 \value{
 a data.frame of descriptive features

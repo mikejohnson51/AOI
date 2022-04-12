@@ -35,6 +35,7 @@
 #' }
 #' @export
 #' @importFrom sf st_geometry_type
+#' @importFrom magrittr %>%
 
 aoi_map <- function(AOI = NULL, returnMap = FALSE) {
 
@@ -75,22 +76,22 @@ aoi_map <- function(AOI = NULL, returnMap = FALSE) {
   }
 
 
-  m <- leaflet::leaflet()  |>
-    leaflet::addProviderTiles("Esri.NatGeoWorldMap", group = "Terrain")  |>
-    leaflet::addProviderTiles("CartoDB.Positron", group = "Grayscale")  |>
-    leaflet::addProviderTiles("Esri.WorldImagery", group = "Imagery")  |>
-    leaflet::addScaleBar("bottomleft")  |>
+  m <- leaflet::leaflet()  %>%
+    leaflet::addProviderTiles("Esri.NatGeoWorldMap", group = "Terrain")  %>%
+    leaflet::addProviderTiles("CartoDB.Positron", group = "Grayscale")  %>%
+    leaflet::addProviderTiles("Esri.WorldImagery", group = "Imagery")  %>%
+    leaflet::addScaleBar("bottomleft")  %>%
     leaflet::addMiniMap(
       toggleDisplay = TRUE,
       minimized = TRUE
-    )  |>
+    )  %>%
     leaflet::addMeasure(
       position = "bottomleft",
       primaryLengthUnit = "feet",
       primaryAreaUnit = "sqmiles",
       activeColor = "red",
       completedColor = "green"
-    )  |>
+    )  %>%
     leaflet::addLayersControl(
       baseGroups = c("Terrain", "Grayscale", "Imagery"),
       options = leaflet::layersControlOptions(collapsed = TRUE)

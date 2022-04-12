@@ -17,7 +17,8 @@
 #' @return a \code{SpatialPolygons} object projected to \emph{EPSG:4269}.
 #' @export
 #' @keywords internal
-#' @author Mike Johnson
+#' @importFrom magrittr %>%
+
 
 
 getClip <- function(x, km = FALSE) {
@@ -81,9 +82,9 @@ getClip <- function(x, km = FALSE) {
     poly <- st_bbox(c(xmin = west,
                       xmax = east,
                       ymin = south,
-                      ymax = north), crs = 4326) |>
-      sf::st_as_sfc() |>
-      sf::st_as_sf() |>
+                      ymax = north), crs = 4326) %>%
+      sf::st_as_sfc() %>%
+      sf::st_as_sf() %>%
       rename_geometry("geometry")
 }
   return(poly)

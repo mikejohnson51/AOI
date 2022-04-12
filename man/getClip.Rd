@@ -30,7 +30,4 @@ a \code{SpatialPolygons} object projected to \emph{EPSG:4269}.
 \code{getClip} generates a Spatial object based on a point;
 bounding box dimisions; and their relation to the point.
 }
-\author{
-Mike Johnson
-}
 \keyword{internal}
