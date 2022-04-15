@@ -76,7 +76,9 @@ getFiat <- function(country = NULL, state = NULL, county = NULL, fip = NULL) {
       },
       error = function(e){ NULL })
 
-    if(is.null(ret)){
+    ret = ret[!sf::st_is_empty(ret),]
+
+    if(is.null(ret) | nrow(ret) == 0 ){
       ret = list_states()
       ret = ret[tolower(ret$region) %in% tolower(state),]
       ret = merge(
@@ -84,8 +86,6 @@ getFiat <- function(country = NULL, state = NULL, county = NULL, fip = NULL) {
         list_states(),
         all.x = TRUE)
     }
-
-    ret = ret[!sf::st_is_empty(ret),]
 
     if(nrow(ret) == 0 ){ stop('State, county pair(s) not found', call. = FALSE) }
 
