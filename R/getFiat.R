@@ -42,17 +42,17 @@ getFiat <- function(country = NULL, state = NULL, county = NULL, fip = NULL) {
   if (!is.null(country)) {
     countries <- rnaturalearth::ne_countries(returnclass = "sf")
 
-    region <- tolower(country)
-    region <- gsub("south", "southern", region)
-    region <- gsub("australia", "oceania", region)
-    region <- gsub("north", "northern", region)
-    region <- gsub("east", "eastern", region)
-    region <- gsub("west", "western", region)
+    region1 <- tolower(country)
+    region2 <- gsub("south", "southern", region)
+    region2 <- gsub("australia", "oceania", region)
+    region2 <- gsub("north", "northern", region)
+    region2 <- gsub("east", "eastern", region)
+    region2 <- gsub("west", "western", region)
 
-    region <- unlist(c(
-      sapply(region, .find, vec = countries$subregion, full = countries$name),
-      sapply(region, .find, vec = countries$continent, full = countries$name)
-    ))
+    region <- unique(unlist(c(
+      sapply(c(region1, region2), .find, vec = countries$subregion, full = countries$name),
+      sapply(c(region1, region2), .find, vec = countries$continent, full = countries$name)
+    )))
 
     map0 <- countries[countries$name %in% region, ]
 
