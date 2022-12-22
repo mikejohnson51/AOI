@@ -55,37 +55,44 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">aoi_buffer</span><span class="op">(</span><span class="va">AOI</span>, <span class="va">d</span>, km <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">aoi_buffer</span><span class="op">(</span><span class="va">AOI</span>, <span class="va">d</span>, km <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>AOI</dt>
 <dd><p>a spatial, raster or simple features object</p></dd>
+
+
 <dt>d</dt>
 <dd><p><code>numeric</code>.The distance by which to modify each edge</p></dd>
+
+
 <dt>km</dt>
 <dd><p><code>logical</code>. If <code>TRUE</code> distances are in kilometers,
 default is <code>FALSE</code> with distances in miles</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a spatial geometry of the same class as the input AOI
+    
+
+<p>a spatial geometry of the same class as the input AOI
        (if Raster sp returned)</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># get an AOI of 'Garden of the Gods' and add a 2 mile buffer</span></span>
-<span class="r-in"><span class="va">AOI</span> <span class="op">&lt;-</span> <span class="fu"><a href="aoi_get.html">aoi_get</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Garden of the Gods"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">modify</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># get an AOI of 'Garden of the Gods' and add a 2 kilometer buffer</span></span>
-<span class="r-in"><span class="fu">getAOI</span><span class="op">(</span><span class="st">"Garden of the Gods"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">modify</span><span class="op">(</span><span class="fl">2</span>, km <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># get and AOI for Colorado Springs and subtract 3 miles</span></span>
-<span class="r-in"><span class="fu">getAOI</span><span class="op">(</span><span class="st">"Colorado Springs"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">modify</span><span class="op">(</span><span class="op">-</span><span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># get an AOI of 'Garden of the Gods' and add a 2 mile buffer</span></span></span>
+<span class="r-in"><span><span class="va">AOI</span> <span class="op">&lt;-</span> <span class="fu"><a href="aoi_get.html">aoi_get</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Garden of the Gods"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">modify</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># get an AOI of 'Garden of the Gods' and add a 2 kilometer buffer</span></span></span>
+<span class="r-in"><span><span class="fu">getAOI</span><span class="op">(</span><span class="st">"Garden of the Gods"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">modify</span><span class="op">(</span><span class="fl">2</span>, km <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># get and AOI for Colorado Springs and subtract 3 miles</span></span></span>
+<span class="r-in"><span><span class="fu">getAOI</span><span class="op">(</span><span class="st">"Colorado Springs"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">modify</span><span class="op">(</span><span class="op">-</span><span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -100,7 +107,7 @@ default is <code>FALSE</code> with distances in miles</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

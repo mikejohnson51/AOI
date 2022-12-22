@@ -71,42 +71,59 @@ of all place names.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">geocode</span><span class="op">(</span>
-  location <span class="op">=</span> <span class="cn">NULL</span>,
-  zipcode <span class="op">=</span> <span class="cn">NULL</span>,
-  event <span class="op">=</span> <span class="cn">NULL</span>,
-  pt <span class="op">=</span> <span class="cn">FALSE</span>,
-  bb <span class="op">=</span> <span class="cn">FALSE</span>,
-  all <span class="op">=</span> <span class="cn">FALSE</span>,
-  full <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">geocode</span><span class="op">(</span></span>
+<span>  location <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  zipcode <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  event <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pt <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  bb <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  all <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  full <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>location</dt>
 <dd><p><code>character</code>. Place name(s)</p></dd>
+
+
 <dt>zipcode</dt>
 <dd><p><code>character</code>. USA zipcode(s)</p></dd>
+
+
 <dt>event</dt>
 <dd><p><code>character</code>. a term to search for on wikipedia</p></dd>
+
+
 <dt>pt</dt>
 <dd><p><code>logical</code>. If TRUE point geometery is appended
 to the returned list()</p></dd>
+
+
 <dt>bb</dt>
 <dd><p><code>logical</code>. If TRUE bounding box geometry is
 appended to the returned list()</p></dd>
+
+
 <dt>all</dt>
 <dd><p>if TRUE the point and bounding box representations are returned</p></dd>
+
+
 <dt>full</dt>
 <dd><p><code>logical</code>. If TRUE all OSM attributes reuturned
 with query, else just the lat/long pair.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>at minimum a data.frame of lat/lon coordinates.
+    
+
+<p>at minimum a data.frame of lat/lon coordinates.
         Possible list with appended spatial features of
         type <code>sf</code> or <code>sp</code></p>
+
+
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -115,23 +132,23 @@ with query, else just the lat/long pair.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co">## geocode a single location</span></span>
-<span class="r-in"><span class="fu">geocode</span><span class="op">(</span><span class="st">"UCSB"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## geocode a single location and return a SpatialPoints object</span></span>
-<span class="r-in"><span class="fu">geocode</span><span class="op">(</span><span class="st">"UCSB"</span>, pt <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## geocode a single location and derived bounding box of location</span></span>
-<span class="r-in"><span class="fu">geocode</span><span class="op">(</span>location <span class="op">=</span> <span class="st">"UCSB"</span>, bb <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## geocode multiple locations</span></span>
-<span class="r-in"><span class="fu">geocode</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"UCSB"</span>, <span class="st">"Goleta"</span>, <span class="st">"Santa Barbara"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## geocode multiple points and generate a minimum bounding box of all locations and spatial points</span></span>
-<span class="r-in"><span class="fu">geocode</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"UCSB"</span>, <span class="st">"Goleta"</span>, <span class="st">"Santa Barbara"</span><span class="op">)</span>, bb <span class="op">=</span> <span class="cn">T</span>, pt <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co">## geocode a single location</span></span></span>
+<span class="r-in"><span><span class="fu">geocode</span><span class="op">(</span><span class="st">"UCSB"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## geocode a single location and return a SpatialPoints object</span></span></span>
+<span class="r-in"><span><span class="fu">geocode</span><span class="op">(</span><span class="st">"UCSB"</span>, pt <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## geocode a single location and derived bounding box of location</span></span></span>
+<span class="r-in"><span><span class="fu">geocode</span><span class="op">(</span>location <span class="op">=</span> <span class="st">"UCSB"</span>, bb <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## geocode multiple locations</span></span></span>
+<span class="r-in"><span><span class="fu">geocode</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"UCSB"</span>, <span class="st">"Goleta"</span>, <span class="st">"Santa Barbara"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## geocode multiple points and generate a minimum bounding box of all locations and spatial points</span></span></span>
+<span class="r-in"><span><span class="fu">geocode</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"UCSB"</span>, <span class="st">"Goleta"</span>, <span class="st">"Santa Barbara"</span><span class="op">)</span>, bb <span class="op">=</span> <span class="cn">T</span>, pt <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -146,7 +163,7 @@ with query, else just the lat/long pair.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
