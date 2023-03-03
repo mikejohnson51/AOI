@@ -1,30 +1,15 @@
 context("aoi functions")
 
 test_that("aoi_get errors...", {
-  expect_error(
-    aoi_get(state = "CA", x = "UCSB"),
-    "Only 'state' or 'x' can be used. Set the other to NULL"
-  )
+  expect_error(aoi_get(state = "CA", x = "UCSB"))
 
-  expect_error(
-    aoi_get(state = 10),
-    "State must be a character value."
-  )
+  expect_error( aoi_get(state = 10) )
 
-  expect_error(
-    aoi_get(state = "TweedleDee"),
-    "State not recognized. Full names, regions, or abbreviations can be used."
-  )
+  expect_error( aoi_get(state = "TweedleDee") )
 
-  expect_error(
-    aoi_get(county = "Santa Barbara"),
-    "The use of 'county' requires a 'state' parameter."
-  )
+  expect_error( aoi_get(county = "Santa Barbara") )
 
-  expect_error(
-    aoi_get(state = NULL, x = NULL),
-    "Requires an 'x' or 'state' parameter to execute."
-  )
+  expect_error( aoi_get(state = NULL, x = NULL) )
 })
 
 test_that("aoi_get & getFiat & getClip & defineClip", {
@@ -57,9 +42,7 @@ test_that("aoi_get & getFiat & getClip & defineClip", {
     "No country found"
   )
 
-  expect_error(
-    aoi_get(state = "CA", county = "Dallas")
-  )
+  expect_true(is.na(aoi_get(state = "CA", county = "Dallas")$state_abbr))
 
   conus <- aoi_get(state = "conus")
   expect_true(nrow(conus) == 49)

@@ -30,7 +30,7 @@ geocodeOSM <- function(location, pt = FALSE, bb = FALSE,
     stop("Only pt, bb, or all can be TRUE. Leave others as FALSE")
   }
 
-  if (class(location) != "character") {
+  if (!inherits(location, "character")) {
     stop(paste(
       "",
       "Input location is not a place name. ",
