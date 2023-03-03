@@ -11,9 +11,7 @@ Check](https://github.com/mikejohnson51/AOI/actions/workflows/R-CMD-check.yaml/b
 [![Dependencies](https://img.shields.io/badge/dependencies-6/33-orange?style=flat)](#)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://choosealicense.com/licenses/mit/)
-[![Project Status:
-Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![LifeCycle](man/figures/lifecycle/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![codecov](https://codecov.io/github/mikejohnson51/AOI/branch/master/graph/badge.svg?token=C8B30HSTMU)](https://codecov.io/github/mikejohnson51/AOI)
 <!-- badges: end -->
 
 The purpose of AOI is to help create reproducible, programmatic
@@ -34,7 +32,7 @@ you have more ridgid addresses `tidygeocoder` is great!
 geocode(c('Colorado State University', "University of Colorado", 'NOAA'))
 #>                     request      lat        lon
 #> 1 Colorado State University 40.57066 -105.08540
-#> 2    University of Colorado 39.67962 -104.93770
+#> 2    University of Colorado 40.00760 -105.26910
 #> 3                      NOAA 25.73289  -80.16056
 ```
 
@@ -70,7 +68,7 @@ geocode(event = 'Hurricane Harvey')
 #> 5  Hurricane+Harvey          Honduras          Honduras 15.257243 -86.07551
 #> 6  Hurricane+Harvey            Belize            Belize 16.825979 -88.76009
 #> 7  Hurricane+Harvey    Cayman Islands    Cayman Islands 19.703182 -79.91746
-#> 8  Hurricane+Harvey Yucatán Peninsula Yucatán Peninsula 18.845000 -89.12556
+#> 8  Hurricane+Harvey Yucatán Peninsula Yucatán Peninsula 18.801686 -89.74270
 #> 10 Hurricane+Harvey        Louisiana)        Louisiana) 30.870388 -92.00713
 
 # Multi-location events with BBOX
@@ -88,12 +86,14 @@ geocode(event = 'Hurricane Harvey', bb = TRUE)
 
 ``` r
 geocode_rev(c(37, -119))
-#>    place_id osm_type osm_id                             display_name
-#> 1 282405492 relation 396492 Fresno County, California, United States
-#>          county      state       country country_code
-#> 1 Fresno County California United States           us
-#>                                               bb
-#> 1 -120.9192485,-118.3612791,35.9066756,37.586101
+#>    place_id osm_type osm_id
+#> 1 298122425 relation 396492
+#>                                                         display_name
+#> 1 Fresno County, CAL Fire Southern Region, California, United States
+#>          county           state_district      state ISO3166-2-lvl4
+#> 1 Fresno County CAL Fire Southern Region California          US-CA
+#>         country country_code                                             bb
+#> 1 United States           us -120.9192485,-118.3612791,35.9066756,37.586101
 ```
 
 ### 2. Consistent queries for domestic (USA) and international boundaries:
@@ -148,7 +148,7 @@ aoi_get(country = "Ukraine")
 #> Geometry type: MULTIPOLYGON
 #> Dimension:     XY
 #> Bounding box:  xmin: 22.08561 ymin: 44.36148 xmax: 40.08079 ymax: 52.33507
-#> Geodetic CRS:  SOURCECRS
+#> CRS:           +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0
 #>     scalerank      featurecla labelrank sovereignt sov_a3 adm0_dif level
 #> 166         1 Admin-0 country         3    Ukraine    UKR        0     2
 #>                  type   admin adm0_a3 geou_dif geounit gu_a3 su_dif subunit
@@ -232,10 +232,10 @@ aoi_get(list("D-day", 100, 100))
 #> Simple feature collection with 1 feature and 0 fields
 #> Geometry type: POLYGON
 #> Dimension:     XY
-#> Bounding box:  xmin: 1.955047 ymin: 41.91365 xmax: 3.925122 ymax: 43.36293
+#> Bounding box:  xmin: -73.99623 ymin: 43.66281 xmax: -71.96821 ymax: 45.11209
 #> Geodetic CRS:  WGS 84
 #>                         geometry
-#> 1 POLYGON ((1.955047 41.91365...
+#> 1 POLYGON ((-73.99623 43.6628...
 ```
 
 ### 4. View and Draw
@@ -266,7 +266,14 @@ environment.
 aoi_draw()
 ```
 
-<img src="man/figures/shiny-app.png" title="Using the aoi_draw() interface" alt="Using the aoi_draw() interface" width="75%" />
+<div class="figure">
+
+<img src="man/figures/shiny-app.png" alt="Using the aoi_draw() interface" width="75%" />
+<p class="caption">
+Using the aoi_draw() interface
+</p>
+
+</div>
 
 ### 5. Programmatic way to interface with other R packages that require user defined AOIs or bounding boxes
 
@@ -274,19 +281,19 @@ The need for AOI’s is rampant in the r-spatial community. AOI plays
 nicely with the following non-exhaustive list helping users be to the
 meat of their utilities without getting hung up on boundary definition.
 
--   ggmap
--   opendap.catalog
--   nhdplusTools
--   elevatr
--   terrainr
--   climateR
--   dataRetrivial
--   soilDB
--   nwmTools
--   osmdata
--   FedData
--   hereR
--   Please add more!
+- ggmap
+- opendap.catalog
+- nhdplusTools
+- elevatr
+- terrainr
+- climateR
+- dataRetrivial
+- soilDB
+- nwmTools
+- osmdata
+- FedData
+- hereR
+- Please add more!
 
 ### Installation:
 
@@ -298,25 +305,6 @@ remotes::install_github("mikejohnson51/AOI")
 
 See the package [website](https://mikejohnson51.github.io/AOI/)
 vignettes showing the general workflow and functionality.
-
-### Contributing:
-
-Thank you for considering a contribution!
-
-1.  Contributions should be thoroughly tested with
-    [testthat](https://testthat.r-lib.org/).  
-2.  Code style should attempt to follow the [tidyverse style
-    guide.](http://style.tidyverse.org/)  
-3.  Please attempt to describe what you want to do prior to contributing
-    by submitting an issue.  
-4.  Please follow the typical github [fork - pull-request
-    workflow.](https://gist.github.com/Chaser324/ce0505fbed06b947d962)  
-5.  Make sure you use roxygen and run Check before contributing.
-
-Other notes: - consider running `lintr` prior to contributing. -
-consider running `goodpractice::gp()` on the package before
-contributing. - consider running `devtools::spell_check()` if you wrote
-documentation.
 
 ### Support:
 
