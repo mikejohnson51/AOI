@@ -28,5 +28,3 @@
 #' \href{https://mikejohnson51.github.io/AOI/}{here}.
 #'
 #' @docType package
-
-

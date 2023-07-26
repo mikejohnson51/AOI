@@ -10,21 +10,19 @@
 #' @param bb if TRUE the OSM bounding area of the location is appended
 #'           to returned list
 #' @param all if TRUE the point and bounding box representations are returned
-#' @param full \code{logical}. If TRUE all OSM attributes reuturned with query,
-#'             else just the lat/long pair.
+#' @param method the geocoding service to be used. See ?tidygeocoder::geocode
 #' @return at minimum a data.frame of lat, long
-#' @author Mike Johnson
 #' @export
 #' @examples
 #' \dontrun{
-#' geocodeOSM("UCSB")
-#' geocodeOSM("Garden of the Gods", bb = TRUE)
+#' geocodeAOI("UCSB")
+#' geocodeAOI("Garden of the Gods", bb = TRUE)
 #' }
-#' @importFrom jsonlite fromJSON
+#' @importFrom tidygeocoder geo
 #' @importFrom sf st_as_sf
 
-geocodeOSM <- function(location, pt = FALSE, bb = FALSE,
-                       all = FALSE, full = FALSE) {
+geocodeAOI <- function(location, pt = FALSE, bb = FALSE,
+                      all = FALSE, method = "arcgis") {
 
   if (sum(pt, bb, all) > 1) {
     stop("Only pt, bb, or all can be TRUE. Leave others as FALSE")
@@ -40,74 +38,48 @@ geocodeOSM <- function(location, pt = FALSE, bb = FALSE,
     ))
   }
 
-  URL <- paste0(
-    "http://nominatim.openstreetmap.org/search?q=",
-    gsub(" ", "+", location, fixed = TRUE),
-    "&format=json&limit=1"
-  )
+  ret = suppressMessages({
+    tidygeocoder::geo(location, progress_bar = FALSE, method = method, full_results = TRUE)
+  })
 
 
-  ret <- jsonlite::fromJSON(URL)
 
-  rownames(ret) <- NULL
+  ret$lon = ret$long
+  ret$long = NULL
+  ret$request = location
+  ret$address = NULL
 
-  if (length(ret) != 0) {
-    s     <- data.frame(request = location, ret, stringsAsFactors = FALSE)
-    s$lat <- as.numeric(s$lat)
-    s$lon <- as.numeric(s$lon)
-    s$licence <- NULL
-    s$icon <- NULL
-  } else {
-    s <- data.frame(
-      request = location,
-      lat = NA,
-      lon = NA,
-      stringsAsFactors = FALSE
-    )
+  if(all(is.na(ret$lat))){
+    return(ret)
   }
 
-  sub <- data.frame(
-    request = location,
-    lat = s$lat,
-    lon = s$lon,
-    stringsAsFactors = FALSE
-  )
+  bbs = list()
 
-  coords <- if (full) {
-    s
-  } else {
-    sub
+  for(i in 1:nrow(ret)){
+    bbs[[i]] <- st_bbox(c(xmin = ret$extent.xmin[i],
+                     xmax = ret$extent.xmax[i],
+                     ymin = ret$extent.ymin[i],
+                     ymax = ret$extent.ymax[i]), crs = 4326) %>%
+      sf::st_as_sfc() %>%
+      sf::st_as_sf() %>%
+      rename_geometry("geometry")
   }
 
-  if (is.na(coords$lat)) {
-    return(coords)
-  }
+  bbs =  do.call(rbind, bbs)
+  bbs$request = ret$request
 
-  point <- sf::st_as_sf(x = coords, coords = c("lon", "lat"), crs = 4269)
+  ret = ret[, !grepl("[.]", names(ret))]
 
-  tmp.bb <- as.numeric(unlist(s$boundingbox))
+  bbs = merge(bbs, ret)
 
-  bbs <- st_bbox(c(xmin = tmp.bb[3],
-                   xmax = tmp.bb[4],
-                   ymin = tmp.bb[1],
-                   ymax = tmp.bb[2]), crs = 4326) %>%
-    sf::st_as_sfc() %>%
-    sf::st_as_sf() %>%
-    rename_geometry("geometry")
+  point <- sf::st_as_sf(x = ret, coords = c("lon", "lat"), crs = 4269)
 
-  bbs$request <- s$request
 
-  bbs <- if (full) {
-    merge(bbs, s)
-  } else {
-    bbs
-  }
-
-  if (pt)  { return(point) }
+  if (pt)  {  return(point) }
   if (bb)  {  return(bbs)  }
-  if (all) { return(list(coords = coords, pt = point, bbox = bbs)) }
+  if (all) {  return(list(coords = ret, pt = point, bbox = bbs)) }
 
-  return(coords)
+  return(ret)
 }
 
 
@@ -130,7 +102,7 @@ geocodeOSM <- function(location, pt = FALSE, bb = FALSE,
 #'           to the returned list()
 #' @param bb \code{logical}. If TRUE bounding box geometry is
 #'           appended to the returned list()
-#' @param full \code{logical}. If TRUE all OSM attributes reuturned
+#' @param full \code{logical}. If TRUE all attributes reuturned
 #'             with query, else just the lat/long pair.
 #' @param all if TRUE the point and bounding box representations are returned
 #' @return at minimum a data.frame of lat/lon coordinates.
@@ -168,6 +140,10 @@ geocode <- function(location = NULL,
     suppressWarnings({
       locs <-  do.call(rbind,lapply(event, geocode_wiki))
     })
+
+    if(pt | bb | all){
+      locs = sf::st_as_sf(locs, coords = c("lon", "lat"), crs = 4269)
+    }
   }
 
   if (!is.null(zipcode)) {
@@ -176,54 +152,23 @@ geocode <- function(location = NULL,
 
     failed <- zipcode[!zipcode %in% locs$zip]
 
-    if (length(failed) > 0) {
+    if (length(failed) > 0 & all(is.na(locs$lat))) {
+      stop("Zipcodes ", paste(failed, collapse = ", "), " not found.")
+    } else if (length(failed) > 0 ){
       warning("Zipcodes ", paste(failed, collapse = ", "), " not found.")
+      locs = locs[!is.na(locs$zipcode),]
+    }
+
+    if(pt | bb | all){
+      locs = sf::st_as_sf(locs, coords = c("lon", "lat"), crs = 4269)
     }
   }
 
   if (!is.null(location)) {
-
-    if (length(location) == 1) {
-      return(geocodeOSM(location, pt, bb, all, full))
-    } else {
-      geoHERE <- function(x) {
-        geocodeOSM(x, pt = FALSE, bb = FALSE, full = full)
-      }
-
-      latlon <- do.call('rbind', lapply(location, geoHERE))
-
-      if (full) {
-        locs <- latlon
-        locs$lat <- as.numeric(locs$lat)
-        locs$lon <- as.numeric(locs$lon)
-      } else {
-        locs <- data.frame(
-          request = location,
-          lat = as.numeric(latlon$lat),
-          lon = as.numeric(latlon$lon)
-        )
-      }
-    }
+    locs = geocodeAOI(location, pt, bb, all)
   }
 
-  locs = locs[!is.na(locs$lat) & !is.na(locs$lon),]
-  if(nrow(locs) == 0 ){ stop("No data found.") }
-
-  points <- st_as_sf(
-    x = locs,
-    coords = c("lon", "lat"),
-    crs = 4269
-  )
-
-  if (all) {
-    return(list(coords = locs, pt = points, bb = bbox_get(points)))
-  } else if (pt) {
-    return(points)
-  } else if (bb) {
-    return(bbox_get(points))
-  } else {
-    return(locs)
-  }
+  return(locs)
 }
 
 
@@ -241,7 +186,6 @@ geocode <- function(location = NULL,
 #' alt_page("Twin_towers")
 #' }
 #' @importFrom rvest read_html html_nodes html_attr html_text
-#' @importFrom magrittr %>%
 
 alt_page <- function(loc, pt = FALSE) {
 
@@ -301,7 +245,6 @@ alt_page <- function(loc, pt = FALSE) {
 #' @importFrom rvest read_html html_nodes html_table
 #' @importFrom rnaturalearth ne_countries
 #' @importFrom sf st_as_sf
-#' @importFrom magrittr %>%
 
 geocode_wiki <- function(event = NULL, pt = FALSE) {
 

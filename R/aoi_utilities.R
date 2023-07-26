@@ -138,8 +138,6 @@ list_states <- function() {
 #' }
 #' @importFrom sf st_as_sf
 #' @importFrom fipio as_fips fips_metadata
-#' @importFrom magrittr %>%
-
 fip_meta <- function(state, county = NULL) {
 
   fipio::as_fips(county = county, state = state) %>%

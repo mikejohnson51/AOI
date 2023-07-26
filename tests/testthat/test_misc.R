@@ -2,7 +2,7 @@ context("utility functions")
 
 test_that("aoi_inside...", {
   # r = raster::raster(system.file("external/test.grd", package="raster"))
-  lake_tahoe <- aoi_get(list("Lake Tahoe", 100, 100))
+  lake_tahoe <- aoi_get(x = list("Lake Tahoe, CA", 100, 100))
   CA <- aoi_get(state = "CA")
   SB <- aoi_get(state = "CA", county = "Santa Barbara")
 

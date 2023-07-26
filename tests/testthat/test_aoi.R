@@ -13,6 +13,11 @@ test_that("aoi_get errors...", {
 })
 
 test_that("aoi_get & getFiat & getClip & defineClip", {
+
+  FIP = aoi_get(fip  = "08011")
+  expect_equal(FIP$name, "Bent")
+
+
   CA <- aoi_get(state = "CA")
   expect_true(CA$state_abbr == "CA")
 
@@ -119,4 +124,23 @@ test_that("aoi_get & getFiat & getClip & defineClip", {
   expect_true(nrow(cali_county_mex) == 59)
 
   expect_error(geocode("UCSB", pt = T, bb = T), "Only pt, bb, or all can be TRUE. Leave others as FALSE")
+})
+
+
+
+test_that("aoi_describe errors...", {
+
+  x = aoi_describe(aoi_get("Fort Collins"))
+  expect_true(is.null(x))
+
+  x = aoi_describe(AOI = geocode("Fort Collins", pt = TRUE))
+  expect_true(is.null(x))
+})
+
+
+test_that("aoi_map errors...", {
+ xx = aoi_map(AOI = aoi_get("Fort Collins"))
+ expect_true(inherits(xx, "sf"))
+ xx = aoi_map(AOI = aoi_get("Fort Collins"), returnMap = TRUE)
+ expect_true(inherits(xx, "leaflet"))
 })

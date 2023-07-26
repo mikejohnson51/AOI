@@ -35,7 +35,6 @@
 #' }
 #' @export
 #' @importFrom sf st_geometry_type
-#' @importFrom magrittr %>%
 
 aoi_map <- function(AOI = NULL, returnMap = FALSE) {
 
@@ -115,11 +114,10 @@ aoi_map <- function(AOI = NULL, returnMap = FALSE) {
     }
   }
 
-  #message(m)
-
   if (returnMap) {
     m
   } else {
+    print(m)
     orig
   }
 }

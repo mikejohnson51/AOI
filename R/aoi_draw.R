@@ -18,8 +18,7 @@ check_pkg <- function(pkg) {
 #' a new sf object called 'aoi' will appear in your environment.
 #' @return An sf object called 'aoi'.
 #' @export
-#' @importFrom sf st_sf st_sfc st_as_sf st_polygon st_cast
-#' @importFrom magrittr %>%
+#' @importFrom sf st_sf st_sfc st_as_sf st_polygon st_cast `%>%`
 #'
 #' @examples \dontrun{
 #' aoi_draw()

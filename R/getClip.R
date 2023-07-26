@@ -17,7 +17,6 @@
 #' @return a \code{SpatialPolygons} object projected to \emph{EPSG:4269}.
 #' @export
 #' @keywords internal
-#' @importFrom magrittr %>%
 
 
 

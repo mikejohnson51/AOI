@@ -30,4 +30,9 @@ test_that("bbox_get and bbox_coords work as expected...", {
   bbr_vec <- bbox_coords(r)
   expect_true(sf::st_geometry_type(bbr) == "POLYGON")
   expect_true(length(bbr_vec) == 4)
+
+
+  yy <- bbox_get("37, 38, -120, -119")
+  yy1 <- bbox_get(c(37, 38, -120, -119))
+  expect_identical(yy,yy1)
 })

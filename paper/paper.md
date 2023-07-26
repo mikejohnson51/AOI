@@ -9,43 +9,44 @@ authors:
   - name: J. Michael Johnson
     orcid: 0000-0002-5288-8350
     affiliation: 1
-  - name: Keith C. Clarke
+  - name: Justin Sing
     affiliation: 1
 affiliations:
   - name: Department of Geography, University of California, Santa Barbara
-    index: 1
+    index: 2
+  - name: Department of Geography, University of California, Santa Barbara
+    index: 2
 date: \today
 bibliography: paper.bib
 ---
 
 # Summary
-The primary functions in this package are `geocode`, `revgeocode`, `getAOI`, and `getBoundingBox`.  The first returns a `data.frame` of coordinates from place names using the Open Street Map API; the second returns a list of descriptive features from a known place name or latitude longitude pair; the third returns a simple features (sf) geometry from a country, state, county, or defined region, and the last an extent encompassing a set of input features. Additional helper functions include `bbox_st` and `bbox_sp` which help convert AOIs between string and geometries;  `check` which helps users visualize AOIs in an interactive leaflet map; `modify` which allows AOIs to be modified by uniform distances; and `is_inside` which check for partial and complete overlap over features.  Finally, `describe`  breaks existing spatial features into `getAOI` parameters to improve the reproducibility of geometry generation. Three core datasets are served with the package. The first contains the spatial geometries and identification attributes of all `world` countries. The second, the spatial geometries for US `states` and the third contains the same for all US `counties`.
+
+The primary functions in this package are `geocode`/`geocode_rev`, `aoi_get`, `aoi_map`/`aoi_draw`.  The first returns a `data.frame` of coordinates from place names using the Open Street Map API; the second returns a list of descriptive features from a known place name or latitude longitude pair; the third returns a simple features (sf) geometry from a country, state, county, or defined region, and the last an extent encompassing a set of input features. Additional helper functions include `bbox_st` and `bbox_sp` which help convert AOIs between string and geometries;  `check` which helps users visualize AOIs in an interactive leaflet map; `modify` which allows AOIs to be modified by uniform distances; and `is_inside` which check for partial and complete overlap over features.  Finally, `describe`  breaks existing spatial features into `getAOI` parameters to improve the reproducibility of geometry generation. Three core datasets are served with the package. The first contains the spatial geometries and identification attributes of all `world` countries. The second, the spatial geometries for US `states` and the third contains the same for all US `counties`.
 
 # Introduction
 
-An Area of Interest (AOI) is a geographic extent demarcating a region of the earth with significance to an analysis or user. AOIs can be complex geometries, such as a state outlines or watershed boundaries, or more simply, a bounding box defined by minimum and maximum XY coordinates.  In spatial data science, where data is often continuous (eg raster climate and satellite data), or at least more expansive than needed (e.g. national or state scale vector data), AOIs are commonly used for limiting the scope of a study by subsetting existing data to a new extent.
+An Area of Interest (AOI) is a geographic extent demarcating a region of the earth with significance to an analysis or user. AOIs can be complex geometries, such as a state outlines or watershed boundaries, or simply, a bounding box defined by minimum and maximum X,Y coordinates.  In spatial data science, where data is often continuous (eg raster climate and satellite data), or at least more expansive than needed (e.g. national or state scale vector data), AOIs are commonly used for limiting the scope of a study by subsetting existing data to a new, more manageable, extent.
 
-Subsetting tasks can be executed on local data, but are commonly being outsourced to cloud based data repositories via URL queries.  Initially, `AOI` was conceived as a helper package for converting existing spatial representations into bounding coordinates, querying web-based services; and coercing the returned data into standard spatial formats (e.g. `sf` and `raster` for R).
+Subsetting tasks can be executed on local data, but are commonly being outsourced to cloud based data repositories via URL queries.  Initially, `AOI` was conceived as a helper package for converting existing spatial representations into bounding coordinates, querying web-based services; and coercing the returned data into standard spatial formats (e.g. `sf` and `SpatRaster` for R).
 
-Over the course of package construction, it became more clear that while the idea of an AOI is quite simple, the practice of generating AOIs in a reproducible, flexible, and programmatic way is quite complicated.
+Over the course of package construction, it became more clear that while the idea of an AOI is quite simple, the practice of generating AOIs in a reproducible, flexible, and programmatic way is quite complicated, and is down in a suprisingly large variety of ways across packages.
 
-To illustrate, while most of us can quickly describe an AOI by the features and dimensions of the area we are interested in (eg  ‘California”,  “UCSB's campus”, or, “the 100 square kilometer area surrounding Denver, Colorado”) few us can, on the fly, describe these regions by the lat/long vertices needed to generate a polygon, query  any subsetting service,  or populate many existing R function.  As a result, we generally revert to some combination of finding an existing spatial file online, launching Google Earth, drawing a polygon in ArcMap or QGIS, or visiting a geocoding website.  The obvious drawback to these workflows are the time they take, their execution out of an otherwise programatic workflow, and the inherent lack of reproducibility and specificity.
-
-As data science - and science as a whole - transitions to more transparent sharing of analysis [@lowndes2017], the ability to quickly, and flexibly  generate AOIs programmatically is, if not critical, quite convenient. In this vein, AOI covers four main themes:
+To illustrate, while most of us can quickly describe an AOI by the features and dimensions of the area we are interested in (eg  ‘California”,  “UCSB's campus”, or, “the 100 square mile area surrounding Denver, Colorado”) few us can, on the fly, describe these regions by the lat/long vertices needed to generate a polygon, query  any  service,  or populate many existing R function.  As a result, we generally revert to some combination of finding an existing spatial file online, launching Google Earth, drawing a polygon in ArcMap or QGIS, or visiting a geocoding website.  The obvious drawback to these workflows are the time they take, their execution out of an otherwise programmatic workflow, and the inherent lack of reproducibility. As data science - and science as a whole - transitions to more transparent sharing of analysis [@lowndes2017], the ability to quickly, and flexibly  generate AOIs programmatically is, if not critical, quite convenient. In this vein, AOI covers four main themes:
 
 1. Forward, reverse, and event/association based geocoding
-2. AOI queries based on fiat boundaries
+2. AOI queries based on fiat boundaries (country, state, county, zipcode)
 3. AOI creation from point and bounding box dimensions
 4. Wrappers for common AOI processes
 
-The remainder of this paper is structured to discuss, primarily through example, these themes. On a more technical note, AOI plays nicely with the  `raster`[@hijmans2019], `sp` [@bivand2008], and `sf`[@pebesma2018] data models but returns all features as `sf` objects in EPSG:4269. The default length measurement in AOI is miles however any function requiring a distance input  has a `km` parameter that can be set to `TRUE`. Finally, all functions are designed to work with tidy [@tidyverse2017] and `magrittr` [@magrittr2014] piping principles allowing seamless integration with other spatial packages.
+The remainder of this paper is structured to discuss, primarily through example, these themes. On a more technical note, AOI plays nicely with the  `terra`[@hijmans2019] [@bivand2008], and `sf`[@pebesma2018] data models but returns all features as `sf` objects in EPSG:4269. The default length measurement in AOI is miles however any function requiring a distance input  has a `km` parameter that can be set to `TRUE`. Finally, all functions are designed to work with tidy [@tidyverse2017] and `magrittr` [@magrittr2014] piping principles allowing seamless integration with other dplyr based packages.
 
 # 1. Geocoding
 
-Geocoding is the process of converting descriptions of place to XY coordinates.  The AOI packages offers an API interface to the Open Street Map (OSM) Nominatim [@OpenStreetMap2017] tool which provides search capacities by name and address. While other packages offer geocoding (eg dismo, prettymapper, ggmap, opencage) each relies on a commercial service  (Google, pickpoint.io, Opencage respectively) that have limitations, user agreements, and/or require API keys. Sticking to the core of the open source and R spatial community, adding a free and open source geocoding engine seemed ideal. Basic AOI geocoding requires a character-sting input and returns a `data.frame` of latitude and longitude coordinates.
+Geocoding is the process of converting descriptions of place to XY coordinates.  The AOI packages offers an API interface to the Open Street Map (OSM) Nominatim [@OpenStreetMap2017] tool which provides search capacities by name and address. While other packages offer geocoding (eg dismo, prettymapper, ggmap, opencage, tidygeocode) each relies on a commercial service  (Google, pickpoint.io, Opencage respectively) that have limitations, user agreements, and/or require API keys. Sticking to the core of the open source and R spatial community, adding a free and open source geocoding engine seemed ideal. Basic AOI geocoding requires a character-sting input and returns a `data.frame` of latitude and longitude coordinates.
 
 ```r
-> str(geocode("Denver”))
+> str(geocode("Denver"))
 'data.frame':	1 obs. of  2 variables:
  $ lat: num 39.7
  $ lon: num -105
@@ -69,7 +70,7 @@ If a user wants more information , they can turn on the full return which append
  $ importance  : num 0.765
 ```
 
-In addition to attribute data, users can request point and/or bounding box realizations of a query using the  `pt` and `bb` parameters respectively (Figure 1A-B). Bounding boxes are derived from the OSM bounding box string (seen the OSM attribute data) and points from the latitude/longitude pair.
+In addition to attribute data, users can request point and/or bounding box realizations of a query using the `pt` and `bb` parameters respectively (Figure 1A-B). Bounding boxes are derived from the OSM bounding box string (seen the OSM attribute data) and points from the latitude/longitude pair.
 
 The geocode function can iterate over multiple locations providing data.frame, point, and bb objects pending the function parameterization. The only difference in the case of multiple requests is that `bb=TRUE` returns the minimum bounding box of all queried points rather than the bounding area of each query (Figure 1C).
 

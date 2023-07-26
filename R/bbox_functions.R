@@ -7,7 +7,6 @@
 #' @return a sf polygon
 #' @export
 #' @importFrom sf st_bbox st_crs st_as_sfc st_sf
-#' @importFrom magrittr %>%
 
 bbox_get <- function(x) {
   if (inherits(x, "character")) {

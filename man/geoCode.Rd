@@ -29,7 +29,7 @@ appended to the returned list()}
 
 \item{all}{if TRUE the point and bounding box representations are returned}
 
-\item{full}{\code{logical}. If TRUE all OSM attributes reuturned
+\item{full}{\code{logical}. If TRUE all attributes reuturned
 with query, else just the lat/long pair.}
 }
 \value{

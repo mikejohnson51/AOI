@@ -120,7 +120,6 @@
 #' aoi_get(x = list("UCSB", 10, 10, "lowerleft"))
 #' }
 #' @importFrom sf st_union st_transform
-#' @importFrom magrittr %>%
 
 aoi_get <- function(x = NULL,
                     country = NULL,

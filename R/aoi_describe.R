@@ -25,7 +25,7 @@ aoi_describe = function(AOI){
   } else {
     tot_area      = NULL
     bb            = sf::st_bbox(AOI)
-    bb_area       = sf::st_area(sf::st_as_sfc(bb)) / 1e6
+    bb_area       = NULL
     coverage_per  = NULL
     tot_units     = nrow(AOI)
     geom = "POINT"
@@ -40,7 +40,7 @@ aoi_describe = function(AOI){
 
   {
     cat("type:\t\t",  geom  , paste0("(", tot_units, ")\n"))
-    cat("BBox Area:\t",  bb_area  , "[km^2]\n")
+    if(!is.null(bb_area)){ cat("BBox Area:\t",  bb_area  , "[km^2]\n") }
     cat("Centroid:\t",  lon_cent, lat_cent  , "[x,y]\n")
     cat("Diminsions:\t",  width, height  , "[width, height, in miles]\n")
     if(geom != "POINT"){
