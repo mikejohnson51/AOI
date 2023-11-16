@@ -14,6 +14,7 @@ knitr::opts_chunk$set(
 )
 
 library(AOI)
+library(sf)
 ```
 
 # AOI <img src="man/figures/logo.png" width=130 height = 150 align="right" />
@@ -26,11 +27,11 @@ library(AOI)
 [![codecov](https://codecov.io/github/mikejohnson51/AOI/branch/master/graph/badge.svg?token=C8B30HSTMU)](https://codecov.io/github/mikejohnson51/AOI)
 <!-- badges: end -->
 
-The purpose of AOI is to help create reproducible, programmatic boundaries for analysis and mapping workflows. The package targets five main use cases:
+AOI helps  create reproducible, programmatic boundaries for analysis and mapping workflows. The package targets five main use cases:
 
-## 1. Flexable, term based geocoding
+## 1. Term based geocoding
 
-The aim of the AOI geooding service is to provide flexible, term-based geocoding via the OSM Notimun and Wikipedia APIs and the Wikipedia. If you have more ridgid addresses `tidygeocoder` is great!
+AOI uses `tidygeocoder` as a backend for term-based geooding and Wikipedia APIs. If you have more ridgid addresses `tidygeocoder` is great!
 
 ### Foward (from name to location)
 
@@ -51,11 +52,10 @@ geocode('500 Linden St, Fort Collins, CO 80524', pt = TRUE)
 # Single events
 geocode(event = 'D-day')
 
-# Multi-location events
-geocode(event = 'Hurricane Harvey')
-
 # Multi-location events with BBOX
-geocode(event = 'Hurricane Harvey', bb = TRUE)
+(harvey = geocode(event = 'Hurricane Harvey', bb = TRUE))
+
+mapview::mapview(harvey)
 ```
 
 ### Reverse (from location to term)
@@ -101,21 +101,23 @@ aoi_describe(USA_south)
 
 ```{r}
 # 100 square mile region around Longs Peaks
-aoi_get(list("Long Peaks", 10, 10))
+aoi_ext("Long Peaks", wh = 10)
 ```
 
 #### Location and Diminsions
 
 ```{r}
 # 200 square mile region around 37,-119
-aoi_get(list(37, -119, 20, 10))
+aoi_ext(xy = c(x = 119, y = 37), wh =  c(20, 10))
 ```
 
 #### Event and Diminsions
 
 ```{r}
-# 10,000 square mile region around Normandy Landings
-aoi_get(list("D-day", 100, 100))
+# 10,000 square meter region around Normandy Landings
+aoi_ext(geo = "white house", wh = 10000, bbox = TRUE) |> 
+  st_as_sf() |>
+  aoi_map(returnMap = T)
 ```
 
 ### 4. View and Draw
@@ -125,7 +127,7 @@ aoi_get(list("D-day", 100, 100))
 Sometimes it is useful to view the created AOIs. `aoi_map` offers a quickly formatted `leaflet` map (not all that dissimilar from `mapview` so this may retire).
 
 ```{r}
-AOI = geocode(location = c("Paris", "Amsterdam", "Prague", "England"), pt = TRUE) 
+AOI = geocode(geo = c("Paris", "Amsterdam", "Prague", "England"), pt = TRUE) 
 aoi_map(AOI, returnMap = TRUE)
 
 ```
@@ -146,28 +148,27 @@ knitr::include_graphics('man/figures/shiny-app.png')
 The need for AOI's is rampant in the r-spatial community. AOI plays nicely with the following non-exhaustive list helping users be to the meat of their utilities without getting hung up on boundary definition.
 
 
-- ggmap
-- opendap.catalog
-- nhdplusTools
-- elevatr
-- terrainr
-- climateR
-- dataRetrivial
-- soilDB
-- nwmTools
-- osmdata
-- FedData
-- hereR
-- Please add more!
+| package  | 
+|---|
+| ggmap  |     
+| nhdplusTools  |   
+| elevatr  |   
+| terrainr  | 
+| climateR  |   
+| dataRetrivial  |   
+| soilDB  |    
+| nwmTools  |   
+| FedData  |   
+| hereR  |   
+
+
+Please add more!
 
 ### Installation:
 
 ```{r, eval = FALSE }
 remotes::install_github("mikejohnson51/AOI")
 ```
-
-### Resources
-See the package [website](https://mikejohnson51.github.io/AOI/) vignettes showing the general workflow and functionality.
 
 
 ### Support:

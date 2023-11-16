@@ -7,6 +7,18 @@
     <loc>/LICENSE-text.html</loc>
   </url>
   <url>
+    <loc>/articles/fiat.html</loc>
+  </url>
+  <url>
+    <loc>/articles/geocoding.html</loc>
+  </url>
+  <url>
+    <loc>/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>/articles/region.html</loc>
+  </url>
+  <url>
     <loc>/authors.html</loc>
   </url>
   <url>
@@ -31,6 +43,9 @@
     <loc>/reference/aoi_draw.html</loc>
   </url>
   <url>
+    <loc>/reference/aoi_ext.html</loc>
+  </url>
+  <url>
     <loc>/reference/aoi_get.html</loc>
   </url>
   <url>
@@ -49,10 +64,25 @@
     <loc>/reference/check_pkg.html</loc>
   </url>
   <url>
+    <loc>/reference/default_crs.html</loc>
+  </url>
+  <url>
+    <loc>/reference/discritize.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dot-domain.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dot-geocode.html</loc>
+  </url>
+  <url>
     <loc>/reference/fip_meta.html</loc>
   </url>
   <url>
     <loc>/reference/geocode.html</loc>
+  </url>
+  <url>
+    <loc>/reference/geocodeAOI.html</loc>
   </url>
   <url>
     <loc>/reference/geocodeOSM.html</loc>

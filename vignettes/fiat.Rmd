@@ -1,0 +1,109 @@
+---
+title: "Fiat Boundaries"
+description: |
+  "Getting Fiat Data"
+author:
+  - name: "Mike Johnson"
+    url: https://github.com/mikejohnson51
+    affiliation: Lynker, NOAA-Affiliate
+    affiliation_url: https://lynker.com
+output: distill::distill_article
+vignette: >
+  %\VignetteIndexEntry{fiat}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%",
+  dev = "jpeg"
+)
+```
+
+```{r setup}
+library(AOI)
+library(mapview)
+library(dplyr)
+```
+
+AOI aims to provide a consistent, and flexible, syntax for retrieving fiat boundaries for spatial analysis, map making, and data retrivial. This is all done in the `aoi_get` function:
+
+> **Definition**: _fiat_: fiatness implies mind-dependence, and thus a fiat boundary is a boundary that is determined by human fiat, lacking any natural indication.
+
+This package makes no claims on sovereignty and returns data as found in Natural Earth, or, produced by the US Census Department (in the US).
+
+# Countries
+
+To retrive country boundaries (1 or more), ISO codes, abbreviations and names can be used:
+
+```{r}
+am = aoi_get(country = "New Zealand") |> 
+  plot(max.plot = 1)
+
+aoi_get(country = c("484", "USA", "CA")) |> 
+  plot(max.plot = 1)
+```
+
+# State
+
+```{r}
+aoi_get(state = "CO") |> 
+  plot(max.plot = 1)
+
+aoi_get(state = c("CO", "Utah")) |> 
+  plot(max.plot = 1)
+```
+
+# County
+
+
+```{r}
+aoi_get(state = "CO", county = "Larimer") |> 
+  plot(max.plot = 1)
+
+aoi_get(state = "TX", county = "all") |> 
+  plot(max.plot = 1)
+```
+
+# FIP
+
+```{r}
+aoi_get(fip = "01")  |> 
+  plot(max.plot = 1)
+
+aoi_get(fip = "01125")  |> 
+  plot(max.plot = 1)
+```
+
+# Zipcode
+
+```{r}
+aoi_get(zipcode = "80906") |> 
+  plot(max.plot = 1)
+```
+
+# Aggregate
+ 
+```{r}
+aoi_get(country = "Asia") |> 
+  plot(max.plot = 1)
+
+aoi_get(country = "Latin America & Caribbean") |> 
+  plot(max.plot = 1)
+
+aoi_get(state = "conus") |> 
+  plot(max.plot = 1)
+
+aoi_get(state = "south") |> 
+  plot(max.plot = 1)
+```
+
+# Union
+
+```{r}
+aoi_get(country = "Latin America & Caribbean", union = TRUE) |> 
+  plot()
+```

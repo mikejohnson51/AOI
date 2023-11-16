@@ -1,186 +1,210 @@
-#' @title geocodeOSM
-#' @description
-#' Geocode via Open Street Maps API. \code{geocodeOSM}
-#' takes an input string and converts it to a geolocation.
-#' Additionally it can return the location as a simple
-#' features point and the minimum bounding area
-#' of the location extent.
-#' @param location a place name
-#' @param pt if TRUE a simple feature point is appended to returned list
-#' @param bb if TRUE the OSM bounding area of the location is appended
-#'           to returned list
-#' @param all if TRUE the point and bounding box representations are returned
-#' @param method the geocoding service to be used. See ?tidygeocoder::geocode
-#' @return at minimum a data.frame of lat, long
-#' @export
-#' @examples
-#' \dontrun{
-#' geocodeAOI("UCSB")
-#' geocodeAOI("Garden of the Gods", bb = TRUE)
-#' }
-#' @importFrom tidygeocoder geo
-#' @importFrom sf st_as_sf
+#' @title .geocode
+#' @inheritParams geocode
+#' @inherit geocode return
 
-geocodeAOI <- function(location, pt = FALSE, bb = FALSE,
-                      all = FALSE, method = "arcgis") {
+.geocode <- function(geo,
+                     pt = FALSE,
+                     bbox = FALSE,
+                     all = FALSE,
+                     method = default_method,
+                     crs = default_crs) {
 
-  if (sum(pt, bb, all) > 1) {
-    stop("Only pt, bb, or all can be TRUE. Leave others as FALSE")
+  request <- long <- lat <-  score <-  . <- NULL
+
+  if (sum(pt, bbox, all) > 1) {
+    stop("Only pt, bbox, or all can be TRUE. Leave others as FALSE")
   }
 
-  if (!inherits(location, "character")) {
-    stop(paste(
-      "",
-      "Input location is not a place name. ",
-      "You might be looking for reverse geocodeing.",
-      "Try: AOI::geocode_rev()",
-      sep = "\n"
-    ))
+  if (!inherits(geo, "character")) {
+    stop(
+      paste(
+        "",
+        "Input geo is not a place name. ",
+        "You might be looking for reverse geocodeing.",
+        "Try: AOI::geocode_rev()",
+        sep = "\n"
+      )
+    )
   }
 
   ret = suppressMessages({
-    tidygeocoder::geo(location, progress_bar = FALSE, method = method, full_results = TRUE)
+    geo(
+      geo,
+      progress_bar = FALSE,
+      method = method,
+      full_results = TRUE,
+      verbose = FALSE
+    ) %>%
+      mutate(request = geo) %>%
+      select(request,
+             x = long,
+             y = lat,
+             score,
+             contains("_address"),
+             contains("extent"))
   })
 
-
-
-  ret$lon = ret$long
-  ret$long = NULL
-  ret$request = location
-  ret$address = NULL
-
-  if(all(is.na(ret$lat))){
+  if (all(is.na(ret$y))) {
     return(ret)
   }
 
-  bbs = list()
+  point <-
+    st_as_sf(x = ret,
+             coords = c("x", "y"),
+             crs = 4326) %>%
+    rename_geometry("geometry") %>%
+    st_transform(crs) %>%
+    mutate(x = sf::st_coordinates(.)[,1],
+           y = sf::st_coordinates(.)[,2]) %>%
+    select(-contains("extent"))
 
-  for(i in 1:nrow(ret)){
-    bbs[[i]] <- st_bbox(c(xmin = ret$extent.xmin[i],
-                     xmax = ret$extent.xmax[i],
-                     ymin = ret$extent.ymin[i],
-                     ymax = ret$extent.ymax[i]), crs = 4326) %>%
-      sf::st_as_sfc() %>%
-      sf::st_as_sf() %>%
-      rename_geometry("geometry")
+  if(nrow(point) > 1){
+    bbs = bbox_get(point)
+  } else {
+    bbs = list()
+
+    for (i in 1:nrow(ret)) {
+      bbs[[i]] <-
+        st_bbox(
+          c(
+            xmin = ret$extent.xmin[i],
+            xmax = ret$extent.xmax[i],
+            ymin = ret$extent.ymin[i],
+            ymax = ret$extent.ymax[i]
+          ),
+          crs = 4326
+        ) %>%
+        st_as_sfc() %>%
+        st_as_sf() %>%
+        rename_geometry("geometry") %>%
+        st_transform(crs)
+    }
+
+    bbs =  do.call(rbind, bbs)
+    bbs$request = ret$request
+    bbs = merge(bbs, st_drop_geometry(point))
   }
 
-  bbs =  do.call(rbind, bbs)
-  bbs$request = ret$request
+  if (pt)  { return(point) }
+  if (bbox){ return(bbs) }
+  if (all) {
+    return(list(pt = point, bbox = bbs ))
+  }
 
-  ret = ret[, !grepl("[.]", names(ret))]
-
-  bbs = merge(bbs, ret)
-
-  point <- sf::st_as_sf(x = ret, coords = c("lon", "lat"), crs = 4269)
-
-
-  if (pt)  {  return(point) }
-  if (bb)  {  return(bbs)  }
-  if (all) {  return(list(coords = ret, pt = point, bbox = bbs)) }
-
-  return(ret)
+  return(st_drop_geometry(point))
 }
 
 
 #' @title Geocoding
 #' @description
-#' A wrapper around the OpenSteetMap geocoding web-services.
-#' Users can request a lat/lon pair, spatial points, and/or
-#' a bounding box geometries. One or more place name can be
-#' given at a time. If a single point is requested, `geocode`
+#' A wrapper around the tidygeocoding and Wikipedia services.
+#' Users can request a data.frame (default), vector (xy = TRUE), point (pt = TRUE), and/or a bounding box (bbox = TRUE) representation of a place/location (geo) or event. One or more can be given at a time.
+#'
+#' If a single entitiy is requested, `geocode`
 #' will provide a data.frame of lat/lon values and, if requested,
-#' a spatial point object and the geocode derived bounding box.
-#' If multiple place names are given, the returned objects will
+#' a  point object and the derived bounding box of the geo/event.
+#'
+#' If multiple entities are requested, the returned objects will
 #' be a data.frame with columns for input name-lat-lon; if requested,
-#' a SpatialPoints object will be returned; and a minimum bounding box
-#' of all place names.
-#' @param location \code{character}. Place name(s)
-#' @param zipcode \code{character}. USA zipcode(s)
-#' @param event \code{character}. a term to search for on wikipedia
-#' @param pt \code{logical}. If TRUE point geometery is appended
-#'           to the returned list()
-#' @param bb \code{logical}. If TRUE bounding box geometry is
-#'           appended to the returned list()
-#' @param full \code{logical}. If TRUE all attributes reuturned
-#'             with query, else just the lat/long pair.
-#' @param all if TRUE the point and bounding box representations are returned
-#' @return at minimum a data.frame of lat/lon coordinates.
-#'         Possible list with appended spatial features of
-#'         type \code{sf} or \code{sp}
+#' a POINT object will be returned.  Here, the bbox argument will return the
+#' minimum bounding box of all place names.
+#' @param geo \code{character}. Place name(s)
+#' @param event \code{character}. a term to search for on Wikipedia
+#' @param pt \code{logical}. If TRUE point geometry is created.
+#' @param bbox \code{logical}. If TRUE bounding box geometry is created
+#' @param xy \code{logical}. If TRUE a named xy numeric vector is created
+#' @param all \code{logical}. If TRUE the point, bbox and xy representations are returned as a list
+#' @param method the geocoding service to be used. See ?tidygeocoder::geocode
+#' @param crs desired CRS. Defaults to AOI::default_crs
+#' @return a data.frame, sf object, or vector
 #' @export
-#' @author Mike Johnson
+#' @family geocode
 #' @examples
 #' \dontrun{
-#' ## geocode a single location
+#' ## geocode a single locations
 #' geocode("UCSB")
 #'
-#' ## geocode a single location and return a SpatialPoints object
+#' ## geocode a single location and return a POINT object
 #' geocode("UCSB", pt = TRUE)
 #'
-#' ## geocode a single location and derived bounding box of location
-#' geocode(location = "UCSB", bb = TRUE)
+#' ## geocode a single location and derived bbox of location
+#' geocode(location = "UCSB", bbox = TRUE)
 #'
 #' ## geocode multiple locations
 #' geocode(c("UCSB", "Goleta", "Santa Barbara"))
 #'
 #' ## geocode multiple points and generate a minimum bounding box of all locations and spatial points
-#' geocode(c("UCSB", "Goleta", "Santa Barbara"), bb = T, pt = T)
+#' geocode(c("UCSB", "Goleta", "Santa Barbara"), bbox = T, pt = T)
 #' }
-#'
-geocode <- function(location = NULL,
-                    zipcode = NULL,
+
+geocode <- function(geo = NULL,
                     event = NULL,
                     pt = FALSE,
-                    bb = FALSE,
+                    bbox = FALSE,
                     all = FALSE,
-                    full = FALSE) {
+                    xy = FALSE,
+                    method = default_method,
+                    crs = default_crs) {
+
+
 
   if (!is.null(event)) {
+    locs = list()
+
     suppressWarnings({
-      locs <-  do.call(rbind,lapply(event, geocode_wiki))
+      locs$event <-  do.call(rbind, lapply(event, geocode_wiki)) %>%
+        st_as_sf(coords = c("x", "y"), crs = 4326) %>%
+        st_transform(crs)
     })
 
-    if(pt | bb | all){
-      locs = sf::st_as_sf(locs, coords = c("lon", "lat"), crs = 4269)
+    if (pt | all | bbox) {
+      locs$pt = st_as_sf(locs$event,
+                         coords = c("x", "y"),
+                         crs = 4326) %>%
+        st_transform(crs)
+
+      locs$event = NULL
+    }
+
+    if (bbox | all) {
+      if (nrow(locs$pt) > 1) {
+        locs$bbox = st_as_sf(merge(st_drop_geometry(locs$pt), bbox_get(locs$pt)))
+      } else {
+        locs$bbox = locs$pt
+      }
+
+      if (bbox) {
+        locs$pt = NULL
+      }
+    }
+
+    if (length(locs) == 1) {
+      locs = locs[[1]]
     }
   }
 
-  if (!is.null(zipcode)) {
-
-    locs <- AOI::zipcodes[match(as.numeric(zipcode), AOI::zipcodes$zipcode), ]
-
-    failed <- zipcode[!zipcode %in% locs$zip]
-
-    if (length(failed) > 0 & all(is.na(locs$lat))) {
-      stop("Zipcodes ", paste(failed, collapse = ", "), " not found.")
-    } else if (length(failed) > 0 ){
-      warning("Zipcodes ", paste(failed, collapse = ", "), " not found.")
-      locs = locs[!is.na(locs$zipcode),]
-    }
-
-    if(pt | bb | all){
-      locs = sf::st_as_sf(locs, coords = c("lon", "lat"), crs = 4269)
-    }
+  if (!is.null(geo)) {
+    locs = .geocode(geo,
+                    pt,
+                    bbox,
+                    all,
+                    method,
+                    crs = crs)
   }
 
-  if (!is.null(location)) {
-    locs = geocodeAOI(location, pt, bb, all)
+  if (xy) {
+    locs = c(locs$x,locs$y)
   }
 
   return(locs)
 }
 
-
 #' @title Alternate Page Finder
 #' @description Find linked pages to a wikipedia call
 #' @param loc a wikipedia structured call
-#' @param pts \code{logical}. If TRUE point geometery
+#' @param pt \code{logical}. If TRUE point geometery
 #'            is appended to the returned list()
 #' @return at minimum a data.frame of lat, long
-#' @author Mike Johnson
-#' @keywords internal
-#' @export
 #' @examples
 #' \dontrun{
 #' alt_page("Twin_towers")
@@ -188,29 +212,30 @@ geocode <- function(location = NULL,
 #' @importFrom rvest read_html html_nodes html_attr html_text
 
 alt_page <- function(loc, pt = FALSE) {
+  tt <- read_html(
+    paste0(
+      "https://en.wikipedia.org/w/index.php?search=",
+      loc,
+      "&title=Special%3ASearch&go=Go"
+    )
+  )
 
-  tt <- rvest::read_html(paste0(
-    "https://en.wikipedia.org/w/index.php?search=",
-    loc,
-    "&title=Special%3ASearch&go=Go"
-  ))
-
-  a <- rvest::html_nodes(tt, "a")
-
-  url_ <- rvest::html_attr(a, "href")
-
-  link_ <- rvest::html_text(a)
+  a <- html_nodes(tt, "a")
+  url_  <- html_attr(a, "href")
+  link_ <- html_text(a)
 
   df_new <- data.frame(urls = url_, links = link_)
-  df_new <- df_new[!is.na(df_new$urls), ]
-  df_new <- df_new[!is.na(df_new$links), ]
-  df_new <- df_new[grepl("/wiki/", df_new$urls), ]
-  df_new <- df_new[!grepl(":", df_new$urls), ]
-  df_new <- df_new[!grepl("Main_Page", df_new$urls), ]
-  df_new <- df_new[!grepl("Privacy_Policy", df_new$urls), ]
-  df_new <- df_new[!grepl("Terms_of_use", df_new$urls), ]
+  df_new <- df_new[!is.na(df_new$urls),]
+  df_new <- df_new[!is.na(df_new$links),]
+  df_new <- df_new[grepl("/wiki/", df_new$urls),]
+  df_new <- df_new[!grepl(":", df_new$urls),]
+  df_new <- df_new[!grepl("Main_Page", df_new$urls),]
+  df_new <- df_new[!grepl("Privacy_Policy", df_new$urls),]
+  df_new <- df_new[!grepl("Terms_of_use", df_new$urls),]
 
-  if(nrow(df_new) == 0) { df_new <- NULL }
+  if (nrow(df_new) == 0) {
+    df_new <- NULL
+  }
 
   return(df_new)
 }
@@ -222,8 +247,9 @@ alt_page <- function(loc, pt = FALSE) {
 #' @param event \code{character}. a term to search for on wikipeida
 #' @param pt \code{logical}. If TRUE point geometery is appended
 #'           to the returned list()
-#' @return aa data.frame of lat/lon coordinates
+#' @return a data.frame of lat/lon coordinates
 #' @export
+#' @family geocode
 #' @examples
 #' \dontrun{
 #' ## geocode an Agency
@@ -241,10 +267,6 @@ alt_page <- function(loc, pt = FALSE) {
 #' ## geocode an event
 #' geocode_wiki("Hurricane Harvey")
 #' }
-#' @importFrom jsonlite fromJSON
-#' @importFrom rvest read_html html_nodes html_table
-#' @importFrom rnaturalearth ne_countries
-#' @importFrom sf st_as_sf
 
 geocode_wiki <- function(event = NULL, pt = FALSE) {
 
@@ -256,7 +278,7 @@ geocode_wiki <- function(event = NULL, pt = FALSE) {
     "&limit=1&format=json&redirects=resolve"
   )
 
-  url <- unlist(jsonlite::fromJSON(u))
+  url <- unlist(fromJSON(u))
   url <- url[grepl("http", url)]
   call <- gsub("https://en.wikipedia.org/wiki/", "", url)
 
@@ -272,17 +294,23 @@ geocode_wiki <- function(event = NULL, pt = FALSE) {
     return(df_new)
 
   } else {
+    coord_url <-
+      paste0(
+        'https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&titles=',
+        paste(call, collapse = "|"),
+        '&format=json'
+      )
 
-    coord_url <- paste0('https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&titles=',
-                        paste(call, collapse = "|"),
-                        '&format=json')
 
+    fin <- fromJSON(coord_url)
 
-    fin <- jsonlite::fromJSON(coord_url)
-
-    extract = function(x){
-      if(!is.null(x$coordinates)){
-        data.frame(title = x$title, lat = x$coordinates$lat, lon = x$coordinates$lon)
+    extract = function(x) {
+      if (!is.null(x$coordinates)) {
+        data.frame(
+          title = x$title,
+          lat = x$coordinates$lat,
+          lon = x$coordinates$lon
+        )
       } else {
         NULL
       }
@@ -292,8 +320,8 @@ geocode_wiki <- function(event = NULL, pt = FALSE) {
 
     if (is.null(df)) {
       infobox <-
-        rvest::read_html(url, header = FALSE) %>%
-        rvest::html_nodes(xpath = '//table[contains(@class, "infobox")]')
+        read_html(url, header = FALSE) %>%
+        html_nodes(xpath = '//table[contains(@class, "infobox")]')
 
       if (length(infobox) == 0) {
         df_new <- alt_page(loc)
@@ -305,10 +333,8 @@ geocode_wiki <- function(event = NULL, pt = FALSE) {
         )
         return(df_new)
       } else {
-        y <- as.data.frame(
-          rvest::html_table(infobox[1], header = F)[[1]],
-          stringsAsFactors = FALSE
-        )
+        y <- as.data.frame(html_table(infobox[1], header = F)[[1]],
+                           stringsAsFactors = FALSE)
         search <- y$X2[which(y$X1 == "Location")]
       }
 
@@ -318,14 +344,17 @@ geocode_wiki <- function(event = NULL, pt = FALSE) {
 
       if (length(search) == 0) {
         meta <- list_states()
-        countries <- rnaturalearth::ne_countries(returnclass = "sf")
-        y <- y[y$X1 != y$X2, ]
-        x <- y[grepl(tolower(paste0(c(meta$name, countries$name), collapse = "|")), tolower(y$X2)), ]
+        countries <- ne_countries(returnclass = "sf")
+        y <- y[y$X1 != y$X2,]
+        x <-
+          y[grepl(tolower(paste0(
+            c(meta$name, countries$name), collapse = "|"
+          )), tolower(y$X2)),]
 
         all <- strsplit(gsub(", ", ",", x[1, 2]), ",")[[1]]
         df <- list()
         for (i in seq_len(length(all))) {
-          df[[i]] <- geocode(all[i], full = FALSE)
+          df[[i]] <- geocode(all[i])
         }
 
         df <- cbind(all, do.call(rbind, df))
@@ -335,17 +364,24 @@ geocode_wiki <- function(event = NULL, pt = FALSE) {
         df <- NULL
         i <- 0
 
-        while (NROW(df) == 0) {
+        while (nrow(df) == 0) {
           i <- i + 1
           def <- gsub('/"', "", do.call(paste, list(s1[c(1:i)])))
-          df <- geocode(def, full = TRUE)
+          df <- geocode(def)
         }
       }
     }
   }
 
+  lookup <- c(y = "lat", x = "lon")
+
+  df = df %>%
+    rename(any_of(lookup))
+
   if (pt) {
-    sf::st_as_sf(x = df, coords = c("lon", "lat"), crs = 4269)
+    st_as_sf(x = df,
+             coords = c("x", "y"),
+             crs = default_crs)
   } else {
     data.frame(cbind(request = loc, df))
   }
@@ -355,97 +391,43 @@ geocode_wiki <- function(event = NULL, pt = FALSE) {
 #' @title Reverse Geocoding
 #' @description
 #' Describe a location using the ERSI and OSM reverse geocoding web-services.
-#' This service provides tradional reverse geocoding (lat/lon to placename)
-#' but can also be use to get more information about a place name.
-#' @param x a point provided by \code{numeric} lat/lon pair or
-#'          \code{character} place name
-#' @param method "osm" (deafalt) or "ersi"
-#' @return a data.frame of descriptive features
+#' This service provides traditional reverse geocoding (lat/lon to placename)
+#' but can also be use to get more information about a place name. xy must contain geographic coordinates!
+#' @inheritParams geocode
+#' @inherit geocode return
 #' @export
-#' @author Mike Johnson
+#' @family geocode
 #' @examples
 #' \dontrun{
-#'  geocode_rev(x = c(38,-115))
-#'  geocode_rev("UCSB")
+#'  geocode_rev(xy = c(38,-115))
 #' }
-#' @importFrom jsonlite fromJSON
 
-geocode_rev <- function(x, method = "osm") {
+geocode_rev <- function(xy,
+                        pt = FALSE,
+                        method = default_method) {
 
-  if (inherits(x, "character")) {
-    pt <- geocode(x)
-  } else if(inherits(x, "numeric")){
-    pt <- data.frame(
-      lat = x[1],
-      lon = x[2]
-    )
-  } else {
-    coords = sf::st_coordinates(sf::st_centroid(x))
-    pt <- data.frame(
-      lat = coords[2],
-      lon = coords[1]
-    )
+  address <-  long <- lat <- NULL
+
+  if (inherits(xy, "character")) {
+    stop("Reverse geocoding opperates on numeric xy coordinates. Maybe try geocode?")
+  } else if (length(xy) != 2) {
+    stop("xy must be of length 2")
+  } else if (inherits(xy, "numeric")) {
+    tmp = reverse_geo(
+      lat = xy[2],
+      long = xy[1],
+      method = method,
+      progress_bar = FALSE,
+      quiet = TRUE
+    ) %>%
+      select(address, x = long, y = lat)
   }
 
-  # ESRI Rgeocode -----------------------------------------------------------
-
-  if(method == "esri"){
-   esri_url <- paste0(
-     "https://geocode.arcgis.com/",
-     "arcgis/rest/services/World/GeocodeServer/reverseGeocode",
-     "?f=pjson&featureTypes=&location=",
-     paste(pt$lon, pt$lat, sep = ",")
-   )
-
-    ll   <- jsonlite::fromJSON(esri_url)
-    xr   <- unlist(ll)
-    esri <- data.frame(t(xr), stringsAsFactors = F)
-    names(esri) <- gsub(
-               "address\\.|location\\.|spatialReference\\.",
-               "",
-               names(xr)
-             )
-
-   names(esri)[which(names(esri) == "x")] <- "lon"
-   names(esri)[which(names(esri) == "y")] <- "lat"
-   names(esri)[which(names(esri) == "boundingbox3")] <- "xmin"
-   names(esri)[which(names(esri) == "boundingbox4")] <- "xmax"
-   names(esri)[which(names(esri) == "boundingbox1")] <- "ymin"
-   names(esri)[which(names(esri) == "boundingbox2")] <- "ymax"
-   esri[grepl("latest", names(esri))] <- NULL
-   tmp = esri
+  if (pt) {
+    tmp = st_as_sf(x = tmp,
+                   coords = c("x", "y"),
+                   crs = 4326)
   }
 
-  # OSM Rgeocode ------------------------------------------------------------
- if(method == "osm"){
-  osm_url <- paste0(
-    "https://nominatim.openstreetmap.org/reverse?format=json&lat=",
-    pt$lat,
-    "&lon=",
-    pt$lon,
-    "&zoom=18&addressdetails=1"
-  )
-
-  ll  <- jsonlite::fromJSON(osm_url)
-  xr  <- unlist(ll)
-  osm <- data.frame(t(xr), stringsAsFactors = FALSE)
-  names(osm) <- gsub("address\\.|location\\.|spatialReference\\.", "", names(xr))
-
-  osm$licence <- NULL
-
-  osm$bb <- paste(
-    osm$boundingbox3,
-    osm$boundingbox4,
-    osm$boundingbox1,
-    osm$boundingbox2,
-    sep = ","
-  )
-
-  osm[grepl("boundingbox", names(osm))] <- NULL
-  osm[grepl("lat", names(osm))]         <- NULL
-  osm[grepl("lon", names(osm))]         <- NULL
-  tmp = osm
- }
-
-  tmp
+  return(tmp)
 }

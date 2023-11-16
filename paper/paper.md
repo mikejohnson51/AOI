@@ -9,13 +9,11 @@ authors:
   - name: J. Michael Johnson
     orcid: 0000-0002-5288-8350
     affiliation: 1
-  - name: Justin Sing
+  - name: Justin Singh
     affiliation: 1
 affiliations:
-  - name: Department of Geography, University of California, Santa Barbara
-    index: 2
-  - name: Department of Geography, University of California, Santa Barbara
-    index: 2
+  - name: Lynker
+    index: 1
 date: \today
 bibliography: paper.bib
 ---
@@ -26,9 +24,11 @@ The primary functions in this package are `geocode`/`geocode_rev`, `aoi_get`, `a
 
 # Introduction
 
-An Area of Interest (AOI) is a geographic extent demarcating a region of the earth with significance to an analysis or user. AOIs can be complex geometries, such as a state outlines or watershed boundaries, or simply, a bounding box defined by minimum and maximum X,Y coordinates.  In spatial data science, where data is often continuous (eg raster climate and satellite data), or at least more expansive than needed (e.g. national or state scale vector data), AOIs are commonly used for limiting the scope of a study by subsetting existing data to a new, more manageable, extent.
+An Area of Interest (AOI) is a geographic extent defining a region of the earth with significance to an analysis or user. AOIs can be complex geometries, such as a state outlines or watershed boundaries, or simply, a bounding box defined by minimum and maximum X,Y coordinates.  In spatial data science, where data is often continuous (eg raster climate and satellite data), or at least more expansive than needed (e.g. national or state scale vector data), AOIs are commonly used for limiting the scope of a study by subsetting existing data to a new, more manageable, extent.
 
-Subsetting tasks can be executed on local data, but are commonly being outsourced to cloud based data repositories via URL queries.  Initially, `AOI` was conceived as a helper package for converting existing spatial representations into bounding coordinates, querying web-based services; and coercing the returned data into standard spatial formats (e.g. `sf` and `SpatRaster` for R).
+#Cartography
+
+Subsetting tasks can be executed on local data, but are commonly being outsourced to cloud based data repositories that rely on the parti.  Initially, `AOI` was conceived as a helper package for converting existing spatial representations into bounding coordinates, querying web-based services; and coercing the returned data into standard spatial formats (e.g. `sf` and `SpatRaster` for R).
 
 Over the course of package construction, it became more clear that while the idea of an AOI is quite simple, the practice of generating AOIs in a reproducible, flexible, and programmatic way is quite complicated, and is down in a suprisingly large variety of ways across packages.
 
@@ -37,13 +37,12 @@ To illustrate, while most of us can quickly describe an AOI by the features and 
 1. Forward, reverse, and event/association based geocoding
 2. AOI queries based on fiat boundaries (country, state, county, zipcode)
 3. AOI creation from point and bounding box dimensions
-4. Wrappers for common AOI processes
 
 The remainder of this paper is structured to discuss, primarily through example, these themes. On a more technical note, AOI plays nicely with the  `terra`[@hijmans2019] [@bivand2008], and `sf`[@pebesma2018] data models but returns all features as `sf` objects in EPSG:4269. The default length measurement in AOI is miles however any function requiring a distance input  has a `km` parameter that can be set to `TRUE`. Finally, all functions are designed to work with tidy [@tidyverse2017] and `magrittr` [@magrittr2014] piping principles allowing seamless integration with other dplyr based packages.
 
 # 1. Geocoding
 
-Geocoding is the process of converting descriptions of place to XY coordinates.  The AOI packages offers an API interface to the Open Street Map (OSM) Nominatim [@OpenStreetMap2017] tool which provides search capacities by name and address. While other packages offer geocoding (eg dismo, prettymapper, ggmap, opencage, tidygeocode) each relies on a commercial service  (Google, pickpoint.io, Opencage respectively) that have limitations, user agreements, and/or require API keys. Sticking to the core of the open source and R spatial community, adding a free and open source geocoding engine seemed ideal. Basic AOI geocoding requires a character-sting input and returns a `data.frame` of latitude and longitude coordinates.
+Geocoding is the process of converting descriptions of place to XY coordinates.  The AOI packages leverages the `tidygeocoder` API which provides search capacities by name and address. Basic AOI geocoding requires a character-sting input and returns a `data.frame` of latitude and longitude coordinates.
 
 ```r
 > str(geocode("Denver"))
@@ -124,7 +123,7 @@ Examples of fiat queries, including some of their variations and parameter choic
 
 # 3. Flexible bounding box queries
 
-In addition to querying fiat boundaries, `getAOI` allows users to generate unique AOIs through a set of parameters describing a location and bounding box dimensions.  At a minimum, `getAOI` requires a place name from which the OSM boundary is defined, with a result analogous to `geocode(XXX, bb = T)`(Figure 4A). To exert more control over the dimensions of the bounding box, users can specify a height and width (in miles). This bounding box is, by default, drawn treating the input location as the centroid (Figure 4B). Alternatively a user can specify the relative location of the location to the queried bounding box by selecting between “upperleft”, “lowerleft”, “upperright”, “lowerright” and “center” (Figure 4C). Iterations on these calls can include providing a latitude/longitude pair instead of a place name, or setting the units of the bounding box dimensions to kilometers via `km = TRUE`.
+In addition to querying fiat boundaries, `aoi_ext` allows users to generate unique AOIs through a set of parameters describing a location and bounding box dimensions.  At a minimum, `getAOI` requires a place name from which the OSM boundary is defined, with a result analogous to `geocode(XXX, bb = T)`(Figure 4A). To exert more control over the dimensions of the bounding box, users can specify a height and width (in miles). This bounding box is, by default, drawn treating the input location as the centroid (Figure 4B). Alternatively a user can specify the relative location of the location to the queried bounding box by selecting between “upperleft”, “lowerleft”, “upperright”, “lowerright” and “center” (Figure 4C). Iterations on these calls can include providing a latitude/longitude pair instead of a place name, or setting the units of the bounding box dimensions to kilometers via `km = TRUE`.
 
 ![](./figures/Figure4.png)
 
@@ -172,7 +171,7 @@ AOI has also proven useful in providing map-based Shiny applications seeking to 
 In the end, the purpose of `AOI` is to expedite common tasks centered around formalizing space. It fits within the existing and evolving R spatial ecosystem, and aims to save users time while increasing speed and reproducibility. We contend it has applications for both package development and spatial workflows, and that its grounding in free and open source services and datasets will give it lasting usability.
 
 # Availability
-`AOI` is open source software made available under the MIT license. It can be installed  from its GitHub repository using the `devtools` package: `devtools::install_github("mikejohnson51/AOI")`. Current coverage is handled by Travis CI and coveralls.
+`AOI` is open source software made available under the MIT license. It can be installed from its GitHub repository using the `devtools` package: `devtools::install_github("mikejohnson51/AOI")`. Current coverage is handled by Travis CI and coveralls.
 
 # Acknowledgements
 

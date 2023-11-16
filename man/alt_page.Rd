@@ -9,7 +9,7 @@ alt_page(loc, pt = FALSE)
 \arguments{
 \item{loc}{a wikipedia structured call}
 
-\item{pts}{\code{logical}. If TRUE point geometery
+\item{pt}{\code{logical}. If TRUE point geometery
 is appended to the returned list()}
 }
 \value{
@@ -23,7 +23,3 @@ Find linked pages to a wikipedia call
 alt_page("Twin_towers")
 }
 }
-\author{
-Mike Johnson
-}
-\keyword{internal}

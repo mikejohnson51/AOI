@@ -17,6 +17,7 @@ test_that("aoi_get & getFiat & getClip & defineClip", {
   FIP = aoi_get(fip  = "08011")
   expect_equal(FIP$name, "Bent")
 
+  expect_error(aoi_get(fip = "1234"))
 
   CA <- aoi_get(state = "CA")
   expect_true(CA$state_abbr == "CA")
@@ -36,18 +37,21 @@ test_that("aoi_get & getFiat & getClip & defineClip", {
   brazil3 <- aoi_get(country = "BRA")
   expect_true(brazil3$name == "Brazil")
 
+  brazil4 <- aoi_get(country = "076")
+  expect_true(brazil4$name == "Brazil")
+
   south <- aoi_get(state = "south")
   expect_true(nrow(south) == 16)
 
   africa <- aoi_get(country = "Africa")
-  expect_true(nrow(africa) == 51)
+  expect_true(nrow(africa) == 52)
 
   expect_error(
     aoi_get(country = "BRAAAAAAA"),
     "No country found"
   )
 
-  expect_true(is.na(aoi_get(state = "CA", county = "Dallas")$state_abbr))
+  expect_error(aoi_get(state = "CA", county = "Dallas"))
 
   conus <- aoi_get(state = "conus")
   expect_true(nrow(conus) == 49)
@@ -58,16 +62,17 @@ test_that("aoi_get & getFiat & getClip & defineClip", {
   conus_u <- aoi_get(state = "conus", union = TRUE)
   expect_true(nrow(conus_u) == 1)
 
-   r = raster::raster(system.file("external/test.grd", package="raster"))
+  f <- system.file("ex/elev.tif", package="terra")
+  r <- terra::rast(f)
 
-   AOIr <- aoi_get(r) %>%
-    st_transform(r@crs) %>%
+   AOIr <- aoi_get(x = r) %>%
+    st_transform(terra::crs(r)) %>%
     bbox_coords()
 
-  expect_true(raster::extent(r)[1] == round(AOIr$xmin, 0))
-  expect_true(raster::extent(r)[2] == round(AOIr$xmax, 0))
-  expect_true(raster::extent(r)[3] == round(AOIr$ymin, 0))
-  expect_true(raster::extent(r)[4] == round(AOIr$ymax, 0))
+  expect_true(terra::ext(r)[1] == AOIr$xmin, 0)
+  expect_true(terra::ext(r)[2] == AOIr$xmax, 0)
+  expect_true(terra::ext(r)[3] == AOIr$ymin, 0)
+  expect_true(terra::ext(r)[4] == AOIr$ymax, 0)
 
   fname <- system.file("shape/nc.shp", package = "sf")
   nc <- sf::read_sf(fname)
@@ -77,45 +82,33 @@ test_that("aoi_get & getFiat & getClip & defineClip", {
 
   expect_true(identical(sf_obj, sp_obj))
 
-  d1 <- aoi_get("UCSB")
+  d1 <- geocode("UCSB")
   expect_true(d1$request == "UCSB")
 
-  d2 <- aoi_get(list("UCSB", 10, 10))
-  d3 <- aoi_get(list("UCSB", 10, 10, center = "center"))
+  d2 <- aoi_ext("UCSB", wh = 10)
+  d3 <- aoi_ext("UCSB", wh = c(10, 10))
   expect_true(identical(d2, d3))
 
-  dul <- aoi_get(list("UCSB", 10, 10, center = "upperleft"))
-  dll <- aoi_get(list("UCSB", 10, 10, center = "lowerleft"))
-  dur <- aoi_get(list("UCSB", 10, 10, center = "upperright"))
-  dlr <- aoi_get(list("UCSB", 10, 10, center = "lowerright"))
+  aoi_ext("UCSB", bbox = TRUE)
 
-  expect_false(identical(dul, dll))
-  expect_false(identical(dul, dur))
-  expect_false(identical(dul, dlr))
+  aoi_ext("UCSB")
 
-  num <- aoi_get(list(37, -119, 10, 10))
-  num2 <- aoi_get(list(37, -119, 10, 10, "center"))
-  expect_true(sf::st_geometry_type(num) == "POLYGON")
-  expect_true(identical(num, num2))
 
-  expect_error(
-    aoi_get(list(899, -119, 10, 10)),
-    "Latitude must be vector element 1 and between -90 and 90"
-  )
-  expect_error(
-    aoi_get(list(-899, -119, 10, 10)),
-    "Latitude must be vector element 1 and between -90 and 90"
-  )
+  tmp = aoi_ext(xy = c(-119, 37)) %>%
+    sf::st_coordinates()
 
-  expect_error(
-    aoi_get(list(39, 190, 10, 10)),
-    "Longitude must be vector element 2 and between -180 and 180"
-  )
+  expect_true(any(tmp != -119))
 
-  expect_error(
-    aoi_get(list(39, -190, 10, 10)),
-    "Longitude must be vector element 2 and between -180 and 180"
-  )
+  tmp =aoi_ext(xy = c(-119, 37), crs = 5070) %>%
+    sf::st_coordinates()
+
+  expect_true(all(tmp != -119))
+
+  expect_true(identical(aoi_ext("UCSB", wh = 10), aoi_ext("UCSB", wh = c(10,10))))
+  expect_true(!identical(aoi_ext("UCSB", wh = 10), aoi_ext("UCSB", wh = c(100,10))))
+
+  expect_true(sf::st_geometry_type(aoi_ext("UCSB", bbox = TRUE)) == "POINT")
+  expect_true(sf::st_geometry_type(aoi_ext("UCSB", wh = 10, bbox = TRUE)) ==  "POLYGON")
 
   cali_mex <- aoi_get(state = "CA", country = "MX")
   cali_county_mex <- aoi_get(state = "CA", county = "all", country = "MX")
@@ -123,14 +116,16 @@ test_that("aoi_get & getFiat & getClip & defineClip", {
   expect_true(all(cali_mex$NAME %in% c("California", "Mexico")))
   expect_true(nrow(cali_county_mex) == 59)
 
-  expect_error(geocode("UCSB", pt = T, bb = T), "Only pt, bb, or all can be TRUE. Leave others as FALSE")
+  expect_error(geocode("UCSB", pt = T, bb = T))
+
+
 })
 
 
 
 test_that("aoi_describe errors...", {
 
-  x = aoi_describe(aoi_get("Fort Collins"))
+  x = aoi_describe(geocode("Fort Collins", bbox = T))
   expect_true(is.null(x))
 
   x = aoi_describe(AOI = geocode("Fort Collins", pt = TRUE))
@@ -139,8 +134,9 @@ test_that("aoi_describe errors...", {
 
 
 test_that("aoi_map errors...", {
- xx = aoi_map(AOI = aoi_get("Fort Collins"))
+ x = geocode("Fort Collins", bbox = TRUE)
+ xx = aoi_map(AOI = x)
  expect_true(inherits(xx, "sf"))
- xx = aoi_map(AOI = aoi_get("Fort Collins"), returnMap = TRUE)
+ xx = aoi_map(AOI = x, returnMap = TRUE)
  expect_true(inherits(xx, "leaflet"))
 })

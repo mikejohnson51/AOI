@@ -93,7 +93,7 @@ aoi_draw <- function() {
 
       # store the sf in a reactiveValues
       values    <- shiny::reactiveValues()
-      values$sf <- sf::st_sf(sf::st_sfc(crs = 4326))
+      values$sf <- st_sf(st_sfc(crs = 4326))
 
       # update map with user input
       shiny::observeEvent(input$aoi_draw_new_feature, {
@@ -107,7 +107,7 @@ aoi_draw <- function() {
         tmp <- shiny::isolate(
           sf::st_as_sf(
             sf::st_sf(
-              geometry = sf::st_sfc(sf::st_polygon(list(coords))),
+              geometry = st_sfc(st_polygon(list(coords))),
               crs = 4326
             )
           )
@@ -116,7 +116,7 @@ aoi_draw <- function() {
         if (feature_type %in% c("rectangle", "polygon")) {
           new_sf <- tmp
         } else {
-          new_sf <- sf::st_cast(tmp, "POINT")
+          new_sf <- st_cast(tmp, "POINT")
         }
 
         shiny::isolate(values$sf <- rbind(values$sf, new_sf))

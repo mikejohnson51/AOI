@@ -13,7 +13,7 @@ geocode_wiki(event = NULL, pt = FALSE)
 to the returned list()}
 }
 \value{
-aa data.frame of lat/lon coordinates
+a data.frame of lat/lon coordinates
 }
 \description{
 A wrapper around the Wikipedia API to return
@@ -37,3 +37,9 @@ geocode_wiki("New York Times")
 geocode_wiki("Hurricane Harvey")
 }
 }
+\seealso{
+Other geocode: 
+\code{\link{geocode_rev}()},
+\code{\link{geocode}()}
+}
+\concept{geocode}

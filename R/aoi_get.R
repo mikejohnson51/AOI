@@ -1,16 +1,8 @@
 #' @title Get Area of Interest (AOI) geometry
 #' @description Generate a spatial geometry from:
-#' \enumerate{
-#'   \item  Country name, 2-digit or 3-digit ISO abbreviation(s)
-#'   \item  Country Region or Continent (e.g. South Asia, Africa)
-#'   \item  US state name(s) or abbreviation(s)
-#'   \item  US region (e.g. Northeast, South, North Central, West)
-#'   \item  US state, county pair(s)
-#'   \item  a spatial, sf or raster object
-#'   \item  a clip unit (see details)
-#' }
+#' @param x \code{sf}, or a \code{Spat*} object
 #' @param country \code{character}. Full name, ISO 3166-1 2 or 3 digit code.
-#'                Not case senstive. Data comes from Natural Earth.
+#'                Not case sensitive. Data comes from Natural Earth.
 #' @param state \code{character}. Full name or two character abbreviation.
 #'              Not case sensitive. If \code{state = 'conus'}, the lower 48
 #'              states will be returned. If \code{state = 'all'}, all states
@@ -18,85 +10,16 @@
 #' @param county \code{character}. County name(s). Requires \code{state} input.
 #'               Not case sensitive If 'all' then all counties in a state
 #'               are returned
-#' @param x \code{spatial}, \code{raster}, \code{sf} or a \code{list} object
-#'          (see details for list parameters)
-#' @param fip a 2 or 3 digit US fip code
-#' @param km \code{logical}. If \code{TRUE} distances are in kilometers,
-#'           default is \code{FALSE} with distances in miles
+#' @param fip a 2 or 5 digit US fip code
+#' @param zipcode a US zip code. Will return a centroid.
 #' @param union \code{logical}. If TRUE objects are unioned into a single object
-#' @details
-#' A \code{x} unit can be described by just a place name (e.g. 'UCSB').
-#' In doing so the associated boundaries determined by \code{\link{geocode}}
-#' will be returned. To have greater control over the clip unit it can be
-#' defined as a list with a minimum of 3 inputs:
-#' \enumerate{
-#'    \item A point:
-#'      \itemize{
-#'        \item 'place name' (\code{character}) ex: "UCSB" - or -
-#'        \item 'lat/lon' pair: ex: "-36, -120"
-#'      }
-#'    \item A bounding box height (\code{numeric})
-#'      \itemize{
-#'        \item{in miles} ex: 10
-#'      }
-#'    \item A bounding box width (\code{numeric})
-#'      \itemize{
-#'        \item{in miles} ex: 10
-#'      }
-#'    }
-#'
-#' The bounding box is always drawn in relation to the point.
-#' By default, the point is treated as the center of the box.
-#' To define the relative location of the point to the bounding box,
-#' a fourth input can be used:
-#' \enumerate{
-#'   \item Origin \itemize{
-#'     \item 'center' (default)
-#'     \item 'upperleft'
-#'     \item 'upperright'
-#'     \item 'lowerleft'
-#'     \item 'lowerright'
-#'   }
-#' }
-#' In total, 1 to 5 elements can be used to define \code{clip} element
-#' and \strong{ORDER MATTERS} (point, height, width, origin).
-#' Acceptable variations include:
-#' \itemize{
-#'   \item 1 member: (1) place name
-#'     \itemize{
-#'       \item \emph{"UCSB"}
-#'     }
-#'   \item 1 member: (1) lat/lon pair
-#'     \itemize{
-#'       \item \emph{c(36, -119)}
-#'     }
-#'   \item 3 members: (1) location name, (2) height, (3) width
-#'     \itemize{
-#'       \item \emph{list("UCSB", 10, 10)}
-#'     }
-#'   \item 4 members: (1) lat, (2) lon, (3) height, (4) width
-#'     \itemize{
-#'       \item \emph{list(36, -120, 10, 10)}
-#'     }
-#'   \item 4 members: (1) place name, (2) height, (3) width, (4) origin
-#'     \itemize{
-#'       \item \emph{list("UCSB", 10, 10, "lowerright)}
-#'     }
-#'   \item 5 members: (1) lat, (2) lon, (3) height, (4) width, (5) origin
-#'     \itemize{
-#'       \item \emph{list(36,-120, 10, 10, "upperright)}
-#'     }
-#' }
-#' @return a sf geometry projected to \emph{EPSG:4269}.
+#' @return a sf geometry projected to \emph{EPSG:4326}.
 #' @export
 #' @examples
 #' \dontrun{
 #' # Get AOI for a country
 #' aoi_get(country = "Brazil")
-#'
-#' # Get AOI for a location
-#' aoi_get(x = "Sacramento")
-#'
+
 #' # Get AOI defined by a state(s)
 #' aoi_get(state = "CA")
 #' aoi_get(state = c("CA", "nevada"))
@@ -109,34 +32,33 @@
 #' aoi_get(state = "California", county = "Santa Barbara")
 #' aoi_get(state = "CA", county = c("Santa Barbara", "ventura"))
 #'
-#'
 #' # Get AOI defined by state & all counties
 #' aoi_get(state = "California", county = "all")
-#'
-#' # Get AOI defined by 10 mile bounding box using lat/lon
-#' aoi_get(c(35, -119, 10, 10))
-#'
-#' # Get AOI defined by 10 mile2 bounding box using the 'KMART near UCSB' as lower left corner
-#' aoi_get(x = list("UCSB", 10, 10, "lowerleft"))
 #' }
-#' @importFrom sf st_union st_transform
 
 aoi_get <- function(x = NULL,
                     country = NULL,
                     state = NULL,
                     county = NULL,
                     fip = NULL,
-                    km = FALSE,
+                    zipcode = NULL,
                     union = FALSE) {
 
   meta <- list_states()
 
+  if(all(is.null(x),
+         is.null(country),
+         is.null(state),
+         is.null(county),
+         is.null(fip),
+         is.null(zipcode))) {
+    stop("All entries cannot be NULL.")
+  }
+
+
   # Error Catching
   if (is.null(country)) {
     if (!is.null(state)) {
-      if (!is.null(x)) {
-        stop("Only 'state' or 'x' can be used. Set the other to NULL")
-      }
 
       for (value in state) {
         if (!is.character(value)) { stop("State must be a character value.") }
@@ -158,32 +80,52 @@ aoi_get <- function(x = NULL,
       if (!is.null(county)) {
         stop("The use of 'county' requires a 'state' parameter.")
       }
-      if (is.null(x) & is.null(fip)) {
-        stop("Requires an 'x' or 'state' parameter to execute.")
-      }
     }
   }
 
-  # Fiat Boundary Definition (Existing Spatial/Raster Feature or getFiat())
   shp <- if (is.null(x)) {
-    getFiat(country = country, state = state, county = county, fip = fip)
+
+    if(!is.null(zipcode)){
+
+      print(zipcode)
+      locs <- zipcodes[match(as.numeric(zipcode), zipcodes$zipcode), ]
+      print(locs)
+      failed <- zipcode[!zipcode %in% locs$zip]
+
+      if (length(failed) > 0 & all(is.na(locs$lat))) {
+        stop("Zipcodes ", paste(failed, collapse = ", "), " not found.")
+      } else if (length(failed) > 0 ){
+        warning("Zipcodes ", paste(failed, collapse = ", "), " not found.")
+        locs = locs[!is.na(locs$zipcode),]
+      }
+
+      st_as_sf(locs, coords = c("lon", "lat"), crs = 4269)  %>%
+        rename_geometry("geometry")
+
+    } else {
+      getFiat(country = country, state = state, county = county, fip = fip)
+    }
+
   } else if (any(
-    inherits(x, "Raster"),
+    inherits(x, "SpatRaster"),
     inherits(x, "Spatial"),
     inherits(x, "sf")
   )) {
+
     st_bbox(x) %>%
       sf::st_as_sfc() %>%
       st_as_sf() %>%
       st_transform(4326) %>%
       rename_geometry("geometry")
-  } else {
-    getClip(x, km)
+
+  }  else {
+    stop()
   }
+
 
   # Return AOI
   if (union) {
-    sf::st_union(shp) %>%
+    st_union(shp) %>%
       st_as_sf() %>%
       rename_geometry("geometry")
   } else {

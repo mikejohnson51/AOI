@@ -40,7 +40,7 @@ getFiat <- function(country = NULL, state = NULL, county = NULL, fip = NULL) {
   map0 <- map1 <- map2  <- map3 <-  NULL
 
   if (!is.null(country)) {
-    countries <- rnaturalearth::ne_countries(returnclass = "sf")
+    countries <- ne_countries(returnclass = "sf")
 
     region1 <- tolower(country)
     region2 <- gsub("south", "southern", region1)
@@ -51,7 +51,9 @@ getFiat <- function(country = NULL, state = NULL, county = NULL, fip = NULL) {
 
     region <- unique(unlist(c(
       sapply(c(region1, region2), .find, vec = countries$subregion, full = countries$name),
-      sapply(c(region1, region2), .find, vec = countries$continent, full = countries$name)
+      sapply(c(region1, region2), .find, vec = countries$continent, full = countries$name),
+      sapply(c(region1, region2), .find, vec = countries$region_un, full = countries$name),
+      sapply(c(region1, region2), .find, vec = countries$region_wb, full = countries$name)
     )))
 
     map0 <- countries[countries$name %in% region, ]
@@ -59,7 +61,8 @@ getFiat <- function(country = NULL, state = NULL, county = NULL, fip = NULL) {
     country <- unlist(c(
       sapply(country, .find, vec = countries$name,   full = countries$name),
       sapply(country, .find, vec = countries$iso_a2, full = countries$name),
-      sapply(country, .find, vec = countries$iso_a3, full = countries$name)
+      sapply(country, .find, vec = countries$iso_a3, full = countries$name),
+      sapply(country, .find, vec = countries$iso_n3, full = countries$name)
     ))
 
     map1 <- countries[countries$name %in% country, ]
@@ -71,10 +74,7 @@ getFiat <- function(country = NULL, state = NULL, county = NULL, fip = NULL) {
 
   if (!is.null(state)) {
 
-    ret = tryCatch({
-      fip_meta(state = state, county = county)
-      },
-      error = function(e){ NULL })
+    ret = fip_meta(state = state, county = county)
 
     ret = ret[!sf::st_is_empty(ret),]
 
@@ -87,6 +87,8 @@ getFiat <- function(country = NULL, state = NULL, county = NULL, fip = NULL) {
         all.x = TRUE)
     }
 
+    ret = ret[!sf::st_is_empty(ret),]
+
     if(nrow(ret) == 0 ){ stop('State, county pair(s) not found', call. = FALSE) }
 
     map2 <- ret
@@ -97,7 +99,7 @@ getFiat <- function(country = NULL, state = NULL, county = NULL, fip = NULL) {
     if(!nchar(fip) %in% c(2,5)){
       stop("FIP codes must be of length 2 or 5")
     } else {
-      map3 <-  fipio::fips_metadata(fip, geometry = TRUE)
+      map3 <-  st_as_sf(fipio::fips_metadata(fip, geometry = TRUE))
     }
   }
 

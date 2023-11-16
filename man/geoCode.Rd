@@ -5,69 +5,70 @@
 \title{Geocoding}
 \usage{
 geocode(
-  location = NULL,
-  zipcode = NULL,
+  geo = NULL,
   event = NULL,
   pt = FALSE,
-  bb = FALSE,
+  bbox = FALSE,
   all = FALSE,
-  full = FALSE
+  xy = FALSE,
+  method = default_method,
+  crs = default_crs
 )
 }
 \arguments{
-\item{location}{\code{character}. Place name(s)}
+\item{geo}{\code{character}. Place name(s)}
 
-\item{zipcode}{\code{character}. USA zipcode(s)}
+\item{event}{\code{character}. a term to search for on Wikipedia}
 
-\item{event}{\code{character}. a term to search for on wikipedia}
+\item{pt}{\code{logical}. If TRUE point geometry is created.}
 
-\item{pt}{\code{logical}. If TRUE point geometery is appended
-to the returned list()}
+\item{bbox}{\code{logical}. If TRUE bounding box geometry is created}
 
-\item{bb}{\code{logical}. If TRUE bounding box geometry is
-appended to the returned list()}
+\item{all}{\code{logical}. If TRUE the point, bbox and xy representations are returned as a list}
 
-\item{all}{if TRUE the point and bounding box representations are returned}
+\item{xy}{\code{logical}. If TRUE a named xy numeric vector is created}
 
-\item{full}{\code{logical}. If TRUE all attributes reuturned
-with query, else just the lat/long pair.}
+\item{method}{the geocoding service to be used. See ?tidygeocoder::geocode}
+
+\item{crs}{desired CRS. Defaults to AOI::default_crs}
 }
 \value{
-at minimum a data.frame of lat/lon coordinates.
-        Possible list with appended spatial features of
-        type \code{sf} or \code{sp}
+a data.frame, sf object, or vector
 }
 \description{
-A wrapper around the OpenSteetMap geocoding web-services.
-Users can request a lat/lon pair, spatial points, and/or
-a bounding box geometries. One or more place name can be
-given at a time. If a single point is requested, `geocode`
+A wrapper around the tidygeocoding and Wikipedia services.
+Users can request a data.frame (default), vector (xy = TRUE), point (pt = TRUE), and/or a bounding box (bbox = TRUE) representation of a place/location (geo) or event. One or more can be given at a time.
+
+If a single entitiy is requested, `geocode`
 will provide a data.frame of lat/lon values and, if requested,
-a spatial point object and the geocode derived bounding box.
-If multiple place names are given, the returned objects will
+a  point object and the derived bounding box of the geo/event.
+
+If multiple entities are requested, the returned objects will
 be a data.frame with columns for input name-lat-lon; if requested,
-a SpatialPoints object will be returned; and a minimum bounding box
-of all place names.
+a POINT object will be returned.  Here, the bbox argument will return the
+minimum bounding box of all place names.
 }
 \examples{
 \dontrun{
-## geocode a single location
+## geocode a single locations
 geocode("UCSB")
 
-## geocode a single location and return a SpatialPoints object
+## geocode a single location and return a POINT object
 geocode("UCSB", pt = TRUE)
 
-## geocode a single location and derived bounding box of location
-geocode(location = "UCSB", bb = TRUE)
+## geocode a single location and derived bbox of location
+geocode(location = "UCSB", bbox = TRUE)
 
 ## geocode multiple locations
 geocode(c("UCSB", "Goleta", "Santa Barbara"))
 
 ## geocode multiple points and generate a minimum bounding box of all locations and spatial points
-geocode(c("UCSB", "Goleta", "Santa Barbara"), bb = T, pt = T)
+geocode(c("UCSB", "Goleta", "Santa Barbara"), bbox = T, pt = T)
 }
-
 }
-\author{
-Mike Johnson
+\seealso{
+Other geocode: 
+\code{\link{geocode_rev}()},
+\code{\link{geocode_wiki}()}
 }
+\concept{geocode}

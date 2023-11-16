@@ -1,0 +1,28 @@
+url: ~
+
+template:
+  bootstrap: 5
+  bootswatch: litera
+
+home:
+  title: Generating Area's of Interest
+
+development:
+  mode: auto
+
+authors:
+   footer:
+    roles: [cre, ctb]
+   citation:
+    roles: [cre]
+   sidebar:
+    roles: [cre, ctb, fnd]
+
+articles:
+- title: AOI generation
+  desc: Quick Start
+  contents:
+  - geocoding
+  - fiat
+  - region
+  - example

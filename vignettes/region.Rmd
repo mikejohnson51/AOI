@@ -1,0 +1,179 @@
+---
+title: "Extents & discritizations"
+description: |
+  "Defining Regions"
+author:
+  - name: "Mike Johnson"
+    url: https://github.com/mikejohnson51
+    affiliation: Lynker, NOAA-Affiliate
+    affiliation_url: https://lynker.com
+output: distill::distill_article
+vignette: >
+  %\VignetteIndexEntry{extents}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%",
+  dev = "jpeg"
+)
+```
+
+```{r setup}
+library(AOI)
+library(dplyr)
+```
+
+## Basic Usage
+
+The core functions described here are `aoi_ext` which builds a specific extent around a given `POINT` / `coordinate set` and `discritize` which discritizes an extent/object. 
+
+To start, lets build a 1000 meter extent around the location called "Fort Collins":
+
+```{r}
+aoi_ext(geo = "Fort Collins", wh = 1000)
+```
+From this, we can see a extent was created!
+
+## Add bbox
+
+As with `AOI::geocode`, the returned object can be represented as a `POLYGON` by adding `bbox = TRUE`. This is helpful for mapping:
+
+```{r}
+aoi_ext(geo = "Fort Collins", wh = 1000, bbox = TRUE) %>% 
+  mapview::mapview()
+```
+
+## Modify both diminisons
+
+Providing a single value to the `wh` argument generates a square extent. To find a rectangular extent, a two value vector can be passed:
+
+```{r}
+aoi_ext(geo = "Fort Collins", wh = c(2000, 1000), bbox = TRUE) %>% 
+  mapview::mapview()
+```
+
+## Use XY
+
+We have relied on providing a place that requires `AOI::geocode` to be run. Instead, we can provide a direct coordinate set as an `xy vector`:
+
+```{r}
+aoi_ext(xy = c(x = -119, y = 36), wh = 1000)
+```
+
+## Units
+
+By default all measures are made in the default AOI unit:
+
+```{r}
+(AOI:::default_units)
+```
+
+We can override these by defining the `units` argument in the aoi_ext signiture. Here we see that a 1km and 1000m wh argument produce identical results:
+
+```{r}
+identical( aoi_ext(geo = "Fort Collins", wh = 1, units = "km"), 
+           aoi_ext(geo = "Fort Collins", wh = 1000) )
+```
+
+## Area discritizations
+
+In many applications, getting the extent is only part of the challenge. The other is defining a discretizion of a region. This can be done with the `AOI::discritize` function:
+
+```{r}
+aoi_ext("Fort Collins", wh = c(10000, 20000)) %>% 
+  discritize()
+```
+
+## Diminsions
+
+By default, the function uses the AOI default discritization:
+
+```{r}
+(AOI:::default_dim)
+```
+
+This can be changed using the dim argument: 
+
+```{r}
+aoi_ext("Fort Collins", wh = c(10000, 20000)) %>% 
+  discritize(dim = 1024)
+```
+
+## CRS
+
+The default expected input CRS is EPSG:4326. This is also the default output. Both can be changed depending on the desired input and output.
+
+ - If a CRS can be extracted from the input, then it is used.
+ - If a CRS cannot be extracted from the input, then EPSG:4326 is assumed
+ - The assumed CRS can be overridden with the  `in_crs` argument
+
+```{r}
+# CRS inferred from input and changed to 5070
+aoi_ext("Fort Collins", wh = c(20000, 10000)) %>% 
+  discritize(out_crs = 5070)
+```
+
+```{r}
+# CRS inferred
+t1 = aoi_ext("Fort Collins", wh = c(20000, 10000), crs = 5070, bbox = TRUE) %>% 
+  discritize(out_crs = 5070)
+t1$extent
+
+# Bad, assumed EPSG
+t2 = c(-781506.2, 1976590.7, -740107.0, 2000454.0) %>% 
+  discritize(out_crs = 5070)
+t2$extent
+
+# Explicit CRS named
+t3 = c(-781506.2, 1976590.7, -740107.0, 2000454.0)  %>% 
+  discritize(in_crs = 5070, out_crs = 5070)
+t3$extent
+```
+
+
+## SpatRaster
+
+If you want a gridded object for future processing, you can set `spatrast = TRUE`.
+
+```{r}
+aoi_ext("Fort Collins", wh = c(20000, 10000)) %>% 
+  discritize(spatrast = TRUE)
+```
+
+# Passing Other objects.
+
+Defining and extent for a `POINT` and `wh` argument is only one option that can be discritized. Others include all AOI outputs, sf objects and both SpatVect and SpatRast objects.
+
+## AOI BBOX returns
+
+```{r}
+geocode(c("Fort Collins", "Boulder"), bbox = TRUE) %>% 
+  discritize(spatrast = TRUE, dim = c(10,10))
+```
+
+## AOI fiat boundaries
+
+(really this applies to any sf object!)
+
+```{r}
+aoi_get(state = "OR") %>% 
+  discritize(spatrast = TRUE, dim = c(5,5))
+```
+
+## Other `Spat*` object
+
+```{r}
+(r <- terra::rast(system.file("ex/elev.tif", package="terra")) )
+
+# SpatRast
+discritize(r, spatrast = TRUE)
+
+# SpatVect
+terra::vect(system.file("ex/lux.shp", package="terra")) %>% 
+  discritize(spatrast = TRUE)
+```

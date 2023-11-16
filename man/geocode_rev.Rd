@@ -4,28 +4,31 @@
 \alias{geocode_rev}
 \title{Reverse Geocoding}
 \usage{
-geocode_rev(x, method = "osm")
+geocode_rev(xy, pt = FALSE, method = default_method)
 }
 \arguments{
-\item{x}{a point provided by \code{numeric} lat/lon pair or
-\code{character} place name}
+\item{xy}{\code{logical}. If TRUE a named xy numeric vector is created}
 
-\item{method}{"osm" (deafalt) or "ersi"}
+\item{pt}{\code{logical}. If TRUE point geometry is created.}
+
+\item{method}{the geocoding service to be used. See ?tidygeocoder::geocode}
 }
 \value{
-a data.frame of descriptive features
+a data.frame, sf object, or vector
 }
 \description{
 Describe a location using the ERSI and OSM reverse geocoding web-services.
-This service provides tradional reverse geocoding (lat/lon to placename)
-but can also be use to get more information about a place name.
+This service provides traditional reverse geocoding (lat/lon to placename)
+but can also be use to get more information about a place name. xy must contain geographic coordinates!
 }
 \examples{
 \dontrun{
- geocode_rev(x = c(38,-115))
- geocode_rev("UCSB")
+ geocode_rev(xy = c(38,-115))
 }
 }
-\author{
-Mike Johnson
+\seealso{
+Other geocode: 
+\code{\link{geocode_wiki}()},
+\code{\link{geocode}()}
 }
+\concept{geocode}

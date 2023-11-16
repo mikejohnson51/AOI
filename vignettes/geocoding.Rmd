@@ -1,0 +1,159 @@
+---
+title: "Geocoding"
+description: |
+  "Geocoding and spatial representation"
+author:
+  - name: "Mike Johnson"
+    url: https://github.com/mikejohnson51
+    affiliation: Lynker, NOAA-Affiliate
+    affiliation_url: https://lynker.com
+output: distill::distill_article
+vignette: >
+  %\VignetteIndexEntry{Geocoding}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%",
+  dev = "jpeg"
+)
+
+library(dplyr)
+```
+
+```{r setup}
+library(AOI)
+```
+
+Geocoding is the act of converting a named entity to a spatial representation. `AOI` uses the [`tidygeocoder`](https://jessecambon.github.io/tidygeocoder/) package for geocoding and overlays some basic syntax to return optional representations.
+
+The `tidygeocoder` package provides a range of services (see ?tidygeocoder::geo mehtods). You are free to chose your own with the `method` argument. The default method for the package is `arcgis`.
+
+```{r, default-method}
+(AOI:::default_method)
+```
+
+## Basic Usage
+
+The default `AOI::geocode` behavior returns a` data.frame` with a "request" named after the input `geo`, and an `x`, `y` column along with the `{method}_address` and `score`.
+
+```{r, basic-usage}
+geocode("Fort Collins") |>
+  glimpse()
+```
+
+## Return a POINT representation
+
+The basic return can be converted to a POINT representation by setting `pt = TRUE`. 
+
+```{r}
+geocode("Fort Collins", pt = TRUE) |> 
+  glimpse()
+```
+
+The data will be returned in the crs specified in the function signature. By default, all AOI utilities act on:
+
+This can be changed to meet your application needs: 
+
+```{r}
+geocode("Fort Collins", pt = TRUE, crs = 5070) |> 
+  glimpse()
+```
+`
+AOI::geocode` is setup to take more then one request and all prior arguments apply:
+
+```{r}
+geocode(c("Boulder", "Fort Collins"), pt = TRUE, crs = 5070) |> 
+  glimpse()
+```
+
+
+## Return bounding box representation
+
+Setting `bbox = TRUE` will return the bounding box representation of the `geo` input using the following rules:
+
+1. If the geocoding method does **not** return an extent for an input, the POINT is returned
+2. If a single `geo` is passed _AND_ and extent is returned, the `POLYGON` is generated
+3. If multiple `geo` objects are passed, the POLYGON representing the extent of all POINT(s) is returned
+
+### Default behavior
+
+```{r}
+geocode("Fort Collins", bbox = TRUE)  |> 
+  glimpse()
+```
+
+### Multiple inputs return a single bounding box:
+
+```{r}
+# EPSG:5070
+geocode(c("Boulder", "Fort Collins"), bbox = TRUE, crs = 5070)  |> 
+  aoi_map(returnMap = TRUE)
+```
+
+If you actually _do_ want the extents of multiple inputs, then pass the inputs through `lapply`:
+
+```{r}
+lapply(c('Fort Collins', 'Boulder'), FUN = geocode, bbox = TRUE) |>
+  bind_rows() |>
+  aoi_map(returnMap = TRUE)
+```
+
+
+## Return bounding box and POINT representations
+
+Setting `all = TRUE` will return both the `point` and `bbox` representation. The `bbox` returned will still follow the same rules:
+
+```{r}
+geocode('Fort Collins', all = TRUE) |>
+  aoi_map(returnMap = TRUE)
+
+geocode(geo = c('Fort Collins', 'Boulder'), all = TRUE) |>
+  aoi_map(returnMap = TRUE)
+```
+
+
+## xy
+
+Setting `xy = TRUE` will return just the XY coordinates of the geocoded point. This is useful for applications shown later:
+
+```{r}
+geocode("Fort Collins", xy = TRUE)
+geocode(geo = "Fort Collins", xy = TRUE, crs = 5070)
+```
+
+## Event based 
+
+Moving away for just tidygeocdoing, AOI::geocode provides tha
+
+```{r}
+geocode(event = "dday") |>
+ aoi_map(returnMap = TRUE)
+```
+
+```{r}
+geocode(event = "Hurricane Harvey", all = TRUE) |>
+  aoi_map(returnMap = TRUE)
+```
+
+
+# Reverse Geocoding
+
+Reverse geocoding is the act of converting a XY location to a named entity. Here we work through an example of a place 
+
+```{r}
+# getting an xy input
+xy = geocode("UCSB", xy = TRUE)
+```
+
+```{r}
+geocode_rev(xy)
+```
+
+```{r}
+geocode_rev(xy, pt = TRUE)
+```

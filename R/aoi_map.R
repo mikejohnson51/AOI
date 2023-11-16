@@ -34,7 +34,6 @@
 #' htmlwidgets::saveWidget(m, file = paste0(getwd(), "/myMap.html"))
 #' }
 #' @export
-#' @importFrom sf st_geometry_type
 
 aoi_map <- function(AOI = NULL, returnMap = FALSE) {
 

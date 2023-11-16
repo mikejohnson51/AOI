@@ -10,21 +10,19 @@
 #'   nc <- sf::read_sf(fname)
 #'   aoi_describe(AOI = nc[1, ])
 #' }
-#' @importFrom sf st_transform st_bbox
-#'
 
 aoi_describe = function(AOI){
 
-  if(any(sf::st_is(AOI, "POLYGON") | sf::st_is(AOI, "MULTIPOLYGON"))){
-    tot_area  = sum(sf::st_area(AOI)) / 1e6
-    bb            = sf::st_bbox(AOI)
-    bb_area       = sf::st_area(sf::st_as_sfc(bb)) / 1e6
+  if(any(st_is(AOI, "POLYGON") | st_is(AOI, "MULTIPOLYGON"))){
+    tot_area  = sum(st_area(AOI)) / 1e6
+    bb            = st_bbox(AOI)
+    bb_area       = st_area(st_as_sfc(bb)) / 1e6
     coverage_per  = 100 * (tot_area / bb_area)
     tot_units = nrow(AOI)
     geom = "POLYGON"
   } else {
     tot_area      = NULL
-    bb            = sf::st_bbox(AOI)
+    bb            = st_bbox(AOI)
     bb_area       = NULL
     coverage_per  = NULL
     tot_units     = nrow(AOI)

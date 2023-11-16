@@ -14,7 +14,7 @@ test_that("bbox_get works as expected...", {
 
 
 test_that("bbox_get and bbox_coords work as expected...", {
-  A <- aoi_get("UCSB")
+  A <- geocode("UCSB", pt = T)
   bbsf <- bbox_get(A)
   bbsf_vec <- bbox_coords(A)
   expect_true(sf::st_geometry_type(bbsf) == "POLYGON")

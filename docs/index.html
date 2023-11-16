@@ -4,20 +4,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Areas of Interest • AOI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="A consistent tool kit for forward and reverse geocoding and defining boundaries for spatial analysis.">
+<title>Generating Area's of Interest • AOI</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
-<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Areas of Interest">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Generating Area's of Interest">
 <meta property="og:description" content="A consistent tool kit for forward and reverse geocoding and defining boundaries for spatial analysis.">
 <meta property="og:image" content="/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -25,63 +25,63 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body data-spy="scroll" data-target="#toc">
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <div class="container template-home">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">AOI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.1</span>
-      </span>
-    </div>
+    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
+    
+    <a class="navbar-brand me-2" href="index.html">AOI</a>
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="reference/index.html">Reference</a>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.3.0</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item">
+  <a class="nav-link" href="reference/index.html">Reference</a>
 </li>
-<li>
-  <a href="news/index.html">Changelog</a>
+<li class="nav-item">
+  <a class="nav-link" href="articles/index.html">Articles</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="news/index.html">Changelog</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/mikejohnson51/AOI/" class="external-link">
-    <span class="fab fa-github fa-lg"></span>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/mikejohnson51/AOI/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul>
 </div>
-<!--/.nav-collapse -->
+
+    
   </div>
-<!--/.container -->
+</nav><div class="container template-home">
+<div class="row">
+  <main id="main" class="col-md-9"><div class="section level1">
+<div class="page-header">
+<img src="logo.svg" class="logo" alt=""><h1 id="aoi-">AOI <a class="anchor" aria-label="anchor" href="#aoi-"></a>
+</h1>
 </div>
-<!--/.navbar -->
-
-      
-
-      </header><div class="row">
-  <div class="contents col-md-9">
-<div class="section level1">
-<div class="page-header"><h1 id="aoi-">AOI <img src="reference/figures/logo.png" width="130" height="150" align="right"><a class="anchor" aria-label="anchor" href="#aoi-"></a>
-</h1></div>
 <!-- badges: start -->
 
-<p>The purpose of AOI is to help create reproducible, programmatic boundaries for analysis and mapping workflows. The package targets five main use cases:</p>
+<p>AOI helps create reproducible, programmatic boundaries for analysis and mapping workflows. The package targets five main use cases:</p>
 <div class="section level2">
-<h2 id="1-flexable-term-based-geocoding">1. Flexable, term based geocoding<a class="anchor" aria-label="anchor" href="#1-flexable-term-based-geocoding"></a>
+<h2 id="id_1-term-based-geocoding">1. Term based geocoding<a class="anchor" aria-label="anchor" href="#id_1-term-based-geocoding"></a>
 </h2>
-<p>The aim of the AOI geooding service is to provide flexible, term-based geocoding via the OSM Notimun and Wikipedia APIs and the Wikipedia. If you have more ridgid addresses <code>tidygeocoder</code> is great!</p>
+<p>AOI uses <code>tidygeocoder</code> as a backend for term-based geooding and Wikipedia APIs. If you have more ridgid addresses <code>tidygeocoder</code> is great!</p>
 <div class="section level3">
 <h3 id="foward-from-name-to-location">Foward (from name to location)<a class="anchor" aria-label="anchor" href="#foward-from-name-to-location"></a>
 </h3>
@@ -89,278 +89,344 @@
 <h4 id="places">Places<a class="anchor" aria-label="anchor" href="#places"></a>
 </h4>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/geocode.html">geocode</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Colorado State University'</span>, <span class="st">"University of Colorado"</span>, <span class="st">'NOAA'</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt;                     request      lat        lon</span>
-<span class="co">#&gt; 1 Colorado State University 40.57066 -105.08540</span>
-<span class="co">#&gt; 2    University of Colorado 39.67962 -104.93770</span>
-<span class="co">#&gt; 3                      NOAA 25.73289  -80.16056</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/geocode.html">geocode</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Colorado State University'</span>, <span class="st">"University of Colorado"</span>, <span class="st">'NOAA'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 3 × 5</span></span>
+<span><span class="co">#&gt;   request                   score arcgis_address                 x     y</span></span>
+<span><span class="co">#&gt; * &lt;chr&gt;                     &lt;int&gt; &lt;chr&gt;                      &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 Colorado State University   100 Colorado State University -105.   40.6</span></span>
+<span><span class="co">#&gt; 2 University of Colorado      100 University of Colorado    -105.   40.0</span></span>
+<span><span class="co">#&gt; 3 NOAA                        100 Noaa                       -94.8  29.3</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="addresses">Addresses<a class="anchor" aria-label="anchor" href="#addresses"></a>
 </h4>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Address with POINT representation</span>
-<span class="fu"><a href="reference/geocode.html">geocode</a></span><span class="op">(</span><span class="st">'500 Linden St, Fort Collins, CO 80524'</span>, pt <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> 
-<span class="co">#&gt; Simple feature collection with 1 feature and 1 field</span>
-<span class="co">#&gt; Geometry type: POINT</span>
-<span class="co">#&gt; Dimension:     XY</span>
-<span class="co">#&gt; Bounding box:  xmin: -105.0678 ymin: 40.59336 xmax: -105.0678 ymax: 40.59336</span>
-<span class="co">#&gt; Geodetic CRS:  NAD83</span>
-<span class="co">#&gt;                                 request                   geometry</span>
-<span class="co">#&gt; 1 500 Linden St, Fort Collins, CO 80524 POINT (-105.0678 40.59336)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Address with POINT representation</span></span>
+<span><span class="fu"><a href="reference/geocode.html">geocode</a></span><span class="op">(</span><span class="st">'500 Linden St, Fort Collins, CO 80524'</span>, pt <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; Simple feature collection with 1 feature and 5 fields</span></span>
+<span><span class="co">#&gt; Geometry type: POINT</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: -105.0665 ymin: 40.59362 xmax: -105.0665 ymax: 40.59362</span></span>
+<span><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
+<span><span class="co">#&gt; # A tibble: 1 × 6</span></span>
+<span><span class="co">#&gt;   request             score arcgis_address             geometry     x     y</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;               &lt;int&gt; &lt;chr&gt;                   &lt;POINT [°]&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 500 Linden St, For…   100 500 Linden St… (-105.0665 40.59362) -105.  40.6</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="events">Events<a class="anchor" aria-label="anchor" href="#events"></a>
 </h4>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Single events</span>
-<span class="fu"><a href="reference/geocode.html">geocode</a></span><span class="op">(</span>event <span class="op">=</span> <span class="st">'D-day'</span><span class="op">)</span>
-<span class="co">#&gt;        request             title      lat        lon</span>
-<span class="co">#&gt; 252854   D-day Normandy landings 49.33333 -0.5666667</span>
-
-<span class="co"># Multi-location events</span>
-<span class="fu"><a href="reference/geocode.html">geocode</a></span><span class="op">(</span>event <span class="op">=</span> <span class="st">'Hurricane Harvey'</span><span class="op">)</span>
-<span class="co">#&gt;             request               all         request.1       lat       lon</span>
-<span class="co">#&gt; 1  Hurricane+Harvey  Windward Islands  Windward Islands 13.400000 -61.16000</span>
-<span class="co">#&gt; 2  Hurricane+Harvey          Suriname          Suriname  4.141303 -56.07712</span>
-<span class="co">#&gt; 3  Hurricane+Harvey            Guyana            Guyana  4.841710 -58.64169</span>
-<span class="co">#&gt; 4  Hurricane+Harvey         Nicaragua         Nicaragua 12.609016 -85.29369</span>
-<span class="co">#&gt; 5  Hurricane+Harvey          Honduras          Honduras 15.257243 -86.07551</span>
-<span class="co">#&gt; 6  Hurricane+Harvey            Belize            Belize 16.825979 -88.76009</span>
-<span class="co">#&gt; 7  Hurricane+Harvey    Cayman Islands    Cayman Islands 19.703182 -79.91746</span>
-<span class="co">#&gt; 8  Hurricane+Harvey Yucatán Peninsula Yucatán Peninsula 18.845000 -89.12556</span>
-<span class="co">#&gt; 10 Hurricane+Harvey        Louisiana)        Louisiana) 30.870388 -92.00713</span>
-
-<span class="co"># Multi-location events with BBOX</span>
-<span class="fu"><a href="reference/geocode.html">geocode</a></span><span class="op">(</span>event <span class="op">=</span> <span class="st">'Hurricane Harvey'</span>, bb <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; Simple feature collection with 1 feature and 0 fields</span>
-<span class="co">#&gt; Geometry type: POLYGON</span>
-<span class="co">#&gt; Dimension:     XY</span>
-<span class="co">#&gt; Bounding box:  xmin: -92.00713 ymin: 4.141302 xmax: -56.07712 ymax: 30.87039</span>
-<span class="co">#&gt; Geodetic CRS:  NAD83</span>
-<span class="co">#&gt;                         geometry</span>
-<span class="co">#&gt; 1 POLYGON ((-92.00713 4.14130...</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Single events</span></span>
+<span><span class="fu"><a href="reference/geocode.html">geocode</a></span><span class="op">(</span>event <span class="op">=</span> <span class="st">'D-day'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Simple feature collection with 1 feature and 2 fields</span></span>
+<span><span class="co">#&gt; Geometry type: POINT</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: -0.6 ymin: 49.34 xmax: -0.6 ymax: 49.34</span></span>
+<span><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
+<span><span class="co">#&gt;        request             title           geometry</span></span>
+<span><span class="co">#&gt; 252854   D-day Normandy landings POINT (-0.6 49.34)</span></span>
+<span></span>
+<span><span class="co"># Multi-location events with BBOX</span></span>
+<span><span class="op">(</span><span class="va">harvey</span> <span class="op">=</span> <span class="fu"><a href="reference/geocode.html">geocode</a></span><span class="op">(</span>event <span class="op">=</span> <span class="st">'Hurricane Harvey'</span>, bb <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Simple feature collection with 9 features and 5 fields</span></span>
+<span><span class="co">#&gt; Geometry type: POLYGON</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: -96.81531 ymin: 3.931777 xmax: -56.01361 ymax: 32.83577</span></span>
+<span><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
+<span><span class="co">#&gt;            request</span></span>
+<span><span class="co">#&gt; 1 Hurricane+Harvey</span></span>
+<span><span class="co">#&gt; 2 Hurricane+Harvey</span></span>
+<span><span class="co">#&gt; 3 Hurricane+Harvey</span></span>
+<span><span class="co">#&gt; 4 Hurricane+Harvey</span></span>
+<span><span class="co">#&gt; 5 Hurricane+Harvey</span></span>
+<span><span class="co">#&gt; 6 Hurricane+Harvey</span></span>
+<span><span class="co">#&gt; 7 Hurricane+Harvey</span></span>
+<span><span class="co">#&gt; 8 Hurricane+Harvey</span></span>
+<span><span class="co">#&gt; 9 Hurricane+Harvey</span></span>
+<span><span class="co">#&gt;                                                                   all</span></span>
+<span><span class="co">#&gt; 1                                                    Windward Islands</span></span>
+<span><span class="co">#&gt; 2                                                            Suriname</span></span>
+<span><span class="co">#&gt; 3                                                              Guyana</span></span>
+<span><span class="co">#&gt; 4                                                           Nicaragua</span></span>
+<span><span class="co">#&gt; 5                                                            Honduras</span></span>
+<span><span class="co">#&gt; 6                                                              Belize</span></span>
+<span><span class="co">#&gt; 7                                                      Cayman Islands</span></span>
+<span><span class="co">#&gt; 8                                                   Yucatán Peninsula</span></span>
+<span><span class="co">#&gt; 9 Southern and Eastern United States (especially Texas and Louisiana)</span></span>
+<span><span class="co">#&gt;                                                             request.1  score</span></span>
+<span><span class="co">#&gt; 1                                                    Windward Islands 100.00</span></span>
+<span><span class="co">#&gt; 2                                                            Suriname 100.00</span></span>
+<span><span class="co">#&gt; 3                                                              Guyana 100.00</span></span>
+<span><span class="co">#&gt; 4                                                           Nicaragua 100.00</span></span>
+<span><span class="co">#&gt; 5                                                            Honduras 100.00</span></span>
+<span><span class="co">#&gt; 6                                                              Belize 100.00</span></span>
+<span><span class="co">#&gt; 7                                                      Cayman Islands 100.00</span></span>
+<span><span class="co">#&gt; 8                                                   Yucatán Peninsula 100.00</span></span>
+<span><span class="co">#&gt; 9 Southern and Eastern United States (especially Texas and Louisiana)  93.73</span></span>
+<span><span class="co">#&gt;                                     arcgis_address</span></span>
+<span><span class="co">#&gt; 1                                 Windward Islands</span></span>
+<span><span class="co">#&gt; 2                                         Suriname</span></span>
+<span><span class="co">#&gt; 3                                           Guyana</span></span>
+<span><span class="co">#&gt; 4                                        Nicaragua</span></span>
+<span><span class="co">#&gt; 5                                         Honduras</span></span>
+<span><span class="co">#&gt; 6                                           Belize</span></span>
+<span><span class="co">#&gt; 7                                   Cayman Islands</span></span>
+<span><span class="co">#&gt; 8                                Yucatan Peninsula</span></span>
+<span><span class="co">#&gt; 9 Southern Ave &amp; Eastern Ave, Dallas, Texas, 75209</span></span>
+<span><span class="co">#&gt;                         geometry</span></span>
+<span><span class="co">#&gt; 1 POLYGON ((-96.81531 3.93177...</span></span>
+<span><span class="co">#&gt; 2 POLYGON ((-96.81531 3.93177...</span></span>
+<span><span class="co">#&gt; 3 POLYGON ((-96.81531 3.93177...</span></span>
+<span><span class="co">#&gt; 4 POLYGON ((-96.81531 3.93177...</span></span>
+<span><span class="co">#&gt; 5 POLYGON ((-96.81531 3.93177...</span></span>
+<span><span class="co">#&gt; 6 POLYGON ((-96.81531 3.93177...</span></span>
+<span><span class="co">#&gt; 7 POLYGON ((-96.81531 3.93177...</span></span>
+<span><span class="co">#&gt; 8 POLYGON ((-96.81531 3.93177...</span></span>
+<span><span class="co">#&gt; 9 POLYGON ((-96.81531 3.93177...</span></span>
+<span></span>
+<span><span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html" class="external-link">mapview</a></span><span class="op">(</span><span class="va">harvey</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="40%"></p>
 </div>
 </div>
 <div class="section level3">
 <h3 id="reverse-from-location-to-term">Reverse (from location to term)<a class="anchor" aria-label="anchor" href="#reverse-from-location-to-term"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/geocode_rev.html">geocode_rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">37</span>, <span class="op">-</span><span class="fl">119</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt;    place_id osm_type osm_id                             display_name</span>
-<span class="co">#&gt; 1 282405492 relation 396492 Fresno County, California, United States</span>
-<span class="co">#&gt;          county      state       country country_code</span>
-<span class="co">#&gt; 1 Fresno County California United States           us</span>
-<span class="co">#&gt;                                               bb</span>
-<span class="co">#&gt; 1 -120.9192485,-118.3612791,35.9066756,37.586101</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/geocode_rev.html">geocode_rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">37</span>, <span class="op">-</span><span class="fl">119</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 1 × 3</span></span>
+<span><span class="co">#&gt;   address x     y    </span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;   &lt;lgl&gt; &lt;lgl&gt;</span></span>
+<span><span class="co">#&gt; 1 &lt;NA&gt;    NA    NA</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="2-consistent-queries-for-domestic-usa-and-international-boundaries">2. Consistent queries for domestic (USA) and international boundaries:<a class="anchor" aria-label="anchor" href="#2-consistent-queries-for-domestic-usa-and-international-boundaries"></a>
+<h3 id="id_2-consistent-queries-for-domestic-usa-and-international-boundaries">2. Consistent queries for domestic (USA) and international boundaries:<a class="anchor" aria-label="anchor" href="#id_2-consistent-queries-for-domestic-usa-and-international-boundaries"></a>
 </h3>
 <div class="section level4">
 <h4 id="state--multi-state">State / Multi-state<a class="anchor" aria-label="anchor" href="#state--multi-state"></a>
 </h4>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/aoi_get.html">aoi_get</a></span><span class="op">(</span>state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CO"</span>, <span class="st">"UT"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Simple feature collection with 2 features and 14 fields</span>
-<span class="co">#&gt; Geometry type: MULTIPOLYGON</span>
-<span class="co">#&gt; Dimension:     XY</span>
-<span class="co">#&gt; Bounding box:  xmin: -114.0529 ymin: 36.99246 xmax: -102.0415 ymax: 42.0017</span>
-<span class="co">#&gt; Geodetic CRS:  WGS 84</span>
-<span class="co">#&gt;   state_region state_division feature_code state_name state_abbr     name</span>
-<span class="co">#&gt; 1            4              8      1779779   Colorado         CO Colorado</span>
-<span class="co">#&gt; 2            4              8      1455989       Utah         UT     Utah</span>
-<span class="co">#&gt;   fip_class tiger_class combined_area_code metropolitan_area_code</span>
-<span class="co">#&gt; 1      &lt;NA&gt;       G4000                 NA                   &lt;NA&gt;</span>
-<span class="co">#&gt; 2      &lt;NA&gt;       G4000                 NA                   &lt;NA&gt;</span>
-<span class="co">#&gt;   functional_status    land_area water_area fip_code</span>
-<span class="co">#&gt; 1                 A 268418796417 1185716938       08</span>
-<span class="co">#&gt; 2                 A 213355072799 6529973239       49</span>
-<span class="co">#&gt;                         geometry</span>
-<span class="co">#&gt; 1 MULTIPOLYGON (((-105.155 36...</span>
-<span class="co">#&gt; 2 MULTIPOLYGON (((-111.5078 4...</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/aoi_get.html">aoi_get</a></span><span class="op">(</span>state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CO"</span>, <span class="st">"UT"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Simple feature collection with 2 features and 14 fields</span></span>
+<span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: -114.0529 ymin: 36.99246 xmax: -102.0415 ymax: 42.0017</span></span>
+<span><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
+<span><span class="co">#&gt;   state_region state_division feature_code state_name state_abbr     name</span></span>
+<span><span class="co">#&gt; 1            4              8      1779779   Colorado         CO Colorado</span></span>
+<span><span class="co">#&gt; 2            4              8      1455989       Utah         UT     Utah</span></span>
+<span><span class="co">#&gt;   fip_class tiger_class combined_area_code metropolitan_area_code</span></span>
+<span><span class="co">#&gt; 1      &lt;NA&gt;       G4000                 NA                   &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2      &lt;NA&gt;       G4000                 NA                   &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;   functional_status    land_area water_area fip_code</span></span>
+<span><span class="co">#&gt; 1                 A 268418796417 1185716938       08</span></span>
+<span><span class="co">#&gt; 2                 A 213355072799 6529973239       49</span></span>
+<span><span class="co">#&gt;                         geometry</span></span>
+<span><span class="co">#&gt; 1 MULTIPOLYGON (((-105.155 36...</span></span>
+<span><span class="co">#&gt; 2 MULTIPOLYGON (((-111.5078 4...</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="usa-counties">USA Counties<a class="anchor" aria-label="anchor" href="#usa-counties"></a>
 </h4>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/aoi_get.html">aoi_get</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"TX"</span>, county <span class="op">=</span> <span class="st">"Harris"</span><span class="op">)</span>
-<span class="co">#&gt; Simple feature collection with 1 feature and 14 fields</span>
-<span class="co">#&gt; Geometry type: MULTIPOLYGON</span>
-<span class="co">#&gt; Dimension:     XY</span>
-<span class="co">#&gt; Bounding box:  xmin: -95.96073 ymin: 29.49734 xmax: -94.90865 ymax: 30.17061</span>
-<span class="co">#&gt; Geodetic CRS:  WGS 84</span>
-<span class="co">#&gt;   state_region state_division feature_code state_name state_abbr   name</span>
-<span class="co">#&gt; 1            3              7      1383886      Texas         TX Harris</span>
-<span class="co">#&gt;   fip_class tiger_class combined_area_code metropolitan_area_code</span>
-<span class="co">#&gt; 1        H1       G4020                288                   &lt;NA&gt;</span>
-<span class="co">#&gt;   functional_status  land_area water_area fip_code</span>
-<span class="co">#&gt; 1                 A 4421068052  182379558    48201</span>
-<span class="co">#&gt;                         geometry</span>
-<span class="co">#&gt; 1 MULTIPOLYGON (((-95.21642 2...</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/aoi_get.html">aoi_get</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"TX"</span>, county <span class="op">=</span> <span class="st">"Harris"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Simple feature collection with 1 feature and 14 fields</span></span>
+<span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: -95.96073 ymin: 29.49734 xmax: -94.90865 ymax: 30.17061</span></span>
+<span><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
+<span><span class="co">#&gt;   state_region state_division feature_code state_name state_abbr   name</span></span>
+<span><span class="co">#&gt; 1            3              7      1383886      Texas         TX Harris</span></span>
+<span><span class="co">#&gt;   fip_class tiger_class combined_area_code metropolitan_area_code</span></span>
+<span><span class="co">#&gt; 1        H1       G4020                288                   &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;   functional_status  land_area water_area fip_code</span></span>
+<span><span class="co">#&gt; 1                 A 4421068052  182379558    48201</span></span>
+<span><span class="co">#&gt;                         geometry</span></span>
+<span><span class="co">#&gt; 1 MULTIPOLYGON (((-95.21642 2...</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="world-countries">World Countries<a class="anchor" aria-label="anchor" href="#world-countries"></a>
 </h4>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/aoi_get.html">aoi_get</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"Ukraine"</span><span class="op">)</span>
-<span class="co">#&gt; Simple feature collection with 1 feature and 63 fields</span>
-<span class="co">#&gt; Geometry type: MULTIPOLYGON</span>
-<span class="co">#&gt; Dimension:     XY</span>
-<span class="co">#&gt; Bounding box:  xmin: 22.08561 ymin: 44.36148 xmax: 40.08079 ymax: 52.33507</span>
-<span class="co">#&gt; Geodetic CRS:  SOURCECRS</span>
-<span class="co">#&gt;     scalerank      featurecla labelrank sovereignt sov_a3 adm0_dif level</span>
-<span class="co">#&gt; 166         1 Admin-0 country         3    Ukraine    UKR        0     2</span>
-<span class="co">#&gt;                  type   admin adm0_a3 geou_dif geounit gu_a3 su_dif subunit</span>
-<span class="co">#&gt; 166 Sovereign country Ukraine     UKR        0 Ukraine   UKR      0 Ukraine</span>
-<span class="co">#&gt;     su_a3 brk_diff    name name_long brk_a3 brk_name brk_group abbrev postal</span>
-<span class="co">#&gt; 166   UKR        0 Ukraine   Ukraine    UKR  Ukraine      &lt;NA&gt;   Ukr.     UA</span>
-<span class="co">#&gt;     formal_en formal_fr note_adm0 note_brk name_sort name_alt mapcolor7</span>
-<span class="co">#&gt; 166   Ukraine      &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;   Ukraine     &lt;NA&gt;         5</span>
-<span class="co">#&gt;     mapcolor8 mapcolor9 mapcolor13  pop_est gdp_md_est pop_year lastcensus</span>
-<span class="co">#&gt; 166         1         6          3 45700395     339800       NA       2001</span>
-<span class="co">#&gt;     gdp_year              economy             income_grp wikipedia fips_10</span>
-<span class="co">#&gt; 166       NA 6. Developing region 4. Lower middle income        NA    &lt;NA&gt;</span>
-<span class="co">#&gt;     iso_a2 iso_a3 iso_n3 un_a3 wb_a2 wb_a3 woe_id adm0_a3_is adm0_a3_us</span>
-<span class="co">#&gt; 166     UA    UKR    804   804    UA   UKR     NA        UKR        UKR</span>
-<span class="co">#&gt;     adm0_a3_un adm0_a3_wb continent region_un      subregion</span>
-<span class="co">#&gt; 166         NA         NA    Europe    Europe Eastern Europe</span>
-<span class="co">#&gt;                 region_wb name_len long_len abbrev_len tiny homepart</span>
-<span class="co">#&gt; 166 Europe &amp; Central Asia        7        7          4   NA        1</span>
-<span class="co">#&gt;                           geometry</span>
-<span class="co">#&gt; 166 MULTIPOLYGON (((31.786 52.1...</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/aoi_get.html">aoi_get</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"Ukraine"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Simple feature collection with 1 feature and 168 fields</span></span>
+<span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: 22.08561 ymin: 45.29331 xmax: 40.08079 ymax: 52.33507</span></span>
+<span><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
+<span><span class="co">#&gt;          featurecla scalerank labelrank sovereignt sov_a3 adm0_dif level</span></span>
+<span><span class="co">#&gt; 113 Admin-0 country         1         3    Ukraine    UKR        0     2</span></span>
+<span><span class="co">#&gt;                  type tlc   admin adm0_a3 geou_dif geounit gu_a3 su_dif subunit</span></span>
+<span><span class="co">#&gt; 113 Sovereign country   1 Ukraine     UKR        0 Ukraine   UKR      0 Ukraine</span></span>
+<span><span class="co">#&gt;     su_a3 brk_diff    name name_long brk_a3 brk_name brk_group abbrev postal</span></span>
+<span><span class="co">#&gt; 113   UKR        0 Ukraine   Ukraine    UKR  Ukraine      &lt;NA&gt;   Ukr.     UA</span></span>
+<span><span class="co">#&gt;     formal_en formal_fr name_ciawf note_adm0 note_brk name_sort name_alt</span></span>
+<span><span class="co">#&gt; 113   Ukraine      &lt;NA&gt;    Ukraine      &lt;NA&gt;     &lt;NA&gt;   Ukraine     &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;     mapcolor7 mapcolor8 mapcolor9 mapcolor13  pop_est pop_rank pop_year gdp_md</span></span>
+<span><span class="co">#&gt; 113         5         1         6          3 44385155       15     2019 153781</span></span>
+<span><span class="co">#&gt;     gdp_year              economy             income_grp fips_10 iso_a2</span></span>
+<span><span class="co">#&gt; 113     2019 6. Developing region 4. Lower middle income      UP     UA</span></span>
+<span><span class="co">#&gt;     iso_a2_eh iso_a3 iso_a3_eh iso_n3 iso_n3_eh un_a3 wb_a2 wb_a3   woe_id</span></span>
+<span><span class="co">#&gt; 113        UA    UKR       UKR    804       804   804    UA   UKR 23424976</span></span>
+<span><span class="co">#&gt;     woe_id_eh                   woe_note adm0_iso adm0_diff adm0_tlc adm0_a3_us</span></span>
+<span><span class="co">#&gt; 113  23424976 Exact WOE match as country      UKR      &lt;NA&gt;      UKR        UKR</span></span>
+<span><span class="co">#&gt;     adm0_a3_fr adm0_a3_ru adm0_a3_es adm0_a3_cn adm0_a3_tw adm0_a3_in</span></span>
+<span><span class="co">#&gt; 113        UKR        UKR        UKR        UKR        UKR        UKR</span></span>
+<span><span class="co">#&gt;     adm0_a3_np adm0_a3_pk adm0_a3_de adm0_a3_gb adm0_a3_br adm0_a3_il</span></span>
+<span><span class="co">#&gt; 113        UKR        UKR        UKR        UKR        UKR        UKR</span></span>
+<span><span class="co">#&gt;     adm0_a3_ps adm0_a3_sa adm0_a3_eg adm0_a3_ma adm0_a3_pt adm0_a3_ar</span></span>
+<span><span class="co">#&gt; 113        UKR        UKR        UKR        UKR        UKR        UKR</span></span>
+<span><span class="co">#&gt;     adm0_a3_jp adm0_a3_ko adm0_a3_vn adm0_a3_tr adm0_a3_id adm0_a3_pl</span></span>
+<span><span class="co">#&gt; 113        UKR        UKR        UKR        UKR        UKR        UKR</span></span>
+<span><span class="co">#&gt;     adm0_a3_gr adm0_a3_it adm0_a3_nl adm0_a3_se adm0_a3_bd adm0_a3_ua</span></span>
+<span><span class="co">#&gt; 113        UKR        UKR        UKR        UKR        UKR        UKR</span></span>
+<span><span class="co">#&gt;     adm0_a3_un adm0_a3_wb continent region_un      subregion</span></span>
+<span><span class="co">#&gt; 113        -99        -99    Europe    Europe Eastern Europe</span></span>
+<span><span class="co">#&gt;                 region_wb name_len long_len abbrev_len tiny homepart min_zoom</span></span>
+<span><span class="co">#&gt; 113 Europe &amp; Central Asia        7        7          4  -99        1        0</span></span>
+<span><span class="co">#&gt;     min_label max_label  label_x  label_y      ne_id wikidataid  name_ar</span></span>
+<span><span class="co">#&gt; 113       2.7         7 32.14086 49.72474 1159321345       Q212 أوكرانيا</span></span>
+<span><span class="co">#&gt;     name_bn name_de name_en name_es name_fa name_fr  name_el  name_he name_hi</span></span>
+<span><span class="co">#&gt; 113  ইউক্রেন Ukraine Ukraine Ucrania اوکراین Ukraine Ουκρανία אוקראינה    युक्रेन</span></span>
+<span><span class="co">#&gt;     name_hu name_id name_it    name_ja    name_ko  name_nl name_pl name_pt</span></span>
+<span><span class="co">#&gt; 113 Ukrajna Ukraina Ucraina ウクライナ 우크라이나 Oekraïne Ukraina Ucrânia</span></span>
+<span><span class="co">#&gt;     name_ru name_sv name_tr name_uk name_ur name_vi name_zh name_zht</span></span>
+<span><span class="co">#&gt; 113 Украина Ukraina Ukrayna Україна  یوکرین Ukraina  乌克兰   烏克蘭</span></span>
+<span><span class="co">#&gt;          fclass_iso tlc_diff      fclass_tlc fclass_us fclass_fr fclass_ru</span></span>
+<span><span class="co">#&gt; 113 Admin-0 country     &lt;NA&gt; Admin-0 country      &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;     fclass_es fclass_cn fclass_tw fclass_in fclass_np fclass_pk fclass_de</span></span>
+<span><span class="co">#&gt; 113      &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;     fclass_gb fclass_br fclass_il fclass_ps fclass_sa fclass_eg fclass_ma</span></span>
+<span><span class="co">#&gt; 113      &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;     fclass_pt fclass_ar fclass_jp fclass_ko fclass_vn fclass_tr fclass_id</span></span>
+<span><span class="co">#&gt; 113      &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;     fclass_pl fclass_gr fclass_it fclass_nl fclass_se fclass_bd fclass_ua</span></span>
+<span><span class="co">#&gt; 113      &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;                           geometry</span></span>
+<span><span class="co">#&gt; 113 MULTIPOLYGON (((31.78599 52...</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="usa-and-world-regions">USA and World Regions<a class="anchor" aria-label="anchor" href="#usa-and-world-regions"></a>
 </h4>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">World_asia</span> <span class="op">=</span> <span class="fu"><a href="reference/aoi_get.html">aoi_get</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"Asia"</span><span class="op">)</span>
-<span class="fu"><a href="reference/aoi_describe.html">aoi_describe</a></span><span class="op">(</span><span class="va">World_asia</span><span class="op">)</span>
-<span class="co">#&gt; type:         POLYGON (47)</span>
-<span class="co">#&gt; BBox Area:    101752122 [km^2]</span>
-<span class="co">#&gt; Centroid:     85.79324 22.51263 [x,y]</span>
-<span class="co">#&gt; Diminsions:   7617.139 4536.421 [width, height, in miles]</span>
-<span class="co">#&gt; area:         31270874 [km^2]</span>
-<span class="co">#&gt; Area/BBox Area:   30.7324 [%]</span>
-
-
-<span class="va">USA_south</span> <span class="op">=</span> <span class="fu"><a href="reference/aoi_get.html">aoi_get</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"south"</span><span class="op">)</span>
-<span class="fu"><a href="reference/aoi_describe.html">aoi_describe</a></span><span class="op">(</span><span class="va">USA_south</span><span class="op">)</span>
-<span class="co">#&gt; type:         POLYGON (16)</span>
-<span class="co">#&gt; BBox Area:    5360056 [km^2]</span>
-<span class="co">#&gt; Centroid:     -90.81484 32.51755 [x,y]</span>
-<span class="co">#&gt; Diminsions:   1842.137 1120.732 [width, height, in miles]</span>
-<span class="co">#&gt; area:         2399422 [km^2]</span>
-<span class="co">#&gt; Area/BBox Area:   44.76487 [%]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">World_asia</span> <span class="op">=</span> <span class="fu"><a href="reference/aoi_get.html">aoi_get</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"Asia"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/aoi_describe.html">aoi_describe</a></span><span class="op">(</span><span class="va">World_asia</span><span class="op">)</span></span>
+<span><span class="co">#&gt; type:         POLYGON (47)</span></span>
+<span><span class="co">#&gt; BBox Area:    101752122 [km^2]</span></span>
+<span><span class="co">#&gt; Centroid:     85.79324 22.51263 [x,y]</span></span>
+<span><span class="co">#&gt; Diminsions:   7617.139 4536.421 [width, height, in miles]</span></span>
+<span><span class="co">#&gt; area:         31270884 [km^2]</span></span>
+<span><span class="co">#&gt; Area/BBox Area:   30.73241 [%]</span></span>
+<span></span>
+<span></span>
+<span><span class="va">USA_south</span> <span class="op">=</span> <span class="fu"><a href="reference/aoi_get.html">aoi_get</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"south"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/aoi_describe.html">aoi_describe</a></span><span class="op">(</span><span class="va">USA_south</span><span class="op">)</span></span>
+<span><span class="co">#&gt; type:         POLYGON (16)</span></span>
+<span><span class="co">#&gt; BBox Area:    5360056 [km^2]</span></span>
+<span><span class="co">#&gt; Centroid:     -90.81484 32.51755 [x,y]</span></span>
+<span><span class="co">#&gt; Diminsions:   1842.137 1120.732 [width, height, in miles]</span></span>
+<span><span class="co">#&gt; area:         2399422 [km^2]</span></span>
+<span><span class="co">#&gt; Area/BBox Area:   44.76487 [%]</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level3">
-<h3 id="3-creating-flexible-aois-from-locations-and-bounding-dimensions">3. Creating flexible AOIs from locations and bounding dimensions.<a class="anchor" aria-label="anchor" href="#3-creating-flexible-aois-from-locations-and-bounding-dimensions"></a>
+<h3 id="id_3-creating-flexible-aois-from-locations-and-bounding-dimensions">3. Creating flexible AOIs from locations and bounding dimensions.<a class="anchor" aria-label="anchor" href="#id_3-creating-flexible-aois-from-locations-and-bounding-dimensions"></a>
 </h3>
 <div class="section level4">
 <h4 id="place-name-and-diminsions">Place Name and diminsions<a class="anchor" aria-label="anchor" href="#place-name-and-diminsions"></a>
 </h4>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># 100 square mile region around Longs Peaks</span>
-<span class="fu"><a href="reference/aoi_get.html">aoi_get</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"Long Peaks"</span>, <span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Simple feature collection with 1 feature and 0 fields</span>
-<span class="co">#&gt; Geometry type: POLYGON</span>
-<span class="co">#&gt; Dimension:     XY</span>
-<span class="co">#&gt; Bounding box:  xmin: 101.5569 ymin: 3.069709 xmax: 101.702 ymax: 3.214636</span>
-<span class="co">#&gt; Geodetic CRS:  WGS 84</span>
-<span class="co">#&gt;                         geometry</span>
-<span class="co">#&gt; 1 POLYGON ((101.5569 3.069709...</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># 100 square mile region around Longs Peaks</span></span>
+<span><span class="fu"><a href="reference/aoi_ext.html">aoi_ext</a></span><span class="op">(</span><span class="st">"Long Peaks"</span>, wh <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="co">#&gt;      xmin      ymin      xmax      ymax </span></span>
+<span><span class="co">#&gt; 33.852795  3.789964 33.852975  3.790145</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="location-and-diminsions">Location and Diminsions<a class="anchor" aria-label="anchor" href="#location-and-diminsions"></a>
 </h4>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># 200 square mile region around 37,-119</span>
-<span class="fu"><a href="reference/aoi_get.html">aoi_get</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">37</span>, <span class="op">-</span><span class="fl">119</span>, <span class="fl">20</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Simple feature collection with 1 feature and 0 fields</span>
-<span class="co">#&gt; Geometry type: POLYGON</span>
-<span class="co">#&gt; Dimension:     XY</span>
-<span class="co">#&gt; Bounding box:  xmin: -119.0907 ymin: 36.85507 xmax: -118.9093 ymax: 37.14493</span>
-<span class="co">#&gt; Geodetic CRS:  WGS 84</span>
-<span class="co">#&gt;                         geometry</span>
-<span class="co">#&gt; 1 POLYGON ((-119.0907 36.8550...</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># 200 square mile region around 37,-119</span></span>
+<span><span class="fu"><a href="reference/aoi_ext.html">aoi_ext</a></span><span class="op">(</span>xy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">119</span>, y <span class="op">=</span> <span class="fl">37</span><span class="op">)</span>, wh <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;      xmin      ymin      xmax      ymax </span></span>
+<span><span class="co">#&gt; 119.00111  37.00024 119.00156  37.00042</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="event-and-diminsions">Event and Diminsions<a class="anchor" aria-label="anchor" href="#event-and-diminsions"></a>
 </h4>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># 10,000 square mile region around Normandy Landings</span>
-<span class="fu"><a href="reference/aoi_get.html">aoi_get</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"D-day"</span>, <span class="fl">100</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Simple feature collection with 1 feature and 0 fields</span>
-<span class="co">#&gt; Geometry type: POLYGON</span>
-<span class="co">#&gt; Dimension:     XY</span>
-<span class="co">#&gt; Bounding box:  xmin: 1.955047 ymin: 41.91365 xmax: 3.925122 ymax: 43.36293</span>
-<span class="co">#&gt; Geodetic CRS:  WGS 84</span>
-<span class="co">#&gt;                         geometry</span>
-<span class="co">#&gt; 1 POLYGON ((1.955047 41.91365...</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># 10,000 square meter region around Normandy Landings</span></span>
+<span><span class="fu"><a href="reference/aoi_ext.html">aoi_ext</a></span><span class="op">(</span>geo <span class="op">=</span> <span class="st">"white house"</span>, wh <span class="op">=</span> <span class="fl">10000</span>, bbox <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">st_as_sf</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="reference/aoi_map.html">aoi_map</a></span><span class="op">(</span>returnMap <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-12-1.png" width="40%"></p>
 </div>
 </div>
 <div class="section level3">
-<h3 id="4-view-and-draw">4. View and Draw<a class="anchor" aria-label="anchor" href="#4-view-and-draw"></a>
+<h3 id="id_4-view-and-draw">4. View and Draw<a class="anchor" aria-label="anchor" href="#id_4-view-and-draw"></a>
 </h3>
 <p><strong>NOTE</strong>: The following functions require leaflet, shiny and leaflelt.extras. Since these are Suggested Dependencies you will need to install them yourself in warnings appear.</p>
 <p>Sometimes it is useful to view the created AOIs. <code>aoi_map</code> offers a quickly formatted <code>leaflet</code> map (not all that dissimilar from <code>mapview</code> so this may retire).</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">AOI</span> <span class="op">=</span> <span class="fu"><a href="reference/geocode.html">geocode</a></span><span class="op">(</span>location <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Paris"</span>, <span class="st">"Amsterdam"</span>, <span class="st">"Prague"</span>, <span class="st">"England"</span><span class="op">)</span>, pt <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> 
-<span class="fu"><a href="reference/aoi_map.html">aoi_map</a></span><span class="op">(</span><span class="va">AOI</span>, returnMap <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">AOI</span> <span class="op">=</span> <span class="fu"><a href="reference/geocode.html">geocode</a></span><span class="op">(</span>geo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Paris"</span>, <span class="st">"Amsterdam"</span>, <span class="st">"Prague"</span>, <span class="st">"England"</span><span class="op">)</span>, pt <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="reference/aoi_map.html">aoi_map</a></span><span class="op">(</span><span class="va">AOI</span>, returnMap <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-13-1.png" width="40%"></p>
 <p>Alternatively sometimes users need very specific AOIs that are not POINTs, bounding boxes, or fiat boundaries. For this AOI provides <code><a href="reference/aoi_draw.html">aoi_draw()</a></code> which allows users to interactively draw an Area of Interest (AOI) using a shiny app. Once an object is drawn and the “Save AOI” button pressed, a new <code>sf</code> object called ‘aoi’ will appear in your environment.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/aoi_draw.html">aoi_draw</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/shiny-app.png" title="Using the aoi_draw() interface" alt="Using the aoi_draw() interface" width="75%"></p>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/aoi_draw.html">aoi_draw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<img src="reference/figures/shiny-app.png" alt="Using the aoi_draw() interface" width="75%"><p class="caption">
+Using the aoi_draw() interface
+</p>
+</div>
 </div>
 <div class="section level3">
-<h3 id="5-programmatic-way-to-interface-with-other-r-packages-that-require-user-defined-aois-or-bounding-boxes">5. Programmatic way to interface with other R packages that require user defined AOIs or bounding boxes<a class="anchor" aria-label="anchor" href="#5-programmatic-way-to-interface-with-other-r-packages-that-require-user-defined-aois-or-bounding-boxes"></a>
+<h3 id="id_5-programmatic-way-to-interface-with-other-r-packages-that-require-user-defined-aois-or-bounding-boxes">5. Programmatic way to interface with other R packages that require user defined AOIs or bounding boxes<a class="anchor" aria-label="anchor" href="#id_5-programmatic-way-to-interface-with-other-r-packages-that-require-user-defined-aois-or-bounding-boxes"></a>
 </h3>
 <p>The need for AOI’s is rampant in the r-spatial community. AOI plays nicely with the following non-exhaustive list helping users be to the meat of their utilities without getting hung up on boundary definition.</p>
-<ul>
-<li>ggmap</li>
-<li>opendap.catalog</li>
-<li>nhdplusTools</li>
-<li>elevatr</li>
-<li>terrainr</li>
-<li>climateR</li>
-<li>dataRetrivial</li>
-<li>soilDB</li>
-<li>nwmTools</li>
-<li>osmdata</li>
-<li>FedData</li>
-<li>hereR</li>
-<li>Please add more!</li>
-</ul>
+<table class="table">
+<thead><tr class="header">
+<th>package</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>ggmap</td>
+</tr>
+<tr class="even">
+<td>nhdplusTools</td>
+</tr>
+<tr class="odd">
+<td>elevatr</td>
+</tr>
+<tr class="even">
+<td>terrainr</td>
+</tr>
+<tr class="odd">
+<td>climateR</td>
+</tr>
+<tr class="even">
+<td>dataRetrivial</td>
+</tr>
+<tr class="odd">
+<td>soilDB</td>
+</tr>
+<tr class="even">
+<td>nwmTools</td>
+</tr>
+<tr class="odd">
+<td>FedData</td>
+</tr>
+<tr class="even">
+<td>hereR</td>
+</tr>
+</tbody>
+</table>
+<p>Please add more!</p>
 </div>
 <div class="section level3">
 <h3 id="installation">Installation:<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h3>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"mikejohnson51/AOI"</span><span class="op">)</span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="resources">Resources<a class="anchor" aria-label="anchor" href="#resources"></a>
-</h3>
-<p>See the package <a href="https://mikejohnson51.github.io/AOI/" class="external-link">website</a> vignettes showing the general workflow and functionality.</p>
-</div>
-<div class="section level3">
-<h3 id="contributing">Contributing:<a class="anchor" aria-label="anchor" href="#contributing"></a>
-</h3>
-<p>Thank you for considering a contribution!</p>
-<ol style="list-style-type: decimal">
-<li>Contributions should be thoroughly tested with <a href="https://testthat.r-lib.org/" class="external-link">testthat</a>.<br>
-</li>
-<li>Code style should attempt to follow the <a href="http://style.tidyverse.org/" class="external-link">tidyverse style guide.</a><br>
-</li>
-<li>Please attempt to describe what you want to do prior to contributing by submitting an issue.<br>
-</li>
-<li>Please follow the typical github <a href="https://gist.github.com/Chaser324/ce0505fbed06b947d962" class="external-link">fork - pull-request workflow.</a><br>
-</li>
-<li>Make sure you use roxygen and run Check before contributing.</li>
-</ol>
-<p>Other notes: - consider running <code>lintr</code> prior to contributing. - consider running <code>goodpractice::gp()</code> on the package before contributing. - consider running <code><a href="https://devtools.r-lib.org/reference/spell_check.html" class="external-link">devtools::spell_check()</a></code> if you wrote documentation.</p>
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"mikejohnson51/AOI"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="support">Support:<a class="anchor" aria-label="anchor" href="#support"></a>
@@ -369,10 +435,7 @@
 </div>
 </div>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div class="links">
+  </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
 <li><a href="https://github.com/mikejohnson51/AOI/" class="external-link">Browse source code</a></li>
@@ -401,41 +464,30 @@
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Mike Johnson <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-5288-8350" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li><a href="authors.html">More about authors...</a></li>
+<li>Justin Singh-Mohudpur <br><small class="roles"> Contributor </small> <a href="https://orcid.org/0000-0002-5233-5799" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://zenodo.org/badge/latestdoi/158620263" class="external-link"><img src="https://zenodo.org/badge/158620263.svg" alt="DOI"></a></li>
-<li><a href="https://github.com/mikejohnson51/AOI/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/mikejohnson51/AOI/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R CMD Check"></a></li>
-<li><a href="#"><img src="https://img.shields.io/badge/dependencies-6/33-orange?style=flat" alt="Dependencies"></a></li>
-<li><a href="https://choosealicense.com/licenses/mit/" class="external-link"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a></li>
-<li><a href="https://www.repostatus.org/#active" class="external-link"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active"></a></li>
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="reference/figures/lifecycle/lifecycle-stable.svg" alt="LifeCycle"></a></li>
-</ul>
-</div>
 
-  </div>
+
+  </aside>
 </div>
 
 
-      <footer><div class="copyright">
+    <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by Mike Johnson.</p>
+<p>Developed by Mike Johnson, Justin Singh-Mohudpur.</p>
 </div>
 
-<div class="pkgdown">
+<div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
-
 
   
 

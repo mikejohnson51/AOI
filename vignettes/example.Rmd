@@ -1,0 +1,196 @@
+---
+title: "Example Use Cases"
+description: |
+  "Getting Fiat Data"
+author:
+  - name: "Mike Johnson"
+    url: https://github.com/mikejohnson51
+    affiliation: Lynker, NOAA-Affiliate
+    affiliation_url: https://lynker.com
+output: distill::distill_article
+vignette: >
+  %\VignetteIndexEntry{fiat}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%",
+  dev = "jpeg"
+)
+
+gdalio_terra <- function(dsn, ..., band_output_type = "numeric") {
+  v <- gdalio_data(dsn, ..., band_output_type  = band_output_type)
+  g <- gdalio_get_default_grid()
+  r <- terra::rast(terra::ext(g$extent), nrows = g$dimension[2], ncols = g$dimension[1], crs = g$projection)
+  if (length(v) > 1) terra::nlyr(r) <- length(v)
+  terra::setValues(r, do.call(cbind, v))
+}
+```
+
+```{r setup}
+library(AOI)
+library(terra)
+```
+
+
+# `climateR` Integration
+
+climateR provides access to spatial datasets available as web accessible resources. climateR utilities require an input AOI parameter that can be generated with AOI fucntions:
+
+```{r}
+library(climateR)
+
+# fiat boundary request
+AOI = aoi_get(state = "FL")
+tmax = getGridMET(AOI = aoi_get(state = "FL"),
+                     varname = "tmmx",
+                     startDate = "2023-10-29")
+```
+
+```{r}
+plot(tmax$daily_maximum_temperature)
+```
+
+```{r}
+nlcd = getNLCD(AOI = aoi_ext("Fort Collins", wh = 10, units = "km", bbox = TRUE))
+
+terra::plot(nlcd$`2019 Land Cover L48`)
+```
+
+# `zonal` Integration
+
+zonal provides tools to summarized gridded data to polygon areas. Paired with climateR and AOI, it becomes easier to extract area based summaries of geopspatial landscape characteristics.
+
+```{r}
+library(zonal)
+
+# fiat boundary request
+AOI = aoi_get(state = "conus", county = "all")
+
+tmax = getGridMET(AOI = AOI,
+                  varname = "pr",
+                  startDate = "2023-10-29")
+
+s = execute_zonal(tmax, geom = AOI, ID = "fip_code", fun = "mean")
+
+plot(s['mean.pr_2023.10.29'], border = NA)
+```
+
+# `gdalio` Integration 
+
+`gdalio` is designed to read data direct with GDAL warp with the design philosophy that a target grid be specified once.  `AOI::aoi_ext` and `AOI::discritize` allow target grids to be easily defined.
+
+```{r}
+library(gdalio) ## https://github.com/hypertidy/gdalio
+
+# Define target grid and discritization
+(target = aoi_ext("Fort Collins", wh = 10, units = "km") |> 
+  discritize(dim = c(1024))) 
+
+# Define data source (taken from gdalio readme)
+virtualearth_imagery <- tempfile(fileext = ".xml")
+
+writeLines('<GDAL_WMS>
+  <Service name="VirtualEarth">
+    <ServerUrl>http://a${server_num}.ortho.tiles.virtualearth.net/tiles/a${quadkey}.jpeg?g=90</ServerUrl>
+  </Service>
+  <MaxConnections>4</MaxConnections>
+  <Cache/>
+</GDAL_WMS>', virtualearth_imagery)
+
+# Set grid and read data:
+gdalio_set_default_grid(target)
+(img <- gdalio_terra(virtualearth_imagery, bands = 1:3))
+
+plotRGB(img)
+
+```
+
+# `nhdplusTools` Integration 
+
+`nhdplusTools` is a large-scale package designed for working with the NHDPlus data model. Additionally, it provides a suite of wrappers around the USGS web services to read data. 
+
+```{r}
+library(nhdplusTools)
+
+x = get_nhdplus(AOI = aoi_ext(xy = c(-110,37), wh = 10000, bbox = TRUE), realization = "all")
+
+{
+  plot(x$catchment$geometry, main = "NHDPlus Access")
+  plot(x$flowline$geometry, col = "blue", add = TRUE)
+  plot(x$outlet, pch = 16, col = "red", add = TRUE)
+}
+```
+
+# `osmdata` Integration 
+
+OpenStreetMap is perhaps the ultimate example of open data and the `osmdata` package provides easy access to this resourece. The package forms Overpass Queries based on input bounding boxes like those produced by AOI.
+
+```{r}
+library(osmdata)
+
+bb = aoi_ext("500 Linden Street, Fort Collins", wh = .5, units = "km")
+
+roads <- opq(bbox = bb) %>%
+    add_osm_feature(key = 'highway') %>%
+    osmdata_sf () 
+
+plot(roads$osm_lines['osm_id'])
+```
+
+# `FedData` Integration  
+
+FedData is an ROpenSci package that facilitated data access to a range of products. Most requests are made using a `template` that defines the area to extract data for. 
+
+```{r}
+library(FedData) # https://docs.ropensci.org/FedData/articles/FedData.html
+
+bb = aoi_ext("500 Linden Street, Fort Collins", wh = .5, units = "km", bbox =TRUE)
+
+ssurgo <- get_ssurgo(
+  template = bb,
+  label = "foco"
+)
+
+plot(ssurgo$spatial["MUKEY"])
+
+```
+
+
+# Remote Vector Data
+
+The FlatGeoBuff team hosts dataset of every census block in the USA, including its population. The entire file is over 12GB - this remote file can be subset using the GDAL/sf with a passed AOI.
+
+Again, the magic is being done by the ogr2og/GDAL, while AOI provides the convinence of easily defined extents and areas.
+
+```{r}
+library(sf)
+
+bb = aoi_ext("500 Linden Street, Fort Collins", wh = 2, units = "km", bbox = TRUE) 
+
+xx = read_sf('/vsicurl/https://flatgeobuf.septima.dk/population_areas.fgb', wkt_filter = st_as_text(bb))
+```
+
+```{r}
+plot(xx['population'])
+```
+
+# Remote Raster Data (variable CRS)
+
+A 100+ GB, tiled DEM is hosted by the USGS as part of the National Map. In this same bucket, a VRT file was built which can be read with `terra::rast()`. Simular to how sf::read_sf allows for a partical file read using the wkt_filter, 
+
+```{r}
+r = rast('/vsicurl/https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/USGS_Seamless_DEM_1.vrt')
+
+bb = aoi_ext("500 Linden Street, Fort Collins", wh = .5, units = "km", bbox = TRUE, crs = crs(r))
+
+d = crop(r, bb)
+```
+
+```{r}
+plot(d)
+```
